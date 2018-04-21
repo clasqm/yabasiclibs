@@ -1,0 +1,28 @@
+#!yabasic
+clear screen
+import linuxmisclib
+print "Test which dialog system?"
+print "1  dialog"
+print "2  whiptail"
+print "3  zenity"
+    a$ = inkey$
+switch a$
+    case "1"
+        import dialoglib
+        break
+    case "2"
+        import whiptaillib
+        break
+    case "3"
+        import zenitylib
+        break
+    default
+        break
+end switch
+
+
+
+
+
+
+end
