@@ -1,0 +1,22 @@
+<h1>yabasiclibs</h1>
+
+<p>extension libraries for yabasic</p>
+
+<h2>dialog</h2>
+
+<p>This folder contains a library for yabasic that allows the use of the Linux command <em>dialog</em> to display a variety of dialogs in text mode.</p>
+
+<p>The library will test for the presence of the dialog command and will exit gracefully if it is not present</p>
+
+<p>Developed on elementary OS 0.4 "Loki" (i.e. Linux), but it should work on any system that will run both yabasic and the dialog command.</p>
+
+<p>The library should exist either in the same folder as your program or in the standard yabasic library location on your system.</p>
+
+<p>To use the library, use the command </p>
+
+<pre><code>import dialoglib
+</code></pre>
+
+<p>You should <strong>not</strong> use this library and one of the others in this set that provides dialogs concurrently, because they replicate subroutine names. Pick the right one for your program and stick with it!</p>
+
+<h3>Commands available:</h3>

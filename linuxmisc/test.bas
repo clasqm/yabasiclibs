@@ -63,5 +63,5 @@ import linuxmisclib
 	//system("rm test2.txt")
 
 //test WhereAmI$()
-	print WhereAmI$()
+	//print WhereAmI$()
 	

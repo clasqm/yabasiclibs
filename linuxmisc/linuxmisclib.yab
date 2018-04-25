@@ -157,7 +157,6 @@ export sub WhereAmI$()
         return path$
 end sub
 
-
 sub TempDir$()
 //returns the location of Linux's TMPDIR directory
 //technically not necessary, but a lot of my routines
