@@ -19,5 +19,7 @@ it is safe to use this library and one of the others in this set concurrently,
 
 ### Commands available:
 
-+ **OpenInNano**(filename$) - opens a given text file in the nano text editor.
++ **IsItATextFile**\(filename$\) - Tests whether a given file is a text file or not. Anytjhing that does not have the string "text" in the results of the *file* command is assumed to be a binary file. This should work fine on Linux but may be problematic on BSD systems (including MacOS?) where this command may reject shell scripts. if you need something more powerful than *file*, I suggest you install *enca*.
++ **OpenInNano$**\(filename$\) - opens a given text file in the *nano* text editor in the same terminal window as your program. Will fail and return an error message if *nano* does not exist on your system. If *filename\$* does not exist, nano will create one in memory and let you save it. You may have to CLEAR SCREEN and rebuild your screen afterwards.
++ **TestForUtility$**\(filename$\) - tests whether a given utility exists on your $PATH and is executable. Returns an empty string if the utility exists, and a warning message if it does not \(this reverses the functionality of the Linux *which* command\). This command is used by many of the other routines in this library, and a version of it can be found in the each of the various dialog libraries.
 

@@ -1,26 +1,120 @@
-sub TestForUtility(utility$)
-	#internal routine to test if the called utility actually exists
-	#an empty string returned means it does.
-	if system$("which " + utility$)="" then
-		return "The required program " + utility$ + " does not exist on this system"
+export sub TestForUtility$(utility$)
+	//internal routine to test if the called utility actually exists
+	//an empty string returned means it does.
+	local which$
+	which$ = system$("which " + utility$)
+	if which$ = "" return "The required program " + utility$ + " does not exist on this system"
+end sub
+
+export sub IsItATextFile(filename$)
+	//Tests whether a given file is a text file or not
+	//anytjhing that does not have the string "text" in the results of the
+	//file command is assumed to be a binary file.
+	//This should work fine on Linux but may be problematic on BSD systerms
+	//where this command may reject shell scripts
+	//if you need something more powerful I suggest you install enca.
+	if instr(system$ ("file " + filename$), "text") then
+		return 1
 	else
-		return
+		return 0
 	endif
 end sub
 
-export sub OpenInNano(filename$)
-	#opens a given text file in the nano text editor.
-	#must obviously be run in a program that is already in a terminal
-	#For best results your filename should be enclosed in single
-	#quotation marks so that it will not get confused by spaces. This
-	#routine will not check for that.
-	local UTest$, UTest2$
-	UTest$ = TestForUtility("nano")
-	if UTest$ <> "" then 
+export sub OpenInNano$(filename$)
+	//opens a given text file in the nano text editor.
+	//must be run in a program that is already in a terminal
+	//For best results your filename should be enclosed in single
+	//quotation marks so that it will not get confused by spaces. This
+	//routine will not check for that.
+	local UTest$
+	UTest$ = TestForUtility$("nano")
+	if UTest$ <> "" then
 		return UTest$
-	else 
-		system$("nano " + filename$)
+	else
+		system("nano " + filename$)
 	endif
-	
 end sub
+
+export sub StripLFoffSysCmd$(tempval$)
+	//remove LF from the results of a system call
+	//if the results of a System() or System$() command end on a LF (most do),
+	//strip the LF off and return the resulting string
+	if instr(tempval$, "\n", len(tempval$)) <> 0 then //if the string ends with a LF
+		tempval$ = left$(tempval$, len(tempval$)-1) //strip off trailing newline
+        endif
+        return tempval$
+end sub
+
+export sub ArraySort(z())
+	//sorts a ONE-dimensional numeric array
+	//Usage: ArraySort(a())
+	//do not try a() =  ArraySort(a()), it won't work
+	//your array should be global - I have had inconsistent results 
+	//with local arrays.
+        local tempfile1$, tempfile2$,upperlimit, handle, item$
+        tempfile1$ = TempDir$() + "/" + str$(RandInt())
+        tempfile2$ = TempDir$() + "/"  + str$(RandInt())
+        upperlimit =arraysize(z(),1)
+        handle = open(tempfile1$,"w")
+        for f = 1 to upperlimit
+                print #handle str$(z(f))
+        next f
+        close handle
+        system("sort -bn " + tempfile1$ + " > " + tempfile2$)
+        handle = open(tempfile2$,"r")
+        for f = 1 to upperlimit
+                line input #handle item$
+                z(f) = val(item$)
+        next f
+        close handle
+	system("rm " + tempfile1$)
+        system("rm " + tempfile2$)
+end sub
+
+export sub ArraySort$(z$())
+	//sorts a ONE-dimensional numeric array (case-independent) and returns it
+	//Usage: ArraySort$(a$())
+	//do not try a$() =  ArraySort$(a$()), it won't work
+	//your array should be global - I have had inconsistent results 
+	//with local arrays.
+        local tempfile1$, tempfile2$,upperlimit, handle, item$
+        tempfile1$ = TempDir$() + "/" + str$(RandInt())
+        tempfile2$ = TempDir$() + "/" + str$(RandInt())
+        upperlimit =arraysize(z$(),1)
+        handle = open(tempfile1$,"w")
+        for f = 1 to upperlimit
+                print #handle z$(f)
+        next f
+        close handle
+        system("sort -bf " + tempfile1$ + " > " + tempfile2$)
+        handle = open(tempfile2$,"r")
+        for f = 1 to upperlimit
+                line input #handle item$
+                z$(f) = item$
+        next f
+        close handle
+        system("rm " + tempfile1$)
+        system("rm " + tempfile2$)
+end sub
+
+sub TempDir$()
+//returns the location of Linux's TMPDIR directory
+//technically not necessary, but a lot of my routines
+//ported from Haiku expect to see this.
+//note: no traling "/", you will have to add that.
+//edit the line below if necessary on a different Unix-like OS
+        return "/tmp"
+end sub
+
+sub RandInt()
+//returns a random integer between 0 and 32767
+//used here to generate random filenames to place in TMPDIR
+        local a
+        a = int(ran(32768))
+        return a
+end sub
+
+
+
+
 

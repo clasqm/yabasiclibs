@@ -1,7 +1,10 @@
 # yabasiclibs
-extension libraries for yabasic.
+
+Extension libraries for yabasic.
 
 A series of libraries for [yabasic](http://www.yabasic.de/) that gives access to a number of common utilities on Linux. Not tested on other platforms, but it should be possible to adjust them accordingly.
+
+This software is still very much in the planning and experimentation stages.
 
 + dialoglib.yab - allows the use of the Linux command *dialog* to display a variety of dialogs in text mode.
 + kdialoglib.yab - allows the use of the Linux command *kdialog* to display a variety of dialogs in text mode.
