@@ -1,0 +1,37 @@
+<h1>yabasiclibs</h1>
+
+<p>extension libraries for yabasic</p>
+
+<h2>Miscellaneous commands</h2>
+
+<p>This folder contains a library for yabasic that allows the use of a variety of common Linux commands in text mode. For example, opening a text file in the <em>nano</em> text editor will make it unnecessary for you to write your own text editing routine.</p>
+
+<p>The library will test for the presence of the required command and will exit gracefully if it is not present</p>
+
+<p>This library also contains some routines ported from my libraries originally developed under yab for Haiku.</p>
+
+<p>These routines make heavy use of <em>system()</em> and <em>system\$()</em> commands, and some write temporary files, work on them, and read them back. They. will.  slow. your. programs. down. a. lot.</p>
+
+<p>All are case-sensitive.</p>
+
+<p>Developed on elementary OS 0.4 "Loki" (i.e. Linux), but it should work on any system that will run both yabasic and the command in question.</p>
+
+<p>The library should exist either in the same folder as your program or in the standard yabasic library location on your system.</p>
+
+<p>To use the library, use the command </p>
+
+<pre><code>import linuxmisclib
+</code></pre>
+
+<p>It is safe to use this library and one of the others in this set concurrently,</p>
+
+<h3>Routines available:</h3>
+
+<ul>
+<li><strong>ArraySort</strong>(a()) - sorts a ONE-dimensional numeric array. Do not try <em>a() =  ArraySort(a())</em>, it won't work. Your array should be global - I have had inconsistent results with local arrays.</li>
+<li><strong>ArraySort\$</strong>(a\$()) - sorts a ONE-dimensional string array (case-independent). Do not try a\$() =  ArraySort\$(a\$()), it won't work. Your array should be global - I have had inconsistent results with local arrays.</li>
+<li><strong>IsItATextFile</strong>(filename$) - Tests whether a given file is a text file or not. Anytjhing that does not have the string "text" in the results of the <em>file</em> command is assumed to be a binary file. This should work fine on Linux but may be problematic on BSD systems (including MacOS?) where this command may reject shell scripts. if you need something more powerful than <em>file</em>, I suggest you install <em>enca</em>.</li>
+<li><strong>OpenInNano$</strong>(filename$) - opens a given text file in the <em>nano</em> text editor in the same terminal window as your program. Will fail and return an error message if <em>nano</em> does not exist on your system. If <em>filename\$</em> does not exist, nano will create one in memory and let you save it. For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.You may have to CLEAR SCREEN and rebuild your screen afterwards.</li>
+<li><strong>StripLFoffSysCmd$</strong>(val$) -  Remove linefeeds from the results of a system call. If the results of a System() or System\$() command end on a LF (most do), strip the LF off and return the resulting string. But it can be used for any string that might have a suspected and unwanted LF at the end. If there is no LF present, it does nothing. This may not work on Windows systems, where you also need to test for a CR but we are not writing this library for Windows in any case. </li>
+<li><strong>TestForUtility$</strong>(filename\$) - tests whether a given utility exists on your $PATH and is executable. Returns an empty string if the utility exists, and a warning message if it does not (this reverses the functionality of the Linux <em>which</em> command). This command is used by many of the other routines in this library, and a version of it can be found in the each of the various dialog libraries.</li>
+</ul>

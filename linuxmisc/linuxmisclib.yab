@@ -72,7 +72,7 @@ export sub ArraySort(z())
 end sub
 
 export sub ArraySort$(z$())
-	//sorts a ONE-dimensional numeric array (case-independent) and returns it
+	//sorts a ONE-dimensional string array (case-independent)
 	//Usage: ArraySort$(a$())
 	//do not try a$() =  ArraySort$(a$()), it won't work
 	//your array should be global - I have had inconsistent results 
@@ -96,6 +96,67 @@ export sub ArraySort$(z$())
         system("rm " + tempfile1$)
         system("rm " + tempfile2$)
 end sub
+
+export sub FileExists(fullpathname$)
+	//test if a file exists
+	//returns 1 - file exists
+	//returns 0 - file does not exist
+        local handle
+        handle = open(fullpathname$,"r")
+        if handle then
+                close handle
+                return 1
+        else
+                return 0
+        endif
+end sub
+
+export sub FileorDir(pathname$)
+	//determines if a passed filename is a file or a directory
+	//returns 1 if the passed variable is a directory
+	//returns 0 if it is a file
+        local isadir$
+        isadir$ = system$("if test -d " + pathname$ + ";then echo 1; else echo 0;fi")
+	return val(isadir$)
+end sub
+
+export sub FileorLink(pathname$)
+	//determines if a passed filename is a file/directory or a symlink
+	//returns 1 if the passed variable is a link
+	//returns 0 if it is a file/directory
+        local isalink$
+        isalink$ = system$("if test -L " + pathname$ + ";then echo 1; else echo 0;fi")
+	return val(isalink$)
+end sub
+
+export sub IsFileZeroByte(pathname$)
+#determines if a passed filename is a zero-byte file
+#returns 1 if the passed variable is larger than zero bytes
+#returns 0 if it is zero bytes in size
+#(note that this reverses the output of the test -s command)
+#caution: will also retun 0 if file does not exist
+#test for that with FileExists first
+#caution: will also return 1 if file is actually a directory
+#test for that with FileorDir first
+#caution: If the file given is a symlink, this routine will report on the real, linked file
+#################################################
+        local isazero$
+        isazero$ = system$("if test -s " + pathname$ + ";then echo 0; else echo 1;fi")
+	return val(isazero$)
+end sub
+
+export sub WhereAmI$()
+	local path$
+        if (peek("isbound")) then
+                path$=peek$("directory")
+        else
+                path$=system$("pwd")
+        endif
+         path$ = StripLFoffSysCmd$(path$)
+         // I prefer not to add the trailing slash at this point
+        return path$
+end sub
+
 
 sub TempDir$()
 //returns the location of Linux's TMPDIR directory
