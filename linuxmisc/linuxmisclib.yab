@@ -130,20 +130,34 @@ export sub FileorLink(pathname$)
 end sub
 
 export sub IsFileZeroByte(pathname$)
-#determines if a passed filename is a zero-byte file
-#returns 1 if the passed variable is larger than zero bytes
-#returns 0 if it is zero bytes in size
-#(note that this reverses the output of the test -s command)
-#caution: will also retun 0 if file does not exist
-#test for that with FileExists first
-#caution: will also return 1 if file is actually a directory
-#test for that with FileorDir first
-#caution: If the file given is a symlink, this routine will report on the real, linked file
-#################################################
+	//determines if a passed filename is a zero-byte file
+	//returns 1 if the passed variable is larger than zero bytes
+	//returns 0 if it is zero bytes in size
+	//(note that this reverses the output of the test -s command)
+	//caution: will also retun 0 if file does not exist
+	//test for that with FileExists first
+	//caution: will also return 1 if file is actually a directory
+	//test for that with FileorDir first
+	//caution: If the file given is a symlink, this routine will report on the real, linked file
         local isazero$
         isazero$ = system$("if test -s " + pathname$ + ";then echo 0; else echo 1;fi")
 	return val(isazero$)
 end sub
+
+export sub EncloseString$(thestring$,type)
+	//Encloses a string in either single or double quotes, if it isn't already
+	//mostly for use with long filenames that may include spaces.
+	//type is either 0 (single quote) or 1 (double quote)
+	local type$, type2$
+	if type = 0 then
+		type$ = chr$(39): type2$ = chr$(34)
+	else
+		type$ = chr$(34): type2$ = chr$(39)
+	endif
+	if left$(thestring$,1) <> type$ and left$(thestring$,1) <> type2$ thestring$ = type$ + thestring$
+	if right$(thestring$,1) <> type$ and right$(thestring$,1) <> type2$ thestring$ = thestring$ + type$
+	return thestring$
+end sub	
 
 export sub WhereAmI$()
 	local path$

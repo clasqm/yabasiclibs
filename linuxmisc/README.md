@@ -31,6 +31,7 @@ It is safe to use this library and one of the others in this set concurrently,
 
 + **ArraySort**\(a\(\)\) - sorts a ONE-dimensional numeric array. Do not try *a\(\) =  ArraySort\(a\(\))*, it won't work. Your array should be global - I have had inconsistent results with local arrays.
 + **ArraySort$**\(a\$\(\)\) - sorts a ONE-dimensional string array (case-independent). Do not try a\$\(\) =  ArraySort$\(a\$\(\)), it won't work. Your array should be global - I have had inconsistent results with local arrays.
++ **EncloseString$**\(thestring$,type\) - Encloses a string in either single or double quotes, if it isn't already. Mostly for use with long filenames that may include spaces. No error-checking is done here. If you feed this routine a string that already contains quotes, your program will come to a halt. Use INSTR to check first.
 + **FileExists**\(fullpathname$\) - Test if a file exists. Returns 1 if the file exists, or returns 0 if the file does not exist. If only a filename is given, only the program's local directory will be searched.But you can also give a full pathname.
 + **FileorDir**\(fullpathname$\) - Test if a file (in the Unix sense) is a regular file or a directory. Returns 1 if it is a directory, 0 if it is just a regular file.
 + **FileorLink**\(fullpathname$\) - Test if a file (in the Unix sense) is a regular file or a symbolic link. Returns 1 if it is a link, 0 if it is just a regular file. This does NOT test for hard links.

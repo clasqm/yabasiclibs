@@ -1,6 +1,10 @@
 # yabasiclibs
 extension libraries for yabasic
 
+**PLEASE NOTE: KDE compatibility is a long-term goal for this project, after we have text-mode and GTK dialogs properly settled down. One day, I promise.**
+
+**OK, I admit it, the only way to get kdialog is to install the whole KDE subsystem, with a bunch of apps I don't need. I'm not quite ready for that.**
+
 ## kdialog
 
 This folder contains a library for yabasic that allows the use of the Linux command *kdialog* to display a variety of dialogs in text mode.

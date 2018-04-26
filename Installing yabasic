@@ -1,0 +1,21 @@
+If your distro doesn't offer yabasic, you need to compile it yourself. These instructions worked for me.
+
+You will need a C compiler (usually gcc), flex and bison on your system. These are pretty much standard equipement on any Linux box.
+
+Go to www.yabasic.de and download the Unix source code. Unpack the .tar.gz file into a directory. Open a terminal and cd to that directory.
+
+Now you need to install some dependencies:
+
+sudo apt update
+sudo apt install libx11-dev libxt-dev ncurses-dev
+
+now all you do is 
+
+./configure
+make
+make check
+sudo make install
+
+There is a development version of yabasic on github. I suggest you stay away from it for now. Its Ruby based installer didn't do it for me.
+
+

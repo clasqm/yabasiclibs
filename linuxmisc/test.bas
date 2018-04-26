@@ -65,3 +65,6 @@ import linuxmisclib
 //test WhereAmI$()
 	//print WhereAmI$()
 	
+//test EncloseString$
+	//print EncloseString$("This should be enclosed with single quotes", 0)
+	//print EncloseString$("This should be enclosed with double quotes", 1)
