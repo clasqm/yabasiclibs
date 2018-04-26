@@ -1,0 +1,8 @@
+export sub ClearDlg()
+	system(getcmd$() + "--clear")
+end sub
+
+
+sub getcmd$()
+	return "dialog "
+end sub

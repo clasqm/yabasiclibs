@@ -1,0 +1,10 @@
+export sub ClearDlg()
+	//dummy routine for compatibility, since
+	//it does not really make sense in zenity
+	//or kdialog
+end sub
+
+
+sub getcmd$()
+	return "zenity "
+end sub

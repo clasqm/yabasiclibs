@@ -1,15 +1,10 @@
-# yabasiclibs
-extension libraries for yabasic
-
-**PLEASE NOTE: KDE compatibility is a long-term goal for this project, after we have text-mode and GTK dialogs properly settled down. One day, I promise.**
-
-**OK, I admit it, the only way to get kdialog is to install the whole KDE subsystem, with a bunch of apps I don't need. I'm not quite ready for that.**
-
-## kdialog
+# kdialog
 
 This folder contains a library for yabasic that allows the use of the Linux command *kdialog* to display a variety of dialogs in text mode.
 
-The library will test for the presence of the kdialog command and will exit gracefully if it is not present
+The library will test for the presence of the kdialog command and will exit gracefully if it is not present.kdialog is a KDE program, so the colours and styles will follow that of your KDE defaults.
+
+The entire set of libraries focuses on sane defaults and getting basic functionality into yabasic. There are a lot of options that will not be implemented!
 
 Developed on elementary OS 0.4 "Loki" (i.e. Linux), but it should work on any system that will run both yabasic and the kdialog command.
 
@@ -21,7 +16,19 @@ To use the library, use the command
 
 You should **not** use this library and one of the others in this set that provides dialogs concurrently, because they replicate subroutine names. Pick the right one for your program and stick with it!
 
-### Commands available:
+## Routines available:
+
+### Common Routines
+
+**These routines are available on any of the four dialog-providing libraries.**
+
++ **ClearDlg**\(\) - on dialog and whiptail, this clears the dialog from your terminal. On zenity and kdialog, dummy routines are provided for compatibility so that you do not need to rewrite your code.
+
+### kdialog-specific routines
+
+**These routines will only work with kdialog.**
+
+
 
 
 

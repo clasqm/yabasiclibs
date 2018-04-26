@@ -1,16 +1,10 @@
-<h1>yabasiclibs</h1>
-
-<p>extension libraries for yabasic</p>
-
-<p><strong>PLEASE NOTE: KDE compatibility is a long-term goal for this project, after we have text-mode and GTK dialogs properly settled down. One day, I promise.</strong></p>
-
-<p><strong>OK, I admit it, the only way to get kdialog is to install the whole KDE subsystem, with a bunch of apps I don't need. I'm not quite ready for that.</strong></p>
-
-<h2>kdialog</h2>
+<h1>kdialog</h1>
 
 <p>This folder contains a library for yabasic that allows the use of the Linux command <em>kdialog</em> to display a variety of dialogs in text mode.</p>
 
-<p>The library will test for the presence of the kdialog command and will exit gracefully if it is not present</p>
+<p>The library will test for the presence of the kdialog command and will exit gracefully if it is not present.kdialog is a KDE program, so the colours and styles will follow that of your KDE defaults.</p>
+
+<p>The entire set of libraries focuses on sane defaults and getting basic functionality into yabasic. There are a lot of options that will not be implemented!</p>
 
 <p>Developed on elementary OS 0.4 "Loki" (i.e. Linux), but it should work on any system that will run both yabasic and the kdialog command.</p>
 
@@ -23,4 +17,16 @@
 
 <p>You should <strong>not</strong> use this library and one of the others in this set that provides dialogs concurrently, because they replicate subroutine names. Pick the right one for your program and stick with it!</p>
 
-<h3>Commands available:</h3>
+<h2>Routines available:</h2>
+
+<h3>Common Routines</h3>
+
+<p><strong>These routines are available on any of the four dialog-providing libraries.</strong></p>
+
+<ul>
+<li><strong>ClearDlg</strong>() - on dialog and whiptail, this clears the dialog from your terminal. On zenity and kdialog, dummy routines are provided for compatibility so that you do not need to rewrite your code.</li>
+</ul>
+
+<h3>kdialog-specific routines</h3>
+
+<p><strong>These routines will only work with kdialog.</strong></p>

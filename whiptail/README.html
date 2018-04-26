@@ -1,12 +1,10 @@
-<h1>yabasiclibs</h1>
-
-<p>extension libraries for yabasic</p>
-
-<h2>whiptail</h2>
+<h1>whiptail</h1>
 
 <p>This folder contains a library for yabasic that allows the use of the Linux command <em>whiptail</em> to display a variety of dialogs in text mode.</p>
 
-<p>The library will test for the presence of the whiptail command and will exit gracefully if it is not present</p>
+<p>The library will test for the presence of the whiptail command and will exit gracefully if it is not present. Whiptail is a textmode application and must be run in a terminal. It will not be useful in a headless script.</p>
+
+<p>The entire set of libraries focuses on sane defaults and getting basic functionality into yabasic. There are a lot of options that will not be implemented!</p>
 
 <p>Developed on elementary OS 0.4 "Loki" (i.e. Linux), but it should work on any system that will run both yabasic and the whiptail command.</p>
 
@@ -19,4 +17,16 @@
 
 <p>You should <strong>not</strong> use this library and one of the others in this set that provides dialogs concurrently, because they replicate subroutine names. Pick the right one for your program and stick with it!</p>
 
-<h3>Commands available:</h3>
+<h1>Routines available:</h1>
+
+<h3>Common Routines</h3>
+
+<p><strong>These routines are available on any of the four dialog-providing libraries.</strong></p>
+
+<ul>
+<li><strong>ClearDlg</strong>() - on dialog and whiptail, this clears the dialog from your terminal. On zenity and kdialog, dummy routines are provided for compatibility so that you do not need to rewrite your code.</li>
+</ul>
+
+<h3>whiptail-specific routines</h3>
+
+<p><strong>These routines will only work with whiptail.</strong></p>
