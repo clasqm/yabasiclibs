@@ -68,3 +68,10 @@ import linuxmisclib
 //test EncloseString$
 	//print EncloseString$("This should be enclosed with single quotes", 0)
 	//print EncloseString$("This should be enclosed with double quotes", 1)
+
+
+//Test URL-loading routines.
+	//if URLExist("http://clasquin-johnson.co.za/michel/") = 1 OpeninW3m("http://clasquin-johnson.co.za/michel/")
+	//if URLExist$("http://clasquin-johnson.co.za/michel/") = "1" OpeninLinks("http://clasquin-johnson.co.za/michel/")
+	//if URLExist("http://clasquin-johnson.co.za/michel/") OpeninLynx("http://clasquin-johnson.co.za/michel/")
+

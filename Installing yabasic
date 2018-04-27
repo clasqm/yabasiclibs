@@ -1,10 +1,14 @@
-If your distro doesn't offer yabasic, you need to compile it yourself. These instructions worked for me.
+The yabasic website at www.yabasic.de offers RPM and DEB packages. The DEB found there didn't work for me, so I made my own - it requires a recent x86_64 (64-bit) distro to run on.
 
-You will need a C compiler (usually gcc), flex and bison on your system. These are pretty much standard equipement on any Linux box.
+Get it here: https://github.com/clasqm/yabasic_2.78.5/tree/master/build
+
+If your distro doesn't offer yabasic, and the packages on the yabasic website or mine don't work for you, you will need to compile it yourself. These instructions worked for me.
+
+You will need a C compiler (usually gcc), flex and bison on your system. These are pretty much standard equipment on any Linux box.
 
 Go to www.yabasic.de and download the Unix source code. Unpack the .tar.gz file into a directory. Open a terminal and cd to that directory.
 
-Now you need to install some dependencies:
+Now you need to install some dependencies. These instructions should work on a Debian/Ubuntu distro:
 
 sudo apt update
 sudo apt install libx11-dev libxt-dev ncurses-dev

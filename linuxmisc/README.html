@@ -1,8 +1,4 @@
-<h1>yabasiclibs</h1>
-
-<p>extension libraries for yabasic</p>
-
-<h2>Miscellaneous commands</h2>
+<h1>Miscellaneous commands</h1>
 
 <p>This folder contains a library for yabasic that allows the use of a variety of common Linux commands in text mode. For example, opening a text file in the <em>nano</em> text editor will make it unnecessary for you to write your own text editing routine.</p>
 
@@ -29,7 +25,7 @@
 
 <p>It is safe to use this library and one of the others in this set concurrently,</p>
 
-<h3>Routines available:</h3>
+<h2>Routines available:</h2>
 
 <ul>
 <li><strong>ArraySort</strong>(a()) - sorts a ONE-dimensional numeric array. Do not try <em>a() =  ArraySort(a())</em>, it won't work. Your array should be global - I have had inconsistent results with local arrays.</li>
@@ -40,8 +36,11 @@
 <li><strong>FileorLink</strong>(fullpathname$) - Test if a file (in the Unix sense) is a regular file or a symbolic link. Returns 1 if it is a link, 0 if it is just a regular file. This does NOT test for hard links.</li>
 <li><strong>IsFileZeroByte</strong>(pathname$) - determines if a passed filename is a zero-byte file.  Returns 0 (false) if the passed variable is larger than zero bytes, and returns 1 (true) if it is zero bytes in size (note that this reverses the output of the <em>test -s</em> command). <strong>Caution:</strong> will also return 1 if file does not exist: test for that with <em>FileExists</em> first. It will also return 0 if file is actually a directory: test for that with <em>FileorDir</em> first. If the file given is a symlink, this routine will report on the real, linked file. This yabasic routine is incompatible with a similar routine I wrote for yab. If you program in both languages, you need to reverse the conditions.</li>
 <li><strong>IsItATextFile</strong>(filename$) - Tests whether a given file is a text file or not. Anything that does not have the string "text" in the results of the <em>file</em> command is assumed to be a binary file. This should work fine on Linux but may be problematic on BSD systems (including MacOS?) where this command may reject shell scripts. if you need something more powerful than <em>file</em>, I suggest you install <em>enca</em>.</li>
+<li><strong>OpeninLinks</strong>(URL$): Opens a URL in the links text-based browser. Must be run in a program that is already in a terminal. For best results your URL should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
+<li><strong>OpeninLynx</strong>(URL$): Opens a URL in the lynx text-based browser. Must be run in a program that is already in a terminal. For best results your URL should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
 <li><strong>OpenInNano$</strong>(filename$) - opens a given text file in the <em>nano</em> text editor in the same terminal window as your program. Will fail and return an error message if <em>nano</em> does not exist on your system. If <em>filename\$</em> does not exist, nano will create one in memory and let you save it. For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.You may have to CLEAR SCREEN and rebuild your screen afterwards.</li>
-<li><strong>StripLFoffSysCmd$</strong>(val$) -  Remove linefeeds from the results of a system call. If the results of a system() or system\$() command end on a LF (most do), strip the LF off and return the resulting string. But it can be used for any string that might have a suspected and unwanted LF at the end. If there is no LF present, it does nothing. This may not work on Windows systems, where you also need to test for a CR but we are not writing this library for Windows in any case. </li>
+<li><p><strong>OpeninW3m</strong>(URL$): Opens a URL in the w3m text-based browser. Must be run in a program that is already in a terminal. For best results your URL should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</p></li>
+<li><p><strong>StripLFoffSysCmd$</strong>(val$) -  Remove linefeeds from the results of a system call. If the results of a system() or system\$() command end on a LF (most do), strip the LF off and return the resulting string. But it can be used for any string that might have a suspected and unwanted LF at the end. If there is no LF present, it does nothing. This may not work on Windows systems, where you also need to test for a CR but we are not writing this library for Windows in any case. </p></li>
 <li><strong>TestForUtility$</strong>(filename\$) - tests whether a given utility exists on your $PATH and is executable. Returns an empty string if the utility exists, and a warning message if it does not (this reverses the functionality of the Linux <em>which</em> command). This command is used by many of the other routines in this library, and a version of it can be found in the each of the various dialog libraries.</li>
 <li><strong>WhereAmI$</strong>() - returns the current directory from which the program is running.</li>
 </ul>

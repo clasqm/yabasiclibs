@@ -26,12 +26,69 @@ export sub OpenInNano$(filename$)
 	//For best results your filename should be enclosed in single
 	//quotation marks so that it will not get confused by spaces. This
 	//routine will not check for that.
+	//
+	//No, I won't. Friends don't let friends use emacs
+	//but I'll consider vi if there is a demand
 	local UTest$
 	UTest$ = TestForUtility$("nano")
 	if UTest$ <> "" then
 		return UTest$
 	else
 		system("nano " + filename$)
+	endif
+end sub
+
+export sub URLExist$(URL$)
+	//tests whether a URL exists or not. Returns the STRING value "1"
+	//if it does. or "0" if it does not.
+	return StripLFoffSysCmd$(system$("if curl --output /dev/null --silent --head --fail \"" + URL$ + "\"; then echo \"1\"; else  echo \"0\"; fi"))
+end sub
+
+export sub URLExist(URL$)
+	//tests whether a URL exists or not. Returns the NUMERIC value 1
+	//if it does. or 0 if it does not.
+	return val(StripLFoffSysCmd$(system$("if curl --output /dev/null --silent --head --fail \"" + URL$ + "\"; then echo \"1\"; else  echo \"0\"; fi")))
+end sub
+
+export sub OpeninLinks(URL$)
+	//Opens a URL in the links text-based browser
+	//Must be run in a program that is already in a terminal
+	//For best results your URL should be enclosed in single
+	//quotation marks so that it will not get confused by spaces. This
+	//routine will not check for that.
+	UTest$ = TestForUtility$("links")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("links " + URL$)
+	endif
+end sub
+
+export sub OpeninLynx(URL$)
+	//Opens a URL in the lynx text-based browser
+	//Must be run in a program that is already in a terminal
+	//For best results your URL should be enclosed in single
+	//quotation marks so that it will not get confused by spaces. This
+	//routine will not check for that.
+	UTest$ = TestForUtility$("lynx")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("lynx " + URL$)
+	endif
+end sub
+
+export sub OpeninW3m(URL$)
+	//Opens a URL in the w3m text-based browser
+	//Must be run in a program that is already in a terminal
+	//For best results your URL should be enclosed in single
+	//quotation marks so that it will not get confused by spaces. This
+	//routine will not check for that.
+	UTest$ = TestForUtility$("w3m")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("w3m " + URL$)
 	endif
 end sub
 
