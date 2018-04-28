@@ -1,7 +1,18 @@
+//COMMON ROUTINES
+
 export sub ClearDlg()
 	system(getcmd$() + "--clear")
 end sub
 
+
+
+//DIALOG-SPECIFIC ROUTINES
+
+
+
+
+
+//SUPPORTIVE SUBROUTINES
 
 sub getcmd$()
 	return "dialog "

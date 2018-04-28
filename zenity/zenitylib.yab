@@ -1,9 +1,20 @@
+//COMMON ROUTINES
+
 export sub ClearDlg()
 	//dummy routine for compatibility, since
 	//it does not really make sense in zenity
 	//or kdialog
 end sub
 
+
+
+//DIALOG-SPECIFIC ROUTINES
+
+
+
+
+
+//SUPPORTIVE SUBROUTINES
 
 sub getcmd$()
 	return "zenity "

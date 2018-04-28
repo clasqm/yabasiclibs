@@ -2,18 +2,38 @@
 
 <p>Extension libraries for yabasic.</p>
 
-<p>A series of libraries for <a href="http://www.yabasic.de/">yabasic</a> that gives access to a number of common utilities on Linux. Not tested on other platforms, but it should be possible to adjust them accordingly.</p>
+<p>A series of libraries for <a href="http://www.yabasic.de/">yabasic</a> , the BASIC dialects by <a href="https://github.com/marcIhm">Marc Ihm</a>, that gives access to a number of common utilities on Linux. Not tested on other UNIX platforms, but it should be possible to adjust them accordingly.</p>
 
 <p>This software is still very much in the planning and experimentation stages.</p>
 
+<h2>The libraries</h2>
+
 <ul>
-<li>dialoglib.yab - allows the use of the Linux command <em>dialog</em> to display a variety of dialogs in text mode.</li>
-<li>kdialoglib.yab - allows the use of the Linux command <em>kdialog</em> to display a variety of dialogs in text mode.</li>
-<li>linuxmisclib.yab - allows the use of a variety of common Linux commands in text mode.</li>
-<li>whiptaillib.yab - allows the use of the Linux command <em>whiptail</em> to display a variety of dialogs in text mode.</li>
-<li>zenitylib.yab - allows the use of the Linux command <em>zenity</em> to display a variety of dialogs in graphical mode.</li>
+<li><a href="https://github.com/clasqm/yabasiclibs/tree/master/dialog">dialoglib.yab</a> - allows the use of the Linux command <em>dialog</em> to display a variety of dialogs in text mode.</li>
+<li><a href="https://github.com/clasqm/yabasiclibs/tree/master/kdialog">kdialoglib.yab</a> - allows the use of the Linux command <em>kdialog</em> to display a variety of dialogs in text mode.</li>
+<li><a href="https://github.com/clasqm/yabasiclibs/tree/master/linuxmisc">linuxmisclib.yab</a> - allows the use of a variety of common Linux text-mode commands and applications. Also contains a few routines that I just found myself doing over and over.</li>
+<li><a href="https://github.com/clasqm/yabasiclibs/tree/master/whiptail">whiptaillib.yab</a> - allows the use of the Linux command <em>whiptail</em> to display a variety of dialogs in text mode.</li>
+<li><a href="https://github.com/clasqm/yabasiclibs/tree/master/zenity">zenitylib.yab</a> - allows the use of the Linux command <em>zenity</em> to display a variety of dialogs in graphical mode.</li>
 </ul>
 
-<p>For instructions, see the separate README file for each of these libraries. Please note that the libraries that give access to dialog boxes cannot be mixed in the same program, as they will create an unholy mess of namespace confusion. Pick one and stick with it! The <em>linuxmisc</em> library can be safely combined with any one of the others.</p>
+<p>For instructions, see the separate README file for each of these libraries. Each library also comes with a <em>test.bas</em> file in which each new function is supplied with an example. Just remove the comments from the example you want to test, save the changes  and run the command</p>
+
+<pre><code>yabasic test,bas
+</code></pre>
+
+<p>within the same folder where the library resides.</p>
+
+<p>Please note that the libraries that give access to dialog boxes cannot be mixed in the same program, as they will create an unholy mess of namespace confusion. Pick one and stick with it! However, the <em>linuxmisclib</em> library can be safely combined with any one of the others.</p>
+
+<p>The dialog-providing routines have common commands as well as dialog-specific ones. If your program sticks religiously to the common routines, you will be able to change it from, say, zenity to kdialog by changing a single <em>import</em> statement.</p>
 
 <p>Get it here: https://github.com/clasqm/yabasiclibs </p>
+
+<h2>What will <em>not</em> be included</h2>
+
+<ul>
+<li>Routines to use GUI apps. There is no possible way to wite a routine for every graphical text editor in Linux. And that is just the text editors. My routines are very straightforward and you should be able to adapt them to your own needs.</li>
+<li>Anything to do with emacs. friends don't let friends use emacs.</li>
+<li>In <em>linuxmisclib</em>, routines that start up in a new xterm. Well, maybe much later.</li>
+<li>The entire set of libraries focuses on sane defaults and getting basic functionality into yabasic. There are a lot of obscure switches (esp. in kdialog) that will not be implemented!</li>
+</ul>

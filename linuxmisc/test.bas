@@ -15,9 +15,16 @@ import linuxmisclib
 //Test of OpenInNano$
 //this should work
 	//OpenInNano$("test.txt")
-//deliberate error -this file should not exist, but nano will create one in memory
-//and you can save it
-	//OpenInNano$("testx.txt")
+	//deliberate error -this file should not exist, but nano will create one in memory
+	//and you can save it
+	//OpenInNano$("")
+	
+//Test of OpenInJed
+//this should work
+	//OpeninJed$("test.txt")
+	//deliberate error -this file should not exist, but nano will create one in memory
+	//and you can save it
+	//OpeninJed$("testx.txt")
 
 //Testing Arraysort()
 	//dim a(3)
@@ -69,9 +76,22 @@ import linuxmisclib
 	//print EncloseString$("This should be enclosed with single quotes", 0)
 	//print EncloseString$("This should be enclosed with double quotes", 1)
 
-
 //Test URL-loading routines.
-	//if URLExist("http://clasquin-johnson.co.za/michel/") = 1 OpeninW3m("http://clasquin-johnson.co.za/michel/")
-	//if URLExist$("http://clasquin-johnson.co.za/michel/") = "1" OpeninLinks("http://clasquin-johnson.co.za/michel/")
-	//if URLExist("http://clasquin-johnson.co.za/michel/") OpeninLynx("http://clasquin-johnson.co.za/michel/")
+//Note the different methods to test the availability of a URL
+//before you display it in one of the available browsers.
+	//if URLExist("http://clasquin-johnson.co.za/michel/") = 1 OpeninW3m$("http://clasquin-johnson.co.za/michel/")
+	//if URLExist$("http://clasquin-johnson.co.za/michel/") = "1" OpeninLinks$("http://clasquin-johnson.co.za/michel/")
+	//if URLExist("http://clasquin-johnson.co.za/michel/") OpeninLynx$("http://clasquin-johnson.co.za/michel/")
+	//if URLExist("http://clasquin-johnson.co.za/michel/") = true OpeninElinks$("http://clasquin-johnson.co.za/michel/")
 
+//test miscellaneous utilities
+	//OpenCalcurse$()
+	//OpenTinaS()
+	//OpeninTpp$("/usr/share/doc/tpp/examples/tpp-features.tpp")
+	//OpeninWordgrinder$("example.wg")
+	//OpenNano$()
+	//OpenJed$()
+	//OpenWordgrinder$()
+	//ConvertFile$("README.md", "~/Downloads/readme.docx")
+	//ConvertFile2PDF$("README.md", "~/Downloads/readme.pdf")
+	
