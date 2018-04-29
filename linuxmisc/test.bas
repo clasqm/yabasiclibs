@@ -108,7 +108,9 @@ import linuxmisclib
 	//OpenWordgrinder$()
 	//ConvertFile$("README.md", "~/Downloads/readme.docx")
 	//ConvertFile2PDF$("README.md", "~/Downloads/readme.pdf")
-
-
-
+	//OpenSc$()
+	//PrintFiglet$("mini", "figlet text")
+	//PrintToilet$("letter", "toilet text")
+	
+	
 exit

@@ -325,6 +325,21 @@ export sub OpenInNano$(filename$)
 	endif
 end sub
 
+export sub OpenInSc$(filename$)
+	//opens a given text file in the sc spreadsheet.
+	//must be run in a program that is already in a terminal
+	//For best results your filename should be enclosed in single
+	//quotation marks so that it will not get confused by spaces. This
+	//routine will not check for that.
+	local UTest$
+	UTest$ = TestForUtility$("sc")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("sc " + filename$)
+	endif
+end sub
+
 export sub OpeninTpp$(filename$)
 	//Opens a given  file in the tpp Text Presentation Program
 	//Must be run in a program that is already in a terminal
@@ -398,6 +413,17 @@ export sub OpenNano$()
 	endif
 end sub
 
+export sub OpenSc$()
+	//same as OpenInSc$("")
+	local UTest$
+	UTest$ = TestForUtility$("sc")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("sc")
+	endif
+end sub
+
 export sub OpenTina$()
 	//Opens the tina text-based personal information manager
 	//Only the default database is provided for in this routine.
@@ -423,6 +449,40 @@ end sub
 
 
 ########## P ###########
+
+export sub PrintFiglet$(font$, text$)
+	//Print text$ in the figlet font font$
+	//you can find these fonts with locate *.flf
+	local UTest$
+	UTest$ = TestForUtility$("figlet")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		if font$ = "" then 
+			UTest$ = "figlet "
+		else
+			UTest$ = "figlet -f " + font$ + " "
+		endif
+		system(UTest$ + text$)
+	endif
+end sub
+
+export sub PrintToilet$(font$, text$)
+	//Print text$ in the toilet font font$
+	//you can find these fonts with locate *.tlf
+	local UTest$
+	UTest$ = TestForUtility$("toilet")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		if font$ = "" then 
+			UTest$ = "toilet "
+		else
+			UTest$ = "toilet -f " + font$ + " "
+		endif
+		system(UTest$ + text$)
+	endif
+end sub
 
 ########## Q ###########
 
