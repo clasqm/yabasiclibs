@@ -430,6 +430,45 @@ end sub
 
 ########## S ###########
 
+export sub Screensaver(onoff,type)
+	//Starts or halts  the termsaver screensaver application.
+	//Please note that work in your program is not necessarily suspended while this runs,
+	//because it gets launched in a separate process, but it is up to you to poll for the exiting condition.
+	//values for onoff are 1 (start screensaver) and 0 (close screensaver), If 0,
+	//the second parameter may be omitted. 
+	//Closing the screensaver will likely close ALL termsaver instances on your system.
+	//You can also close it manually with CTRL-C
+	//values for type are 0 (24 hr clock), 1 (12 hr clock), 2 (the words Yabasic forever appear
+	//at random on your screen), 3 (scrolling MIMEtype information), and 4 (system monitor).
+	//This implementation only uses screensavers that do not need an Internet connection.
+	//See two ways to handle a screensaver in test.bas
+	local type$
+	if onoff = 0 then
+		system("pkill termsaver && clear")
+	else
+		switch type
+		case 0 
+			type$ = "clock"
+			break
+		 case 1
+			type$ = "clock -m"
+			break
+		case 2
+			type$ = "randtxt -d 1 -w \"Yabasic forever\'"
+			break
+		case 3
+			type$ = "programmer -p /usr/share/mime/"
+			break
+		case 4
+			type$ = "sysmon"
+			break
+		default
+			break
+		end switch
+		system ("clear && termsaver " + type$ + " &")
+	endif
+end sub
+
 export sub StripLFoffSysCmd$(tempval$)
 	//remove LF from the results of a system call
 	//if the results of a System() or System$() command end on a LF (most do),

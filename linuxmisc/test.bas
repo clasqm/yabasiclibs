@@ -84,6 +84,20 @@ import linuxmisclib
 	//if URLExist("http://clasquin-johnson.co.za/michel/") OpeninLynx$("http://clasquin-johnson.co.za/michel/")
 	//if URLExist("http://clasquin-johnson.co.za/michel/") = true OpeninElinks$("http://clasquin-johnson.co.za/michel/")
 
+//test screensaver with wait
+	//Screensaver(1,0)
+	//wait 3
+	//Screensaver (0)
+
+//test screensaver with input
+	//Screensaver(1,0)
+	//input a
+	//Screensaver (0)
+//inkey$ does not work with this routine
+//since clear screen buggers up the screen mode
+//but this way you can dismiss the screen saver just
+//by pressing ENTER
+	
 //test miscellaneous utilities
 	//OpenCalcurse$()
 	//OpenTinaS()
@@ -94,4 +108,7 @@ import linuxmisclib
 	//OpenWordgrinder$()
 	//ConvertFile$("README.md", "~/Downloads/readme.docx")
 	//ConvertFile2PDF$("README.md", "~/Downloads/readme.pdf")
-	
+
+
+
+exit
