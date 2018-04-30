@@ -227,6 +227,18 @@ end sub
 
 ########## K ###########
 
+export sub KillPlay()
+	//Stops any multimedia files currently playing if they use either 
+	//ffplay or aplay. Please not that this is a nuclear option - it will 
+	//also affect any other programs making use of these utilities.
+	local UTest$
+	UTest$ = TestForUtility$("pkill")
+	if UTest$ = "" then
+		system("pkill ffplay")
+		system("pkill aplay")
+	endif
+end sub
+
 ########## L ###########
 
 ########## M ###########
@@ -450,6 +462,46 @@ end sub
 
 ########## P ###########
 
+export sub PlayMP3(file$)
+	//Plays a .mp3 sound file. Launched in a separate process,
+	//so it cannot be stopped afterwards, unless you do a pkill ffplay
+	local UTest$
+	UTest$ = TestForUtility$("ffplay")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("ffplay -nodisp -loglevel quiet " + file$ + " &")
+	endif
+end sub
+
+export sub PlayVideo(file$)
+	//Plays a video file (.mp4, .mov etc.) Launched in a separate process,
+	//so it cannot be stopped afterwards, unless you do a pkill ffplay.
+	//If played in an xterm, this will open a NEW window.
+	//In a fullscreen console, it will play in an ASCII-art format.
+	//This can also be used for MP3 files - It will then show the cover art
+	//unlike the audio only playing of PlayMP3().
+	local UTest$
+	UTest$ = TestForUtility$("ffplay")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("ffplay -loglevel quiet " + file$ + " &")
+	endif
+end sub
+
+export sub PlayWav(file$)
+	//Plays a .wav sound file. Launched in a separate process,
+	//so it cannot be stopped afterwards unless you do a pkill aplay.
+	local UTest$
+	UTest$ = TestForUtility$("aplay")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("aplay -q " + file$ + " &")
+	endif
+end sub
+
 export sub PrintFiglet$(font$, text$)
 	//Print text$ in the figlet font font$
 	//you can find these fonts with locate *.flf
@@ -502,10 +554,13 @@ export sub Screensaver(onoff,type)
 	//at random on your screen), 3 (scrolling MIMEtype information), and 4 (system monitor).
 	//This implementation only uses screensavers that do not need an Internet connection.
 	//See two ways to handle a screensaver in test.bas
-	local type$
+	local type$, UTest$
 	if onoff = 0 then
-		system("pkill termsaver && clear")
+		UTest$ = TestForUtility$("pkill")
+		if UTest$ <> "" system("pkill termsaver && clear")
 	else
+		UTest$ = TestForUtility$("termsaver")
+		if UTest$ = "" return
 		switch type
 		case 0 
 			type$ = "clock"
@@ -588,6 +643,7 @@ end sub
 #====================================
 
 //SUPPORTIVE SUBROUTINES
+//These will not be available in your main program
 
 sub TempDir$()
 //returns the location of Linux's TMPDIR directory

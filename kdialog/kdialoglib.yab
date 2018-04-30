@@ -1,22 +1,87 @@
 //COMMON ROUTINES
 
+#COM######### A ###########
+#COM######### B ###########
+#COM######### C ###########
+
 export sub ClearDlg()
 	//dummy routine for compatibility, since
 	//it does not really make sense in zenity
 	//or kdialog
 end sub
 
+#COM######### D ###########
+#COM######### E ###########
+#COM######### F ###########
+#COM######### G ###########
+#COM######### H ###########
+#COM######### I ###########
+#COM######### J ###########
+#COM######### K ###########
+#COM######### L ###########
+#COM######### M ###########
+#COM######### N ###########
+#COM######### O ###########
+#COM######### P ###########
+#COM######### Q ###########
+#COM######### R ###########
+#COM######### S ###########
+#COM######### T ###########
+
+export sub TestForDialogUtility$()
+	//internal routine to test if the called utility actually exists
+	//an empty string returned means it does.
+	local which$
+	which$ = system$("which " + getcmd$())
+	if which$ = "" then
+		return "The required program " + getcmd$() + " does not exist on this system"
+	else
+		return ""
+	endif
+end sub 
+
+#COM######### U ###########
+#COM######### V ###########
+#COM######### W ###########
+#COM######### X ###########
+#COM######### Y ###########
+#COM######### Z ###########
 
 
 //DIALOG-SPECIFIC ROUTINES
 
 
-
+#DS######### A ###########
+#DS######### B ###########
+#DS######### C ###########
+#DS######### D ###########
+#DS######### E ###########
+#DS######### F ###########
+#DS######### G ###########
+#DS######### H ###########
+#DS######### I ###########
+#DS######### J ###########
+#DS######### K ###########
+#DS######### L ###########
+#DS######### M ###########
+#DS######### N ###########
+#DS######### O ###########
+#DS######### P ###########
+#DS######### Q ###########
+#DS######### R ###########
+#DS######### S ###########
+#DS######### T ###########
+#DS######### U ###########
+#DS######### V ###########
+#DS######### W ###########
+#DS######### X ###########
+#DS######### Y ###########
+#DS######### Z ###########
 
 
 //SUPPORTIVE SUBROUTINES
-
+//These will not be available in your main program
 
 sub getcmd$()
-	return "kdialog "
+	return "kdialog"
 end sub

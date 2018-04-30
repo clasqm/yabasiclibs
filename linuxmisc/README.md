@@ -4,7 +4,7 @@ This folder contains a library for *yabasic* that allows the use of a variety of
 
 This library also contains some routines ported from my libraries originally developed under yab for Haiku.
 
-These routines make heavy use of *system\(\)* and *system$\(\)* commands, and some write temporary files, work on them, and read them back. They. will.  slow. your. programs. down. a. lot.
+These routines make heavy use of *system\(\)* and *system$\(\)* commands, and some write temporary files, work on them, and read them back. They. will.  slow. your. programs. down. a. lot. Also, ensuring that you (or your users) have the appropriate packages installed will be up to you. The routines themselves only check for the existence of the binary and exit if it is not found. All I can tell you is that every utility used here was found in the Ubuntu repositories. *apt-cache search* is your friend.
 
 All are case-sensitive.
 
@@ -46,7 +46,7 @@ It is safe to use this library and ONE of the others in this set concurrently,
 
 + **ConvertFile2PDF\$**\(infile\$, outfile\$\) - Convert any [text file format](#pandocformats) that *pandoc* \(http://pandoc.org/\) can handle to PDF. make sure that your infile's name has the correct extension added, and that your outfile's name ends with .pdf, then *pandoc* will almost always get it right. e.g. *ConvertFile2PDF\$\("myfile.md", "myfile.pdf"\)* will convert a Markdown file to pdf format. **System commands used:** *pandoc*, *wkhtmltopdf*
 
-+ **EncloseString$**\(thestring$,type\) - Encloses a string in either single or double quotes, if it isn't already. Mostly for use with long filenames that may include spaces. No error-checking is done here. If you feed this routine a string that already contains quotes, your program will come to a halt. Use INSTR() to check for that first. **System commands used:** none.
++ **EncloseString$**\(thestring$,type\) - Encloses a string in either single or double quotes, if it isn't already. Mostly for use with long filenames that may include spaces. *type* is either 0 (single quote) or 1 (double quote). No error-checking is done here. If you feed this routine a string that already contains quotes, your program will come to a halt. Use INSTR() to check for that first. **System commands used:** none.
 
 + **FileExists**\(fullpathname$\) - Test if a file exists. Returns 1 if the file exists, or returns 0 if the file does not exist. If only a filename is given, only the program's local directory will be searched.But you can also give a full pathname. **System commands used:** none.
 
@@ -57,6 +57,8 @@ It is safe to use this library and ONE of the others in this set concurrently,
 + **IsFileZeroByte**\(pathname$\) - determines if a passed filename is a zero-byte file.  Returns 0 \(false\) if the passed variable is larger than zero bytes, and returns 1 \(true\) if it is zero bytes in size (note that this reverses the output of the *test -s* command). **Caution:** will also return 1 if file does not exist: test for that with *FileExists* first. It will also return 0 if file is actually a directory: test for that with *FileorDir* first. If the file given is a symlink, this routine will report on the real, linked file. This yabasic routine is incompatible with a similar routine I wrote for yab. If you program in both languages, you need to reverse the conditions. **System commands used:** *test*.
 
 + **IsItATextFile**\(filename$\) - Tests whether a given file is a text file or not. Anything that does not have the string "text" in the results of the *file* command is assumed to be a binary file. This should work fine on Linux but may be problematic on BSD systems (including MacOS?) where this command may reject shell scripts. if you need something more powerful than *file*, I suggest you install *enca*. **System commands used:** *file*.
+
++ **KillPlay**\(\) - Stops any multimedia files currently playing if they use either *ffplay* or *aplay*, such as files launched with *PlayMP3\(\)*, *PlayVideo\(\)* or *PlayWav\(\)*. Please note that this is a nuclear option: it will also affect any other programs making use of these utilities. **System commands used:** *pkill*.
 
 + **OpenCalcurse\$**\(\) - Opens the *calcurse* text-mode calendar app. Only the default calendar is provided for in this routine. **System commands used:** *calcurse*.
 
@@ -80,6 +82,12 @@ It is safe to use this library and ONE of the others in this set concurrently,
 
 + **OpenTina$**\(\) - Opens the *tina* text-based personal information manager. Only the default database is provided for in this routine. **System commands used:** *tina*.
 
++ **PlayMP3**\(file\$\) - Plays an audio (.mp3, m4a, etc) file. Launched in a separate process, so it cannot be stopped afterwards, unless you do a *KilPlay\(\)*. For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that. Will also play .wav files, but *PlayWav\(\)* is a little faster.  **System commands used:** *ffplay*.
+
++ **PlayVideo**\(file\$\) - Plays a video file (.mp4, .mov etc.) Launched in a separate process, so it cannot be stopped afterwards, unless you do a *KillPlay\(\)*. If played in an xterm, this will open a NEW window. In a fullscreen console, it will play in an ASCII-art format. For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that. This routine can also be used for audio files - It will then show the cover art, unlike the audio-only playing of *PlayMP3\(\)*. **System commands used:** *ffplay*.
+
++ **PlayWav**/(file/$/) - Plays a .wav sound file. Launched in a separate process, so it cannot be stopped afterwards, unless you do a *KillPlay\(\)*. For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that. **System commands used:** *aplay*.
+
 + **PrintFiglet\$**\(font\$, text\$\) - Print *text$* in the *figlet* font *font$* \(you can find these fonts with *locate \*.flf*).  **System commands used:** *figlet*.
 
 + **PrintToilet\$**\(font\$, text\$\) - Print *text$* in the *toilet* font *font$* \(you can find these fonts with *locate \*.tlf*).  **System commands used:** *toilet*.
@@ -88,7 +96,7 @@ It is safe to use this library and ONE of the others in this set concurrently,
 
 + **StripLFoffSysCmd$**\(val$\) -  Remove linefeeds from the results of a system call. If the results of a system\(\) or system\$\(\) command end on a LF (most do), strip the LF off and return the resulting string. But it can be used for any string that might have a suspected and unwanted LF at the end. If there is no LF present, it does nothing. This may not work on Windows systems, where you also need to test for a CR but we are not writing this library for Windows in any case. **System commands used:** none
 
-+ **TestForUtility$**\(filename\$\) - tests whether a given utility exists on your $PATH and is executable. Returns an empty string if the utility exists, and a warning message if it does not \(this reverses the functionality of the Linux *which* command\). This command is used by many of the other routines in this library, and a version of it can be found in the each of the various dialog libraries. If the required program does not exist.  **System commands used:** *which*.
++ **TestForUtility$**\(filename\$\) - tests whether a given utility exists on your $PATH and is executable. Returns an empty string if the utility exists, and a warning message if it does not \(this reverses the functionality of the Linux *which* command\). This command is used by many of the other routines in this library, and a version of it can be found in each of the various dialog libraries. If the required program does not exist.  **System commands used:** *which*.
 
 + **URLExist**\(URL\$\) and **URLExist\$**\(URL\$\) do the equivalent job of testing whether a URL exists before sending it to *OpeninLinks*\(\), for example. The difference is whether the *1* \(it exists\) or 0 \(it does not exist\) is sent as a numeric or string result. See the file *test.bas* for the different ways to use these routines.  **System commands used:** *curl*.
 
