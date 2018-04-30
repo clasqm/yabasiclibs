@@ -99,11 +99,11 @@ import linuxmisclib
 //by pressing ENTER
 
 //test multimedia
-	//PlayMP3(EncloseString$("/home/michel/Music/Alanis Morissette/Alanis Unplugged/2 - Joining You.m4a", 0)) //substitute your own filename here
+	//PlayMP3$(EncloseString$("/home/michel/Music/Alanis Morissette/Alanis Unplugged/2 - Joining You.m4a", 0)) //substitute your own filename here
 	//wait 2
-	//PlayVideo(EncloseString$("/home/michel/Videos/Solar Panels/batteries.mov", 0) ) //substitute your own filename here
+	//PlayVideo$(EncloseString$("/home/michel/Videos/Solar Panels/batteries.mov", 0) ) //substitute your own filename here
 	//wait 2
-	//PlayWav("/usr/share/sounds/alsa/Noise.wav")
+	//PlayWav$("/usr/share/sounds/alsa/Noise.wav")
 	//wait 1
 	//print "killing ..."
 	//KillPlay()

@@ -480,7 +480,7 @@ end sub
 
 ########## P ###########
 
-export sub PlayMP3(file$)
+export sub PlayMP3$(file$)
 	//Plays a .mp3 sound file. Launched in a separate process,
 	//so it cannot be stopped afterwards, unless you do a pkill ffplay
 	local UTest$
@@ -492,7 +492,7 @@ export sub PlayMP3(file$)
 	endif
 end sub
 
-export sub PlayVideo(file$)
+export sub PlayVideo$(file$)
 	//Plays a video file (.mp4, .mov etc.) Launched in a separate process,
 	//so it cannot be stopped afterwards, unless you do a pkill ffplay.
 	//If played in an xterm, this will open a NEW window.
@@ -508,7 +508,7 @@ export sub PlayVideo(file$)
 	endif
 end sub
 
-export sub PlayWav(file$)
+export sub PlayWav$(file$)
 	//Plays a .wav sound file. Launched in a separate process,
 	//so it cannot be stopped afterwards unless you do a pkill aplay.
 	local UTest$

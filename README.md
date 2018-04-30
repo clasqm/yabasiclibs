@@ -8,11 +8,11 @@ This software is still very much in the planning and experimentation stages.
 
 ## The libraries
 
-+ [dialoglib.yab](https://github.com/clasqm/yabasiclibs/tree/master/dialog) - allows the use of the Linux command *dialog* to display a variety of dialogs in text mode.
-+ [kdialoglib.yab](https://github.com/clasqm/yabasiclibs/tree/master/kdialog) - allows the use of the Linux command *kdialog* to display a variety of dialogs in text mode.
-+ [linuxmisclib.yab](https://github.com/clasqm/yabasiclibs/tree/master/linuxmisc) - allows the use of a variety of common Linux text-mode commands and applications. Also contains a few routines that I just found myself doing over and over.
-+ [whiptaillib.yab](https://github.com/clasqm/yabasiclibs/tree/master/whiptail) - allows the use of the Linux command *whiptail* to display a variety of dialogs in text mode.
-+ [zenitylib.yab](https://github.com/clasqm/yabasiclibs/tree/master/zenity) - allows the use of the Linux command *zenity* to display a variety of dialogs in graphical mode.
++ [dialoglib.yab](https://clasqm.github.io/yabasiclibs/dialog/) - allows the use of the Linux command *dialog* to display a variety of dialogs in text mode.
++ [kdialoglib.yab](https://clasqm.github.io/yabasiclibs/kdialog/) - allows the use of the Linux command *kdialog* to display a variety of dialogs in text mode.
++ [linuxmisclib.yab](https://clasqm.github.io/yabasiclibs/linuxmisc/) - allows the use of a variety of common Linux text-mode commands and applications. Also contains a few routines that I just found myself doing over and over.
++ [whiptaillib.yab](https://clasqm.github.io/yabasiclibs/whiptail/) - allows the use of the Linux command *whiptail* to display a variety of dialogs in text mode.
++ [zenitylib.yab](https://clasqm.github.io/yabasiclibs/zenity/) - allows the use of the Linux command *zenity* to display a variety of dialogs in graphical mode.
 
 For instructions, see the separate README file for each of these libraries. Each library also comes with a *test.bas* file in which each new function is supplied with an example. Just remove the comments from the example you want to test, save the changes  and run the command
 
