@@ -114,6 +114,24 @@ export sub ConvertFile$(infile$, outfile$)
 	endif
 end sub
 
+export sub ConvertFile2String$(infile$)
+	//Convert any text file format that pandoc 
+	//(http://pandoc.org/) can handle to text. 
+	//make sure that your filename has the correct
+	//extension, then pandoc will almost always get it right.
+	//e.g a$ = ConvertFile2String$("myfile.md")
+	//will convert a Markdown file and return the result 
+	//as the string variable a$.
+	//Unlike ConvertFile$(), this routine will NOT write an output file.
+	local UTest$
+	UTest$ = TestForUtility$("pandoc")
+	if UTest$ <> "" then
+	else
+		UTest$ = system$("pandoc -t plain " + infile$)
+	endif
+	return UTest$
+end sub
+
 export sub  ConvertFile2PDF$(infile$, outfile$)
 	//convert any text file format that pandoc (http://pandoc.org/)
 	//can handle to PDF. make sure that your infile's name has the 

@@ -24,7 +24,7 @@ You should **not** use this library and one of the others in this set that provi
 
 + **ClearDlg**\(\) - on dialog and whiptail, this clears the dialog from your terminal. On zenity and kdialog, dummy routines are provided for compatibility so that you do not need to rewrite your code.
 
-+ **TestForDialogUtility\$**\(\) - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.
++ **TestForDialogUtility$**\(\) - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.
 
 ### kdialog-specific routines
 
