@@ -191,13 +191,13 @@ It is safe to use this library and ONE of the others in this set concurrently,
     + Only the default database is provided for in this routine. 
     + **System commands used:** *tina*.
 
-+ **PlayMP3**(file$) - Plays an audio (.mp3, m4a, etc) file. 
++ **PlayMP3$**(file$) - Plays an audio (.mp3, m4a, etc) file. 
     + Launched in a separate process, so it cannot be stopped afterwards, unless you do a *KilPlay()*. 
     + For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that. 
     + Will also play .wav files, but *PlayWav()* is a little faster.  
     + **System commands used:** *ffplay*.
 
-+ **PlayVideo**(file$) - Plays a video file (.mp4, .mov etc.) 
++ **PlayVideo$**(file$) - Plays a video file (.mp4, .mov etc.) 
     + Launched in a separate process, so it cannot be stopped afterwards, unless you do a *KillPlay()*. 
     + If played in an xterm, this will open a NEW window. 
     + In a fullscreen console, it will play in an ASCII-art format. 
@@ -205,7 +205,7 @@ It is safe to use this library and ONE of the others in this set concurrently,
     + This routine can also be used for audio files - It will then show the cover art, unlike the audio-only playing of *PlayMP3()*. 
     + **System commands used:** *ffplay*.
 
-+ **PlayWav**(file$) - Plays a .wav sound file. 
++ **PlayWav$**(file$) - Plays a .wav sound file. 
     + Launched in a separate process, so it cannot be stopped afterwards, unless you do a *KillPlay()*. 
     + For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that. 
     + **System commands used:** *aplay*.
@@ -256,8 +256,21 @@ It is safe to use this library and ONE of the others in this set concurrently,
 + **WhereAmI$**() - returns the current directory from which the program is running.  
     + **System commands used:** *pwd*.
 
-----------
++ **WikipediaDump$**(searchterm$, language$) - Search wikipedia for a specific string, convert the article to text and return it as a string variable.
+    + If language$ is not supplied, English will be assumed.
+    + See [Appendix 2](#wikilangs) for the language codes supported.
+    + *searchterm$* may include spaces.
+    + **NOTE**: this routine may take a second or two to get going.
+    + **System commands used:** *wikipedia2text*.
 
++ **WikipediaURL$**(searchterm$, language$) - Search wikipedia for a specific string, and return the URL as a string variable.
+    + if language$ is not supplied, English will be assumed
+    + See [Appendix 2](#wikilangs) for the language codes supported.
+    + *searchterm$* may include spaces.
+    + **NOTE**: this routine may take a second or two to get going.
+    + **System commands used:** *wikipedia2text*.
+
+----------
 ## Appendix 1: Pandoc formats
 <a name="pandocformats"></a>
 
@@ -266,3 +279,26 @@ It is safe to use this library and ONE of the others in this set concurrently,
 **Output formats**: asciidoc, beamer, commonmark, context, docbook, docx, dokuwiki, dzslides, epub, epub3, fb2, haddock, html, html5, icml, latex, man, markdown, markdown_github, markdown_mmd, markdown_phpextra, markdown_strict, mediawiki, native, odt, opendocument, opml, org, plain, revealjs, rst, rtf, s5, slideous, slidy, texinfo, textile
 
 ![pandoc formats](imgs/pandocdiagram.jpg)
+
+</br>
+## Appendix 2: Language support for wikipedia2text
+<a name="wikilangs"></a>
+
+|Code| Language|Code| Language|
+|:----|:----|:----|:----|
+| **af** | Afrikaans|**la** | Latin|
+| **als** | Alemannic| **lb** | Luxembourgian|
+| **ca** | Catalan| **nds** | Low German|
+| **cs** | Czech| **nl** | Dutch|
+| **da** | Danish|**nn** | Norwegian (Nynorsk|
+| **de** | German|**no** | Norwegian (Bokmål)|
+| **en** | English|**pl** | Polish|
+| **eo** | Esperanto|**pt** | Portuguese|
+| **es** | Spanish|**rm** | Rhaeto-Romanic|
+| **fi** | Finnish| **ro** | Romanian|
+| **fr** | French| **simple** | Simple English|
+| **hu** | Hungarian| **sk** | Slovak|
+| **ia** | Interlingua|**sl** | Slovenian|
+| **is** | Islandic|  **sv** | Swedish|
+| **it** | Italian| **tr** | Turkish
+ |:----|:----|:----|:----|

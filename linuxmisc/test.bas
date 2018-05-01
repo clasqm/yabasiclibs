@@ -118,10 +118,12 @@ import linuxmisclib
 	//OpenWordgrinder$()
 	//ConvertFile$("README.md", "~/Downloads/readme.docx")
 	//ConvertFile2PDF$("README.md", "~/Downloads/readme.pdf")
-	print ConvertFile2String$("README.md")
+	//print ConvertFile2String$("README.md")
 	//OpenSc$("example.sc")
 	//PrintFiglet$("mini", "figlet text")
 	//PrintToilet$("letter", "toilet text")
+	//print left$(WikipediaDump$("linux", "en"),3000)
+	print WikipediaURL$("linux", "en")
 
 	
 exit

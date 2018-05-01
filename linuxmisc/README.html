@@ -251,7 +251,7 @@
 <li>Only the default database is provided for in this routine. </li>
 <li><strong>System commands used:</strong> <em>tina</em>.</li>
 </ul></li>
-<li><p><strong>PlayMP3</strong>(file$) - Plays an audio (.mp3, m4a, etc) file. </p>
+<li><p><strong>PlayMP3$</strong>(file$) - Plays an audio (.mp3, m4a, etc) file. </p>
 
 <ul>
 <li>Launched in a separate process, so it cannot be stopped afterwards, unless you do a <em>KilPlay()</em>. </li>
@@ -259,7 +259,7 @@
 <li>Will also play .wav files, but <em>PlayWav()</em> is a little faster.  </li>
 <li><strong>System commands used:</strong> <em>ffplay</em>.</li>
 </ul></li>
-<li><p><strong>PlayVideo</strong>(file$) - Plays a video file (.mp4, .mov etc.) </p>
+<li><p><strong>PlayVideo$</strong>(file$) - Plays a video file (.mp4, .mov etc.) </p>
 
 <ul>
 <li>Launched in a separate process, so it cannot be stopped afterwards, unless you do a <em>KillPlay()</em>. </li>
@@ -269,7 +269,7 @@
 <li>This routine can also be used for audio files - It will then show the cover art, unlike the audio-only playing of <em>PlayMP3()</em>. </li>
 <li><strong>System commands used:</strong> <em>ffplay</em>.</li>
 </ul></li>
-<li><p><strong>PlayWav</strong>(file$) - Plays a .wav sound file. </p>
+<li><p><strong>PlayWav$</strong>(file$) - Plays a .wav sound file. </p>
 
 <ul>
 <li>Launched in a separate process, so it cannot be stopped afterwards, unless you do a <em>KillPlay()</em>. </li>
@@ -344,6 +344,24 @@
 <ul>
 <li><strong>System commands used:</strong> <em>pwd</em>.</li>
 </ul></li>
+<li><p><strong>WikipediaDump$</strong>(searchterm$, language$) - Search wikipedia for a specific string, convert the article to text and return it as a string variable.</p>
+
+<ul>
+<li>If language$ is not supplied, English will be assumed.</li>
+<li>See <a href="#wikilangs">Appendix 2</a> for the language codes supported.</li>
+<li><em>searchterm$</em> may include spaces.</li>
+<li><strong>NOTE</strong>: this routine may take a second or two to get going.</li>
+<li><strong>System commands used:</strong> <em>wikipedia2text</em>.</li>
+</ul></li>
+<li><p><strong>WikipediaURL$</strong>(searchterm$, language$) - Search wikipedia for a specific string, and return the URL as a string variable.</p>
+
+<ul>
+<li>if language$ is not supplied, English will be assumed</li>
+<li>See <a href="#wikilangs">Appendix 2</a> for the language codes supported.</li>
+<li><em>searchterm$</em> may include spaces.</li>
+<li><strong>NOTE</strong>: this routine may take a second or two to get going.</li>
+<li><strong>System commands used:</strong> <em>wikipedia2text</em>.</li>
+</ul></li>
 </ul>
 
 <hr />
@@ -357,3 +375,28 @@
 <p><strong>Output formats</strong>: asciidoc, beamer, commonmark, context, docbook, docx, dokuwiki, dzslides, epub, epub3, fb2, haddock, html, html5, icml, latex, man, markdown, markdown<em>github, markdown</em>mmd, markdown<em>phpextra, markdown</em>strict, mediawiki, native, odt, opendocument, opml, org, plain, revealjs, rst, rtf, s5, slideous, slidy, texinfo, textile</p>
 
 <p><img src="imgs/pandocdiagram.jpg" alt="pandoc formats" title="" /></p>
+
+<p></br></p>
+
+<h2>Appendix 2: Language support for wikipedia2text</h2>
+
+<p><a name="wikilangs"></a></p>
+
+<p>|Code| Language|Code| Language|
+|:----|:----|:----|:----|
+| <strong>af</strong> | Afrikaans|<strong>la</strong> | Latin|
+| <strong>als</strong> | Alemannic| <strong>lb</strong> | Luxembourgian|
+| <strong>ca</strong> | Catalan| <strong>nds</strong> | Low German|
+| <strong>cs</strong> | Czech| <strong>nl</strong> | Dutch|
+| <strong>da</strong> | Danish|<strong>nn</strong> | Norwegian (Nynorsk|
+| <strong>de</strong> | German|<strong>no</strong> | Norwegian (Bokmål)|
+| <strong>en</strong> | English|<strong>pl</strong> | Polish|
+| <strong>eo</strong> | Esperanto|<strong>pt</strong> | Portuguese|
+| <strong>es</strong> | Spanish|<strong>rm</strong> | Rhaeto-Romanic|
+| <strong>fi</strong> | Finnish| <strong>ro</strong> | Romanian|
+| <strong>fr</strong> | French| <strong>simple</strong> | Simple English|
+| <strong>hu</strong> | Hungarian| <strong>sk</strong> | Slovak|
+| <strong>ia</strong> | Interlingua|<strong>sl</strong> | Slovenian|
+| <strong>is</strong> | Islandic|  <strong>sv</strong> | Swedish|
+| <strong>it</strong> | Italian| <strong>tr</strong> | Turkish
+ |:----|:----|:----|:----|</p>

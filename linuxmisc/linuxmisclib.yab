@@ -652,6 +652,41 @@ export sub WhereAmI$()
         return path$
 end sub
 
+export sub WikipediaDump$(searchterm$, language$) 
+	//Search wikipedia for a specific string, convert the
+	//article to text and return it as a string variable.
+	//if language$ is not supplied, English will be assumed
+	//See the README for the language codes supported.
+	//Searchterm$ may include spaces.
+	//NOTE: this routine may take a second or two to get going
+	local UTest$
+	UTest$ = TestForUtility$("wikipedia2text")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		if language$ = "" language$ = "en"
+		return system$("wikipedia2text -P -O -n -S -l " + language$ + " " + EncloseString$(searchterm$, 0))
+	endif
+end sub
+
+export sub WikipediaURL$(searchterm$, language$) 
+	//Search wikipedia for a specific string
+	//and return the URL as a string variable.
+	//if language$ is not supplied, English will be assumed
+	//See the README for the language codes supported.
+	//Searchterm$ may include spaces.
+	//NOTE: this routine may take a second or two to get going
+	local UTest$
+	UTest$ = TestForUtility$("wikipedia2text")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		if language$ = "" language$ = "en"
+		return system$("wikipedia2text -u -l " + language$ + " " + EncloseString$(searchterm$, 0))
+	endif
+end sub
+
+
 ########## X ###########
 
 ########## Y ###########
