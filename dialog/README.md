@@ -22,9 +22,13 @@ You should **not** use this library and one of the others in this set that provi
 
 **These routines are available on any of the four dialog-providing libraries.**
 
-+ **ClearDlg**\(\) - on dialog and whiptail, this clears the dialog from your terminal. On zenity and kdialog, dummy routines are provided for compatibility so that you do not need to rewrite your code.
++ **ClearDlg**() - on dialog and whiptail, this clears the dialog from your terminal. Same as the yabasic command CLEAR SCREEN, but may work better if you are expecting to issue another Linux command immediately.On zenity and kdialog, dummy routines are provided for compatibility so that you do not need to rewrite your code.
 
-+ **TestForDialogUtility$**\(\) - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.
++ **MessageDlg**(text$) - display a simple message with an OK button. Returns nothing.
+
+<center>![MessageDLG](./imgs/MessageDlg.png)</center>
+
++ **TestForDialogUtility$**() - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.
 
 ### Zenity-specific routines
 

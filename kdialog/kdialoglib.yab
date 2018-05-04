@@ -20,6 +20,14 @@ end sub
 #COM######### K ###########
 #COM######### L ###########
 #COM######### M ###########
+
+export sub MessageDlg(text$)
+	//display a simple message with an OK button
+	//returns nothing
+	system (getcmd$() + " --msgbox " + text$)
+end sub
+
+
 #COM######### N ###########
 #COM######### O ###########
 #COM######### P ###########
