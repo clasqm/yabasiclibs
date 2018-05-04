@@ -234,6 +234,10 @@ It is safe to use this library and ONE of the others in this set concurrently,
     + This implementation only uses screensavers that do not need an Internet connection. 
     + See two ways to handle a screensaver in *test.bas*. 
     + **System commands used:** *termsaver*, *pkill*, *clear*.
+    
++ **StripDoc$**(filename$) - Convert a Microsoft Word .doc (NOT .docx) file to text and return the result as a string variable.
+    + For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.
+    + **System commands used:** *antiword*.
 
 + **StripLFoffSysCmd$**(val$) -  Remove linefeeds from the results of a system call. 
     + If the results of a system() or system$() command end on a LF (most do), strip the LF off and return the resulting string. 
@@ -242,9 +246,14 @@ It is safe to use this library and ONE of the others in this set concurrently,
     + This may not work on Windows systems, where you also need to test for a CR but we are not writing this library for Windows in any case. 
     + **System commands used:** none
 
++ **StripPDF$(filename$)** - Convert a PDF or PS file to text and return the result as a string variable.
+    + Return may contain a bunch of error messages as well as the returned text.
+    + For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.
+    + **System commands used:** *pstotext*. 
+
 + **TestForUtility$**(filename$) - tests whether a given utility exists on your $PATH and is executable. 
     + Returns an empty string if the utility exists, and a warning message if it does not. 
-        + This reverses the functionality of the Linux *which* command. 
+    + This reverses the functionality of the Linux *which* command. 
     + This command is used by many of the other routines in this library, and a version of it can be found in each of the various dialog libraries. If the required program does not exist.  
     + **System commands used:** *which*.
 
@@ -280,7 +289,6 @@ It is safe to use this library and ONE of the others in this set concurrently,
 
 ![pandoc formats](imgs/pandocdiagram.jpg)
 
-</br>
 ## Appendix 2: Language support for wikipedia2text
 <a name="wikilangs"></a>
 

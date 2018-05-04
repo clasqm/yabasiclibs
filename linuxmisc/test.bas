@@ -123,7 +123,8 @@ import linuxmisclib
 	//PrintFiglet$("mini", "figlet text")
 	//PrintToilet$("letter", "toilet text")
 	//print left$(WikipediaDump$("linux", "en"),3000)
-	print WikipediaURL$("linux", "en")
-
+	//print WikipediaURL$("linux", "en")
+	//print StripDoc$("readme.doc") //substitute your own filename here
+	print StripPDF$("test.pdf") //substitute your own filename here
 	
 exit
