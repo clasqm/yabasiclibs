@@ -2,9 +2,11 @@
 
 This folder contains a library for yabasic that allows the use of the Linux command *kdialog* to display a variety of dialogs in text mode.
 
-The library will test for the presence of the kdialog command and will exit gracefully if it is not present.kdialog is a KDE program, so the colours and styles will follow that of your KDE defaults.
+The library will test for the presence of the kdialog command and will exit gracefully if it is not present. Kdialog is a KDE program, so the colours and styles will follow that of your KDE defaults. It may also take a moment or two to pop up - there are a lot of libraries to load! If speed is of the essence, stick to the *dialog* or *whiptail* libraries.
 
 The entire set of libraries focuses on sane defaults and getting basic functionality into yabasic. There are a lot of options that will not be implemented!
+
+The images below are for illustration only. The exact appearance of the dialogs will depend on your system settings.
 
 Developed on elementary OS 0.4 "Loki" (i.e. Linux), but it should work on any system that will run both yabasic and the kdialog command.
 

@@ -1,0 +1,8 @@
+export sub DoItAll()
+	welcomemessage$ = "\"Welcome to the demo program, Let's get this show on the road!\""
+	WelcomeMessage(welcomemessage$)
+end sub
+
+sub WelcomeMessage(a$)
+	MessageDlg(a$)
+end sub

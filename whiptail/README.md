@@ -6,6 +6,8 @@ The library will test for the presence of the whiptail command and will exit gra
 
 The entire set of libraries focuses on sane defaults and getting basic functionality into yabasic. There are a lot of options that will not be implemented!
 
+The images below are for illustration only. The exact appearance of the dialogs will depend on your system settings.
+
 Developed on elementary OS 0.4 "Loki" (i.e. Linux), but it should work on any system that will run both yabasic and the whiptail command.
 
 The library should exist either in the same folder as your program or in the standard yabasic library location on your system.
