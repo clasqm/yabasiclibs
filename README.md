@@ -17,8 +17,10 @@ This software is still very much in the planning and experimentation stages.
 For instructions, see the separate README file for each of these libraries. Each library also comes with a *test.bas* file in which each new function is supplied with an example. Just remove the comments from the example you want to test, save the changes  and run the command
 
     yabasic test,bas
-
+    
 within the same folder where the library resides.
+
+There is also a *demo* folder where some of the capabilities of the system are demonstrated in short programs. See [here](https://clasqm.github.io/yabasiclibs/demo/) for instructions.
 
 Please note that the libraries that give access to dialog boxes cannot be mixed in the same program, as they will create an unholy mess of namespace confusion. Pick one and stick with it! However, the *linuxmisclib* library can be safely combined with any one of the others.
 
