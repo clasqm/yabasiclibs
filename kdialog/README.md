@@ -26,9 +26,7 @@ You should **not** use this library and one of the others in this set that provi
 
 + **MessageDlg**(text$) - display a simple message with an OK button. Returns nothing.
 
-<center>
-![MessageDLG](imgs/MessageDlg.png)
-</center>
+![MessageDlg](imgs/MessageDlg.png)
 
 + **TestForDialogUtility$**\(\) - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.
 
