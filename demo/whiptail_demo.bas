@@ -6,14 +6,14 @@ import whiptaillib
 welcomemessage$ = EncloseString$("Welcome to the demo program,\nLet's get this show on the road!", 1)
 MessageDlg(welcomemessage$)
 LikeIt()
-
+TextFileDlg("README.md", "\"The README file\"", "OK")
 exit
 
 sub LikeIt()
 	if YesNoDlg(EncloseString$("Do you like what you are seeing so far?"), "Yes", "No") then
-		MessageDlg(EncloseString$("Cool! Let's see what else there is", 1))
+		MessageDlg(EncloseString$("Cool! Let us see what else there is. \n\nLet\'s take a look at the README.", 1))
 	else
-		MessageDlg(EncloseString$("Fair enough. But let's keep trying.", 1))
+		MessageDlg(EncloseString$("Fair enough. But let us keep trying.  \n\nLet\'s take a look at the README.", 1))
 	endif
 end sub
 

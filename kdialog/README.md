@@ -32,6 +32,14 @@ You should **not** use this library and one of the others in this set that provi
 
 + **TestForDialogUtility$**\(\) - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.
 
++ **TextFileDlg**(filename$, title$, exit$) - Displays a text file.
+    + The value *title$* is the title on top of the widget.
+    + The value *exit$* has no effect in kde and may be omitted, but is kept here for compatibility reasons.
+    + Text wrapping varies from one dialog-provider to the next. It is better if you preformat your text file.
+    + Returns nothing.
+    
+![TextFileDlg](imgs/TextFileDlg.png)
+
 + **YesNoDlg**(text$,yes$, no$) - Displays a dialog with text (normally a question) and the options to reply yes or no.
     + in *dialog*, the first CAPITAL letter of the yes$ and no$ variables will become the hotkeys for those buttons, so make sure they are different. This does not matter for the other dialog-providing utilities.
     + Returns 1 for yes and 0 for no.

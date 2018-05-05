@@ -21,13 +21,16 @@ import whiptaillib
 	//a$ = inkey$
 
 //test yesno dialog
-	if YesNoDlg("\"Can you see me?\"", "Yes!", "No") then
-		clear screen
-		print "Eureka!"
-	else
-		clear screen
-		print "bummer"
-	endif
-	a$ = inkey$
+	//if YesNoDlg("\"Can you see me?\"", "Yes!", "No") then
+	//	clear screen
+	//	print "Eureka!"
+	//else
+	//	clear screen
+	//	print "bummer"
+	//endif
+	//a$ = inkey$
+
+//test TextFileDlg
+	TextFileDlg("README.md", "\"The README for this library\"","\"All done!\"")
 
 exit

@@ -46,6 +46,18 @@ export sub TestForDialogUtility$()
 	endif
 end sub
 
+export sub TextFileDlg(filename$, title$, exit$)
+	//Displays a text file.
+	//The value title$ has no effect on zenity, but is used 
+	//here for compatibility reasons and must be supplied.
+	//The value exit$ is the title of the button, normally "OK"
+	//Text wrapping varies from one dialog-provider to the next.
+	//It is better if you preformat your text file.
+	//Returns nothing
+	system(getcmd$() + " --text-info --filename=" + filename$ +" --cancel-label=\"\" --ok-label=" + exit$) 
+end sub
+
+
 #COM######### U ###########
 #COM######### V ###########
 #COM######### W ###########
@@ -55,8 +67,6 @@ end sub
 export sub YesNoDlg(text$,yes$, no$)
 	//Displays a dialog with text (normally a question) and the options
 	//to reply yes or no.
-	//The first CAPITAL letter of the yes$ and no$ variables will become the hotkeys
-	//for those buttons, so make sure they are different.
 	//Returns 1 for yes and 0 for no.
 	print getcmd$() + " --question --cancel-label="+ no$ + " --ok-label=" + yes$ + " --text=" + text$
 	if system(getcmd$() + " --question --cancel-label="+ no$ + " --ok-label=" + yes$ + " --text=" + text$) then

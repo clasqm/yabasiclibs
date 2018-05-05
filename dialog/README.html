@@ -34,8 +34,20 @@
 
 <ul>
 <li><p><strong>TestForDialogUtility$</strong>() - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.</p></li>
-<li><p><strong>YesNoDlg</strong>(text$,yes$, no$) - Displays a dialog with text (normally a question) and the options to reply yes or no.</p>
+<li><p><strong>TextFileDlg</strong>(filename$, title$, exit$) - Displays a text file.</p>
 
+<ul>
+<li>The value <em>title$</em> is the title on top of the widget</li>
+<li>The value <em>exit$</em> is the title of the button. Normally EXIT</li>
+<li>Text wrapping varies from one dialog-provider to the next. It is better if you preformat your text file.</li>
+<li>Returns nothing</li>
+</ul></li>
+</ul>
+
+<p><img src="imgs/TextFileDlg.png" alt="TextFileDlg" title="" /></p>
+
+<ul>
+<li><strong>YesNoDlg</strong>(text$,yes$, no$) - Displays a dialog with text (normally a question) and the options to reply yes or no.
 <ul>
 <li>in <em>dialog</em>, the first CAPITAL letter of the yes$ and no$ variables will become the hotkeys for those buttons, so make sure they are different. This does not matter for the other dialog-providing utilities.</li>
 <li>Returns 1 for yes and 0 for no.</li>

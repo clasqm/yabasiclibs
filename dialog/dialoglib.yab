@@ -49,6 +49,16 @@ export sub TestForDialogUtility$()
 	endif
 end sub 
 
+export sub TextFileDlg(filename$, title$, exit$)
+	//Displays a text file.
+	//The value title$ is the title on top of the widget
+	//The value exit$ is the title of the button. Normally EXIT
+	//Text wrapping varies from one dialog-provider to the next.
+	//It is better if you preformat your text file.
+	//Returns nothing
+	system(getcmd$() + " --title " + title$ + " --exit-label " + exit$ + " --textbox " + filename$ + " 0 0")
+end sub
+
 #COM######### U ###########
 #COM######### V ###########
 #COM######### W ###########

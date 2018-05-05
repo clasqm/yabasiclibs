@@ -24,7 +24,7 @@ end sub
 export sub MessageDlg(text$)
 	//display a simple message with an OK button
 	//returns nothing
-	system(getcmd$() + " --msgbox " + text$)
+	system(getcmd$() + " --caption \"\" --msgbox " + text$)
 end sub
 
 
@@ -47,6 +47,18 @@ export sub TestForDialogUtility$()
 		return ""
 	endif
 end sub 
+
+export sub TextFileDlg(filename$, title$, exit$)
+	//Displays a text file.
+	//The value title$ is the title on top of the widget
+	//The value exit$ has no effect in kde and may be omitted,
+	//but is kept here for compatibility reasons.
+	//Text wrapping varies from one dialog-provider to the next.
+	//It is better if you preformat your text file.
+	//Returns nothing
+	system(getcmd$() + " --caption " + title$ + " --textbox " + filename$ + " 0 0")
+end sub
+
 
 #COM######### U ###########
 #COM######### V ###########
