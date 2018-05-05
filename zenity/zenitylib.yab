@@ -23,7 +23,7 @@ end sub
 export sub MessageDlg(text$)
 	//display a simple message with an OK button
 	//returns nothing
-	system (getcmd$() + " --info --text=" + text$)   // + " &")
+	system(getcmd$() + " --info --text=" + text$)   // + " &")
 end sub
 
 #COM######### N ###########
@@ -51,6 +51,22 @@ end sub
 #COM######### W ###########
 #COM######### X ###########
 #COM######### Y ###########
+
+export sub YesNoDlg(text$,yes$, no$)
+	//Displays a dialog with text (normally a question) and the options
+	//to reply yes or no.
+	//The first CAPITAL letter of the yes$ and no$ variables will become the hotkeys
+	//for those buttons, so make sure they are different.
+	//Returns 1 for yes and 0 for no.
+	print getcmd$() + " --question --cancel-label="+ no$ + " --ok-label=" + yes$ + " --text=" + text$
+	if system(getcmd$() + " --question --cancel-label="+ no$ + " --ok-label=" + yes$ + " --text=" + text$) then
+		return 0
+	else
+		return 1
+	endif
+end sub
+
+
 #COM######### Z ###########
 
 
@@ -88,5 +104,10 @@ end sub
 //These will not be available in your main program
 
 sub getcmd$()
-	return "zenity "
+	//This is really just for me, to stop me from
+	//getting confused while I am editing four
+	//libraries simultaneously.
+	//it may be removed when we get 
+	//closer to a release
+	return "zenity"
 end sub

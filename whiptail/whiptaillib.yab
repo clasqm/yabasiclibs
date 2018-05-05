@@ -26,7 +26,7 @@ end sub
 export sub MessageDlg(text$)
 	//display a simple message with an OK button
 	//returns nothing
-	system (getcmd$() + " --msgbox " + text$ + " 0 0")
+	system(getcmd$() + " --msgbox " + text$ + " 0 0")
 end sub
 
 #COM######### N ###########
@@ -53,6 +53,18 @@ end sub
 #COM######### W ###########
 #COM######### X ###########
 #COM######### Y ###########
+
+export sub YesNoDlg(text$,yes$, no$)
+	//Displays a dialog with text (normally a question) and the options
+	//to reply yes or no.
+	//returns 1 for yes and 0 for no.
+	if system(getcmd$() + " --no-button " + no$ + " --yes-button " + yes$ + " --yesno " + text$ +" 0 0") then
+		return 0
+	else
+		return 1
+	endif
+end sub
+
 #COM######### Z ###########
 
 
@@ -92,5 +104,10 @@ end sub
 
 
 sub getcmd$()
+	//This is really just for me, to stop me from
+	//getting confused while I am editing four
+	//libraries simultaneously.
+	//it may be removed when we get 
+	//closer to a release
 	return "whiptail"
 end sub

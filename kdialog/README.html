@@ -33,8 +33,16 @@
 <p><img src="imgs/MessageDlg.png" alt="MessageDlg" title="" /></p>
 
 <ul>
-<li><strong>TestForDialogUtility$</strong>() - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.</li>
+<li><p><strong>TestForDialogUtility$</strong>() - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.</p></li>
+<li><p><strong>YesNoDlg</strong>(text$,yes$, no$) - Displays a dialog with text (normally a question) and the options to reply yes or no.</p>
+
+<ul>
+<li>in <em>dialog</em>, the first CAPITAL letter of the yes$ and no$ variables will become the hotkeys for those buttons, so make sure they are different. This does not matter for the other dialog-providing utilities.</li>
+<li>Returns 1 for yes and 0 for no.</li>
+</ul></li>
 </ul>
+
+<p><img src="imgs/YesNoDlg.png" alt="YesNoDlg" title="" /></p>
 
 <h3>kdialog-specific routines</h3>
 

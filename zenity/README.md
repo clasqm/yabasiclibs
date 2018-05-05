@@ -32,6 +32,13 @@ You should **not** use this library and one of the others that provides dialogs 
 
 + **TestForDialogUtility\$**\(\) - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.
 
++ **YesNoDlg**(text$,yes$, no$) - Displays a dialog with text (normally a question) and the options to reply yes or no.
+    + in *dialog*, the first CAPITAL letter of the yes$ and no$ variables will become the hotkeys for those buttons, so make sure they are different. This does not matter for the other dialog-providing utilities.
+    + Returns 1 for yes and 0 for no.
+
+![YesNoDlg](imgs/YesNoDlg.png)
+
+
 ### Zenity-specific routines
 
 **These routines will only work with zenity.**
