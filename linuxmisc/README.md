@@ -65,6 +65,15 @@ It is safe to use this library and ONE of the others in this set concurrently,
     + **Example**: *Let a$ = ConvertFile2String$("myfile.md")* will convert a Markdown file and return the result as the string variable a$.  Unlike *ConvertFile$()*, this routine will NOT write an output file. 
     + **System commands used**: *pandoc*.
 
++ **ConvertImage**(inputfile$, outputfile$) - 
+Convert an image file to a different format, optionally with a different filename.
+    + This routine will work with either Graphics magic OR Image magic.
+    + If both are installed, Graphics magic takes precedence.
+    + The output format is taken from the file extension. 
+    + The original file is left untouched.
+    + Returns 1 for success and 0 for failure
+   + **System commands used**: *gm* or *convert*.
+
 + **EncloseString$**(thestring$,type) - Encloses a string in either single or double quotes, if it isn't already.
     + Mostly for use with long filenames that may include spaces. No error-checking is done here.
     + If you feed this routine a string that already contains quotes, your program will come to a halt. Use INSTR() to check for that first. 

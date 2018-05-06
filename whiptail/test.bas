@@ -31,6 +31,7 @@ import whiptaillib
 	//a$ = inkey$
 
 //test TextFileDlg
-	TextFileDlg("README.md", "\"The README for this library\"","\"All done!\"")
+	//TextFileDlg("README.md", "\"The README for this library\"","\"All done!\"")
+
 
 exit

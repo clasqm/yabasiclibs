@@ -30,6 +30,8 @@ import kdialoglib
 	//a$ = inkey$
 
 //test TextFileDlg
-	TextFileDlg("README.md", "\"The README for this library\"")
-		
+	//TextFileDlg("README.md", "\"The README for this library\"")
+
+// test InputDlg$
+	print  InputDlg$("\"What is your name?\"", "\"Who are you?\"", "Accept", "Cancel")
 exit

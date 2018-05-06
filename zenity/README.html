@@ -58,4 +58,17 @@
 
 <h3>Zenity-specific routines</h3>
 
-<p><strong>These routines will only work with zenity.</strong></p>
+<p><strong>These routines will only work with zenity, unless specified otherwise.</strong></p>
+
+<ul>
+<li><strong>InputDlg$</strong>(text$, title$, ok$, cancel$) - Presents a one-line dialog into which the user can type a string answer.
+<ul>
+<li>Available in <em>kdialog</em> and <em>zenity</em>.</li>
+<li>The value <em>title$</em> has no effect in zenity but is kept here for compatibility with kdialog and must be supplied.</li>
+<li>The value <em>ok$</em> is the text of the accept button, normally OK.</li>
+<li>The value <em>cancel$</em> is the text of the reject button, normally Cancel.</li>
+<li>The result is returned as a string value.</li>
+</ul></li>
+</ul>
+
+<p><img src="imgs/InputDlg.png" alt="InputDlg" title="" /></p>

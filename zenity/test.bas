@@ -24,16 +24,19 @@ clear screen
 	//a$ = inkey$
 
 //test yesno dialog
-	if YesNoDlg("\"Can you see me?\"", "Yes!", "Nope") then
-		clear screen
-		print "Eureka!"
-	else
-		clear screen
-		print "bummer"
-	endif
-	a$ = inkey$
+	//if YesNoDlg("\"Can you see me?\"", "Yes!", "Nope") then
+	//	clear screen
+	//	print "Eureka!"
+	//else
+	//	clear screen
+	//	print "bummer"
+	//endif
+	//a$ = inkey$
 	
 //test TextFileDlg
-	TextFileDlg("README.md", "\"The README for this library\"", "okidoki")
+	//TextFileDlg("README.md", "\"The README for this library\"", "okidoki")
 
-exit
+// test InputDlg$
+	print  InputDlg$("\"What is your name?\"", "\"Who are you?\"", "Accept", "Cancel")
+
+end

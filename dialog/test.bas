@@ -32,8 +32,7 @@ clear screen
 	//a$ = inkey$
 	
 //test TextFileDlg
-	TextFileDlg("README.md", "\"The README for this library\"", "okidoki")
-	
+	//TextFileDlg("README.md", "\"The README for this library\"", "okidoki")
 
-exit
+
 

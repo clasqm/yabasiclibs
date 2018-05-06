@@ -79,6 +79,17 @@
 <li><strong>Example</strong>: <em>Let a$ = ConvertFile2String$("myfile.md")</em> will convert a Markdown file and return the result as the string variable a$.  Unlike <em>ConvertFile$()</em>, this routine will NOT write an output file. </li>
 <li><strong>System commands used</strong>: <em>pandoc</em>.</li>
 </ul></li>
+<li><p><strong>ConvertImage</strong>(inputfile$, outputfile$) - 
+Convert an image file to a different format, optionally with a different filename.</p>
+
+<ul>
+<li>This routine will work with either Graphics magic OR Image magic.</li>
+<li>If both are installed, Graphics magic takes precedence.</li>
+<li>The output format is taken from the file extension. </li>
+<li>The original file is left untouched.</li>
+<li>Returns 1 for success and 0 for failure</li>
+<li><strong>System commands used</strong>: <em>gm</em> or <em>convert</em>.</li>
+</ul></li>
 <li><p><strong>EncloseString$</strong>(thestring$,type) - Encloses a string in either single or double quotes, if it isn't already.</p>
 
 <ul>

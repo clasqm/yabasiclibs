@@ -3,7 +3,9 @@ clear screen
 Print "this is the whiptail demo"
 import whiptaillib
 
-welcomemessage$ = EncloseString$("Welcome to the demo program,\nLet's get this show on the road!", 1)
+print "Let's get acquainted."
+line input "What is your name?\n" name$
+welcomemessage$ = EncloseString$("Welcome to the demo program, " + name$ + "\nLet's get this show on the road!", 1)
 MessageDlg(welcomemessage$)
 LikeIt()
 TextFileDlg("README.md", "\"The README file\"", "OK")

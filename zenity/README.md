@@ -49,9 +49,13 @@ You should **not** use this library and one of the others that provides dialogs 
 
 ### Zenity-specific routines
 
-**These routines will only work with zenity.**
+**These routines will only work with zenity, unless specified otherwise.**
 
++ **InputDlg$**(text$, title$, ok$, cancel$) - Presents a one-line dialog into which the user can type a string answer.
+    + Available in *kdialog* and *zenity*.
+    + The value *title$* has no effect in zenity but is kept here for compatibility with kdialog and must be supplied.
+    + The value *ok$* is the text of the accept button, normally OK.
+    + The value *cancel$* is the text of the reject button, normally Cancel.
+    + The result is returned as a string value.
 
-
-
-
+![InputDlg](imgs/InputDlg.png)

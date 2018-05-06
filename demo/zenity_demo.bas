@@ -3,7 +3,8 @@ clear screen
 Print "this is the zenity demo"
 import zenitylib
 
-welcomemessage$ = EncloseString$("Welcome to the demo program,\nLet's get this show on the road!", 1)
+name$ = InputDlg$("\"Let's get acquainted. What is your name?\"", "\"Who are you?\"", "OK", "Cancel")
+welcomemessage$ = EncloseString$("Welcome to the demo program, " + name$ + "\nLet's get this show on the road!", 1)
 MessageDlg(welcomemessage$)
 LikeIt()
 TextFileDlg("README.md", "\"The README file\"", "OK")

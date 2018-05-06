@@ -48,9 +48,12 @@ You should **not** use this library and one of the others in this set that provi
 
 ### kdialog-specific routines
 
-**These routines will only work with kdialog.**
+**These routines will only work with kdialog, unless specified otherwise.**
 
++ **InputDlg$**(text$, title$, ok$, cancel$) - Presents a one-line dialog into which the user can type a string answer.
+    + Available in *kdialog* and *zenity*.
+    + The value *title$* is the title on top of the widget
+    + The values *ok$* and *cancel$* have no effect in kdialog and may be omitted, but are kept here for compatibility with zenity.
+    + The result is returned as a string value.
 
-
-
-
+![InputDlg](imgs/InputDlg.png)

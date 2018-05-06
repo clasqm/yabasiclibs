@@ -152,6 +152,24 @@ export sub  ConvertFile2PDF$(infile$, outfile$)
 	endif
 end sub
 
+export sub ConvertImage(inputfile$, outputfile$)
+	//Convert an image file to a different format, optionally with
+	//a different filename.
+	//This routine will work with either Graphics magic OR Image magic
+	//if both are installed, Graphics magic takes precedence.
+	//The original file is left untouched.
+	//returns 1 for success and 0 for failure
+	if TestForUtility$("gm") = "" then
+		system("gm convert " + inputfile$ + " " + outputfile$)
+		return 1
+	elseif TestForUtility$("convert") = ""
+		system("convert " + inputfile$ + " " + outputfile$)
+		return 1
+	else
+		return 0
+	endif
+end sub
+
 ########## D ###########
 
 ########## E ###########

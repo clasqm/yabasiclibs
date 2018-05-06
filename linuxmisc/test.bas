@@ -125,6 +125,6 @@ import linuxmisclib
 	//print left$(WikipediaDump$("linux", "en"),3000)
 	//print WikipediaURL$("linux", "en")
 	//print StripDoc$("readme.doc") //substitute your own filename here
-	print StripPDF$("test.pdf") //substitute your own filename here
-	
+	//print StripPDF$("test.pdf") //substitute your own filename here
+	//ConvertImage("test.png", "Testing.gif") //substitute your own filename here
 exit

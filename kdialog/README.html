@@ -58,4 +58,16 @@
 
 <h3>kdialog-specific routines</h3>
 
-<p><strong>These routines will only work with kdialog.</strong></p>
+<p><strong>These routines will only work with kdialog, unless specified otherwise.</strong></p>
+
+<ul>
+<li><strong>InputDlg$</strong>(text$, title$, ok$, cancel$) - Presents a one-line dialog into which the user can type a string answer.
+<ul>
+<li>Available in <em>kdialog</em> and <em>zenity</em>.</li>
+<li>The value <em>title$</em> is the title on top of the widget</li>
+<li>The values <em>ok$</em> and <em>cancel$</em> have no effect in kdialog and may be omitted, but are kept here for compatibility with zenity.</li>
+<li>The result is returned as a string value.</li>
+</ul></li>
+</ul>
+
+<p><img src="imgs/InputDlg.png" alt="InputDlg" title="" /></p>
