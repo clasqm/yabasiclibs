@@ -324,6 +324,26 @@ Convert an image file to a different format, optionally with a different filenam
 <li>See two ways to handle a screensaver in <em>test.bas</em>. </li>
 <li><strong>System commands used:</strong> <em>termsaver</em>, <em>pkill</em>, <em>clear</em>.</li>
 </ul></li>
+<li><p><strong>ScreensaverCC</strong>(onoff,type) - Starts or halts  the <em>CacaLib</em> screensaver applications.</p>
+
+<ul>
+<li>Please note that work in your program is not necessarily suspended while this runs, because it gets launched in a separate process, but it is up to you to poll for the exiting condition.</li>
+<li>Only use this one if you KNOW your application will be running in a fullscreen console, because caca apps start a new window under X automatically.</li>
+<li>Values for <em>onoff</em> are 
+<ul>
+<li>1 (start screensaver) and </li>
+<li>0 (close screensaver)</li>
+</ul></li>
+<li>If 0, the second parameter may be omitted.</li>
+<li>Closing the screensaver will likely close ALL caca demo app instances on your system.</li>
+<li>You can also close it manually with ESC.</li>
+<li>Values for <em>type</em> are 
+<ul>
+<li>0 (<em>cacademo</em>) and </li>
+<li>1 (<em>cacafire</em>)</li>
+</ul></li>
+<li>See two ways to handle a screensaver in test.bas</li>
+</ul></li>
 <li><p><strong>StripDoc$</strong>(filename$) - Convert a Microsoft Word .doc (NOT .docx) file to text and return the result as a string variable.</p>
 
 <ul>

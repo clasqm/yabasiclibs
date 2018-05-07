@@ -593,10 +593,10 @@ export sub Screensaver(onoff,type)
 	local type$, UTest$
 	if onoff = 0 then
 		UTest$ = TestForUtility$("pkill")
-		if UTest$ <> "" system("pkill termsaver && clear")
+		if UTest$ = "" system("pkill termsaver && clear")
 	else
 		UTest$ = TestForUtility$("termsaver")
-		if UTest$ = "" return
+		if UTest$ <> "" return
 		switch type
 		case 0 
 			type$ = "clock"
@@ -617,6 +617,47 @@ export sub Screensaver(onoff,type)
 			break
 		end switch
 		system ("clear && termsaver " + type$ + " &")
+	endif
+end sub
+
+export sub ScreensaverCC(onoff,type)
+	//Starts or halts  the CacaLib screensaver applications.
+	//Please note that work in your program is not necessarily suspended while this runs,
+	//because it gets launched in a separate process, but it is up to you to poll for the exiting condition.
+	//Only use this one if you KNOW your application will be running in a fullscreen console
+	//because caca apps start a new window under X automatically.
+	//values for onoff are 1 (start screensaver) and 0 (close screensaver), If 0,
+	//the second parameter may be omitted. 
+	//Closing the screensaver will likely close ALL caca demo app instances on your system.
+	//You can also close it manually with ESC
+	//values for type are 0 (cacademo) and 1 (cacafire)
+	//See two ways to handle a screensaver in test.bas
+	local type$, UTest$
+	if onoff = 0 then
+		UTest$ = TestForUtility$("pkill")
+		if UTest$ = "" then 
+			system("pkill cacademo  && clear")
+			system("pkill cacafire  && clear")
+		endif
+	else
+		switch type
+		case 0 
+			UTest$ = TestForUtility$("cacademo")
+			if UTest$ = "" then
+				system("cacademo &")
+			else
+				return
+			endif
+			break
+		default
+			UTest$ = TestForUtility$("cacafire")
+			if UTest$ = "" then
+				system("cacafire &")
+			else
+				return
+			endif
+			break
+		end switch
 	endif
 end sub
 

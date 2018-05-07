@@ -243,7 +243,21 @@ Convert an image file to a different format, optionally with a different filenam
     + This implementation only uses screensavers that do not need an Internet connection. 
     + See two ways to handle a screensaver in *test.bas*. 
     + **System commands used:** *termsaver*, *pkill*, *clear*.
-    
+
++ **ScreensaverCC**(onoff,type) - Starts or halts  the *CacaLib* screensaver applications.
+    + Please note that work in your program is not necessarily suspended while this runs, because it gets launched in a separate process, but it is up to you to poll for the exiting condition.
+    + Only use this one if you KNOW your application will be running in a fullscreen console, because caca apps start a new window under X automatically.
+    + Values for *onoff* are 
+        + 1 (start screensaver) and 
+        + 0 (close screensaver)
+    + If 0, the second parameter may be omitted.
+    + Closing the screensaver will likely close ALL caca demo app instances on your system.
+    + You can also close it manually with ESC.
+    + Values for *type* are 
+        + 0 (*cacademo*) and 
+        + 1 (*cacafire*)
+    + See two ways to handle a screensaver in test.bas
+   
 + **StripDoc$**(filename$) - Convert a Microsoft Word .doc (NOT .docx) file to text and return the result as a string variable.
     + For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.
     + **System commands used:** *antiword*.

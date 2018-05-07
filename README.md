@@ -2,7 +2,7 @@
 
 Extension libraries for yabasic.
 
-A series of libraries for [yabasic](http://www.yabasic.de/) , the BASIC dialects by [Marc Ihm](https://github.com/marcIhm), that gives access to a number of common utilities on Linux. Not tested on other UNIX platforms, but it should be possible to adjust them accordingly.
+A series of libraries for [yabasic](http://www.yabasic.de/) , the BASIC dialect by [Marc Ihm](https://github.com/marcIhm), that give access to a number of common utilities on Linux. Not tested on other UNIX platforms, but it should be possible to adjust them accordingly.
 
 This software is still very much in the planning and experimentation stages.
 
@@ -34,3 +34,7 @@ Get it here: https://github.com/clasqm/yabasiclibs
 + Anything to do with emacs. Friends don't let friends use emacs.
 + In *linuxmisclib*, routines that start up in a new xterm. Well, maybe much later.
 + The entire set of libraries focuses on sane defaults and getting basic functionality into yabasic. There are a lot of obscure switches (esp. in kdialog) that will not be implemented!
+
+## Longer-term plans
+
+At some stage, I will start writing my own library, purely in yabasic, that will replicate as many of these routines as possible. It will look completely different, but will use the same routine names, so you will still be able to switch between libraries with a single *import* statement. And *that* library should work in Windows too!
