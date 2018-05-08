@@ -33,5 +33,7 @@ import kdialoglib
 	//TextFileDlg("README.md", "\"The README for this library\"")
 
 // test InputDlg$
-	print  InputDlg$("\"What is your name?\"", "\"Who are you?\"", "Accept", "Cancel")
-exit
+	//print  InputDlg$("\"What is your name?\"", "\"Who are you?\"", "Accept", "Cancel")
+
+//test PasswordDlg
+	//print PasswordDlg$("\"You can enter a password here\"","\"Password entry\"", "Ok", "Cancel")

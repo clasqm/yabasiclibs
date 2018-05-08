@@ -232,7 +232,7 @@ Convert an image file to a different format, optionally with a different filenam
     + Values for *onoff* are 
         + 1 (start screensaver) and 
         + 0 (close screensaver), 
-    + If *onoff* = 0, the second parameter may be omitted. 
+    + If *onoff* is 0, the second parameter may be omitted. 
     + Closing the screensaver will close ALL *termsaver* instances on your system. 
         + You can also close it manually with CTRL-C. 
     + Values for *type* are 
@@ -250,13 +250,14 @@ Convert an image file to a different format, optionally with a different filenam
     + Values for *onoff* are 
         + 1 (start screensaver) and 
         + 0 (close screensaver)
-    + If 0, the second parameter may be omitted.
-    + Closing the screensaver will likely close ALL caca demo app instances on your system.
+    + If *onoff* is 0, the second parameter may be omitted.
+    + Closing the screensaver will close ALL caca demo app instances on your system.
     + You can also close it manually with ESC.
     + Values for *type* are 
         + 0 (*cacademo*) and 
         + 1 (*cacafire*)
     + See two ways to handle a screensaver in test.bas
+    + **System commands used:** *cacademo*, *cacafire*, *pkill*, *clear*.
    
 + **StripDoc$**(filename$) - Convert a Microsoft Word .doc (NOT .docx) file to text and return the result as a string variable.
     + For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.

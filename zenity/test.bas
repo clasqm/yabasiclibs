@@ -37,6 +37,9 @@ clear screen
 	//TextFileDlg("README.md", "\"The README for this library\"", "okidoki")
 
 // test InputDlg$
-	print  InputDlg$("\"What is your name?\"", "\"Who are you?\"", "Accept", "Cancel")
+	//print  InputDlg$("\"What is your name?\"", "\"Who are you?\"", "Accept", "Cancel")
 
+//test PasswordDlg
+	//print PasswordDlg$("\"You can enter a password here\"","\"Password entry\"", "Ok", "Cancel")
+	
 end

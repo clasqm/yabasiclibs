@@ -57,3 +57,14 @@ You should **not** use this library and one of the others in this set that provi
     + The result is returned as a string value.
 
 ![InputDlg](imgs/InputDlg.png)
+
+
++ **PasswordDlg$**(text$, title$, ok$, cancel$) - Same as *InputDlg$* but with asterisks replacing the input text.
+    + Available in *kdialog* and *zenity*.
+    + The value *title*$ is the title on top of the widget.
+    + The values *ok$* and *cancel$* have no effect in kdialog and may be omitted, but are kept here for compatibility with zenity.
+    + The result is returned as a string value.
+
+![PasswordDlg](imgs/PasswordDlg.png)
+
+

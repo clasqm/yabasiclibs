@@ -12,7 +12,7 @@ Developed on elementary OS 0.4 "Loki" (i.e. Linux), but it should work on any sy
 
 The library should exist either in the same folder as your program or in the standard yabasic library location on your system.
 
-To use the library, use the command 
+To use the library, use the command
 
     import zenitylib
 
@@ -59,3 +59,12 @@ You should **not** use this library and one of the others that provides dialogs 
     + The result is returned as a string value.
 
 ![InputDlg](imgs/InputDlg.png)
+
++ **PasswordDlg$**(text$, title$, ok$, cancel$) - Same as *InputDlg$* but with asterisks replacing the input text.
+    + Available in *kdialog* and *zenity*.
+    + The value *title$* has no effect in zenity, but is kept here for compatibility with kdialog and must be supplied.
+    + The value *ok$* is the text of the accept button, normally OK
+    + The value *cancel$* is the text of the reject button, normally Cancel
+    + The result is returned as a string value.
+
+![PasswordDlg](imgs/PasswordDlg.png)
