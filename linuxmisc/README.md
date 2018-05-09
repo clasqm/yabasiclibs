@@ -278,7 +278,11 @@ Convert an image file to a different format, optionally with a different filenam
 + **TestForUtility$**(filename$) - tests whether a given utility exists on your $PATH and is executable. 
     + Returns an empty string if the utility exists, and a warning message if it does not. 
     + This reverses the functionality of the Linux *which* command. 
-    + This command is used by many of the other routines in this library, and a version of it can be found in each of the various dialog libraries. If the required program does not exist.  
+    + This command is used by many of the other routines in this library, and a version of it can be found in each of the various dialog libraries.
+    + **System commands used:** *which*.
+    
+ **TestForUtility**(filename$) - tests whether a given utility exists on your $PATH and is executable. 
+    + same as TestForUtility$(), but returns 1 if the utility exists, and 0 if it does not.
     + **System commands used:** *which*.
 
 + **URLExist**(URL$) and **URLExist$**(URL$) do the equivalent job of testing whether a URL exists before sending it to *OpeninLinks*(), for example. 

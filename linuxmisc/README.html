@@ -372,7 +372,14 @@ Convert an image file to a different format, optionally with a different filenam
 <ul>
 <li>Returns an empty string if the utility exists, and a warning message if it does not. </li>
 <li>This reverses the functionality of the Linux <em>which</em> command. </li>
-<li>This command is used by many of the other routines in this library, and a version of it can be found in each of the various dialog libraries. If the required program does not exist.  </li>
+<li>This command is used by many of the other routines in this library, and a version of it can be found in each of the various dialog libraries.</li>
+<li><strong>System commands used:</strong> <em>which</em>.</li>
+</ul>
+
+<p><strong>TestForUtility</strong>(filename$) - tests whether a given utility exists on your $PATH and is executable. </p>
+
+<ul>
+<li>same as TestForUtility$(), but returns 1 if the utility exists, and 0 if it does not.</li>
 <li><strong>System commands used:</strong> <em>which</em>.</li>
 </ul></li>
 <li><p><strong>URLExist</strong>(URL$) and <strong>URLExist$</strong>(URL$) do the equivalent job of testing whether a URL exists before sending it to <em>OpeninLinks</em>(), for example. </p>
