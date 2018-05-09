@@ -18,6 +18,15 @@ end sub
 #COM######### G ###########
 #COM######### H ###########
 #COM######### I ###########
+
+export sub InputDlg$(text$, title$, ok$, cancel$)
+	//Presents a one-line dialog into which the 
+	//user can type a string answer.
+	local inputstr$
+	inputstr$ = "echo $(" + getcmd$() + " --title " + title$ + " --ok-button " + ok$ + " --cancel-button " + cancel$ + " --inputbox " + text$ + " 0 0 3>&1 1>&2 2>&3 )"
+	return system$(inputstr$)
+end sub
+
 #COM######### J ###########
 #COM######### K ###########
 #COM######### L ###########
@@ -32,6 +41,17 @@ end sub
 #COM######### N ###########
 #COM######### O ###########
 #COM######### P ###########
+
+export sub PasswordDlg$(text$, title$, ok$, cancel$)
+	//Presents a one-line dialog into which the 
+	//user can type a string answer with the text
+	//replaced with asterisks
+	local inputstr$
+	inputstr$ = "echo $(" + getcmd$() + " --title " + title$ + " --ok-button " + ok$ + " --cancel-button " + cancel$ + " --passwordbox " + text$ + " 0 0 3>&1 1>&2 2>&3 )"
+	//print inputstr$
+	return system$(inputstr$)
+end sub
+
 #COM######### Q ###########
 #COM######### R ###########
 #COM######### S ###########

@@ -9,13 +9,7 @@ MessageDlg(welcomemessage$)
 LikeIt()
 TextFileDlg("README.md", "\"The README file\"", "OK")
 name$ = PasswordDlg$("\"Please enter your banking password\"", "\"Let's see ...\"", "OK","Cancel")
-print name$
-if name$ = "" then
-	name$ = "KIDDING! I was just kidding!\n\nStill, just as well you clicked Cancel. You never know."
-else
-	name$= "KIDDING! I was just kidding!\n\nBut for the record, you entered: " + name$
-		
-endif
+name$= "KIDDING! I was just kidding!\n\nBut for the record, you entered: " + name$
 MessageDlg(EncloseString$(name$,1))
 exit
 

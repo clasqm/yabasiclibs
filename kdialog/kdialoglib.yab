@@ -16,6 +16,18 @@ end sub
 #COM######### G ###########
 #COM######### H ###########
 #COM######### I ###########
+
+export sub InputDlg$(text$, title$, ok$, cancel$)
+	//Presents a one-line dialog into which the 
+	//user can type a string answer.
+	//Available in kdialog and zenity.
+	//The value title$ is the title on top of the widget
+	//The values ok$ and cancel$ have no effect in kde and may be omitted,
+	//but are kept here for compatibility with zenity.
+	//The result is returned as a string value.
+	return system$(getcmd$() + " --caption " + title$ + " --inputbox " + text$ + " \"\" 0 0 ")
+end sub
+
 #COM######### J ###########
 #COM######### K ###########
 #COM######### L ###########
@@ -31,6 +43,18 @@ end sub
 #COM######### N ###########
 #COM######### O ###########
 #COM######### P ###########
+
+export sub PasswordDlg$(text$, title$, ok$, cancel$)
+	//Same as InputDlg$ but with asterisks
+	//replacing the input text.
+	//Available in kdialog and zenity.
+	//The value title$ is the title on top of the widget
+	//The values ok$ and cancel$ have no effect in kdialog and may be omitted,
+	//but are kept here for compatibility with zenity.
+	//The result is returned as a string value.
+	return system$(getcmd$() + " --caption " + title$ + " --password " + text$ + " \"\" 0 0 ")
+end sub
+
 #COM######### Q ###########
 #COM######### R ###########
 #COM######### S ###########
@@ -96,18 +120,6 @@ end sub
 #DS######### G ###########
 #DS######### H ###########
 #DS######### I ###########
-
-export sub InputDlg$(text$, title$, ok$, cancel$)
-	//Presents a one-line dialog into which the 
-	//user can type a string answer.
-	//Available in kdialog and zenity.
-	//The value title$ is the title on top of the widget
-	//The values ok$ and cancel$ have no effect in kde and may be omitted,
-	//but are kept here for compatibility with zenity.
-	//The result is returned as a string value.
-	return system$(getcmd$() + " --caption " + title$ + " --inputbox " + text$ + " \"\" 0 0 ")
-end sub
-
 #DS######### J ###########
 #DS######### K ###########
 #DS######### L ###########
@@ -115,18 +127,6 @@ end sub
 #DS######### N ###########
 #DS######### O ###########
 #DS######### P ###########
-
-export sub PasswordDlg$(text$, title$, ok$, cancel$)
-	//Same as InputDlg$ but with asterisks
-	//replacing the input text.
-	//Available in kdialog and zenity.
-	//The value title$ is the title on top of the widget
-	//The values ok$ and cancel$ have no effect in kdialog and may be omitted,
-	//but are kept here for compatibility with zenity.
-	//The result is returned as a string value.
-	return system$(getcmd$() + " --caption " + title$ + " --password " + text$ + " \"\" 0 0 ")
-end sub
-
 #DS######### Q ###########
 #DS######### R ###########
 #DS######### S ###########

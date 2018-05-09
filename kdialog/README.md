@@ -26,9 +26,24 @@ You should **not** use this library and one of the others in this set that provi
 
 + **ClearDlg**() - on dialog and whiptail, this clears the dialog from your terminal. Same as the yabasic command CLEAR SCREEN, but may work better if you are expecting to issue another Linux command immediately.On zenity and kdialog, dummy routines are provided for compatibility so that you do not need to rewrite your code.
 
++ **InputDlg$**(text$, title$, ok$, cancel$) - Presents a one-line dialog into which the user can type a string answer.
+    + The value *title$* is the title on top of the widget
+    + The values *ok$* and *cancel$* have no effect in kdialog and may be omitted, but are kept here for compatibility.
+    + The result is returned as a string value.
+
+![InputDlg](imgs/InputDlg.png)
+
 + **MessageDlg**(text$) - display a simple message with an OK button. Returns nothing.
 
 ![MessageDlg](imgs/MessageDlg.png)
+
+
++ **PasswordDlg$**(text$, title$, ok$, cancel$) - Same as *InputDlg$* but with asterisks replacing the input text.
+    + The value *title*$ is the title on top of the widget.
+    + The values *ok$* and *cancel$* have no effect in kdialog and may be omitted, but are kept here for compatibility.
+    + The result is returned as a string value.
+
+![PasswordDlg](imgs/PasswordDlg.png)
 
 + **TestForDialogUtility$**\(\) - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.
 
@@ -49,22 +64,4 @@ You should **not** use this library and one of the others in this set that provi
 ### kdialog-specific routines
 
 **These routines will only work with kdialog, unless specified otherwise.**
-
-+ **InputDlg$**(text$, title$, ok$, cancel$) - Presents a one-line dialog into which the user can type a string answer.
-    + Available in *kdialog* and *zenity*.
-    + The value *title$* is the title on top of the widget
-    + The values *ok$* and *cancel$* have no effect in kdialog and may be omitted, but are kept here for compatibility with zenity.
-    + The result is returned as a string value.
-
-![InputDlg](imgs/InputDlg.png)
-
-
-+ **PasswordDlg$**(text$, title$, ok$, cancel$) - Same as *InputDlg$* but with asterisks replacing the input text.
-    + Available in *kdialog* and *zenity*.
-    + The value *title*$ is the title on top of the widget.
-    + The values *ok$* and *cancel$* have no effect in kdialog and may be omitted, but are kept here for compatibility with zenity.
-    + The result is returned as a string value.
-
-![PasswordDlg](imgs/PasswordDlg.png)
-
 

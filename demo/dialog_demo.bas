@@ -2,12 +2,17 @@
 clear screen
 Print "this is the dialog demo"
 import dialoglib
-print "Let's get acquainted."
-line input "What is your name?\n" name$
+
+name$ = InputDlg$("\"Let's get acquainted. What is your name?\"", "\"Who are you?\"", "OK", "Cancel")
 welcomemessage$ = EncloseString$("Welcome to the demo program, " + name$ + "\nLet's get this show on the road!", 1)
 MessageDlg(welcomemessage$)
 LikeIt()
 TextFileDlg("README.md", "\"The README file\"", "OK")
+name$ = PasswordDlg$("\"Please enter your banking password\"", "\"Let's see ...\"", "OK","Cancel")
+name$= "KIDDING! I was just kidding!\n\nBut for the record, you entered: " + name$
+MessageDlg(EncloseString$(name$,1))
+exit
+
 exit
 
 sub LikeIt()

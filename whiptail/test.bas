@@ -33,5 +33,10 @@ import whiptaillib
 //test TextFileDlg
 	//TextFileDlg("README.md", "\"The README for this library\"","\"All done!\"")
 
+// test InputDlg$
+	//print  InputDlg$("\"What is your name?\"", "\"Who are you?\"", "Accept", "Cancel")
+
+//test PasswordDlg
+	//print PasswordDlg$("\"You can enter a password here\"","\"Password entry\"", "Ok", "Cancel")
 
 exit

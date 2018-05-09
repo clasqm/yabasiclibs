@@ -702,9 +702,22 @@ end sub
 export sub TestForUtility$(utility$)
 	//internal routine to test if the called utility actually exists
 	//an empty string returned means it does.
+	//otherwise returns an error message
 	local which$
 	which$ = system$("which " + utility$)
 	if which$ = "" return "The required program " + utility$ + " does not exist on this system"
+end sub
+
+export sub TestForUtility(utility$)
+	//internal routine to test if the called utility actually exists
+	//same as TestForUtility$() but returns 1 if it exists, 0 if it does not
+	local which$
+	which$ = system$("which " + utility$)
+	if which$ = "" then 
+		return 0
+	else
+		return 1
+	endif
 end sub
 
 ########## U ###########
