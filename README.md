@@ -16,7 +16,7 @@ This software is still very much in the planning and experimentation stages.
 
 For instructions, see the separate README file for each of these libraries. Each library also comes with a *test.bas* file in which each new function is supplied with an example. Just remove the comments from the example you want to test, save the changes  and run the command
 
-    yabasic test,bas
+    yabasic test.bas
     
 within the same folder where the library resides.
 
@@ -38,3 +38,6 @@ Get it here: https://github.com/clasqm/yabasiclibs
 ## Longer-term plans
 
 At some stage, I will start writing my own library, purely in yabasic, that will replicate as many of these routines as possible. It will look completely different, but will use the same routine names, so you will still be able to switch between libraries with a single *import* statement. And *that* library should work in Windows too!
+
+![Thanks](imgs/thanks.png)
+

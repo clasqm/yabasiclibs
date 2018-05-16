@@ -11,6 +11,7 @@ TextFileDlg("README.md", "\"The README file\"", "OK")
 name$ = PasswordDlg$("\"Please enter your banking password\"", "\"Let's see ...\"", "OK","Cancel")
 name$= "KIDDING! I was just kidding!\n\nBut for the record, you entered: " + name$
 MessageDlg(EncloseString$(name$,1))
+MenuDlg("Remember that clunky text menu at the start? It could look like this ...", "This is a REAL menu!", "Cool!", "No biggie", "dialog#whiptail#kdialog#zenity") 
 exit
 
 sub LikeIt()

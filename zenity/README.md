@@ -34,6 +34,18 @@ You should **not** use this library and one of the others that provides dialogs 
 
 ![InputDlg](imgs/InputDlg.png)
 
++ **MenuDlg**(text$, title$, ok$, cancel$, menustring$) - Create a menu of options for the user to choose from
+    + The value *title$* has no effect in zenity, but is kept here for compatibility and must be supplied.
+    + The value *ok$* is the text of the accept button, normally OK.
+    + The value *cancel$* is the text of the reject button, normally Cancel.
+    + The value menustring$ is the list of menu options as a single string, separated by hash signs (#). Spaces are allowed.
+    + If the number of options exceed the available space in the widget, the list will be scrollable.
+    + The result is returned as a numeric value, starting from 1.
+   + If you prefer to get the same number in string format, you can use **MenuDlg$**(text$, title$, ok$, cancel$, menustring$)
+   + Please note that the height of this widget is hardcoded at 400 pixels, because it looked really crap when allowed to autosize. This may change with future releases of zenity.
+
+![MenuDlg](imgs/MenuDlg.png)
+
 
 + **MessageDlg**(text$) - display a simple message with an OK button. Returns nothing.
 

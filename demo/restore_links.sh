@@ -1,4 +1,4 @@
-#!bash
+#!/bin/bash
 #something (probably git) is changing the links 
 #to the libraries to actual copies of the files
 #this script fixes that.

@@ -281,7 +281,7 @@ Convert an image file to a different format, optionally with a different filenam
     + This command is used by many of the other routines in this library, and a version of it can be found in each of the various dialog libraries.
     + **System commands used:** *which*.
     
- **TestForUtility**(filename$) - tests whether a given utility exists on your $PATH and is executable. 
++ **TestForUtility**(filename$) - tests whether a given utility exists on your $PATH and is executable.
     + same as TestForUtility$(), but returns 1 if the utility exists, and 0 if it does not.
     + **System commands used:** *which*.
 
