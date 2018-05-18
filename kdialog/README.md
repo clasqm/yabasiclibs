@@ -45,7 +45,9 @@ You should **not** use this library and one of the others in this set that provi
 ![MenuDlg](imgs/MenuDlg.png)
 
 
-+ **MessageDlg**(text$) - display a simple message with an OK button. Returns nothing.
++ **MessageDlg**(text$, ok$)) - Display a simple message with an OK button.
+    + The value ok$ has no effect in kdialog, but is kept here for compatibility
+    + Returns nothing.
 
 ![MessageDlg](imgs/MessageDlg.png)
 
@@ -68,7 +70,7 @@ You should **not** use this library and one of the others in this set that provi
 ![TextFileDlg](imgs/TextFileDlg.png)
 
 + **YesNoDlg**(text$,yes$, no$) - Displays a dialog with text (normally a question) and the options to reply yes or no.
-    + in *dialog*, the first CAPITAL letter of the yes$ and no$ variables will become the hotkeys for those buttons, so make sure they are different. This does not matter for the other dialog-providing utilities.
+    + in *dialog*, the first letter of the yes$ and no$ variables will become the hotkeys for those buttons, so make sure they are different. This does not matter for the other dialog-providing utilities.
     + Returns 1 for yes and 0 for no.
 
 ![YesNoDlg](imgs/YesNoDlg.png)
@@ -77,3 +79,8 @@ You should **not** use this library and one of the others in this set that provi
 
 **These routines will only work with kdialog, unless specified otherwise.**
 
++ **KCalendarDlg$**(text$) - Display a calendar widget with today's date pre-selected.
+    + On exit, the date is returned in the form Day-of-week Month dd yyyy, e.g Sun Jul 15 2018
+    + ONLY available in kdialog. For dialog and zenity, see DCalendarDlg$() and ZCalendarDlg$()
+    + *EXAMPLE: print KCalendarDlg$("\"Pick a date\"")*
+![KCalendarDlg](imgs/KCalendarDlg.png)

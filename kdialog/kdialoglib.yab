@@ -55,8 +55,8 @@ end sub
 export sub MenuDlg$(text$, title$, ok$, cancel$, menustring$)
 	//Create a menu of options for the user to choose from
 	//The value *title$* is the title on top of the widget
-	//The value *ok$* is the text of the accept button, normally OK.
-	//The value *cancel$* is the text of the reject button, normally Cancel.
+	//The values ok$ and cancel$ have no effect in kdialog
+	//but are kept here for compatibility with.
 	//The value menustring$ is the list of menu options as a single string, separated by hash signs (#). Spaces are allowed.
 	//If the number of options exceed the available space in the widget, the list will be scrollable.
 	//The result is returned as a string value, starting from 1
@@ -70,8 +70,10 @@ export sub MenuDlg$(text$, title$, ok$, cancel$, menustring$)
 	return output$
 end sub
 
-export sub MessageDlg(text$)
+export sub MessageDlg(text$,ok$)
 	//display a simple message with an OK button
+	//The value ok$ has no effect in kdialog
+	//but is kept here for compatibility
 	//returns nothing
 	system(getcmd$() + " --caption \"\" --msgbox " + text$)
 end sub
@@ -86,7 +88,7 @@ export sub PasswordDlg$(text$, title$, ok$, cancel$)
 	//replacing the input text.
 	//Available in kdialog and zenity.
 	//The value title$ is the title on top of the widget
-	//The values ok$ and cancel$ have no effect in kdialog and may be omitted,
+	//The values ok$ and cancel$ have no effect in kdialog
 	//but are kept here for compatibility with zenity.
 	//The result is returned as a string value.
 	return system$(getcmd$() + " --caption " + title$ + " --password " + text$ + " \"\" 0 0 ")
@@ -159,6 +161,18 @@ end sub
 #DS######### I ###########
 #DS######### J ###########
 #DS######### K ###########
+
+export sub KCalendarDlg$(text$)
+	//Display a calendar widget with today's date pre-selected.
+	//On exit, the date is returned in the form Day-of-week Month dd yyyy
+	//e.g Sun Jul 15 2018
+	//ONLY available in kdialog.
+	//for dialog and zenity, see DCalendarDlg$() and ZCalendarDlg$()
+	local inputstr$
+	inputstr$ = "echo $(" + getcmd$() + " --calendar " + text$ + ")"
+	return system$(inputstr$)
+end sub
+
 #DS######### L ###########
 #DS######### M ###########
 #DS######### N ###########

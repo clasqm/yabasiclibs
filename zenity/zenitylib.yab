@@ -75,10 +75,10 @@ export sub MenuDlg(text$, title$, ok$, cancel$, menustring$)
 	return output
 end sub
 
-export sub MessageDlg(text$)
+export sub MessageDlg(text$, ok$)
 	//display a simple message with an OK button
 	//returns nothing
-	system(getcmd$() + " --info --text=" + text$)   // + " &")
+	system(getcmd$() + " --ok-label=" + ok$ + " --info --text=" + text$) 
 end sub
 
 #COM######### N ###########
@@ -177,6 +177,22 @@ end sub
 #DS######### X ###########
 #DS######### Y ###########
 #DS######### Z ###########
+
+export sub ZCalendarDlg$(text$, ok$, cancel$)
+	//Display a calendar widget with today's date pre-selected.
+	//Use TAB and SHFT-TAB to move between the fields.
+	//The value *ok$* is the text of the accept button, normally OK.
+	//The value *cancel$* is the text of the reject button, normally Cancel.
+	//The value text$ has no effect on zenity, but is used 
+	//here for compatibility reasons and must be supplied.
+	//On exit, the date is returned in the form dd/mm/yyy, e.g. 23/05/2018
+	//ONLY available in Zenity.
+	//for dialog and kdialog, see DCalendarDlg$() and KCalendarDlg$()
+	//DCalendarDlg$ and ZCalendarDlg$ are fully compatible.
+	local inputstr$
+	inputstr$ = "echo $(" + getcmd$() + " --ok-label " + ok$ + " --cancel-label " + cancel$ + " --calendar " + text$ + ")"
+	return system$(inputstr$)
+end sub
 
 //SUPPORTIVE SUBROUTINES
 //These will not be available in your main program

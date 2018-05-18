@@ -71,11 +71,11 @@ export sub MenuDlg$(text$, title$, ok$, cancel$, menustring$)
 	return output$
 end sub
 
-
-export sub MessageDlg(text$)
+export sub MessageDlg(text$, ok$)
 	//display a simple message with an OK button
+	//The value *ok$* is the text of the accept button, normally OK.
 	//returns nothing
-	system(getcmd$() + " --msgbox " + text$ + " 0 0")
+	system(getcmd$() + " --ok-label " + ok$ +" --msgbox " + text$ + " 0 0")
 end sub
 
 #COM######### N ###########
@@ -147,6 +147,21 @@ end sub
 #DS######### B ###########
 #DS######### C ###########
 #DS######### D ###########
+
+export sub DCalendarDlg$(text$, ok$, cancel$)
+	//Display a calendar widget with today's date pre-selected.
+	//Use TAB and SHFT-TAB to move between the fields.
+	//The value *ok$* is the text of the accept button, normally OK.
+	//The value *cancel$* is the text of the reject button, normally Cancel.
+	//On exit, the date is returned in the form dd/mm/yyy
+	//ONLY available in dialog.
+	//for kdialog and zenity, see KCalendarDlg$() and ZCalendarDlg$()
+	//DCalendarDlg$ and ZCalendarDlg$ are fully compatible.
+	local inputstr$
+	inputstr$ = "echo $(" + getcmd$() + " --ok-label " + ok$ + " --cancel-label " + cancel$ + " --calendar " + text$ + " 0 0 0 3>&1 1>&2 2>&3 )"
+	return system$(inputstr$)
+end sub
+
 #DS######### E ###########
 #DS######### F ###########
 #DS######### G ###########
@@ -163,6 +178,18 @@ end sub
 #DS######### R ###########
 #DS######### S ###########
 #DS######### T ###########
+
+export sub TransientInfoDlg(text$)
+	//.display a simple message with an OK button that will exit immediately after displaying 
+	//the message to the user. The screen is not cleared when dialog exits, so that the message 
+	//will remain on the screen until the calling shell script clears it later. This is useful when 
+	//you want to inform the user that some operations are carrying on that may require some time to finish. 
+	//The value *ok$* is the text of the accept button, normally OK.
+	//ONLY available in dialog - It should work in whiptail but doesn't.
+	//Returns nothing.
+	system(getcmd$() + " --infobox " + text$ + " 0 0")
+end sub
+
 #DS######### U ###########
 #DS######### V ###########
 #DS######### W ###########

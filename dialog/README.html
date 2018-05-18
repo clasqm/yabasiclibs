@@ -55,7 +55,11 @@
 <p><img src="imgs/MenuDlg.png" alt="MenuDlg" title="" /></p>
 
 <ul>
-<li><strong>MessageDlg</strong>(text$) - display a simple message with an OK button. Returns nothing.</li>
+<li><strong>MessageDlg</strong>(text$, ok$) - Display a simple message with an OK button.
+<ul>
+<li>The value <em>ok$</em> is the text of the accept button, normally OK</li>
+<li>Returns nothing.</li>
+</ul></li>
 </ul>
 
 <p><img src="imgs/MessageDlg.png" alt="MessageDlg" title="" /></p>
@@ -99,3 +103,29 @@
 <h3>dialog-specific routines</h3>
 
 <p><strong>These routines will only work with dialog.</strong></p>
+
+<ul>
+<li><strong>DCalendarDlg$</strong>(text$, ok$, cancel$) - Display a calendar widget with today's date pre-selected.
+<ul>
+<li>Use TAB and SHFT-TAB to move between the fields.</li>
+<li>On exit, the date is returned in the form dd/mm/yyyy, e.g. 23/08/2018</li>
+<li>ONLY available in dialog - for kdialog and zenity, see KCalendarDlg$() and ZCalendarDlg$()</li>
+<li>DCalendarDlg$ and ZCalendarDlg$ are fully compatible.</li>
+<li><em>EXAMPLE: print DCalendarDlg$("\"Pick a date\"", "Pick", "Escape")</em></li>
+</ul></li>
+</ul>
+
+<p><img src="imgs/DCalendarDlg.png" alt="DCalendarDlg" title="" /></p>
+
+<ul>
+<li><strong>TransientInfoDlg</strong>(text$)- Display a simple message  that will exit immediately after displaying the message to the user.
+<ul>
+<li>The screen is not cleared when dialog exits, so that the message will remain on the screen until the calling program clears it later.</li>
+<li>This is useful when you want to inform the user that some operations are carrying on that may require some time to finish.</li>
+<li>ONLY available in dialog - it should work in whiptail but doesn't.</li>
+<li>Returns nothing.</li>
+<li><em>EXAMPLE: TransientInfoDlg("\"This will stay onscreen until you press a key\"")</em></li>
+</ul></li>
+</ul>
+
+<p><img src="imgs/TransientInfoDlg.png" alt="TransientInfoDlg" title="" /></p>

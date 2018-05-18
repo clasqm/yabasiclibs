@@ -100,3 +100,19 @@
 <h3>Zenity-specific routines</h3>
 
 <p><strong>These routines will only work with zenity, unless specified otherwise.</strong></p>
+
+<ul>
+<li><strong>ZCalendarDlg$</strong>(text$, ok$, cancel$) - Display a calendar widget with today's date pre-selected.
+<ul>
+<li>Use TAB and SHFT-TAB to move between the fields.</li>
+<li>The value <em>ok$</em> is the text of the accept button, normally OK.</li>
+<li>The value <em>cancel$</em> is the text of the reject button, normally Cancel.</li>
+<li>The value <em>text$</em> has no effect on zenity, but is used here for compatibility reasons and must be supplied.</li>
+<li>On exit, the date is returned in the form dd/mm/yyy, e.g. 23/05/2018</li>
+<li>ONLY available in Zenity. - for dialog and kdialog, see DCalendarDlg$() and KCalendarDlg$()</li>
+<li>DCalendarDlg$ and ZCalendarDlg$ are fully compatible.</li>
+<li><em>EXAMPLE: print ZCalendarDlg$("\"Pick a date\"", "Pick", "Escape")</em></li>
+</ul></li>
+</ul>
+
+<p><img src="imgs/ZCalendarDlg.png" alt="ZCalendarDlg" title="" /></p>

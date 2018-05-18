@@ -41,3 +41,6 @@ import kdialoglib
 //test MenuDlg
 	//a = MenuDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above"): print a
 	//a$ = MenuDlg$("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above"):print a$
+
+//test KCalendarDlg$
+	print KCalendarDlg$("\"Pick a date\"")

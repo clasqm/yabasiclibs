@@ -71,10 +71,11 @@ export sub MenuDlg$(text$, title$, ok$, cancel$, menustring$)
 	return output$
 end sub
 
-export sub MessageDlg(text$)
+export sub MessageDlg(text$, ok$)
 	//display a simple message with an OK button
+	//The value *ok$* is the text of the accept button, normally OK.
 	//returns nothing
-	system(getcmd$() + " --msgbox " + text$ + " 0 0")
+	system(getcmd$() + " --ok-button " + ok$ +" --msgbox " + text$ + " 0 0")
 end sub
 
 #COM######### N ###########

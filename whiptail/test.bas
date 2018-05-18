@@ -15,7 +15,7 @@ import whiptaillib
 	//endif
 
 //test simple message dialog
-	//MessageDlg("\"This is a simple message dialog. Close it with ENTER.\"")
+	//MessageDlg("\"This is a simple message dialog. Close it with ENTER.\"","okidoki")
 	//clear screen
 	//print "message demo is done"
 	//a$ = inkey$
@@ -34,10 +34,10 @@ import whiptaillib
 	//TextFileDlg("README.md", "\"The README for this library\"","\"All done!\"")
 
 // test InputDlg$
-	print  InputDlg$("\"What is your name?\"", "\"Who are you?\"", "Accept", "Cancel")
+	//print  InputDlg$("\"What is your name?\"", "\"Who are you?\"", "Accept", "Cancel")
 
 //test PasswordDlg
-	print PasswordDlg$("\"You can enter a password here\"","\"Password entry\"", "Ok", "Cancel")
+	//print PasswordDlg$("\"You can enter a password here\"","\"Password entry\"", "Ok", "Cancel")
 
 //test MenuDlg
 	//a = MenuDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above"): print a

@@ -18,7 +18,7 @@ clear screen
 	//endif
 	
 //test simple message dialog
-	//MessageDlg("\"This is a simple message dialog. Close it with ENTER or try clicking on OK.\"")
+	//MessageDlg("\"This is a simple message dialog. Close it with ENTER or try clicking on OK.\"", "\"Very well\"")
 	//clear screen
 	//print "message demo is done"
 	//a$ = inkey$
@@ -43,7 +43,9 @@ clear screen
 	//print PasswordDlg$("\"You can enter a password here\"","\"Password entry\"", "Ok", "Cancel")
 	
 //test MenuDlg
-	print "main program"
-	a = MenuDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above"):print a
-	a$ = MenuDlg$("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above"):print a$
+	//print "main program"
+	//a = MenuDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above"):print a
+	//a$ = MenuDlg$("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above"):print a$
 
+//test ZCalendarDlg$
+	print ZCalendarDlg$("\"Pick a date\"", "Pick", "Escape")

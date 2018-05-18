@@ -46,7 +46,9 @@ You should **not** use this library and one of the others in this set that provi
 
 ![MenuDlg](imgs/MenuDlg.png)
 
-+ **MessageDlg**(text$) - display a simple message with an OK button. Returns nothing.
++ **MessageDlg**(text$, ok$) - Display a simple message with an OK button.
+    + The value *ok$* is the text of the accept button, normally OK
+    + Returns nothing.
 
 ![MessageDlg](imgs/MessageDlg.png)
 

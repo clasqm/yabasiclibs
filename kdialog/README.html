@@ -53,7 +53,11 @@
 <p><img src="imgs/MenuDlg.png" alt="MenuDlg" title="" /></p>
 
 <ul>
-<li><strong>MessageDlg</strong>(text$) - display a simple message with an OK button. Returns nothing.</li>
+<li><strong>MessageDlg</strong>(text$, ok$)) - Display a simple message with an OK button.
+<ul>
+<li>The value ok$ has no effect in kdialog, but is kept here for compatibility</li>
+<li>Returns nothing.</li>
+</ul></li>
 </ul>
 
 <p><img src="imgs/MessageDlg.png" alt="MessageDlg" title="" /></p>
@@ -86,7 +90,7 @@
 <ul>
 <li><strong>YesNoDlg</strong>(text$,yes$, no$) - Displays a dialog with text (normally a question) and the options to reply yes or no.
 <ul>
-<li>in <em>dialog</em>, the first CAPITAL letter of the yes$ and no$ variables will become the hotkeys for those buttons, so make sure they are different. This does not matter for the other dialog-providing utilities.</li>
+<li>in <em>dialog</em>, the first letter of the yes$ and no$ variables will become the hotkeys for those buttons, so make sure they are different. This does not matter for the other dialog-providing utilities.</li>
 <li>Returns 1 for yes and 0 for no.</li>
 </ul></li>
 </ul>
@@ -96,3 +100,13 @@
 <h3>kdialog-specific routines</h3>
 
 <p><strong>These routines will only work with kdialog, unless specified otherwise.</strong></p>
+
+<ul>
+<li><strong>KCalendarDlg$</strong>(text$) - Display a calendar widget with today's date pre-selected.
+<ul>
+<li>On exit, the date is returned in the form Day-of-week Month dd yyyy, e.g Sun Jul 15 2018</li>
+<li>ONLY available in kdialog. For dialog and zenity, see DCalendarDlg$() and ZCalendarDlg$()</li>
+<li><em>EXAMPLE: print KCalendarDlg$("\"Pick a date\"")</em>
+<img src="imgs/KCalendarDlg.png" alt="KCalendarDlg" title="" /></li>
+</ul></li>
+</ul>

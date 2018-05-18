@@ -5,22 +5,22 @@ import dialoglib
 
 name$ = InputDlg$("\"Let's get acquainted. What is your name?\"", "\"Who are you?\"", "OK", "Cancel")
 welcomemessage$ = EncloseString$("Welcome to the demo program, " + name$ + "\nLet's get this show on the road!", 1)
-MessageDlg(welcomemessage$)
+MessageDlg(welcomemessage$, "Ok")
 LikeIt()
 TextFileDlg("README.md", "\"The README file\"", "OK")
-name$ = PasswordDlg$("\"Please enter your banking password\"", "\"Let's see ...\"", "OK","Cancel")
+name$ = PasswordDlg$("\"Please enter your banking password\"", "\"Banking password?\"", "OK","Cancel")
 name$= "KIDDING! I was just kidding!\n\nBut for the record, you entered: " + name$
-MessageDlg(EncloseString$(name$,1))
+MessageDlg(EncloseString$(name$,1), "ok")
 MenuDlg("Remember that clunky text menu at the start?\nIt could look like this ...", "This is a REAL menu!", "Cool!", "No biggie", "dialog#whiptail#kdialog#zenity") 
+DCalendarDlg$("\"Dialog can make calendar widgets!\"", "Ok", "Escape")
 exit
 
-exit
 
 sub LikeIt()
 	if YesNoDlg(EncloseString$("Do you like what you are seeing so far?"), "Yes", "No") then
-		MessageDlg(EncloseString$("Cool! Let us see what else there is. \n\nLet\'s take a look at the README.", 1))
+		MessageDlg(EncloseString$("Cool! Let us see what else there is. \n\nLet\'s take a look at the README.", 1), "ok")
 	else
-		MessageDlg(EncloseString$("Fair enough. But let us keep trying.  \n\nLet\'s take a look at the README.", 1))
+		MessageDlg(EncloseString$("Fair enough. But let us keep trying.  \n\nLet\'s take a look at the README.", 1), "OK")
 	endif
 end sub
 

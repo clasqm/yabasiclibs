@@ -16,9 +16,13 @@ clear screen
 	//endif
 	
 //test simple message dialog
-	//MessageDlg("\"This is a simple message dialog. Close it with ENTER or try clicking on OK.\"")
+	//MessageDlg("\"This is a simple message dialog. Close it with ENTER or try clicking on OK.\"", "Fine")
 	//clear screen
 	//print "message demo is done"
+	//a$ = inkey$
+
+//test TransientInfoDlg
+	//TransientInfoDlg("\"This will stay onscreen until you press a key\"")
 	//a$ = inkey$
 
 //test yesno dialog
@@ -34,7 +38,6 @@ clear screen
 //test TextFileDlg
 	//TextFileDlg("README.md", "\"The README for this library\"", "okidoki")
 
-
 // test InputDlg$
 	//print  InputDlg$("\"What is your name?\"", "\"Who are you?\"", "Accept", "Cancel")
 
@@ -44,3 +47,6 @@ clear screen
 //test MenuDlg
 	//a = MenuDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above"): print a
 	//a$ = MenuDlg$("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above"):print a$
+
+//test DCalendarDlg$
+	print DCalendarDlg$("\"Pick a date\"", "Pick", "Escape")
