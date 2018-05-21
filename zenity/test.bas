@@ -48,4 +48,8 @@ clear screen
 	//a$ = MenuDlg$("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above"):print a$
 
 //test ZCalendarDlg$
-	print ZCalendarDlg$("\"Pick a date\"", "Pick", "Escape")
+	//print ZCalendarDlg$("\"Pick a date\"", "Pick", "Escape")
+
+//test RadioDlg
+	//a = RadioDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Magic"): print a
+	//a$ = RadioDlg$("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Science"):print a$	

@@ -36,7 +36,7 @@ You should **not** use this library and one of the others in this set that provi
 + **MenuDlg**(text$, title$, ok$, cancel$, menustring$) - Create a menu of options for the user to choose from
     + The value *title$* is the title on top of the widget
     + The values *ok$* and *cancel$* have no effect in kdialog, but are kept here for compatibility and must be supplied.
-    + The value menustring$ is the list of menu options as a single string, separated by hash signs (#). Spaces are allowed.
+    + The value *menustring$* is the list of menu options as a single string, separated by hash signs (#). Spaces are allowed.
     + If the number of options exceed the available space in the widget, the list will be scrollable.
     + The result is returned as a numeric value, starting from 1.
     + If you prefer to get the same number in string format, you can use **MenuDlg$**(text$, title$, ok$, cancel$, menustring$) 
@@ -58,6 +58,19 @@ You should **not** use this library and one of the others in this set that provi
     + The result is returned as a string value.
 
 ![PasswordDlg](imgs/PasswordDlg.png)
+
++ **RadioDlg**(text$, title$, ok$, cancel$, menustring$, selected$) - Create a menu of options for the user to choose from
+    + Same as *MenuDlg*(), except that you can indicate which item in *menustring$* is currently selected or active.
+    + The value *title$* is the title on top of the widget
+    + The values *ok$* and *cancel$* have no effect in kdialog, but are kept here for compatibility and must be supplied.
+    + The value *menustring$* is the list of menu options as a single string, separated by hash signs (#). Spaces are allowed.
+    + The value *selected$* is the currently selected item and must correspond to one of the items in *menustring$* - case sensitive!
+    + If the number of options exceed the available space in the widget, the list will be scrollable.
+    + The result is returned as a numeric value, starting from 1.
+    + If you prefer to get the same number in string format, you can use **RadioDlg$**(text$, title$, ok$, cancel$, menustring$, selected$)
+    + *EXAMPLE: a = RadioDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Magic"): print a*
+
+![RadioDlg](imgs/RadioDlg.png)
 
 + **TestForDialogUtility$**\(\) - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.
 

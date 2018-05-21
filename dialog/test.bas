@@ -47,6 +47,10 @@ clear screen
 //test MenuDlg
 	//a = MenuDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above"): print a
 	//a$ = MenuDlg$("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above"):print a$
+	
+//test RadioDlg
+	//a = RadioDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Magic"): print a
+	//a$ = RadioDlg$("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Science"):print a$	
 
 //test DCalendarDlg$
-	print DCalendarDlg$("\"Pick a date\"", "Pick", "Escape")
+	//print DCalendarDlg$("\"Pick a date\"", "Pick", "Escape")

@@ -60,6 +60,21 @@ You should **not** use this library and one of the others in this set that provi
 
 ![PasswordDlg](imgs/PasswordDlg.png)
 
++ **RadioDlg**(text$, title$, ok$, cancel$, menustring$, selected$) - Create a menu of options for the user to choose from.
+    + Same as *MenuDlg*(), except that you can indicate which item in *menustring$* is currently selected or active.
+    + The value *title$* is the title on top of the widget
+    + The value *ok$* is the text of the accept button, normally OK.
+    + The value *cancel$* is the text of the reject button, normally Cancel.
+    + The value *menustring$* is the list of menu options as a single string, separated by hash signs (#). Spaces are allowed.
+    + The value *selected$* is the currently selected item and must correspond to one of the items in *menustring$* - case sensitive!
+    + Just moving the cursor is not enough here - the value in the menu must be explicitly selected with SPACE.
+    + If the number of options exceed the available space in the widget, the list will be scrollable.
+    + The result is returned as a numeric value, starting from 1.
+    + If you prefer to get the same number in string format, you can use **RadioDlg$**(text$, title$, ok$, cancel$, menustring$, selected$)
+    + This routine does work in whiptail, but the graphical feedback is poor. This may be a bug in the current version of whiptail.
+    + *EXAMPLE: a = RadioDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Magic"): print a*
+
+![RadioDlg](imgs/RadioDlg.png)
 
 + **TestForDialogUtility$**\(\) - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.
 
