@@ -301,7 +301,7 @@ Convert an image file to a different format, optionally with a different filenam
     + **System commands used:** *wikipedia2text*.
 
 + **WikipediaURL$**(searchterm$, language$) - Search wikipedia for a specific string, and return the URL as a string variable.
-    + if language$ is not supplied, English will be assumed
+    + if language$ is not supplied, English will be assumed.
     + See [Appendix 2](#wikilangs) for the language codes supported.
     + *searchterm$* may include spaces.
     + **NOTE**: this routine may take a second or two to get going.
@@ -315,7 +315,7 @@ Convert an image file to a different format, optionally with a different filenam
 
 **Output formats**: asciidoc, beamer, commonmark, context, docbook, docx, dokuwiki, dzslides, epub, epub3, fb2, haddock, html, html5, icml, latex, man, markdown, markdown_github, markdown_mmd, markdown_phpextra, markdown_strict, mediawiki, native, odt, opendocument, opml, org, plain, revealjs, rst, rtf, s5, slideous, slidy, texinfo, textile
 
-![pandoc formats](imgs/pandocdiagram.jpg)
+![pandoc formats](./imgs/pandocdiagram.jpg)
 
 ## Appendix 2: Language support for wikipedia2text
 <a name="wikilangs"></a>

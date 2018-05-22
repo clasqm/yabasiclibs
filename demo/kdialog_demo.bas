@@ -12,6 +12,7 @@ name$ = PasswordDlg$("\"Please enter your banking password\"", "\"Banking passwo
 name$= "KIDDING! I was just kidding!\n\nBut for the record, you entered: " + name$
 MessageDlg(EncloseString$(name$,1), "Ok")
 MenuDlg("Remember that clunky text menu at the start?\nIt could look like this ...", "This is a REAL menu!", "Cool!", "No biggie", "dialog#whiptail#kdialog#zenity")
+RadioDlg("Or like this ...", "This is a Radio menu!", "Cool!", "No biggie", "dialog#whiptail#kdialog#zenity", "kdialog") 
 KCalendarDlg$("\"kdialog can create clendar widgets!\"")
 exit
 

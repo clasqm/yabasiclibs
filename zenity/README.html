@@ -27,6 +27,13 @@
 
 <ul>
 <li><p><strong>ClearDlg</strong>() - on dialog and whiptail, this clears the dialog from your terminal. Same as the yabasic command CLEAR SCREEN, but may work better if you are expecting to issue another Linux command immediately.On zenity and kdialog, dummy routines are provided for compatibility so that you do not need to rewrite your code.</p></li>
+<li><p><strong>getcmd$</strong>() - return the name of the dialog-providing utility currently being accessed.</p>
+
+<ul>
+<li>This is really just for me, to stop me from getting confused while I am editing four libraries simultaneously.</li>
+<li>However, you could use it to test which utility is currently running and if it is safe to use routines not in the common list.</li>
+<li>e.g. <em>if getcmd$() = "zenity" ZNotifyDlg("this is a notification")</em></li>
+</ul></li>
 <li><p><strong>InputDlg$</strong>(text$, title$, ok$, cancel$) - Presents a one-line dialog into which the user can type a string answer.</p>
 
 <ul>
@@ -37,7 +44,7 @@
 </ul></li>
 </ul>
 
-<p><img src="imgs/InputDlg.png" alt="InputDlg" title="" /></p>
+<p><img src="./imgs/InputDlg.png" alt="InputDlg" title="" /></p>
 
 <ul>
 <li><strong>MenuDlg</strong>(text$, title$, ok$, cancel$, menustring$) - Create a menu of options for the user to choose from
@@ -54,13 +61,13 @@
 </ul></li>
 </ul>
 
-<p><img src="imgs/MenuDlg.png" alt="MenuDlg" title="" /></p>
+<p><img src="./imgs/MenuDlg.png" alt="MenuDlg" title="" /></p>
 
 <ul>
 <li><strong>MessageDlg</strong>(text$) - display a simple message with an OK button. Returns nothing.</li>
 </ul>
 
-<p><img src="imgs/MessageDlg.png" alt="MessageDlg" title="" /></p>
+<p><img src="./imgs/MessageDlg.png" alt="MessageDlg" title="" /></p>
 
 <ul>
 <li><strong>PasswordDlg$</strong>(text$, title$, ok$, cancel$) - Same as <em>InputDlg$</em> but with asterisks replacing the input text.
@@ -72,7 +79,7 @@
 </ul></li>
 </ul>
 
-<p><img src="imgs/PasswordDlg.png" alt="PasswordDlg" title="" /></p>
+<p><img src="./imgs/PasswordDlg.png" alt="PasswordDlg" title="" /></p>
 
 <ul>
 <li><strong>RadioDlg</strong>(text$, title$, ok$, cancel$, menustring$, selected$) - Create a menu of options for the user to choose from
@@ -90,7 +97,7 @@
 </ul></li>
 </ul>
 
-<p><img src="imgs/RadioDlg.png" alt="RadioDlg" title="" /></p>
+<p><img src="./imgs/RadioDlg.png" alt="RadioDlg" title="" /></p>
 
 <ul>
 <li><p><strong>TestForDialogUtility\$</strong>() - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.</p></li>
@@ -104,7 +111,7 @@
 </ul></li>
 </ul>
 
-<p><img src="imgs/TextFileDlg.png" alt="TextFileDlg" title="" /></p>
+<p><img src="./imgs/TextFileDlg.png" alt="TextFileDlg" title="" /></p>
 
 <ul>
 <li><strong>YesNoDlg</strong>(text$,yes$, no$) - Displays a dialog with text (normally a question) and the options to reply yes or no.
@@ -114,7 +121,7 @@
 </ul></li>
 </ul>
 
-<p><img src="imgs/YesNoDlg.png" alt="YesNoDlg" title="" /></p>
+<p><img src="./imgs/YesNoDlg.png" alt="YesNoDlg" title="" /></p>
 
 <h3>Zenity-specific routines</h3>
 
@@ -134,4 +141,12 @@
 </ul></li>
 </ul>
 
-<p><img src="imgs/ZCalendarDlg.png" alt="ZCalendarDlg" title="" /></p>
+<p><img src="./imgs/ZCalendarDlg.png" alt="ZCalendarDlg" title="" /></p>
+
+<ul>
+<li><strong>ZNotifyDlg</strong>(text$) - pop up a GTK notification.
+<ul>
+<li>The exact placement and duration of notifications may depend on your WM settings.</li>
+<li>ONLY available in Zenity.</li>
+</ul></li>
+</ul>

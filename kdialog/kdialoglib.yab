@@ -207,20 +207,10 @@ end sub
 #COM######### Z ###########
 
 
-//DIALOG-SPECIFIC ROUTINES
+//KDIALOG-SPECIFIC ROUTINES
 
 
-#DS######### A ###########
-#DS######### B ###########
-#DS######### C ###########
-#DS######### D ###########
-#DS######### E ###########
-#DS######### F ###########
-#DS######### G ###########
-#DS######### H ###########
-#DS######### I ###########
-#DS######### J ###########
-#DS######### K ###########
+#KDS######### K ###########
 
 export sub KCalendarDlg$(text$)
 	//Display a calendar widget with today's date pre-selected.
@@ -233,31 +223,15 @@ export sub KCalendarDlg$(text$)
 	return system$(inputstr$)
 end sub
 
-#DS######### L ###########
-#DS######### M ###########
-#DS######### N ###########
-#DS######### O ###########
-#DS######### P ###########
-#DS######### Q ###########
-#DS######### R ###########
-#DS######### S ###########
-#DS######### T ###########
-#DS######### U ###########
-#DS######### V ###########
-#DS######### W ###########
-#DS######### X ###########
-#DS######### Y ###########
-#DS######### Z ###########
-
-
 //SUPPORTIVE SUBROUTINES
-//These will not be available in your main program
 
-sub getcmd$()
+export sub getcmd$()
 	//This is really just for me, to stop me from
 	//getting confused while I am editing four
 	//libraries simultaneously.
-	//it may be removed when we get 
-	//closer to a release
+	//However, you could use it to test which utility
+	//is currently running and if it is safe to use routines
+	//not in the common list.
+	//e.g if getcmd$() = "zenity" ZNotifyDlg("this is a notification")
 	return "kdialog"
 end sub

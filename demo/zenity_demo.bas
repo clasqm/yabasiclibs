@@ -3,6 +3,7 @@ clear screen
 Print "this is the zenity demo"
 import zenitylib
 
+ZNotifyDlg("The zenity demo is starting")
 name$ = InputDlg$("\"Let's get acquainted. What is your name?\"", "\"Who are you?\"", "OK", "Cancel")
 welcomemessage$ = EncloseString$("Welcome to the demo program, " + name$ + "\nLet's get this show on the road!", 1)
 MessageDlg(welcomemessage$, "Ok")
@@ -13,6 +14,7 @@ name$= "KIDDING! I was just kidding!\n\nBut for the record, you entered: " + nam
 MessageDlg(EncloseString$(name$,1), "Ok")
 MessageDlg("\"Zenity can make menu widgets\"", "Ok")
 MenuDlg("Remember that clunky text menu at the start? It could look like this ...", "This is a REAL menu!", "Cool!", "No biggie", "dialog#whiptail#kdialog#zenity") 
+RadioDlg("Or like this ...", "This is a Radio menu!", "Cool!", "No biggie", "dialog#whiptail#kdialog#zenity", "zenity") 
 MessageDlg("\"Zenity can make calendar widgets\"", "Ok")
 ZCalendarDlg$("\"Zenity can make calendar widgets!\"", "Ok", "Escape")
 exit

@@ -31,7 +31,7 @@ You should **not** use this library and one of the others in this set that provi
     + The values *ok$* and *cancel$* have no effect in kdialog and may be omitted, but are kept here for compatibility.
     + The result is returned as a string value.
 
-![InputDlg](imgs/InputDlg.png)
+![InputDlg](./imgs/InputDlg.png)
 
 + **MenuDlg**(text$, title$, ok$, cancel$, menustring$) - Create a menu of options for the user to choose from
     + The value *title$* is the title on top of the widget
@@ -41,15 +41,13 @@ You should **not** use this library and one of the others in this set that provi
     + The result is returned as a numeric value, starting from 1.
     + If you prefer to get the same number in string format, you can use **MenuDlg$**(text$, title$, ok$, cancel$, menustring$) 
 
-
-![MenuDlg](imgs/MenuDlg.png)
-
+![MenuDlg](./imgs/MenuDlg.png)
 
 + **MessageDlg**(text$, ok$)) - Display a simple message with an OK button.
     + The value ok$ has no effect in kdialog, but is kept here for compatibility
     + Returns nothing.
 
-![MessageDlg](imgs/MessageDlg.png)
+![MessageDlg](./imgs/MessageDlg.png)
 
 
 + **PasswordDlg$**(text$, title$, ok$, cancel$) - Same as *InputDlg$* but with asterisks replacing the input text.
@@ -57,7 +55,7 @@ You should **not** use this library and one of the others in this set that provi
     + The values *ok$* and *cancel$* have no effect in kdialog and may be omitted, but are kept here for compatibility.
     + The result is returned as a string value.
 
-![PasswordDlg](imgs/PasswordDlg.png)
+![PasswordDlg](./imgs/PasswordDlg.png)
 
 + **RadioDlg**(text$, title$, ok$, cancel$, menustring$, selected$) - Create a menu of options for the user to choose from
     + Same as *MenuDlg*(), except that you can indicate which item in *menustring$* is currently selected or active.
@@ -70,7 +68,7 @@ You should **not** use this library and one of the others in this set that provi
     + If you prefer to get the same number in string format, you can use **RadioDlg$**(text$, title$, ok$, cancel$, menustring$, selected$)
     + *EXAMPLE: a = RadioDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Magic"): print a*
 
-![RadioDlg](imgs/RadioDlg.png)
+![RadioDlg](./imgs/RadioDlg.png)
 
 + **TestForDialogUtility$**\(\) - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.
 
@@ -80,13 +78,13 @@ You should **not** use this library and one of the others in this set that provi
     + Text wrapping varies from one dialog-provider to the next. It is better if you preformat your text file.
     + Returns nothing.
     
-![TextFileDlg](imgs/TextFileDlg.png)
+![TextFileDlg](./imgs/TextFileDlg.png)
 
 + **YesNoDlg**(text$,yes$, no$) - Displays a dialog with text (normally a question) and the options to reply yes or no.
     + in *dialog*, the first letter of the yes$ and no$ variables will become the hotkeys for those buttons, so make sure they are different. This does not matter for the other dialog-providing utilities.
     + Returns 1 for yes and 0 for no.
 
-![YesNoDlg](imgs/YesNoDlg.png)
+![YesNoDlg](./imgs/YesNoDlg.png)
 
 ### kdialog-specific routines
 
@@ -96,4 +94,5 @@ You should **not** use this library and one of the others in this set that provi
     + On exit, the date is returned in the form Day-of-week Month dd yyyy, e.g Sun Jul 15 2018
     + ONLY available in kdialog. For dialog and zenity, see DCalendarDlg$() and ZCalendarDlg$()
     + *EXAMPLE: print KCalendarDlg$("\"Pick a date\"")*
-![KCalendarDlg](imgs/KCalendarDlg.png)
+    
+![KCalendarDlg](./imgs/KCalendarDlg.png)

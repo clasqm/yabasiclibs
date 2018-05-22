@@ -26,13 +26,18 @@ You should **not** use this library and one of the others that provides dialogs 
 
 + **ClearDlg**() - on dialog and whiptail, this clears the dialog from your terminal. Same as the yabasic command CLEAR SCREEN, but may work better if you are expecting to issue another Linux command immediately.On zenity and kdialog, dummy routines are provided for compatibility so that you do not need to rewrite your code.
 
++ **getcmd$**() - return the name of the dialog-providing utility currently being accessed.
+    + This is really just for me, to stop me from getting confused while I am editing four libraries simultaneously.
+    + However, you could use it to test which utility is currently running and if it is safe to use routines not in the common list.
+    + e.g. *if getcmd$() = "zenity" ZNotifyDlg("this is a notification")*
+
 + **InputDlg$**(text$, title$, ok$, cancel$) - Presents a one-line dialog into which the user can type a string answer.
     + The value *title$* has no effect in zenity but is kept here for compatibility and must be supplied.
     + The value *ok$* is the text of the accept button, normally OK.
     + The value *cancel$* is the text of the reject button, normally Cancel.
     + The result is returned as a string value.
 
-![InputDlg](imgs/InputDlg.png)
+![InputDlg](./imgs/InputDlg.png)
 
 + **MenuDlg**(text$, title$, ok$, cancel$, menustring$) - Create a menu of options for the user to choose from
     + The value *title$* has no effect in zenity, but is kept here for compatibility and must be supplied.
@@ -45,12 +50,11 @@ You should **not** use this library and one of the others that provides dialogs 
    + Please note that the height of this widget is hardcoded at 400 pixels, because it looked really crap when allowed to autosize. This may change with future releases of zenity.
    + *EXAMPLE: a = MenuDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above"): print a*
 
-![MenuDlg](imgs/MenuDlg.png)
-
+![MenuDlg](./imgs/MenuDlg.png)
 
 + **MessageDlg**(text$) - display a simple message with an OK button. Returns nothing.
 
-![MessageDlg](imgs/MessageDlg.png)
+![MessageDlg](./imgs/MessageDlg.png)
 
 + **PasswordDlg$**(text$, title$, ok$, cancel$) - Same as *InputDlg$* but with asterisks replacing the input text.
     + The value *title$* has no effect in zenity, but is kept here for compatibility and must be supplied.
@@ -58,7 +62,7 @@ You should **not** use this library and one of the others that provides dialogs 
     + The value *cancel$* is the text of the reject button, normally Cancel
     + The result is returned as a string value.
 
-![PasswordDlg](imgs/PasswordDlg.png)
+![PasswordDlg](./imgs/PasswordDlg.png)
 
 + **RadioDlg**(text$, title$, ok$, cancel$, menustring$, selected$) - Create a menu of options for the user to choose from
     + Same as *MenuDlg*(), except that radiobuttons are presented in the first column. Unlike the other dialog-creating utilities, you cannot choose which one to pre-select.
@@ -72,7 +76,7 @@ You should **not** use this library and one of the others that provides dialogs 
     + If you prefer to get the same number in string format, you can use **RadioDlg$**(text$, title$, ok$, cancel$, menustring$, selected$)
     + *EXAMPLE: a = RadioDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Magic"): print a*
 
-![RadioDlg](imgs/RadioDlg.png)
+![RadioDlg](./imgs/RadioDlg.png)
 
 + **TestForDialogUtility\$**\(\) - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.
 
@@ -82,13 +86,13 @@ You should **not** use this library and one of the others that provides dialogs 
     + Text wrapping varies from one dialog-provider to the next. It is better if you preformat your text file.
     + Returns nothing.
 
-![TextFileDlg](imgs/TextFileDlg.png)
+![TextFileDlg](./imgs/TextFileDlg.png)
 
 + **YesNoDlg**(text$,yes$, no$) - Displays a dialog with text (normally a question) and the options to reply yes or no.
     + in *dialog*, the first CAPITAL letter of the yes$ and no$ variables will become the hotkeys for those buttons, so make sure they are different. This does not matter for the other dialog-providing utilities.
     + Returns 1 for yes and 0 for no.
 
-![YesNoDlg](imgs/YesNoDlg.png)
+![YesNoDlg](./imgs/YesNoDlg.png)
 
 
 ### Zenity-specific routines
@@ -105,5 +109,8 @@ You should **not** use this library and one of the others that provides dialogs 
     + DCalendarDlg$ and ZCalendarDlg$ are fully compatible.
     + *EXAMPLE: print ZCalendarDlg$("\"Pick a date\"", "Pick", "Escape")*
 
-![ZCalendarDlg](imgs/ZCalendarDlg.png)
+![ZCalendarDlg](./imgs/ZCalendarDlg.png)
 
++ **ZNotifyDlg**(text$) - pop up a GTK notification.
+    + The exact placement and duration of notifications may depend on your WM settings.
+    + ONLY available in Zenity.

@@ -39,5 +39,5 @@ Get it here: https://github.com/clasqm/yabasiclibs
 
 At some stage, I will start writing my own library, purely in yabasic, that will replicate as many of these routines as possible. It will look completely different, but will use the same routine names, so you will still be able to switch between libraries with a single *import* statement. And *that* library should work in Windows too!
 
-![Thanks](imgs/thanks.png)
+![Thanks](./imgs/thanks.png)
 

@@ -28,11 +28,11 @@ You should **not** use this library and one of the others in this set that provi
 
 + **InputDlg$**(text$, title$, ok$, cancel$) - Presents a one-line dialog into which the user can type a string answer.
     + The value *title$* is the title on top of the widget
-    + The value *ok$* is the text of the accept button, normally OK.
+    + The value *ok$* is the text of the accept button, normally OK.MessageDlg("\"This is a simple message dialog. Close it with ENTER or try clicking on OK.\"", "Fine"
     + The value *cancel$* is the text of the reject button, normally Cancel.
     + The result is returned as a string value.
     
-![InputDlg](imgs/InputDlg.png)
+![InputDlg](./imgs/InputDlg.png)
 
 + **MenuDlg**(text$, title$, ok$, cancel$, menustring$) - Create a menu of options for the user to choose from
     + The value *title$* is the title on top of the widget
@@ -43,13 +43,13 @@ You should **not** use this library and one of the others in this set that provi
     + The result is returned as a numeric value, starting from 1.
     + If you prefer to get the same number in string format, you can use **MenuDlg$**(text$, title$, ok$, cancel$, menustring$)
 
-![MenuDlg](imgs/MenuDlg.png)
+![MenuDlg](./imgs/MenuDlg.png)
 
 + **MessageDlg**(text$, ok$) - Display a simple message with an OK button.
     + The value *ok$* is the text of the accept button, normally OK
     + Returns nothing.
 
-![MessageDlg](imgs/MessageDlg.png)
+![MessageDlg](./imgs/MessageDlg.png)
 
 + **PasswordDlg$**(text$, title$, ok$, cancel$) - Same as *InputDlg$* but with asterisks replacing the input text.
     + The value *title$* is the title on top of the widget
@@ -57,7 +57,7 @@ You should **not** use this library and one of the others in this set that provi
     + The value *cancel$* is the text of the reject button, normally Cancel
     + The result is returned as a string value.
 
-![PasswordDlg](imgs/PasswordDlg.png)
+![PasswordDlg](./imgs/PasswordDlg.png)
 
 + **RadioDlg**(text$, title$, ok$, cancel$, menustring$, selected$) - Create a menu of options for the user to choose from
     + Same as *MenuDlg*(), except that you can indicate which item in *menustring$* is currently selected or active.
@@ -72,7 +72,7 @@ You should **not** use this library and one of the others in this set that provi
     + If you prefer to get the same number in string format, you can use **RadioDlg$**(text$, title$, ok$, cancel$, menustring$, selected$)
     + *EXAMPLE: a = RadioDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Magic"): print a*
 
-![RadioDlg](imgs/RadioDlg.png)
+![RadioDlg](./imgs/RadioDlg.png)
 
 + **TestForDialogUtility$**() - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.
 
@@ -82,13 +82,13 @@ You should **not** use this library and one of the others in this set that provi
     + Text wrapping varies from one dialog-provider to the next. It is better if you preformat your text file.
     + Returns nothing
 
-![TextFileDlg](imgs/TextFileDlg.png)
+![TextFileDlg](./imgs/TextFileDlg.png)
 
 + **YesNoDlg**(text$,yes$, no$) - Displays a dialog with text (normally a question) and the options to reply yes or no.
     + in *dialog*, the first CAPITAL letter of the yes$ and no$ variables will become the hotkeys for those buttons, so make sure they are different. This does not matter for the other dialog-providing utilities.
     + Returns 1 for yes and 0 for no.
 
-![YesNoDlg](imgs/YesNoDlg.png)
+![YesNoDlg](./imgs/YesNoDlg.png)
 
 
 ### dialog-specific routines
@@ -102,7 +102,7 @@ You should **not** use this library and one of the others in this set that provi
     + DCalendarDlg$ and ZCalendarDlg$ are fully compatible.
     + *EXAMPLE: print DCalendarDlg$("\"Pick a date\"", "Pick", "Escape")*
 
-![DCalendarDlg](imgs/DCalendarDlg.png)
+![DCalendarDlg](./imgs/DCalendarDlg.png)
 
 + **TransientInfoDlg**(text$)- Display a simple message  that will exit immediately after displaying the message to the user.
     + The screen is not cleared when dialog exits, so that the message will remain on the screen until the calling program clears it later.
@@ -111,4 +111,4 @@ You should **not** use this library and one of the others in this set that provi
 	+ Returns nothing.
 	+ *EXAMPLE: TransientInfoDlg("\"This will stay onscreen until you press a key\"")*
 	
-![TransientInfoDlg](imgs/TransientInfoDlg.png)
+![TransientInfoDlg](./imgs/TransientInfoDlg.png)
