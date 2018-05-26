@@ -281,6 +281,32 @@ end sub
 
 ########## N ###########
 
+export sub NotifyDlg(text$, duration, block)
+	//Pop up a one-line notification.
+	//if duration is 0, the notification
+	//remains on screen until right-clicked, and
+	//displays an [X] button to mark the fact.
+	//otherwise, there is no button and the 
+	//notification disappears after the specified
+	//number of seconds.
+	//If block equals 0 the notification will launch in 
+	//a new process and your yabasic program can continue
+	//If block equals 1, your app will pause until the popup disappears.	
+	//Keep your notifications short - 
+	//you don't have much space to play with.
+	//Returns nothing
+	//system utility used: dzen2
+	local dothis$
+	if duration = 0 then
+		dothis$ = "echo \" [X] " + text$ + "\" | dzen2 -ta l -x 50 -y 250 -w 590 -h 50 -p"
+	else
+		dothis$ = "echo \"" + text$ + "\" | dzen2 -ta l -x 50 -y 250 -w 590 -h 50 -p " + str$(duration)
+	endif
+	if block <> 0 dothis$ = dothis$ + " &" 
+	//print dothis$
+	system(dothis$)
+end sub
+
 ########## O ###########
 
 export sub OpenCalcurse$()

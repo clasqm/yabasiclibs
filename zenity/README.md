@@ -113,4 +113,4 @@ You should **not** use this library and one of the others that provides dialogs 
 
 + **ZNotifyDlg**(text$) - pop up a GTK notification.
     + The exact placement and duration of notifications may depend on your WM settings.
-    + ONLY available in Zenity.
+    + ONLY available in Zenity. If you need a general utility, try *NotifyDlg()* in the *linuxmisclib* library.

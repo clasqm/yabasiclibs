@@ -166,6 +166,23 @@ Convert an image file to a different format, optionally with a different filenam
 <li>Please note that this is a nuclear option: it will also affect any other programs making use of these utilities. </li>
 <li><strong>System commands used:</strong> <em>pkill</em>.</li>
 </ul></li>
+<li><p><strong>NotifyDlg</strong>(text$, duration, block) - Pop up a one-line notification.</p>
+
+<ul>
+<li>If <em>duration</em> is 0, the notification remains on screen until <em>right</em>-clicked, and displays an [X] button to mark the fact.</li>
+<li>Otherwise, there is no button and the  notification disappears after the specified number of seconds.</li>
+<li>If <em>block</em> equals 0 the notification will launch in a new process and your yabasic program can continue.</li>
+<li>If <em>block</em> equals 1, your app will pause until the popup disappears.  </li>
+<li>Keep your notifications short - you don't have much space to play with.</li>
+<li>Returns nothing</li>
+<li><strong>System utility used:</strong> <em>dzen2</em></li>
+</ul></li>
+</ul>
+
+<p><img src="./imgs/NotifyDlg2.png" alt="NotifyDlg" title="" />
+<img src="./imgs/NotifyDlg1.png" alt="NotifyDlg" title="" /></p>
+
+<ul>
 <li><p><strong>OpenCalcurse$</strong>() - Opens the <em>calcurse</em> text-mode calendar app. Only the default calendar is provided for in this routine. </p>
 
 <ul>

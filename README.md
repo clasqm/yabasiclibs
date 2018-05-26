@@ -4,7 +4,7 @@ Extension libraries for yabasic.
 
 A series of libraries for [yabasic](http://www.yabasic.de/) , the BASIC dialect by [Marc Ihm](https://github.com/marcIhm), that give access to a number of common utilities on Linux. Not tested on other UNIX platforms, but it should be possible to adjust them accordingly.
 
-This software is still very much in the planning and experimentation stages.
+This software is still very much in the pre-alpha stage. The routines in the libraries work, but need a lot of optimization and error-trapping.
 
 ## The libraries
 

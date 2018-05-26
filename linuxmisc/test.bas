@@ -128,3 +128,9 @@ import linuxmisclib
 	//print StripPDF$("test.pdf") //substitute your own filename here
 	//ConvertImage("test.png", "Testing.gif") //substitute your own filename here
 exit
+
+//test notifications
+	//NotifyDlg(This is a pop-up menu", 5, 1)
+	//NotifyDlg(This is a pop-up menu", 5, 0)
+	//NotifyDlg(This is a pop-up menu", 0, 1)
+	//NotifyDlg(This is a pop-up menu", 0, 1)
