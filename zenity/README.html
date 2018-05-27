@@ -27,12 +27,13 @@
 
 <ul>
 <li><p><strong>ClearDlg</strong>() - on dialog and whiptail, this clears the dialog from your terminal. Same as the yabasic command CLEAR SCREEN, but may work better if you are expecting to issue another Linux command immediately. On zenity and kdialog, dummy routines are provided for compatibility so that you do not need to rewrite your code.</p></li>
-<li><p><strong>getcmd$</strong>() - return the name of the dialog-providing utility currently being accessed.</p>
+<li><p><strong>getcmd$</strong>() - returns the command set available.</p>
 
 <ul>
-<li>This is really just for me, to stop me from getting confused while I am editing four libraries simultaneously.</li>
-<li>However, you could use it to test which utility is currently running and if it is safe to use routines not in the common list.</li>
-<li>e.g. <em>if getcmd$() = "zenity" ZNotifyDlg("this is a notification")</em></li>
+<li>This is really just for me, to stop me from getting confused while I am editing four libraries simultaneously. </li>
+<li>However, you could use it to test which utility (or library, in the case of clasquinator) is currently in use and if it is safe to use routines not in the common list.</li>
+<li>e.g, <em>if getcmd$() = "clasquinator" SubmenuDlg(options ....)</em></li>
+<li>or  <em>if getcmd$() = "zenity" ZNotifyDlg("this is a notification")</em></li>
 </ul></li>
 <li><p><strong>InputDlg$</strong>(text$, title$, ok$, cancel$) - Presents a one-line dialog into which the user can type a string answer.</p>
 

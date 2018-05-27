@@ -28,6 +28,12 @@ This library poaches as many ideas as possible from the other four dialog-provid
 
 + **ClearDlg**() - on dialog and whiptail, this clears the dialog from your terminal. Same as the yabasic command CLEAR SCREEN, but may work better if you are expecting to issue another Linux command immediately. On zenity, clasquinator and kdialog, dummy routines are provided for compatibility so that you do not need to rewrite your code.
 
++ **getcmd$**() - returns the command set available.
+    + This is really just for me, to stop me from getting confused while I am editing four libraries simultaneously. 
+    + However, you could use it to test which utility (or library, in the case of clasquinator) is currently in use and if it is safe to use routines not in the common list.
+    + e.g, *if getcmd$() = "clasquinator" SubmenuDlg(options ....)*
+    + or  *if getcmd$() = "zenity" ZNotifyDlg("this is a notification")*
+
 + **InputDlg$**(text$, title$, ok$, cancel$) - Presents a one-line dialog into which the user can type a string answer.
     + **To Be Done**
     
@@ -87,6 +93,19 @@ This library poaches as many ideas as possible from the other four dialog-provid
 
 ![RadioDlg](./imgs/RadioDlg.png)
 
++ **SubmenuDlg**(text$, title$, ok$, cancel$, menustring$) - Create a secondary menu of options for the user to choose from.
+    + **To Be Done**
+    
+[](    + The value *title$* has no effect in whiptail, but is kept here for compatibility and must be supplied.
+    + The value *ok$* is the text of the accept button, normally OK.
+    + The value *cancel$* is the text of the reject button, normally Cancel.
+    + The value menustring$ is the list of menu options as a single string, separated by hash signs (#). Spaces are allowed.
+    + If the number of options exceed the available space in the widget, the list will be scrollable.
+    + The result is returned as a numeric value, starting from 1.
+   + If you prefer to get the same number in string format, you can use **SubmenuDlg$**(text$, title$, ok$, cancel$, menustring$) )
+
+![SubmenuDlg](./imgs/SubmenuDlg.png)
+
 + **TestForDialogUtility$**\(\) - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.
     + in *clasquinator*, this is a dummy routine provided for compatibility. It will always return an empty string.
 
@@ -100,18 +119,7 @@ This library poaches as many ideas as possible from the other four dialog-provid
 
 ![TextFileDlg](./imgs/TextFileDlg.png)
 
-+ **SubmenuDlg**(text$, title$, ok$, cancel$, menustring$) - Create a seconday menu of options for the user to choose from.
-    + **To Be Done**
-    
-[](    + The value *title$* has no effect in whiptail, but is kept here for compatibility and must be supplied.
-    + The value *ok$* is the text of the accept button, normally OK.
-    + The value *cancel$* is the text of the reject button, normally Cancel.
-    + The value menustring$ is the list of menu options as a single string, separated by hash signs (#). Spaces are allowed.
-    + If the number of options exceed the available space in the widget, the list will be scrollable.
-    + The result is returned as a numeric value, starting from 1.
-   + If you prefer to get the same number in string format, you can use **SubmenuDlg$**(text$, title$, ok$, cancel$, menustring$))
 
-![SubmenuDlg](./imgs/SubmenuDlg.png)
 
 + **YesNoDlg**(text$,yes$, no$) - Displays a dialog with text (normally a question) and the options to reply yes or no.
     + **To Be Done**

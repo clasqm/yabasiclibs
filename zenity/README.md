@@ -26,10 +26,11 @@ You should **not** use this library and one of the others that provides dialogs 
 
 + **ClearDlg**() - on dialog and whiptail, this clears the dialog from your terminal. Same as the yabasic command CLEAR SCREEN, but may work better if you are expecting to issue another Linux command immediately. On zenity and kdialog, dummy routines are provided for compatibility so that you do not need to rewrite your code.
 
-+ **getcmd$**() - return the name of the dialog-providing utility currently being accessed.
-    + This is really just for me, to stop me from getting confused while I am editing four libraries simultaneously.
-    + However, you could use it to test which utility is currently running and if it is safe to use routines not in the common list.
-    + e.g. *if getcmd$() = "zenity" ZNotifyDlg("this is a notification")*
++ **getcmd$**() - returns the command set available.
+    + This is really just for me, to stop me from getting confused while I am editing four libraries simultaneously. 
+    + However, you could use it to test which utility (or library, in the case of clasquinator) is currently in use and if it is safe to use routines not in the common list.
+    + e.g, *if getcmd$() = "clasquinator" SubmenuDlg(options ....)*
+    + or  *if getcmd$() = "zenity" ZNotifyDlg("this is a notification")*
 
 + **InputDlg$**(text$, title$, ok$, cancel$) - Presents a one-line dialog into which the user can type a string answer.
     + The value *title$* has no effect in zenity but is kept here for compatibility and must be supplied.
