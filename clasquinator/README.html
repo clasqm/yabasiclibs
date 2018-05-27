@@ -42,98 +42,31 @@
 <ul>
 <li><strong>To Be Done</strong></li>
 </ul></li>
-</ul>
+<li><p><strong>MenuDlg</strong>(text$, title$, ok$, cancel$, menustring$) - Create a menu of options for the user to choose from.</p>
 
-<p><a href="+ The value *title$* is the title on top of the widget
-    + The value *ok$* is the text of the accept button, normally OK.
-    + The value *cancel$* is the text of the reject button, normally Cancel.
-    + The result is returned as a string value."></a></p>
-
-<p><img src="./imgs/InputDlg.png" alt="InputDlg" title="" /></p>
-
-<ul>
-<li><strong>MenuDlg</strong>(text$, title$, ok$, cancel$, menustring$) - Create a menu of options for the user to choose from.
 <ul>
 <li><strong>To Be Done</strong></li>
 </ul></li>
-</ul>
+<li><p><strong>MessageDlg</strong>(text$, ok$) - Display a simple message with an OK button.</p>
 
-<p><a href="+ The value *title$* has no effect in whiptail, but is kept here for compatibility and must be supplied.
-    + The value *ok$* is the text of the accept button, normally OK.
-    + The value *cancel$* is the text of the reject button, normally Cancel.
-    + The value menustring$ is the list of menu options as a single string, separated by hash signs (#"></a>. Spaces are allowed.
-    + If the number of options exceed the available space in the widget, the list will be scrollable.
-    + The result is returned as a numeric value, starting from 1.
-   + If you prefer to get the same number in string format, you can use <strong>MenuDlg$</strong>(text$, title$, ok$, cancel$, menustring$))</p>
-
-<p><img src="./imgs/MenuDlg.png" alt="MenuDlg" title="" /></p>
-
-<ul>
-<li><strong>MessageDlg</strong>(text$, ok$) - Display a simple message with an OK button.
 <ul>
 <li><strong>To Be Done</strong></li>
 </ul></li>
-</ul>
+<li><p><strong>PasswordDlg$</strong>(text$, title$, ok$, cancel$) - Same as <em>InputDlg$</em> but with asterisks replacing the input text.</p>
 
-<p><a href="+ The value *ok$* is the text of the accept button, normally OK
-    + Returns nothing."></a></p>
-
-<p><img src="./imgs/MessageDlg.png" alt="MessageDlg" title="" /></p>
-
-<ul>
-<li><strong>PasswordDlg$</strong>(text$, title$, ok$, cancel$) - Same as <em>InputDlg$</em> but with asterisks replacing the input text.
 <ul>
 <li><strong>To Be Done</strong></li>
 </ul></li>
-</ul>
+<li><p><strong>RadioDlg</strong>(text$, title$, ok$, cancel$, menustring$, selected$) - Create a menu of options for the user to choose from.</p>
 
-<p><a href="+ The value *text$* has no effect in whiptail, but is kept here for compatibility and must be supplied. This seems to be a bug in the current version of whiptail.
-    + The value *ok$* is the text of the accept button, normally OK
-    + The value *cancel$* is the text of the reject button, normally Cancel
-    + The result is returned as a string value."></a></p>
-
-<p><img src="./imgs/PasswordDlg.png" alt="PasswordDlg" title="" /></p>
-
-<ul>
-<li><strong>RadioDlg</strong>(text$, title$, ok$, cancel$, menustring$, selected$) - Create a menu of options for the user to choose from.
 <ul>
 <li><strong>To Be Done</strong></li>
 </ul></li>
-</ul>
+<li><p><strong>SubmenuDlg</strong>(text$, title$, ok$, cancel$, menustring$) - Create a secondary menu of options for the user to choose from.</p>
 
-<p><a href="+ Same as *MenuDlg*("></a>, except that you can indicate which item in <em>menustring$</em> is currently selected or active.
-    + The value <em>title$</em> is the title on top of the widget
-    + The value <em>ok$</em> is the text of the accept button, normally OK.
-    + The value <em>cancel$</em> is the text of the reject button, normally Cancel.
-    + The value <em>menustring$</em> is the list of menu options as a single string, separated by hash signs (#). Spaces are allowed.
-    + The value <em>selected$</em> is the currently selected item and must correspond to one of the items in <em>menustring$</em> - case sensitive!
-    + Just moving the cursor is not enough here - the value in the menu must be explicitly selected with SPACE.
-    + If the number of options exceed the available space in the widget, the list will be scrollable.
-    + The result is returned as a numeric value, starting from 1.
-    + If you prefer to get the same number in string format, you can use <strong>RadioDlg$</strong>(text$, title$, ok$, cancel$, menustring$, selected$)
-    + This routine does work in whiptail, but the graphical feedback is poor. This may be a bug in the current version of whiptail.
-    + <em>EXAMPLE: a = RadioDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Magic"): print a</em>)</p>
-
-<p><img src="./imgs/RadioDlg.png" alt="RadioDlg" title="" /></p>
-
-<ul>
-<li><strong>SubmenuDlg</strong>(text$, title$, ok$, cancel$, menustring$) - Create a secondary menu of options for the user to choose from.
 <ul>
 <li><strong>To Be Done</strong></li>
 </ul></li>
-</ul>
-
-<p><a href="+ The value *title$* has no effect in whiptail, but is kept here for compatibility and must be supplied.
-    + The value *ok$* is the text of the accept button, normally OK.
-    + The value *cancel$* is the text of the reject button, normally Cancel.
-    + The value menustring$ is the list of menu options as a single string, separated by hash signs (#"></a>. Spaces are allowed.
-    + If the number of options exceed the available space in the widget, the list will be scrollable.
-    + The result is returned as a numeric value, starting from 1.
-   + If you prefer to get the same number in string format, you can use <strong>SubmenuDlg$</strong>(text$, title$, ok$, cancel$, menustring$) )</p>
-
-<p><img src="./imgs/SubmenuDlg.png" alt="SubmenuDlg" title="" /></p>
-
-<ul>
 <li><p><strong>TestForDialogUtility$</strong>() - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.</p>
 
 <ul>
@@ -144,23 +77,9 @@
 <ul>
 <li><strong>To Be Done</strong></li>
 </ul></li>
-</ul>
+<li><p><strong>YesNoDlg</strong>(text$,yes$, no$) - Displays a dialog with text (normally a question) and the options to reply yes or no.</p>
 
-<p><a href="+    The value *title$* is the title on top of the widget
-    + The value *exit$* is the title of the button. Normally OK.
-    + Text wrapping varies from one dialog-provider to the next. It is better if you preformat your text file.
-    + Returns nothing."></a></p>
-
-<p><img src="./imgs/TextFileDlg.png" alt="TextFileDlg" title="" /></p>
-
-<ul>
-<li><strong>YesNoDlg</strong>(text$,yes$, no$) - Displays a dialog with text (normally a question) and the options to reply yes or no.
 <ul>
 <li><strong>To Be Done</strong></li>
 </ul></li>
 </ul>
-
-<p><a href="+ in *dialog*, the first CAPITAL letter of the yes$ and no$ variables will become the hotkeys for those buttons, so make sure they are different. This does not matter for the other dialog-providing utilities.
-    + Returns 1 for yes and 0 for no."></a></p>
-
-<p><img src="./imgs/YesNoDlg.png" alt="YesNoDlg" title="" /></p>
