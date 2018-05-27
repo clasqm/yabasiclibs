@@ -297,13 +297,13 @@ export sub NotifyDlg(text$, duration, block)
 	//Returns nothing
 	//system utility used: dzen2
 	local dothis$
+	if TestForUtility("dzen2") = 0 return
 	if duration = 0 then
 		dothis$ = "echo \" [X] " + text$ + "\" | dzen2 -ta l -x 50 -y 250 -w 590 -h 50 -p"
 	else
 		dothis$ = "echo \"" + text$ + "\" | dzen2 -ta l -x 50 -y 250 -w 590 -h 50 -p " + str$(duration)
 	endif
 	if block <> 0 dothis$ = dothis$ + " &" 
-	//print dothis$
 	system(dothis$)
 end sub
 

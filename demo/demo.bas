@@ -19,6 +19,9 @@ do
 			system("yabasic zenity_demo.bas")
 			break
 		case "5"
+			system("yabasic clasquinator_demo.bas")
+			break
+		case "6"
 			exit
 			break
 		default
@@ -46,19 +49,21 @@ sub InitialMenu()
 	print "Which of the following systems would you like to demo?"
 	print "(Don't worry, this is the only time you will see such a clunky menu!)"
 	print
-	print"Please press keys 1 to 5"
+	print"Please press keys 1 to 6"
 	print "(any other key will use the default)"
 	print
 	print "1. Dialog (default)"
 	print "2. Whiptail"
 	print "3. Kdialog"
 	Print "4. Zenity"
+	print "5. Clasquinator"
 	print
-	print "5. EXIT"
+	print "6. EXIT"
 	print
 end sub
 
-//thelib$ = provider$ + "lib" //this does not work!
+//this does not work!
+//thelib$ = provider$ + "lib" 
 // import thelib$ 
 
 //You'd think this would work, but nooooo ...
@@ -79,4 +84,3 @@ end sub
 //So we'll just have to do this the hard way
 //and call up a new yabasic program
 //in a new process.
-

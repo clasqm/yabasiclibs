@@ -24,7 +24,7 @@ You should **not** use this library and one of the others that provides dialogs 
 
 **These routines are available on any of the four dialog-providing libraries.**
 
-+ **ClearDlg**() - on dialog and whiptail, this clears the dialog from your terminal. Same as the yabasic command CLEAR SCREEN, but may work better if you are expecting to issue another Linux command immediately.On zenity and kdialog, dummy routines are provided for compatibility so that you do not need to rewrite your code.
++ **ClearDlg**() - on dialog and whiptail, this clears the dialog from your terminal. Same as the yabasic command CLEAR SCREEN, but may work better if you are expecting to issue another Linux command immediately. On zenity and kdialog, dummy routines are provided for compatibility so that you do not need to rewrite your code.
 
 + **getcmd$**() - return the name of the dialog-providing utility currently being accessed.
     + This is really just for me, to stop me from getting confused while I am editing four libraries simultaneously.

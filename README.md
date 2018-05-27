@@ -7,12 +7,20 @@ A series of libraries for [yabasic](http://www.yabasic.de/) , the BASIC dialect 
 This software is still very much in the pre-alpha stage. The routines in the libraries work, but need a lot of optimization and error-trapping.
 
 ## The libraries
-
++ [clasquinator.yab](https://clasqm.github.io/yabasiclibs/clasquinator/) - a yabasic library that attempts to reproduce the functionality of the other four dialog-providing libraries purely from within yabasic.
+    + *This library is not 100% compatible with the other four and likely never will be!*
+    + This library should work in yabasic for Windows too, but ATM I don't have a Windows box to test that on.
+    + Currently in planning stage. 
 + [dialoglib.yab](https://clasqm.github.io/yabasiclibs/dialog/) - allows the use of the Linux command *dialog* to display a variety of dialogs in text mode.
+    + Currently in pre-alpha stage.
 + [kdialoglib.yab](https://clasqm.github.io/yabasiclibs/kdialog/) - allows the use of the Linux command *kdialog* to display a variety of dialogs in text mode.
+    + Currently in pre-alpha stage.
 + [linuxmisclib.yab](https://clasqm.github.io/yabasiclibs/linuxmisc/) - allows the use of a variety of common Linux text-mode commands and applications. Also contains a few routines that I just found myself doing over and over.
+    + Currently in pre-alpha stage.
 + [whiptaillib.yab](https://clasqm.github.io/yabasiclibs/whiptail/) - allows the use of the Linux command *whiptail* to display a variety of dialogs in text mode.
+    + Currently in pre-alpha stage.
 + [zenitylib.yab](https://clasqm.github.io/yabasiclibs/zenity/) - allows the use of the Linux command *zenity* to display a variety of dialogs in graphical mode.
+    + Currently in pre-alpha stage.
 
 For instructions, see the separate README file for each of these libraries. Each library also comes with a *test.bas* file in which each new function is supplied with an example. Just remove the comments from the example you want to test, save the changes  and run the command
 
@@ -33,11 +41,7 @@ Get it here: https://github.com/clasqm/yabasiclibs
 + Routines to use GUI apps. There is no possible way to wite a routine for every graphical text editor in Linux. And that is just the text editors. My routines are very straightforward and you should be able to adapt them to your own needs.
 + Anything to do with emacs. Friends don't let friends use emacs.
 + In *linuxmisclib*, routines that start up in a new xterm. Well, maybe much later.
-+ The entire set of libraries focuses on sane defaults and getting basic functionality into yabasic. There are a lot of obscure switches (esp. in kdialog) that will not be implemented!
-
-## Longer-term plans
-
-At some stage, I will start writing my own library, purely in yabasic, that will replicate as many of these routines as possible. It will look completely different, but will use the same routine names, so you will still be able to switch between libraries with a single *import* statement. And *that* library should work in Windows too!
++ The entire set of libraries focuses on sane defaults and getting basic functionality into yabasic. There are a lot of obscure switches (esp. in kdialog and zenity) that will not be implemented!
 
 ![Thanks](./imgs/thanks.png)
 
