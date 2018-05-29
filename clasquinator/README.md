@@ -20,11 +20,25 @@ To use the library, use the command
 
 You should **not** use this library and one of the others in this set that provides dialogs concurrently, because they replicate subroutine names. Pick the right one for your program and stick with it!
 
-By default, widgets are drawn in <span style="color:cyan">cyan</span>, with button and menu triggers in <span style="color:red">red</span>. But you can override this by setting the GLOBAL variables *menu_colour$* and *trigger_colour$*.
+By default, widgets are drawn in <span style="color:cyan; background-color:black">cyan</span>, with button and menu triggers in <span style="color:red; background-color:black">red</span>. But you can override this by setting the GLOBAL variables *menu_colour$* and *trigger_colour$*.
 
 The colours available are the normal ones yabasic can handle, namely "black", "white", "red", "blue", "green", "yellow", "cyan" and "magenta" (which can be abbreviated as "bla", "whi", "red", "blu", "gre", "yel", "cya" and "mag" respectively). The library does not check if the two colours are identical, or if they complement each other visually. If you want to make your menus unreadable, more power to you!
 
 The background colour of widgets is always black, but your program's colours will be restored to whatever they were before.
+
+The "buttons" are not mouse-aware.
+
+The first letter of each button or menu item automaticallyu becomes the trigger. Both lower and upper case variants will activate it. It is up to you to ensure that you do not use menu items that start with the same letter. 
+
+*Hint*: You can always number them, e.g.
+
+    menuitem1$ = "1.File"
+    
+This will make the menu react to the "1" key being pressed, rather than "f" or "F".
+
+If the text of a message (usually in the variable *text$*) is too long to fit in one line, it will be truncated. This may vary with the width of the user's terminal window, so be conservative!
+
+Excessive quote marks (required in other libraries} will be removed by the library to maintain compatibility. Excessive spaces at the front and back of *text$* will be trimmed, but multiple spaces within *text$* will be maintained.
 
 This library is currently still in the development stages and not really usable. But watch this space!
 
@@ -49,15 +63,15 @@ This library poaches as many ideas as possible from the other four dialog-provid
 + **MessageDlg**(text$, ok$) - Display a simple message with an OK button.
     + The value *ok$* is the text of the accept button, normally OK.
     + You only have one line to play with, so keep those messages short!
-    + Returns nothing, therefore does not actually trap the keypress. But the trigger is highlighted to 
+    + Returns nothing, therefore does not actually trap the keypress. But the trigger is highlighted to ensure uniformity among the library's widgets
     + *Example:*
 ```
 for f = 1 to 300
     print "testing  1 2 3 ";
 next f
 MessageDlg("This is a simple message dialog. Close it with ENTER or o.","OK")
-a$ = inkey$ //not really required, but 
-            //shows the restoration of previous content
+a$ = inkey$ //not really required, but here it
+                  //shows the restoration of previous content
 ```
 ![MessageDlg](./imgs/MessageDlg.png)
 
