@@ -1,7 +1,7 @@
 #!yabasic
 
 import whiptaillib
-
+ 
 //Uncomment the indented lines to run a specific test
 
 //COMMON
@@ -44,5 +44,5 @@ import whiptaillib
 	//a$ = MenuDlg$("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above"):print a$
 
 //test RadioDlg
-	a = RadioDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Magic"): print a
+	//a = RadioDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Magic"): print a
 	//a$ = RadioDlg$("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Science"):print a$	

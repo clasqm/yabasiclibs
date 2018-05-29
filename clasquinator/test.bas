@@ -1,25 +1,16 @@
 #!yabasic
 
 import clasquinatorlib
-
+clear screen
 //Uncomment the indented lines to run a specific test
 
 //COMMON
 
-//test for existence of dialog utility
-	//a$ = TestForDialogUtility$()
-	//if a$ ="" then
-		//print "Yes, it exists"
-	//else
-		//print a$
-	//endif
-
 //test simple message dialog
-	//MessageDlg("\"This is a simple message dialog. Close it with ENTER.\"","okidoki")
-	//clear screen
-	//print "message demo is done"
-	//a$ = inkey$
-
+	for f = 1 to 300: print "testing  1 2 3 ";: next f
+	MessageDlg("\"  This is a simple message dialog. Close it with ENTER or o.\"","OK")
+	a$ = inkey$
+	
 //test yesno dialog
 	//if YesNoDlg("\"Can you see me?\"", "Yes!", "No") then
 	//	clear screen
@@ -46,3 +37,5 @@ import clasquinatorlib
 //test RadioDlg
 	a = RadioDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Magic"): print a
 	//a$ = RadioDlg$("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Science"):print a$	
+
+exit

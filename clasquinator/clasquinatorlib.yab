@@ -76,9 +76,33 @@ export sub MenuDlg$(text$, title$, ok$, cancel$, menustring$)
 end sub
 
 export sub MessageDlg(text$, ok$)
-	//display a simple message with an OK button
+	//display a simple message with an OK button 
 	//The value *ok$* is the text of the accept button, normally OK.
+	//This "button" is not mouse-aware
+	//The first letter of ok$  becomes the trigger
+	//if text$ is too long it will be truncated.
+	//excessive quote marks (required in other libraries} will be removed
+	//to maintain compatibility. Exessive spaces will be trimmed.
 	//returns nothing
+	local a$, original$, spaceleft, trigger$, ltrigger$, utrigger$
+	trigger$ = left$(ok$,1): utrigger$ =upper$(trigger$): ltrigger$ = lower$(trigger$)
+	if left$(text$,1) = "\"" or left$(text$,1) = "'" text$ = right$(text$, len(text$) - 1) 
+	if right$(text$,1) = "\"" or right$(text$,1) = "'" text$ = left$(text$, len(text$) - 1) 
+	text$ =trim$(text$)
+	original$ = get_screen$ (1,3)
+	fill_line_with_blanks(0): fill_line_with_blanks(1): fill_line_with_blanks(2)
+	fill_line_with_symbols(1,0, "-")
+	spaceleft = screenwidth - calculate_button_size(ok$) - 2
+	print color(menu_colour$) at(1, 0) left$(text$, spaceleft);
+	print color(menu_colour$) at (screenwidth - calculate_button_size(ok$) - 1, 0) "<";
+	print color(trigger_colour$) at (screenwidth - calculate_button_size(ok$) , 0) trigger$;
+	print color(menu_colour$) at (screenwidth - calculate_button_size(ok$) + 1, 0) right$(ok$, len(ok$) -1) + ">";
+	a$ = inkey$
+	//Since there is only one button 
+	//and the routine returns nothing,
+	//there is no point in trapping the actual keypress
+	//but it is best to look consistent
+	put_screen(1,original$)
 end sub
 
 #COM######### N ###########
@@ -196,3 +220,80 @@ export sub getcmd$()
 	//e.g if getcmd$() = "clasquinator" SubmenuDlg(options ....)
 	return "clasquinator"
 end sub
+
+export sub clasquinator_initialise()
+	//sets up the GLOBAL numeric variables screenwidth and screenheight
+	//Sorry about that, but these really will be used all over and passing them locally
+	//just is not feasible.
+	//Must be run before you can run any other commands
+	//and called again before every dialog-creating command to see if your 
+	//user resized the terminal window.
+	//You can just put the following line in all your programs
+	//    if getcmd$() = "clasquinator" clasquinator_initialise()
+	//that way it won't affect any other library and yoiu can still change libraries
+	//with a minimum of fuss.
+	if screenwidth <> peek("screenwidth") or screenheight <> peek("screenheight") then
+		screenwidth=peek("screenwidth")
+		screenheight=peek("screenheight")
+	endif
+	if menu_colour$ = "" menu_colour$ = "cyan"
+	if trigger_colour$ = "" trigger_colour$ = "red"
+end sub
+
+sub get_screen$(pos,lines)
+	//The value *pos* must be either 1 for top or 0 for bottom.
+	//The value *lines* indicates the number of lines you want to grab 
+	local content$
+	clasquinator_initialise()
+	if pos > 1 pos = 1: if pos < 0 pos = 0
+	if pos =1 content$ = getscreen$(0,0, screenwidth - 1,lines-1)
+	if pos = 0 content$ = getscreen$(0, screenheight - lines - 1, screenwidth-1, screenheight - 1)
+	return content$
+end sub
+
+sub put_screen(pos,content$,lines)
+	//The value *pos* must be either 1 for top or 0 for bottom.
+	//if pos equals 1 the lines value is not required
+	//if pos equals 0 the lines value must be supplied
+	//The value content$ is the string you grabbed earlier with the get_screen$() routine
+	clasquinator_initialise()
+	if pos > 1 pos = 1: if pos < 0 pos = 0
+	if pos = 1 putscreen content$, 0, 0
+	if pos = 0 putscreen content$, 0, screenheight - lines - 1
+end sub
+
+sub fill_line_with_symbols(lin, mode, symbol$)
+	//fill a line with blanks (i.e. clear it) prior to placing information there
+	//mode = 0 means using the normal print (default)
+	//mode = 1 means using reverse print
+	//symbol$ can be any character you wish, like -, = or #
+	// If supplied, it will be used to draw the line instead of spaces.
+	if symbol$ = "" symbol$ = " "
+	if len(symbol$) > 1 symbol$ = left$(symbol$,1)
+	print at (0, lin) " ";
+	for f = 1 to screenwidth -2
+		if mode = 1 then
+			print colour ("black", menu_colour$) at (f, lin) symbol$;
+		else
+			print colour (menu_colour$, "black") at (f, lin) symbol$;
+		endif
+	next f
+end sub
+
+sub fill_line_with_blanks(lin)
+	//fill a line with completely black spaces
+	//for some starnge reason this does not work with a for ... next loop
+	local a$
+	a$ = str$(screenwidth) + ",1:"
+	for f = 1 to screenwidth
+		a$ = a$ + " :Bla:Bla,"
+	next f
+	a$ = a$ + ", blb"
+	putscreen a$, 0, lin
+end sub
+
+sub calculate_button_size(button$)
+	return len(button$) + 3
+end sub
+
+	

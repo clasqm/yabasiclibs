@@ -1,10 +1,8 @@
 #!yabasic
 clear screen
-Print "this is the clasquinator demo"
 import clasquinatorlib
-
-Print "This library is not yet developed enough for a demo. But watch this space!"
-a$=inkey$
+ 
+MessageDlg ("This library is not yet developed enough for a demo. Sorry", "OK")
 exit
 
 //name$ = InputDlg$("\"Let's get acquainted. What is your name?\"", "\"Who are you?\"", "OK", "Cancel")

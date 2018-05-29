@@ -20,7 +20,13 @@ To use the library, use the command
 
 You should **not** use this library and one of the others in this set that provides dialogs concurrently, because they replicate subroutine names. Pick the right one for your program and stick with it!
 
-Currently still in planning stages and not really usable. But watch this space!
+By default, widgets are drawn in <span style="color:cyan">cyan</span>, with button and menu triggers in <span style="color:red">red</span>. But you can override this by setting the GLOBAL variables *menu_colour$* and *trigger_colour$*.
+
+The colours available are the normal ones yabasic can handle, namely "black", "white", "red", "blue", "green", "yellow", "cyan" and "magenta" (which can be abbreviated as "bla", "whi", "red", "blu", "gre", "yel", "cya" and "mag" respectively). The library does not check if the two colours are identical, or if they complement each other visually. If you want to make your menus unreadable, more power to you!
+
+The background colour of widgets is always black, but your program's colours will be restored to whatever they were before.
+
+This library is currently still in the development stages and not really usable. But watch this space!
 
 ## Routines available:
 
@@ -41,7 +47,19 @@ This library poaches as many ideas as possible from the other four dialog-provid
     + **To Be Done**
 
 + **MessageDlg**(text$, ok$) - Display a simple message with an OK button.
-    + **To Be Done**
+    + The value *ok$* is the text of the accept button, normally OK.
+    + You only have one line to play with, so keep those messages short!
+    + Returns nothing, therefore does not actually trap the keypress. But the trigger is highlighted to 
+    + *Example:*
+```
+for f = 1 to 300
+    print "testing  1 2 3 ";
+next f
+MessageDlg("This is a simple message dialog. Close it with ENTER or o.","OK")
+a$ = inkey$ //not really required, but 
+            //shows the restoration of previous content
+```
+![MessageDlg](./imgs/MessageDlg.png)
 
 + **PasswordDlg$**(text$, title$, ok$, cancel$) - Same as *InputDlg$* but with asterisks replacing the input text.
     + **To Be Done**
