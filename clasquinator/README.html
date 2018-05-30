@@ -21,6 +21,8 @@
 
 <p>You should <strong>not</strong> use this library and one of the others in this set that provides dialogs concurrently, because they replicate subroutine names. Pick the right one for your program and stick with it!</p>
 
+<p>Unlike the other libraries, you cannot use \n to break a line in your text variables. Keep that in mind if compatibility between the libraries is important.</p>
+
 <p>By default, widgets are drawn in <span style="color:cyan; background-color:black">cyan</span>, with button and menu triggers in <span style="color:red; background-color:black">red</span>. But you can override this by setting the GLOBAL variables <em>menu_colour$</em> and <em>trigger_colour$</em>.</p>
 
 <p>The colours available are the normal ones yabasic can handle, namely "black", "white", "red", "blue", "green", "yellow", "cyan" and "magenta" (which can be abbreviated as "bla", "whi", "red", "blu", "gre", "yel", "cya" and "mag" respectively). The library does not check if the two colours are identical, or if they complement each other visually. If you want to make your menus unreadable, more power to you!</p>
@@ -29,7 +31,7 @@
 
 <p>The "buttons" are not mouse-aware.</p>
 
-<p>The first letter of each button or menu item automaticallyu becomes the trigger. Both lower and upper case variants will activate it. It is up to you to ensure that you do not use menu items that start with the same letter. </p>
+<p>The first letter of each button or menu item automatically becomes the trigger. Both lower and upper case variants will activate it. It is up to you to ensure that you do not use menu items that start with the same letter. </p>
 
 <p><em>Hint</em>: You can always number them, e.g.</p>
 
@@ -40,7 +42,7 @@
 
 <p>If the text of a message (usually in the variable <em>text$</em>) is too long to fit in one line, it will be truncated. This may vary with the width of the user's terminal window, so be conservative!</p>
 
-<p>Excessive quote marks (required in other libraries} will be removed by the library to maintain compatibility. Excessive spaces at the front and back of <em>text$</em> will be trimmed, but multiple spaces within <em>text$</em> will be maintained.</p>
+<p>Excessive quote marks (required in other libraries and often supplied by EncloseText$() or \"\") will be removed by the library to maintain compatibility. Excessive spaces at the front and back of <em>text$</em> will be trimmed, but multiple spaces within <em>text$</em> will be maintained.</p>
 
 <p>This library is currently still in the development stages and not really usable. But watch this space!</p>
 
@@ -50,6 +52,11 @@
 
 <ul>
 <li><p><strong>ClearDlg</strong>() - on dialog and whiptail, this clears the dialog from your terminal. Same as the yabasic command CLEAR SCREEN, but may work better if you are expecting to issue another Linux command immediately. On zenity, clasquinator and kdialog, dummy routines are provided for compatibility so that you do not need to rewrite your code.</p></li>
+<li><p><strong>EncloseText$</strong>(thestring$) - A simplified version of the <em>EncloseString$</em>() routine that can be found in the linuxmisclib library</p>
+
+<ul>
+<li>Not required in clasquinator, where only a dummy routine is provided for compatibility.</li>
+</ul></li>
 <li><p><strong>getcmd$</strong>() - returns the command set available.</p>
 
 <ul>
@@ -61,7 +68,16 @@
 <li><p><strong>InputDlg$</strong>(text$, title$, ok$, cancel$) - Presents a one-line dialog into which the user can type a string answer.</p>
 
 <ul>
-<li><strong>To Be Done</strong></li>
+<li>The value <em>title$</em> is the title on top of the widget</li>
+<li>The values <em>ok$</em> and <em>cancel$</em> are not used in clasquinator and may be omitted. They are kept in the code for compatibility reasons.</li>
+<li>ENTER accepts the input, which can also be an empty string.</li>
+<li>The empty string counts as the equivalent of a cancel button.</li>
+<li>The result is returned as a string value.</li>
+<li><em>Example:</em>
+<code>
+a$ = InputDlg$("What is your name?", "Who are you?")
+</code>
+<img src="./imgs/InputDlg.png" alt="InputDlg" title="" /></li>
 </ul></li>
 <li><p><strong>MenuDlg</strong>(text$, title$, ok$, cancel$, menustring$) - Create a menu of options for the user to choose from.</p>
 
@@ -76,19 +92,14 @@
 <li>Returns nothing, therefore does not actually trap the keypress. But the trigger is highlighted to ensure uniformity among the library's widgets</li>
 <li><em>Example:</em>
 <code>
-for f = 1 to 300
-print "testing  1 2 3 ";
-next f
 MessageDlg("This is a simple message dialog. Close it with ENTER or o.","OK")
-a$ = inkey$ //not really required, but here it
-          //shows the restoration of previous content
 </code>
 <img src="./imgs/MessageDlg.png" alt="MessageDlg" title="" /></li>
 </ul></li>
-<li><p><strong>PasswordDlg$</strong>(text$, title$, ok$, cancel$) - Same as <em>InputDlg$</em> but with asterisks replacing the input text.</p>
+<li><p><strong>PasswordDlg$</strong>(text$, title$, ok$, cancel$)</p>
 
 <ul>
-<li><strong>To Be Done</strong></li>
+<li>Supplied for compatibility purposes, but here it is just an alias for <em>InputDlg</em>() - inputs are not obfuscated with asterisks.</li>
 </ul></li>
 <li><p><strong>RadioDlg</strong>(text$, title$, ok$, cancel$, menustring$, selected$) - Create a menu of options for the user to choose from.</p>
 

@@ -11,6 +11,23 @@ end sub
 
 #COM######### D ###########
 #COM######### E ###########
+
+export sub EncloseText$(thestring$)
+	//A simplified version of the EncloseString$() routine
+	//that can be found in the linuxmisclib library
+	//Encloses a string in double quotes, if it isn't already.
+	//Therefore a$ = EncloseText$("This is text") gives the same result as
+	// a$ = "\"This is text\""
+	//mostly for use with text strings that may include spaces.
+	//Not required in clasquinator, where only a dummy routine is 
+	//provided for compatibility.
+	local type$, type2$
+	type$ = chr$(34)
+	if left$(thestring$,1) <> type$ thestring$ = type$ + thestring$
+	if right$(thestring$,1) <> type$ thestring$ = thestring$ + type$
+	return thestring$
+end sub
+
 #COM######### F ###########
 #COM######### G ###########
 #COM######### H ###########
@@ -34,26 +51,6 @@ end sub
 #COM######### L ###########
 #COM######### M ###########
 
-export sub MenuDlg$(text$, title$, ok$, cancel$, menustring$)
-	
-	//Create a menu of options for the user to choose from
-	//The value *title$* has no effect in zenity, but is kept here for compatibility and must be supplied
-	//The value *ok$* is the text of the accept button, normally OK.
-	//The value *cancel$* is the text of the reject button, normally Cancel.
-	//The value menustring$ is the list of menu options as a single string, 
-	//separated by hash signs (#). Spaces are allowed.
-	//If the number of options exceed the available space in the widget, the list will be scrollable.
-	//The result is returned as a string value, starting from 1
-	local input$, output$,z$(1),num
-	input$ = getcmd$() + " --height=400  --hide-header  --column " + "\"#\"" + " --column " + "\"Item\"" + " --ok-label=\"" + ok$ + "\" --cancel-label=\"" + cancel$ +  "\"" + " --text=\"" + text$  + "\" --list" 
-	num = token(menustring$, z$(),"#")
-	for f = 1 to num
-		input$ = input$ + " " + str$(f) + " \"" + z$(f) + "\"" 
-	next f
-	output$ = system$(input$)
-	return output$
-end sub
-
 export sub MenuDlg(text$, title$, ok$, cancel$, menustring$)
 	//Create a menu of options for the user to choose from
 	//The value *title$* has no effect in zenity, but is kept here for compatibility and must be supplied
@@ -73,6 +70,10 @@ export sub MenuDlg(text$, title$, ok$, cancel$, menustring$)
 	next f
 	output = val(system$(input$))
 	return output
+end sub
+
+export sub MenuDlg$(text$, title$, ok$, cancel$, menustring$)
+	return str$(MenuDlg(text$, title$, ok$, cancel$, menustring$))
 end sub
 
 export sub MessageDlg(text$, ok$)
@@ -100,32 +101,6 @@ end sub
 #COM######### Q ###########
 #COM######### R ###########
 
-export sub RadioDlg$(text$, title$, ok$, cancel$, menustring$, selected$)
-	//Create a menu of options for the user to choose from
-	//Same as MenuDlg$(), except that radiobuttons are
-	//presented in the first column. Unlike the other
-	//dialog-creating utilities, you cannot choose which one to pre-select.
-	//The value *title$* has no effect in zenity, but is kept here for compatibility and must be supplied
-	//The value *ok$* is the text of the accept button, normally OK.
-	//The value *cancel$* is the text of the reject button, normally Cancel.
-	//The value *selected$* has no effect in zenity, but is kept here for compatibility and must be supplied
-	//The value menustring$ is the list of menu options as a single string, 
-	//separated by hash signs (#). Spaces are allowed.
-	//If the number of options exceed the available space in the widget, the list will be scrollable.
-	//Please note that the height of this widget is hardcoded at 400 pixels, 
-	//because it looked really crap when allowed to autosize. 
-	//This may change with future releases of zenity.
-	//The result is returned as a string value, starting from 1
-	local input$, output$,z$(1),num
-	input$ = getcmd$() + " --height=400  --hide-header  --column " + "\"#\"" + " --column " + "\"Item\"" + " --ok-label=\"" + ok$ + "\" --cancel-label=\"" + cancel$ +  "\"" + " --text=\"" + text$  + "\" --radiolist --list" 
-	num = token(menustring$, z$(),"#")
-	for f = 1 to num
-		input$ = input$ + " " + str$(f) + " \"" + z$(f) + "\"" 
-	next f
-	output$ = system$(input$)
-	return output$
-end sub
-
 export sub RadioDlg(text$, title$, ok$, cancel$, menustring$,selected$)
 	//Create a menu of options for the user to choose from
 	//Same as MenuDlg$(), except that  radiobuttons are
@@ -150,6 +125,10 @@ export sub RadioDlg(text$, title$, ok$, cancel$, menustring$,selected$)
 	next f
 	output = val(system$(input$))
 	return output
+end sub
+
+export sub RadioDlg$(text$, title$, ok$, cancel$, menustring$,selected$)
+	return str$(RadioDlg(text$, title$, ok$, cancel$, menustring$,selected$))
 end sub
 
 #COM######### S ###########
@@ -229,6 +208,7 @@ export sub ZNotifyDlg(text$)
 	//ONLY available in Zenity.
 	system(getcmd$() + " --notification --text=\"" + text$ + "\"")
 end sub
+
 
 //SUPPORTIVE SUBROUTINES
 

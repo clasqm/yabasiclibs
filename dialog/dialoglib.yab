@@ -14,6 +14,23 @@ end sub
 
 #COM######### D ###########
 #COM######### E ###########
+
+export sub EncloseText$(thestring$)
+	//A simplified version of the EncloseString$() routine
+	//that can be found in the linuxmisclib library
+	//Encloses a string in double quotes, if it isn't already.
+	//Therefore a$ = EncloseText$("This is text") gives the same result as
+	// a$ = "\"This is text\""
+	//mostly for use with text strings that may include spaces.
+	//Not required in clasquinator, where only a dummy routine is 
+	//provided for compatibility.
+	local type$, type2$
+	type$ = chr$(34)
+	if left$(thestring$,1) <> type$ thestring$ = type$ + thestring$
+	if right$(thestring$,1) <> type$ thestring$ = thestring$ + type$
+	return thestring$
+end sub
+
 #COM######### F ###########
 #COM######### G ###########
 #COM######### H ###########
@@ -52,23 +69,7 @@ export sub MenuDlg(text$, title$, ok$, cancel$, menustring$)
 end sub
 
 export sub MenuDlg$(text$, title$, ok$, cancel$, menustring$)
-	//Create a menu of options for the user to choose from
-	//The value *title$* is the title on top of the widget
-	//The value *ok$* is the text of the accept button, normally OK.
-	//The value *cancel$* is the text of the reject button, normally Cancel.
-	//The value menustring$ is the list of menu options as a single string, 
-	//separated by hash signs (#). Spaces are allowed.
-	//If the number of options exceed the available space in the widget, the list will be scrollable.
-	//The result is returned as a string value, starting from 1
-	local input$, output$,z$(1),num
-	input$ = getcmd$() + " --title \"" + title$ +"\" --ok-label \"" + ok$ + "\" --cancel-label \"" + cancel$ +  "\" --menu \"" + text$ + "\" 0 0 0"
-	num = token(menustring$, z$(),"#")
-	for f = 1 to num
-		input$ = input$ + " " + str$(f) + " \"" + z$(f) + "\"" 
-	next f
-	input$ = input$ + " 3>&1 1>&2 2>&3 "
-	output$ = system$(input$)
-	return output$
+	return str$(MenuDlg(text$, title$, ok$, cancel$, menustring$))
 end sub
 
 export sub MessageDlg(text$, ok$)
@@ -127,34 +128,7 @@ export sub RadioDlg(text$, title$, ok$, cancel$, menustring$,selected$)
 end sub
 
 export sub RadioDlg$(text$, title$, ok$, cancel$, menustring$,selected$)
-	//Create a menu of options for the user to choose from
-	//Same as MenuDlg$(), except that you can indicate which item in
-	//menustring$ is currently selected or active.
-	//The value *title$* is the title on top of the widget
-	//The value *ok$* is the text of the accept button, normally OK.
-	//The value *cancel$* is the text of the reject button, normally Cancel.
-	//The value menustring$ is the list of menu options as a single string, 
-	//separated by hash signs (#). Spaces are allowed.
-	//If the number of options exceed the available space in the widget, the list will be scrollable.
-	//The value selected$ is the currently selected item and must correspond to one of the items in 
-	//menustring$ - case sensitive!
-	//Just moving the cursor is not enough here - the value in the menu must be
-	//explicitly selected with SPACE.
-	//The result is returned as a string value, starting from 1
-	local input$, output$,z$(1),num
-	input$ = getcmd$() + " --title \"" + title$ +"\" --ok-label \"" + ok$ + "\" --cancel-label \"" + cancel$ +  "\" --radiolist \"" + text$ + "\" 0 0 0"
-	num = token(menustring$, z$(),"#")
-	for f = 1 to num
-		input$ = input$ + " " + str$(f) + " \"" + z$(f) + "\"" 
-		if z$(f) = selected$ then
-			input$ = input$ + " on"
-		else 
-			input$ = input$ + " off"
-		endif
-	next f
-	input$ = input$ + " 3>&1 1>&2 2>&3 "
-	output$ = system$(input$)
-	return output$
+	return str$(RadioDlg(text$, title$, ok$, cancel$, menustring$,selected$))
 end sub
 
 #COM######### S ###########

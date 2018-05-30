@@ -24,7 +24,13 @@ You should **not** use this library and one of the others in this set that provi
 
 **These routines are available on any of the four dialog-providing libraries.**
 
-+ **ClearDlg**() - on dialog and whiptail, this clears the dialog from your terminal. Same as the yabasic command CLEAR SCREEN, but may work better if you are expecting to issue another Linux command immediately. On zenity and kdialog, dummy routines are provided for compatibility so that you do not need to rewrite your code.
++ **ClearDlg**() - on dialog and whiptail, this clears the dialog from your terminal. Same as the yabasic command CLEAR SCREEN, but may work better if you are expecting to issue another Linux command immediately. On zenity, clasquinator and kdialog, dummy routines are provided for compatibility so that you do not need to rewrite your code.
+
++ **EncloseText$**(thestring$) - A simplified version of the *EncloseString$*() routine that can be found in the linuxmisclib library
+    + Encloses a string in double quotes, if it isn't already.
+    + Therefore *a$ = EncloseText$("This is text")* gives the same result as *a$ = "\"This is text\""*
+    + Mostly for use with text strings that may include spaces.
+    + Not required in clasquinator, where only a dummy routine is provided for compatibility.
 
 + **getcmd$**() - returns the command set available.
     + This is really just for me, to stop me from getting confused while I am editing four libraries simultaneously. 
@@ -37,7 +43,10 @@ You should **not** use this library and one of the others in this set that provi
     + The value *ok$* is the text of the accept button, normally OK.
     + The value *cancel$* is the text of the reject button, normally Cancel.
     + The result is returned as a string value.
-
+    + *Example:*
+```
+a$ = InputDlg$(EncloseText$("What is your name?"), EncloseText$("Who are you?"), "Accept", "Cancel")
+```
 ![InputDlg](./imgs/InputDlg.png)
 
 + **MenuDlg**(text$, title$, ok$, cancel$, menustring$) - Create a menu of options for the user to choose from
@@ -54,7 +63,10 @@ You should **not** use this library and one of the others in this set that provi
 + **MessageDlg**(text$, ok$) - Display a simple message with an OK button.
     + The value *ok$* is the text of the accept button, normally OK
     + Returns nothing.
-
+   + *Example:*
+```
+MessageDlg(EncloseText$("This is a simple message dialog. Close it with O or ENTER or try clicking on OK."),"OK")
+```
 ![MessageDlg](./imgs/MessageDlg.png)
 
 + **PasswordDlg$**(text$, title$, ok$, cancel$) - Same as *InputDlg$* but with asterisks replacing the input text.

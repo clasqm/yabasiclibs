@@ -27,6 +27,14 @@
 
 <ul>
 <li><p><strong>ClearDlg</strong>() - on dialog and whiptail, this clears the dialog from your terminal. Same as the yabasic command CLEAR SCREEN, but may work better if you are expecting to issue another Linux command immediately. On zenity, clasquinator and kdialog, dummy routines are provided for compatibility so that you do not need to rewrite your code.</p></li>
+<li><p><strong>EncloseText$</strong>(thestring$) - A simplified version of the <em>EncloseString$</em>() routine that can be found in the linuxmisclib library</p>
+
+<ul>
+<li>Encloses a string in double quotes, if it isn't already.</li>
+<li>Therefore <em>a$ = EncloseText$("This is text")</em> gives the same result as <em>a$ = "\"This is text\""</em></li>
+<li>Mostly for use with text strings that may include spaces.</li>
+<li>Not required in clasquinator, where only a dummy routine is provided for compatibility.</li>
+</ul></li>
 <li><p><strong>getcmd$</strong>() - returns the command set available.</p>
 
 <ul>
@@ -41,13 +49,14 @@
 <li>The value <em>title$</em> is the title on top of the widget</li>
 <li>The values <em>ok$</em> and <em>cancel$</em> have no effect in kdialog and may be omitted, but are kept here for compatibility.</li>
 <li>The result is returned as a string value.</li>
+<li><em>Example:</em>
+<code>
+a$ = InputDlg$(EncloseText$("What is your name?"), EncloseText$("Who are you?"), "Accept", "Cancel")
+</code>
+<img src="./imgs/InputDlg.png" alt="InputDlg" title="" /></li>
 </ul></li>
-</ul>
+<li><p><strong>MenuDlg</strong>(text$, title$, ok$, cancel$, menustring$) - Create a menu of options for the user to choose from</p>
 
-<p><img src="./imgs/InputDlg.png" alt="InputDlg" title="" /></p>
-
-<ul>
-<li><strong>MenuDlg</strong>(text$, title$, ok$, cancel$, menustring$) - Create a menu of options for the user to choose from
 <ul>
 <li>The value <em>title$</em> is the title on top of the widget</li>
 <li>The values <em>ok$</em> and <em>cancel$</em> have no effect in kdialog, but are kept here for compatibility and must be supplied.</li>
@@ -61,17 +70,19 @@
 <p><img src="./imgs/MenuDlg.png" alt="MenuDlg" title="" /></p>
 
 <ul>
-<li><strong>MessageDlg</strong>(text$, ok$)) - Display a simple message with an OK button.
+<li><p><strong>MessageDlg</strong>(text$, ok$)) - Display a simple message with an OK button.</p>
+
 <ul>
 <li>The value ok$ has no effect in kdialog, but is kept here for compatibility</li>
 <li>Returns nothing.</li>
+<li><em>Example:</em>
+<code>
+MessageDlg(EncloseText$("This is a simple message dialog. Close it with ENTER or try clicking on OK."),"OK")
+</code>
+<img src="./imgs/MessageDlg.png" alt="MessageDlg" title="" /></li>
 </ul></li>
-</ul>
+<li><p><strong>PasswordDlg$</strong>(text$, title$, ok$, cancel$) - Same as <em>InputDlg$</em> but with asterisks replacing the input text.</p>
 
-<p><img src="./imgs/MessageDlg.png" alt="MessageDlg" title="" /></p>
-
-<ul>
-<li><strong>PasswordDlg$</strong>(text$, title$, ok$, cancel$) - Same as <em>InputDlg$</em> but with asterisks replacing the input text.
 <ul>
 <li>The value <em>title</em>$ is the title on top of the widget.</li>
 <li>The values <em>ok$</em> and <em>cancel$</em> have no effect in kdialog and may be omitted, but are kept here for compatibility.</li>

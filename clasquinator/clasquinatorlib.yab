@@ -22,9 +22,46 @@
 
 //    import clasquinatorlib
 
+//Unlike the other libraries, you cannot use \n to break a line in your
+//text variables. Keep that in mind if compatibility between the 
+//libraries is important.
+
 //You should **not** use this library and one of the others in this set that 
 //provides dialogs concurrently, because they replicate subroutine names. 
 //Pick the right one for your program and stick with it!
+
+//By default, widgets are drawn in cyan, with button and menu 
+//triggers in red. But you can override this by setting the 
+//GLOBAL variables menu_colour$ and trigger_colour$.
+
+//The colours available are the normal ones yabasic can 
+//handle, namely "black", "white", "red", "blue", "green", 
+//"yellow", "cyan" and "magenta" (which can be abbreviated 
+//as "bla", "whi", "red", "blu", "gre", "yel", "cya" and "mag" 
+//respectively). The library does not check if the two colours 
+//are identical, or if they complement each other visually. 
+//If you want to make your menus unreadable, more power to you!
+
+//The background colour of widgets is always black, but your 
+//program's colours will be restored to whatever they were before.
+
+//The "buttons" are not mouse-aware.
+
+//The first letter of each button or menu item automatically 
+//becomes the trigger. Both lower and upper case variants 
+//will activate it. It is up to you to ensure that you do not 
+//use menu items that start with the same letter. 
+
+//If the text of a message (usually in the variable text$) 
+//is too long to fit in one line, it will be truncated. This may 
+//vary with the width of the user's terminal window, 
+//so be conservative!
+
+//Excessive quote marks (required in other libraries} will 
+//be removed by the library to maintain compatibility. 
+//Excessive spaces at the front and back of text$ will 
+//be trimmed, but multiple spaces within text$ will 
+//be maintained.
 
 //COMMON ROUTINES
 
@@ -39,6 +76,13 @@ end sub
 
 #COM######### D ###########
 #COM######### E ###########
+
+export sub EncloseText$(thestring$)
+	//Not required in clasquinator, where only a dummy routine is 
+	//provided for compatibility.
+	return thestring$
+end sub
+
 #COM######### F ###########
 #COM######### G ###########
 #COM######### H ###########
@@ -47,6 +91,20 @@ end sub
 export sub InputDlg$(text$, title$, ok$, cancel$)
 	//Presents a one-line dialog into which the 
 	//user can type a string answer.
+	//ENTER accepts the input, which can also be an empty string
+	//The empty string counts as the equivalent of a cancel button
+	local a$, original$
+	ok$ = trimtext$(ok$): text$ = trimtext$(text$)
+	triggerok$ = left$(ok$,1): triggercancel$ = left$(cancel$,1)
+	original$ = get_screen$ (1,5)
+	fill_line_with_blanks(0): fill_line_with_blanks(1): fill_line_with_blanks(2):fill_line_with_blanks(3): fill_line_with_blanks(4)
+	fill_line_with_symbols(0,0, "-")
+	fill_line_with_symbols(3,0, "=")
+	print color(trigger_colour$) at (int(screenwidth - len(title$)) /2, 0) title$;
+	print at (1,1) text$
+	line input a$
+	put_screen(1,original$)
+	return a$
 end sub
 
 #COM######### J ###########
@@ -65,30 +123,16 @@ export sub MenuDlg(text$, title$, ok$, cancel$, menustring$)
 end sub
 
 export sub MenuDlg$(text$, title$, ok$, cancel$, menustring$)
-	//Create a menu of options for the user to choose from
-	//The value *title$* is the title on top of the widget
-	//The value *ok$* is the text of the accept button, normally OK.
-	//The value *cancel$* is the text of the reject button, normally Cancel.
-	//The value menustring$ is the list of menu options as a single string,
-	//separated by hash signs (#). Spaces are allowed.
-	//If the number of options exceed the available space in the widget, the list will be scrollable.
-	//The result is returned as a string value, starting from 1
+	return str$(MenuDlg(text$, title$, ok$, cancel$, menustring$))
 end sub
 
 export sub MessageDlg(text$, ok$)
 	//display a simple message with an OK button 
 	//The value *ok$* is the text of the accept button, normally OK.
-	//This "button" is not mouse-aware
-	//The first letter of ok$  becomes the trigger
-	//if text$ is too long it will be truncated.
-	//excessive quote marks (required in other libraries} will be removed
-	//to maintain compatibility. Exessive spaces will be trimmed.
 	//returns nothing
-	local a$, original$, spaceleft, trigger$, ltrigger$, utrigger$
-	trigger$ = left$(ok$,1): utrigger$ =upper$(trigger$): ltrigger$ = lower$(trigger$)
-	if left$(text$,1) = "\"" or left$(text$,1) = "'" text$ = right$(text$, len(text$) - 1) 
-	if right$(text$,1) = "\"" or right$(text$,1) = "'" text$ = left$(text$, len(text$) - 1) 
-	text$ =trim$(text$)
+	local a$, original$, spaceleft, trigger$
+	ok$ = trimtext$(ok$): text$ = trimtext$(text$)
+	trigger$ = left$(ok$,1)
 	original$ = get_screen$ (1,3)
 	fill_line_with_blanks(0): fill_line_with_blanks(1): fill_line_with_blanks(2)
 	fill_line_with_symbols(1,0, "-")
@@ -98,10 +142,8 @@ export sub MessageDlg(text$, ok$)
 	print color(trigger_colour$) at (screenwidth - calculate_button_size(ok$) , 0) trigger$;
 	print color(menu_colour$) at (screenwidth - calculate_button_size(ok$) + 1, 0) right$(ok$, len(ok$) -1) + ">";
 	a$ = inkey$
-	//Since there is only one button 
-	//and the routine returns nothing,
-	//there is no point in trapping the actual keypress
-	//but it is best to look consistent
+	//Since there is only one button and the routine returns nothing,
+	//there is no point in trapping the actual keypress but it is best to look consistent.
 	put_screen(1,original$)
 end sub
 
@@ -110,9 +152,9 @@ end sub
 #COM######### P ###########
 
 export sub PasswordDlg$(text$, title$, ok$, cancel$)
-	//Presents a one-line dialog into which the 
-	//user can type a string answer with the text
-	//replaced with asterisks
+	//Supplied for compatibility purposes, but here is just an 
+	//alias for InputDlg - inputs are not obfuscated with asterisks
+	return InputDlg$(text$, title$, ok$, cancel$)
 end sub
 
 #COM######### Q ###########
@@ -136,20 +178,7 @@ export sub RadioDlg(text$, title$, ok$, cancel$, menustring$,selected$)
 end sub
 
 export sub RadioDlg$(text$, title$, ok$, cancel$, menustring$,selected$)
-	//Create a menu of options for the user to choose from
-	//Same as MenuDlg$(), except that you can indicate which item in
-	//menustring$ is currently selected or active.
-	//The value *title$* is the title on top of the widget
-	//The value *ok$* is the text of the accept button, normally OK.
-	//The value *cancel$* is the text of the reject button, normally Cancel.
-	//The value menustring$ is the list of menu options as a single string, 
-	//separated by hash signs (#). Spaces are allowed.
-	//If the number of options exceed the available space in the widget, the list will be scrollable.
-	//The value selected$ is the currently selected item and must correspond to one of the items in 
-	//menustring$ - case sensitive!
-	//Just moving the cursor is not enough here - the value in the menu must be
-	//explicitly selected with SPACE.
-	//The result is returned as a string value, starting from 1
+	return str$(RadioDlg(text$, title$, ok$, cancel$, menustring$,selected$))
 end sub
 
 #COM######### S ###########
@@ -197,14 +226,7 @@ export sub SubmenuDlg(text$, title$, ok$, cancel$, menustring$)
 end sub
 
 export sub SubmenuDlg$(text$, title$, ok$, cancel$, menustring$)
-	//Create a secondary menu of options for the user to choose from
-	//The value *title$* is the title on top of the widget
-	//The value *ok$* is the text of the accept button, normally OK.
-	//The value *cancel$* is the text of the reject button, normally Cancel.
-	//The value menustring$ is the list of menu options as a single string,
-	//separated by hash signs (#). Spaces are allowed.
-	//If the number of options exceed the available space in the widget, the list will be scrollable.
-	//The result is returned as a string value, starting from 1
+	return str$(SubmenuDlg(text$, title$, ok$, cancel$, menustring$))
 end sub
 
 //SUPPORTIVE SUBROUTINES
@@ -295,5 +317,13 @@ end sub
 sub calculate_button_size(button$)
 	return len(button$) + 3
 end sub
+
+sub trimtext$(text$)
+	if left$(text$,1) = "\"" or left$(text$,1) = "'" text$ = right$(text$, len(text$) - 1) 
+	if right$(text$,1) = "\"" or right$(text$,1) = "'" text$ = left$(text$, len(text$) - 1) 
+	text$ =trim$(text$)
+	return text$
+end sub
+
 
 	

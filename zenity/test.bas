@@ -18,7 +18,7 @@ clear screen
 	//endif
 	
 //test simple message dialog
-	//MessageDlg("\"This is a simple message dialog. Close it with ENTER or try clicking on OK.\"", "\"Very well\"")
+	MessageDlg(EncloseText$("This is a simple message dialog. Close it with ENTER or try clicking on OK."), "\"Very well\"")
 	//clear screen
 	//print "message demo is done"
 	//a$ = inkey$

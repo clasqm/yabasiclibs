@@ -20,6 +20,8 @@ To use the library, use the command
 
 You should **not** use this library and one of the others in this set that provides dialogs concurrently, because they replicate subroutine names. Pick the right one for your program and stick with it!
 
+Unlike the other libraries, you cannot use \n to break a line in your text variables. Keep that in mind if compatibility between the libraries is important.
+
 By default, widgets are drawn in <span style="color:cyan; background-color:black">cyan</span>, with button and menu triggers in <span style="color:red; background-color:black">red</span>. But you can override this by setting the GLOBAL variables *menu_colour$* and *trigger_colour$*.
 
 The colours available are the normal ones yabasic can handle, namely "black", "white", "red", "blue", "green", "yellow", "cyan" and "magenta" (which can be abbreviated as "bla", "whi", "red", "blu", "gre", "yel", "cya" and "mag" respectively). The library does not check if the two colours are identical, or if they complement each other visually. If you want to make your menus unreadable, more power to you!
@@ -28,7 +30,7 @@ The background colour of widgets is always black, but your program's colours wil
 
 The "buttons" are not mouse-aware.
 
-The first letter of each button or menu item automaticallyu becomes the trigger. Both lower and upper case variants will activate it. It is up to you to ensure that you do not use menu items that start with the same letter. 
+The first letter of each button or menu item automatically becomes the trigger. Both lower and upper case variants will activate it. It is up to you to ensure that you do not use menu items that start with the same letter. 
 
 *Hint*: You can always number them, e.g.
 
@@ -38,7 +40,7 @@ This will make the menu react to the "1" key being pressed, rather than "f" or "
 
 If the text of a message (usually in the variable *text$*) is too long to fit in one line, it will be truncated. This may vary with the width of the user's terminal window, so be conservative!
 
-Excessive quote marks (required in other libraries} will be removed by the library to maintain compatibility. Excessive spaces at the front and back of *text$* will be trimmed, but multiple spaces within *text$* will be maintained.
+Excessive quote marks (required in other libraries and often supplied by EncloseText$() or \"\") will be removed by the library to maintain compatibility. Excessive spaces at the front and back of *text$* will be trimmed, but multiple spaces within *text$* will be maintained.
 
 This library is currently still in the development stages and not really usable. But watch this space!
 
@@ -48,6 +50,9 @@ This library poaches as many ideas as possible from the other four dialog-provid
 
 + **ClearDlg**() - on dialog and whiptail, this clears the dialog from your terminal. Same as the yabasic command CLEAR SCREEN, but may work better if you are expecting to issue another Linux command immediately. On zenity, clasquinator and kdialog, dummy routines are provided for compatibility so that you do not need to rewrite your code.
 
++ **EncloseText$**(thestring$) - A simplified version of the *EncloseString$*() routine that can be found in the linuxmisclib library
+    + Not required in clasquinator, where only a dummy routine is provided for compatibility.
+
 + **getcmd$**() - returns the command set available.
     + This is really just for me, to stop me from getting confused while I am editing four libraries simultaneously. 
     + However, you could use it to test which utility (or library, in the case of clasquinator) is currently in use and if it is safe to use routines not in the common list.
@@ -55,7 +60,16 @@ This library poaches as many ideas as possible from the other four dialog-provid
     + or  *if getcmd$() = "zenity" ZNotifyDlg("this is a notification")*
 
 + **InputDlg$**(text$, title$, ok$, cancel$) - Presents a one-line dialog into which the user can type a string answer.
-    + **To Be Done**
+    + The value *title$* is the title on top of the widget
+    + The values *ok$* and *cancel$* are not used in clasquinator and may be omitted. They are kept in the code for compatibility reasons.
+    + ENTER accepts the input, which can also be an empty string.
+    + The empty string counts as the equivalent of a cancel button.
+    + The result is returned as a string value.
+    + *Example:*
+```
+a$ = InputDlg$("What is your name?", "Who are you?")
+```
+![InputDlg](./imgs/InputDlg.png)
 
 + **MenuDlg**(text$, title$, ok$, cancel$, menustring$) - Create a menu of options for the user to choose from.
     + **To Be Done**
@@ -66,17 +80,12 @@ This library poaches as many ideas as possible from the other four dialog-provid
     + Returns nothing, therefore does not actually trap the keypress. But the trigger is highlighted to ensure uniformity among the library's widgets
     + *Example:*
 ```
-for f = 1 to 300
-    print "testing  1 2 3 ";
-next f
 MessageDlg("This is a simple message dialog. Close it with ENTER or o.","OK")
-a$ = inkey$ //not really required, but here it
-                  //shows the restoration of previous content
 ```
 ![MessageDlg](./imgs/MessageDlg.png)
 
-+ **PasswordDlg$**(text$, title$, ok$, cancel$) - Same as *InputDlg$* but with asterisks replacing the input text.
-    + **To Be Done**
++ **PasswordDlg$**(text$, title$, ok$, cancel$)
+    + Supplied for compatibility purposes, but here it is just an alias for *InputDlg*() - inputs are not obfuscated with asterisks.
 
 + **RadioDlg**(text$, title$, ok$, cancel$, menustring$, selected$) - Create a menu of options for the user to choose from.
     + **To Be Done**

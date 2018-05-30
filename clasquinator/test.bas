@@ -7,9 +7,9 @@ clear screen
 //COMMON
 
 //test simple message dialog
-	for f = 1 to 300: print "testing  1 2 3 ";: next f
-	MessageDlg("\"  This is a simple message dialog. Close it with ENTER or o.\"","OK")
-	a$ = inkey$
+	//for f = 1 to 300: print "testing  1 2 3 ";: next f
+	//MessageDlg("\"  This is a simple message dialog. Close it with ENTER or o.\"","OK")
+	//a$ = inkey$
 	
 //test yesno dialog
 	//if YesNoDlg("\"Can you see me?\"", "Yes!", "No") then
@@ -25,7 +25,10 @@ clear screen
 	//TextFileDlg("README.md", "\"The README for this library\"","\"All done!\"")
 
 // test InputDlg$
-	//print  InputDlg$("\"What is your name?\"", "\"Who are you?\"", "Accept", "Cancel")
+	for f = 1 to 300: print "testing  1 2 3 ";: next f
+	a$ =  InputDlg$("What is your name?", "Who are you?")
+	b$ = inkey$
+	print a$
 
 //test PasswordDlg
 	//print PasswordDlg$("\"You can enter a password here\"","\"Password entry\"", "Ok", "Cancel")

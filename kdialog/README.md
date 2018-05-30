@@ -26,6 +26,12 @@ You should **not** use this library and one of the others in this set that provi
 
 + **ClearDlg**() - on dialog and whiptail, this clears the dialog from your terminal. Same as the yabasic command CLEAR SCREEN, but may work better if you are expecting to issue another Linux command immediately. On zenity, clasquinator and kdialog, dummy routines are provided for compatibility so that you do not need to rewrite your code.
 
++ **EncloseText$**(thestring$) - A simplified version of the *EncloseString$*() routine that can be found in the linuxmisclib library
+    + Encloses a string in double quotes, if it isn't already.
+    + Therefore *a$ = EncloseText$("This is text")* gives the same result as *a$ = "\"This is text\""*
+    + Mostly for use with text strings that may include spaces.
+    + Not required in clasquinator, where only a dummy routine is provided for compatibility.
+
 + **getcmd$**() - returns the command set available.
     + This is really just for me, to stop me from getting confused while I am editing four libraries simultaneously. 
     + However, you could use it to test which utility (or library, in the case of clasquinator) is currently in use and if it is safe to use routines not in the common list.
@@ -36,7 +42,10 @@ You should **not** use this library and one of the others in this set that provi
     + The value *title$* is the title on top of the widget
     + The values *ok$* and *cancel$* have no effect in kdialog and may be omitted, but are kept here for compatibility.
     + The result is returned as a string value.
-
+    + *Example:*
+```
+a$ = InputDlg$(EncloseText$("What is your name?"), EncloseText$("Who are you?"), "Accept", "Cancel")
+```
 ![InputDlg](./imgs/InputDlg.png)
 
 + **MenuDlg**(text$, title$, ok$, cancel$, menustring$) - Create a menu of options for the user to choose from
@@ -52,7 +61,10 @@ You should **not** use this library and one of the others in this set that provi
 + **MessageDlg**(text$, ok$)) - Display a simple message with an OK button.
     + The value ok$ has no effect in kdialog, but is kept here for compatibility
     + Returns nothing.
-
+   + *Example:*
+```
+MessageDlg(EncloseText$("This is a simple message dialog. Close it with ENTER or try clicking on OK."),"OK")
+```
 ![MessageDlg](./imgs/MessageDlg.png)
 
 
