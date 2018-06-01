@@ -124,6 +124,15 @@ MessageDlg("This is a simple message dialog. Close it with ENTER or o.","OK")
 <li><p><strong>YesNoDlg</strong>(text$,yes$, no$) - Displays a dialog with text (normally a question) and the options to reply yes or no.</p>
 
 <ul>
-<li><strong>To Be Done</strong></li>
+<li>The first letter of the yes$ and no$ variables will become the hotkeys for those buttons, so make sure they are different.</li>
+<li>no$ is actually a dummy here: pressing anything other than the hotkey for yes$ will return a no</li>
+<li>NOTE: pressing ENTER means NO</li>
+<li>Returns 1 for yes and 0 for no.</li>
+<li>If you would rather get the same result in string format, use <em>YesNoDlg$</em>(text$,yes$, no$)</li>
+<li><em>Example:</em>
+<code>
+YesNoDlg("Can you see this? Press Y if you can.", "Yes!", "No")
+</code>
+<img src="./imgs/YesNoDlg.png" alt="YesNoDlg" title="" /></li>
 </ul></li>
 </ul>

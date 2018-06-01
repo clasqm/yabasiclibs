@@ -106,6 +106,7 @@ MessageDlg(EncloseText$("This is a simple message dialog. Close it with O or ENT
 + **YesNoDlg**(text$,yes$, no$) - Displays a dialog with text (normally a question) and the options to reply yes or no.
     + in *dialog*, the first CAPITAL letter of the yes$ and no$ variables will become the hotkeys for those buttons, so make sure they are different. This does not matter for the other dialog-providing utilities.
     + Returns 1 for yes and 0 for no.
+    + If you would rather get the same result in string format, use *YesNoDlg$*(text$,yes$, no$)
 
 ![YesNoDlg](./imgs/YesNoDlg.png)
 

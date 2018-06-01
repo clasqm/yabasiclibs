@@ -32,7 +32,7 @@
 
 //By default, widgets are drawn in cyan, with button and menu 
 //triggers in red and the title in blue. But you can override this by setting 
-//GLOBAL variables menu_colour$, title-colour$ and trigger_colour$.
+//GLOBAL variables menu_colour$, title_colour$ and trigger_colour$.
 
 //The colours available are the normal ones yabasic can 
 //handle, namely "black", "white", "red", "blue", "green", 
@@ -96,6 +96,7 @@ export sub InputDlg$(text$, title$, ok$, cancel$)
 	//The values ok$ and cancel$ are retained for compatibility only,
 	//but actually do nothing and may be omitted. 
 	local a$, original$
+	ok$ = trimtext$(ok$): text$ = trimtext$(text$): title$ = trimtext$(title$)
 	original$ = get_screen$ (1,5)
 	fill_line_with_blanks(0): fill_line_with_blanks(1): fill_line_with_blanks(2):fill_line_with_blanks(3): fill_line_with_blanks(4)
 	fill_line_with_symbols(0,0, "-")
@@ -207,7 +208,42 @@ end sub
 export sub YesNoDlg(text$,yes$, no$)
 	//Displays a dialog with text (normally a question) and the options
 	//to reply yes or no.
+	//The first letter of the yes$ and no$ variables will become the hotkeys
+	//for those buttons, so make sure they are different.
+	//no$ is actually a dummy here: pressing anything other than the 
+	//hotkey for yes$ will return a no
+	//NOTE: pressing ENTER means NO
 	//returns 1 for yes and 0 for no.
+	local a$, original$, trigger$, triggerno$,yespos, nopos
+	yes$ = trimtext$(yes$): text$ = trimtext$(text$): no$ = trimtext$(no$)
+	trigger$ = left$(yes$, 1)
+	triggerno$ = left$(no$, 1)
+	yespos = int(len(text$)/3) - int(len(yes$)/2 -1)
+	nopos = int(len(text$)/3*2) - int(len(yes$)/2 +1)	
+	while(yespos+len(yes$)+2 > nopos -1)
+		nopos=nopos + 1
+	wend
+	original$ = get_screen$ (1,4)
+	fill_line_with_blanks(0): fill_line_with_blanks(1): fill_line_with_blanks(2):fill_line_with_blanks(3)
+	fill_line_with_symbols(2,0, "-")
+	print color(menu_colour$) at (1,0) text$;
+	print color(menu_colour$) at (yespos, 1) "<";
+	print color(trigger_colour$) at (yespos + 1,1) trigger$;
+	print color(menu_colour$) at (yespos + 2,1) mid$(yes$,2) + ">";
+	print color(menu_colour$) at (nopos, 1) "<";
+	print color(trigger_colour$) at (nopos + 1,1) triggerno$;
+	print color(menu_colour$) at (nopos + 2,1) mid$(no$,2) + ">";
+	a$ = inkey$
+	put_screen(1,original$)
+	if lower$(a$) = lower$(trigger$) then
+		return 1
+	else
+		return 0
+	endif
+end sub
+
+export sub YesNoDlg$(text$,yes$, no$)
+	return str$(YesNoDlg(text$,yes$, no$))
 end sub
 
 #COM######### Z ###########

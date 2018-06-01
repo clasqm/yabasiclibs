@@ -100,6 +100,13 @@ MessageDlg("This is a simple message dialog. Close it with ENTER or o.","OK")
     + **To Be Done**
 
 + **YesNoDlg**(text$,yes$, no$) - Displays a dialog with text (normally a question) and the options to reply yes or no.
-    + **To Be Done**
-
-
+    + The first letter of the yes$ and no$ variables will become the hotkeys for those buttons, so make sure they are different.
+    + no$ is actually a dummy here: pressing anything other than the hotkey for yes$ will return a no
+    + NOTE: pressing ENTER means NO
+    + Returns 1 for yes and 0 for no.
+    + If you would rather get the same result in string format, use *YesNoDlg$*(text$,yes$, no$)
+    + *Example:*
+```
+YesNoDlg("Can you see this? Press Y if you can.", "Yes!", "No")
+```
+![YesNoDlg](./imgs/YesNoDlg.png)

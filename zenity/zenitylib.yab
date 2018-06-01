@@ -176,6 +176,9 @@ export sub YesNoDlg(text$,yes$, no$)
 	endif
 end sub
 
+export sub YesNoDlg$(text$,yes$, no$)
+	return str$(YesNoDlg(text$,yes$, no$))
+end sub
 
 #COM######### Z ###########
 

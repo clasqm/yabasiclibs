@@ -12,12 +12,11 @@ clear screen
 	//a$ = inkey$
 	
 //test yesno dialog
-	//if YesNoDlg("\"Can you see me?\"", "Yes!", "No") then
-	//	clear screen
-	//	print "Eureka!"
+	//for f = 1 to 300: print "testing  1 2 3 ";: next f
+	//if YesNoDlg("Can you see this? Press Y if you can.", "Yes!", "No") then
+	//	print colour ("yellow") at (0,7)"      Eureka!     "
 	//else
-	//	clear screen
-	//	print "bummer"
+	//	print colour ("yellow") at (0,7)"      bummer     "
 	//endif
 	//a$ = inkey$
 
@@ -25,10 +24,10 @@ clear screen
 	//TextFileDlg("README.md", "\"The README for this library\"","\"All done!\"")
 
 // test InputDlg$
-	for f = 1 to 300: print "testing  1 2 3 ";: next f
-	a$ =  InputDlg$("What is your name?", "Who are you?")
-	b$ = inkey$
-	print a$
+	//for f = 1 to 300: print "testing  1 2 3 ";: next f
+	//a$ =  InputDlg$("What is your name?", "Who are you?")
+	//b$ = inkey$
+	//print a$
 
 //test PasswordDlg
 	//print PasswordDlg$("\"You can enter a password here\"","\"Password entry\"", "Ok", "Cancel")
