@@ -31,8 +31,8 @@
 //Pick the right one for your program and stick with it!
 
 //By default, widgets are drawn in cyan, with button and menu 
-//triggers in red. But you can override this by setting the 
-//GLOBAL variables menu_colour$ and trigger_colour$.
+//triggers in red and the title in blue. But you can override this by setting 
+//GLOBAL variables menu_colour$, title-colour$ and trigger_colour$.
 
 //The colours available are the normal ones yabasic can 
 //handle, namely "black", "white", "red", "blue", "green", 
@@ -93,14 +93,14 @@ export sub InputDlg$(text$, title$, ok$, cancel$)
 	//user can type a string answer.
 	//ENTER accepts the input, which can also be an empty string
 	//The empty string counts as the equivalent of a cancel button
+	//The values ok$ and cancel$ are retained for compatibility only,
+	//but actually do nothing and may be omitted. 
 	local a$, original$
-	ok$ = trimtext$(ok$): text$ = trimtext$(text$)
-	triggerok$ = left$(ok$,1): triggercancel$ = left$(cancel$,1)
 	original$ = get_screen$ (1,5)
 	fill_line_with_blanks(0): fill_line_with_blanks(1): fill_line_with_blanks(2):fill_line_with_blanks(3): fill_line_with_blanks(4)
 	fill_line_with_symbols(0,0, "-")
 	fill_line_with_symbols(3,0, "=")
-	print color(trigger_colour$) at (int(screenwidth - len(title$)) /2, 0) title$;
+	print color(title_colour$) at (int(screenwidth - len(title$)) /2, 0) title$;
 	print at (1,1) text$
 	line input a$
 	put_screen(1,original$)
@@ -259,6 +259,7 @@ export sub clasquinator_initialise()
 		screenheight=peek("screenheight")
 	endif
 	if menu_colour$ = "" menu_colour$ = "cyan"
+	if title_colour$ = "" title_colour$ = "blue"
 	if trigger_colour$ = "" trigger_colour$ = "red"
 end sub
 
