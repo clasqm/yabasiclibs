@@ -1,6 +1,8 @@
 #!yabasic
 
 import zenitylib
+import linuxmisclib
+
 clear screen
 
 //Uncomment the indented lines to run a specific test
@@ -18,7 +20,7 @@ clear screen
 	//endif
 	
 //test simple message dialog
-	MessageDlg(EncloseText$("This is a simple message dialog. Close it with ENTER or try clicking on OK."), "\"Very well\"")
+	//MessageDlg(EncloseText$("This is a simple message dialog. Close it with ENTER or try clicking on OK."), "\"Very well\"")
 	//clear screen
 	//print "message demo is done"
 	//a$ = inkey$
@@ -53,3 +55,15 @@ clear screen
 //test RadioDlg
 	//a = RadioDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Magic"): print a
 	//a$ = RadioDlg$("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Science"):print a$	
+
+//test ZOpenFileDlg
+	a$ = StripLFoffSysCmd$(ZOpenFileDlg$())
+	//clear screen: if a$ <> "" system("cat " + EncloseText$(a$))
+
+//test ZSaveFileDlg
+	//a$ = StripLFoffSysCmd$(ZSaveFileDlg$())
+	//clear screen:  if a$ <> "" system("cat " + EncloseText$(a$))
+
+//test ZGetDirDlg
+	//a$ = StripLFoffSysCmd$(ZGetDirDlg$())
+	//clear screen:  if a$ <> "" print a$

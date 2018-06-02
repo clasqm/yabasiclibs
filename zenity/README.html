@@ -160,9 +160,38 @@ MessageDlg(EncloseText$("This is a simple message dialog. Close it with ENTER or
 <p><img src="./imgs/ZCalendarDlg.png" alt="ZCalendarDlg" title="" /></p>
 
 <ul>
-<li><strong>ZNotifyDlg</strong>(text$) - pop up a GTK notification.
+<li><p><strong>ZGetDirDlg$</strong>() - Select a directory to open.</p>
+
 <ul>
+<li>Result is returned as a string value.</li>
+<li>This value is probably terminated with a linefeed - use <em>StripLFoffSysCmd$()</em> in the <em>linuxmisc</em> library to get rid of it.</li>
+<li>Also, once you have it you will want to use <em>EncloseText()</em> to surround it with double quotes, just in case it has 
+spaces in it.</li>
+<li><p>ONLY available in <em>zenity</em>, but <em>kdialog</em> has a comparable set of commands.</p></li>
+<li><p><strong>ZNotifyDlg</strong>(text$) - pop up a GTK notification.</p></li>
 <li>The exact placement and duration of notifications may depend on your WM settings.</li>
-<li>ONLY available in Zenity. If you need a general utility, try <em>NotifyDlg()</em> in the <em>linuxmisclib</em> library.</li>
+<li><p>ONLY available in Zenity. If you need a general utility, try <em>NotifyDlg()</em> in the <em>linuxmisclib</em> library.</p></li>
+<li><p><strong>ZOpenFileDlg$</strong>() - Select a file to open.</p></li>
+</ul></li>
+<li><p>Result is returned as a string value.</p>
+
+<ul>
+<li>This value is probably terminated with a linefeed - use <em>StripLFoffSysCmd$()</em> in the <em>linuxmisc</em> library to get rid of it.</li>
+<li>Also, once you have it you will want to use <em>EncloseText()</em> to surround it with double quotes, just in case it has 
+spaces in it.</li>
+<li>ONLY available in <em>zenity</em>, but <em>kdialog</em> has a comparable set of commands.</li>
+<li><p><em>Example:</em>
+<code>
+a$ = StripLFoffSysCmd$(ZSaveFileDlg$())
+</code> 
+<img src="imgs/ZOpenFileDlg.png" alt="ZOpenFileDlg" title="" /></p></li>
+<li><p><strong>ZSaveFileDlg$</strong>() - Select or create a file to save.</p></li>
+</ul></li>
+<li>Result is returned as a string value.
+<ul>
+<li>This value is probably terminated with a linefeed - use <em>StripLFoffSysCmd$()</em> in the <em>linuxmisc</em> library to get rid of it.</li>
+<li>Also, once you have it you will want to use <em>EncloseText()</em> to surround it with double quotes, just in case it has 
+spaces in it.</li>
+<li>ONLY available in <em>zenity</em>, but <em>kdialog</em> has a comparable set of commands.</li>
 </ul></li>
 </ul>

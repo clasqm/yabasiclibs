@@ -204,6 +204,20 @@ export sub ZCalendarDlg$(text$, ok$, cancel$)
 	return system$(inputstr$)
 end sub
 
+export sub ZGetDirDlg$()
+	//Select a directory to open.
+	//Result is returned as a string value
+	//This value is probably terminated with a linefeed - use StripLFoffSysCmd$() 
+	//in the linuxmisc library to get rid of it. Also, once you have you will want
+	//to use EncloseText() to surround it with double quotes, just in case it has 
+	//spaces in it.
+	//ONLY available in zenity, but kdialog has a comparable set of commands.
+	local a$
+	a$ =  system$(getcmd$() + " --file-selection --directory")
+	if a$ = "\n" a$ = "" //if user selects Cancel return a proper empty string
+	return a$
+end sub
+
 export sub ZNotifyDlg(text$)
 	//pop up a GTK notification.
 	//The exact placement and duration of notifications
@@ -212,6 +226,33 @@ export sub ZNotifyDlg(text$)
 	system(getcmd$() + " --notification --text=\"" + text$ + "\"")
 end sub
 
+export sub ZOpenFileDlg$()
+	//Select a file to open.
+	//Result is returned as a string value
+	//This value is probably terminated with a linefeed - use StripLFoffSysCmd$() 
+	//in the linuxmisc library to get rid of it. Also, once you have you will want
+	//to use EncloseText() to surround it with double quotes, just in case it has 
+	//spaces in it.
+	//ONLY available in zenity, but kdialog has a comparable set of commands.
+	local a$
+	a$ =  system$(getcmd$() + "  --file-selection")
+	if a$ = "\n" a$ = "" //if user selects Cancel return a proper empty string
+	return a$
+end sub
+
+export sub ZSaveFileDlg$()
+	//Select or create a file to save.
+	//Result is returned as a string value
+	//This value is probably terminated with a linefeed - use StripLFoffSysCmd$() 
+	//in the linuxmisc library to get rid of it. Also, once you have you will want
+	//to use EncloseText() to surround it with double quotes, just in case it has 
+	//spaces in it.
+	//ONLY available in zenity, but kdialog has a comparable set of commands.
+	local a$	
+	a$ =  system$(getcmd$() + "  --file-selection --save")
+	if a$ = "\n" a$ = "" //if user selects Cancel return a proper empty string
+	return a$
+end sub
 
 //SUPPORTIVE SUBROUTINES
 

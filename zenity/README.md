@@ -126,6 +126,33 @@ MessageDlg(EncloseText$("This is a simple message dialog. Close it with ENTER or
 
 ![ZCalendarDlg](./imgs/ZCalendarDlg.png)
 
+ + **ZGetDirDlg$**() - Select a directory to open.
+    + Result is returned as a string value.
+    + This value is probably terminated with a linefeed - use *StripLFoffSysCmd$()* in the *linuxmisc* library to get rid of it.
+    + Also, once you have it you will want to use *EncloseText()* to surround it with double quotes, just in case it has 
+spaces in it.
+    + ONLY available in *zenity*, but *kdialog* has a comparable set of commands.
+	
+
 + **ZNotifyDlg**(text$) - pop up a GTK notification.
     + The exact placement and duration of notifications may depend on your WM settings.
     + ONLY available in Zenity. If you need a general utility, try *NotifyDlg()* in the *linuxmisclib* library.
+
++ **ZOpenFileDlg$**() - Select a file to open.
+ + Result is returned as a string value.
+    + This value is probably terminated with a linefeed - use *StripLFoffSysCmd$()* in the *linuxmisc* library to get rid of it.
+    + Also, once you have it you will want to use *EncloseText()* to surround it with double quotes, just in case it has 
+spaces in it.
+    + ONLY available in *zenity*, but *kdialog* has a comparable set of commands.
+    + *Example:*
+```
+a$ = StripLFoffSysCmd$(ZSaveFileDlg$())
+``` 
+![ZOpenFileDlg](imgs/ZOpenFileDlg.png)
+
++ **ZSaveFileDlg$**() - Select or create a file to save.
+ + Result is returned as a string value.
+    + This value is probably terminated with a linefeed - use *StripLFoffSysCmd$()* in the *linuxmisc* library to get rid of it.
+    + Also, once you have it you will want to use *EncloseText()* to surround it with double quotes, just in case it has 
+spaces in it.
+    + ONLY available in *zenity*, but *kdialog* has a comparable set of commands.

@@ -215,7 +215,7 @@ export sub KGetDirDlg$(startdir$)
 	local a$
 	//ONLY available in kdialog, but zenity has a comparable set of commands.
 	if startdir$ = "" startdir$ = "~/"
-	a$ = system$("kdialog --getexistingdirectory " + EncloseText$(startdir$))
+	a$ = system$(getcmd$() + " --getexistingdirectory " + EncloseText$(startdir$))
 	if a$ = "\n" a$ = "" //if user selects Cancel return a proper empty string
 	return a$
 end sub
@@ -234,7 +234,7 @@ export sub KOpenFileDlg$(startdir$, filter$)
 	//ONLY available in kdialog, but zenity has a comparable set of commands.
 	local a$
 	if startdir$ = "" startdir$ = "~/"
-	a$ =  system$("kdialog --getopenfilename " + EncloseText$(startdir$) + " " + filter$)
+	a$ =  system$(getcmd$() + " --getopenfilename " + EncloseText$(startdir$) + " " + filter$)
 	if a$ = "\n" a$ = "" //if user selects Cancel return a proper empty string
 	return a$
 end sub
@@ -244,7 +244,7 @@ export sub KOpenURLDlg$(startdir$, filter$)
 	//ONLY available in kdialog.
 	local a$
 	if startdir$ = "" startdir$ = "~/"
-	a$ = system$("kdialog --getopenurl " + EncloseText$(startdir$) + " " + filter$)
+	a$ = system$(getcmd$() + " --getopenurl " + EncloseText$(startdir$) + " " + filter$)
 	if a$ = "\n" a$ = "" //if user selects Cancel return a proper empty string
 	return a$
 end sub
@@ -263,7 +263,7 @@ export sub KSaveFileDlg$(startdir$, filter$)
 	//ONLY available in kdialog, but zenity has a comparable set of commands.
 	local a$	
 	if startdir$ = "" startdir$ = "~/"
-	a$ = system$("kdialog --getsavefilename " + EncloseText$(startdir$) + " " + filter$)
+	a$ = system$(getcmd$() + " --getsavefilename " + EncloseText$(startdir$) + " " + filter$)
 	if a$ = "\n" a$ = "" //if user selects Cancel return a proper empty string
 	return a$
 end sub
@@ -273,7 +273,7 @@ export sub KSaveURLDlg$(startdir$, filter$)
 	//ONLY available in kdialog, but zenity has a comparable set of commands.
 	local a$
 	if startdir$ = "" startdir$ = "~/"
-	a$ = system$("kdialog --getsaveurl " + EncloseText$(startdir$) + " " + filter$)
+	a$ = system$(getcmd$() + " --getsaveurl " + EncloseText$(startdir$) + " " + filter$)
 	if a$ = "\n" a$ = "" //if user selects Cancel return a proper empty string
 	return a$
 end sub
