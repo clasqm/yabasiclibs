@@ -6,7 +6,7 @@ MessageDlg("This is the clasquinator demo", "Ok")
 name$ = InputDlg$("Let's get acquainted. What is your name?", "Who are you?", "OK", "Cancel")
 welcomemessage$ = "Welcome , " + name$ + ". Let's get this show on the road!"
 MessageDlg(welcomemessage$, "Ok")
-//LikeIt()
+LikeIt()
 //TextFileDlg("README.md", "The README file", "OK")
 name$ = PasswordDlg$("Please enter your banking password", "Banking password?", "OK","Cancel")
 MessageDlg("KIDDING! I was just kidding!", "haha")

@@ -147,27 +147,31 @@ MessageDlg(EncloseText$("This is a simple message dialog. Close it with ENTER or
 <p><strong>These routines will only work with dialog.</strong></p>
 
 <ul>
-<li><strong>DCalendarDlg$</strong>(text$, ok$, cancel$) - Display a calendar widget with today's date pre-selected.
+<li><p><strong>DCalendarDlg$</strong>(text$, ok$, cancel$) - Display a calendar widget with today's date pre-selected.</p>
+
 <ul>
 <li>Use TAB and SHFT-TAB to move between the fields.</li>
 <li>On exit, the date is returned in the form dd/mm/yyyy, e.g. 23/08/2018</li>
-<li>ONLY available in dialog - for kdialog and zenity, see KCalendarDlg$() and ZCalendarDlg$()</li>
-<li>DCalendarDlg$ and ZCalendarDlg$ are fully compatible.</li>
-<li><em>EXAMPLE: print DCalendarDlg$("\"Pick a date\"", "Pick", "Escape")</em></li>
+<li>ONLY available in <em>dialog</em> - for <em>kdialog</em> and <em>zenity</em>, see <em>KCalendarDlg$()</em> and <em>ZCalendarDlg$()</em></li>
+<li><em>DCalendarDlg$()</em> and <em>ZCalendarDlg$()</em> are fully compatible.</li>
+<li><em>Example:</em> 
+<code>
+print DCalendarDlg$("\"Pick a date\"", "Pick", "Escape")
+</code>
+<img src="./imgs/DCalendarDlg.png" alt="DCalendarDlg" title="" /></li>
 </ul></li>
-</ul>
+<li><p><strong>TransientInfoDlg</strong>(text$)- Display a simple message  that will exit immediately after displaying the message to the user.</p>
 
-<p><img src="./imgs/DCalendarDlg.png" alt="DCalendarDlg" title="" /></p>
-
-<ul>
-<li><strong>TransientInfoDlg</strong>(text$)- Display a simple message  that will exit immediately after displaying the message to the user.
 <ul>
 <li>The screen is not cleared when dialog exits, so that the message will remain on the screen until the calling program clears it later.</li>
 <li>This is useful when you want to inform the user that some operations are carrying on that may require some time to finish.</li>
-<li>ONLY available in dialog - it should work in whiptail but doesn't.</li>
+<li>ONLY available in <em>dialog</em> - it should work in <em>whiptail</em> but doesn't.</li>
+<li>If yhou need a cross-library notification system, try <em>NotifyDlg()</em> in the <em>linuxmisc</em> library.</li>
 <li>Returns nothing.</li>
-<li><em>EXAMPLE: TransientInfoDlg("\"This will stay onscreen until you press a key\"")</em></li>
+<li><em>Example:</em> 
+<code>
+TransientInfoDlg("\"This will stay onscreen until you press a key\"")
+</code> 
+<img src="./imgs/TransientInfoDlg.png" alt="TransientInfoDlg" title="" /></li>
 </ul></li>
 </ul>
-
-<p><img src="./imgs/TransientInfoDlg.png" alt="TransientInfoDlg" title="" /></p>

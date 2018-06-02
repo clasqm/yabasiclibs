@@ -2,7 +2,7 @@
 
 <p>This folder contains a library for yabasic that allows the use of the Linux command <em>kdialog</em> to display a variety of dialogs in text mode.</p>
 
-<p>The library will test for the presence of the kdialog command and will exit gracefully if it is not present. Kdialog is a KDE program, so the colours and styles will follow that of your KDE defaults. It may also take a moment or two to pop up - there are a lot of libraries to load! If speed is of the essence, stick to the <em>dialog</em> or <em>whiptail</em> libraries.</p>
+<p>The library will test for the presence of the kdialog command and will exit gracefully if it is not present. Kdialog is a KDE program, so the colours and styles will follow that of your KDE defaults. It may also take a moment or two to pop up - there are a lot of libraries to load! If speed is of the essence, stick to the <em>dialog</em>, <em>clasquinator</em> or <em>whiptail</em> libraries.</p>
 
 <p>The entire set of libraries focuses on sane defaults and getting basic functionality into yabasic. There are a lot of options that will not be implemented!</p>
 
@@ -39,7 +39,7 @@
 
 <ul>
 <li>This is really just for me, to stop me from getting confused while I am editing four libraries simultaneously. </li>
-<li>However, you could use it to test which utility (or library, in the case of clasquinator) is currently in use and if it is safe to use routines not in the common list.</li>
+<li>However, you could use it to test which utility (or library, in the case of <em>clasquinator</em>) is currently in use and if it is safe to use routines not in the common list.</li>
 <li>e.g, <em>if getcmd$() = "clasquinator" SubmenuDlg(options ....)</em></li>
 <li>or  <em>if getcmd$() = "zenity" ZNotifyDlg("this is a notification")</em></li>
 </ul></li>
@@ -142,9 +142,58 @@ MessageDlg(EncloseText$("This is a simple message dialog. Close it with ENTER or
 <li><strong>KCalendarDlg$</strong>(text$) - Display a calendar widget with today's date pre-selected.
 <ul>
 <li>On exit, the date is returned in the form Day-of-week Month dd yyyy, e.g Sun Jul 15 2018</li>
-<li>ONLY available in kdialog. For dialog and zenity, see DCalendarDlg$() and ZCalendarDlg$()</li>
+<li>ONLY available in <em>kdialog</em>. For <em>dialog</em> and <em>zenity</em>, see <em>DCalendarDlg$()</em> and <em>ZCalendarDlg$()</em></li>
 <li><em>EXAMPLE: print KCalendarDlg$("\"Pick a date\"")</em></li>
 </ul></li>
 </ul>
 
 <p><img src="./imgs/KCalendarDlg.png" alt="KCalendarDlg" title="" /></p>
+
+<ul>
+<li><p><strong>KGetDirDlg$</strong>(startdir$) - Select a directory to open.</p>
+
+<ul>
+<li>If startdir$ = "" it defaults to the HOME directory.</li>
+<li>Result is returned as a string value.</li>
+<li>This value is probably terminated with a linefeed - use <em>StripLFoffSysCmd$()</em> in the <em>linuxmisc</em> library to get rid of it.</li>
+<li>Also, once you have it you will want to use <em>EncloseText()</em> to surround it with double quotes, just in case it has spaces in it.</li>
+<li>ONLY available in kdialog, but zenity has a comparable set of commands.</li>
+</ul></li>
+<li><p><strong>KOpenFileDlg$</strong>(startdir$, filter$) - Select a file to open.</p>
+
+<ul>
+<li>If startdir$ = "" it defaults to the HOME directory</li>
+<li>Filter$ should be formatted like this: <em>.yab</em> or <em>.doc</em> or <em>.pdf</em> - only ONE of these!</li>
+<li>If filter$ = "" or isw omitted it defaults to all files</li>
+<li>This will NOT reveal dotfiles like ~/.bashrc</li>
+<li>Result is returned as a string value</li>
+<li>This value is probably terminated with a linefeed - use <em>StripLFoffSysCmd$()</em> in the <em>linuxmisc</em> library to get rid of it. Also, once you have it you will want to use <em>EncloseText()</em> to surround it with double quotes, just in case it has spaces in it.</li>
+<li>ONLY available in <em>kdialog</em>, but <em>zenity</em> has a comparable set of commands.</li>
+<li><em>Example:</em>
+<code>
+a$ = StripLFoffSysCmd$(KOpenFileDlg$("", ".txt")
+</code>
+<img src="./imgs/KOpenFileDlg.png" alt="KOpenFileDlg" title="" /></li>
+</ul></li>
+<li><p><strong>KOpenURLDlg$</strong>(startdir$, filter$) - Same as <em>KOpenFileDlg$()</em> but result starts with <em>file://</em></p>
+
+<ul>
+<li>ONLY available in <em>kdialog</em>.</li>
+</ul></li>
+<li><p><strong>KSaveFileDlg$</strong>(startdir$, filter$) - Select or create a file to save.</p>
+
+<ul>
+<li>If startdir$ = "" it defaults to the HOME directory</li>
+<li>Filter$ should be formatted like this: <em>.yab</em> or <em>.doc</em> or <em>.pdf</em> - only ONE of these!</li>
+<li>If filter$ = "" or isw omitted it defaults to all files</li>
+<li>This will NOT reveal dotfiles like ~/.bashrc</li>
+<li>Result is returned as a string value</li>
+<li>This value is probably terminated with a linefeed - use <em>StripLFoffSysCmd$()</em> in the <em>linuxmisc</em> library to get rid of it. Also, once you have it you will want to use <em>EncloseText()</em> to surround it with double quotes, just in case it has spaces in it.</li>
+<li>ONLY available in <em>kdialog</em>, but <em>zenity</em> has a comparable set of commands.</li>
+</ul></li>
+<li><p><strong>KSaveURLDlg$</strong>(startdir$, filter$) - same as <em>KSaveFileDlg$()</em>, but result starts with <em>file://</em></p>
+
+<ul>
+<li>ONLY available in <em>kdialog</em>.</li>
+</ul></li>
+</ul>

@@ -1,6 +1,7 @@
 #!yabasic
 
 import kdialoglib
+import linuxmisclib
 
 //Uncomment the indented lines to run a specific test
 
@@ -49,3 +50,14 @@ import kdialoglib
 	//a = RadioDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Magic"): print a
 	//a$ = RadioDlg$("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Science"):print a$	
 
+//test KOpenFileDlg
+	//a$ = StripLFoffSysCmd$(KOpenFileDlg$("", ".txt"))
+	//clear screen: if a$ <> "" system("cat " + EncloseText$(a$))
+
+//test KSaveFileDlg
+	//a$ = StripLFoffSysCmd$(KSaveFileDlg$("", ".txt"))
+	//clear screen:  if a$ <> "" system("cat " + EncloseText$(a$))
+
+//test KGetDirDlg
+	//a$ = StripLFoffSysCmd$(KgetDirDlg$(""))
+	//clear screen:  if a$ <> "" print a$

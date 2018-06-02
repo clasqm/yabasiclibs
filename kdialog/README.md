@@ -2,7 +2,7 @@
 
 This folder contains a library for yabasic that allows the use of the Linux command *kdialog* to display a variety of dialogs in text mode.
 
-The library will test for the presence of the kdialog command and will exit gracefully if it is not present. Kdialog is a KDE program, so the colours and styles will follow that of your KDE defaults. It may also take a moment or two to pop up - there are a lot of libraries to load! If speed is of the essence, stick to the *dialog* or *whiptail* libraries.
+The library will test for the presence of the kdialog command and will exit gracefully if it is not present. Kdialog is a KDE program, so the colours and styles will follow that of your KDE defaults. It may also take a moment or two to pop up - there are a lot of libraries to load! If speed is of the essence, stick to the *dialog*, *clasquinator* or *whiptail* libraries.
 
 The entire set of libraries focuses on sane defaults and getting basic functionality into yabasic. There are a lot of options that will not be implemented!
 
@@ -34,7 +34,7 @@ You should **not** use this library and one of the others in this set that provi
 
 + **getcmd$**() - returns the command set available.
     + This is really just for me, to stop me from getting confused while I am editing four libraries simultaneously. 
-    + However, you could use it to test which utility (or library, in the case of clasquinator) is currently in use and if it is safe to use routines not in the common list.
+    + However, you could use it to test which utility (or library, in the case of *clasquinator*) is currently in use and if it is safe to use routines not in the common list.
     + e.g, *if getcmd$() = "clasquinator" SubmenuDlg(options ....)*
     + or  *if getcmd$() = "zenity" ZNotifyDlg("this is a notification")*
 
@@ -111,7 +111,43 @@ MessageDlg(EncloseText$("This is a simple message dialog. Close it with ENTER or
 
 + **KCalendarDlg$**(text$) - Display a calendar widget with today's date pre-selected.
     + On exit, the date is returned in the form Day-of-week Month dd yyyy, e.g Sun Jul 15 2018
-    + ONLY available in kdialog. For dialog and zenity, see DCalendarDlg$() and ZCalendarDlg$()
+    + ONLY available in *kdialog*. For *dialog* and *zenity*, see *DCalendarDlg$()* and *ZCalendarDlg$()*
     + *EXAMPLE: print KCalendarDlg$("\"Pick a date\"")*
     
 ![KCalendarDlg](./imgs/KCalendarDlg.png)
+
++ **KGetDirDlg$**(startdir$) - Select a directory to open.
+    + If startdir$ = "" it defaults to the HOME directory.
+    + Result is returned as a string value.
+    + This value is probably terminated with a linefeed - use *StripLFoffSysCmd$()* in the *linuxmisc* library to get rid of it.
+    + Also, once you have it you will want to use *EncloseText()* to surround it with double quotes, just in case it has spaces in it.
+    + ONLY available in kdialog, but zenity has a comparable set of commands.
+
++ **KOpenFileDlg$**(startdir$, filter$) - Select a file to open.
+    + If startdir$ = "" it defaults to the HOME directory
+    + Filter$ should be formatted like this: *.yab* or *.doc* or *.pdf* - only ONE of these!
+    + If filter$ = "" or isw omitted it defaults to all files
+    + This will NOT reveal dotfiles like ~/.bashrc
+    + Result is returned as a string value
+    + This value is probably terminated with a linefeed - use *StripLFoffSysCmd$()* in the *linuxmisc* library to get rid of it. Also, once you have it you will want to use *EncloseText()* to surround it with double quotes, just in case it has spaces in it.
+    + ONLY available in *kdialog*, but *zenity* has a comparable set of commands.
+    + *Example:*
+```
+a$ = StripLFoffSysCmd$(KOpenFileDlg$("", ".txt")
+```
+![KOpenFileDlg](./imgs/KOpenFileDlg.png)
+
++ **KOpenURLDlg$**(startdir$, filter$) - Same as *KOpenFileDlg$()* but result starts with *file://*
+    + ONLY available in *kdialog*.
+
++ **KSaveFileDlg$**(startdir$, filter$) - Select or create a file to save.
+    + If startdir$ = "" it defaults to the HOME directory
+    + Filter$ should be formatted like this: *.yab* or *.doc* or *.pdf* - only ONE of these!
+    + If filter$ = "" or isw omitted it defaults to all files
+    + This will NOT reveal dotfiles like ~/.bashrc
+    + Result is returned as a string value
+    + This value is probably terminated with a linefeed - use *StripLFoffSysCmd$()* in the *linuxmisc* library to get rid of it. Also, once you have it you will want to use *EncloseText()* to surround it with double quotes, just in case it has spaces in it.
+    + ONLY available in *kdialog*, but *zenity* has a comparable set of commands.
+
++ **KSaveURLDlg$**(startdir$, filter$) - same as *KSaveFileDlg$()*, but result starts with *file://*
+    + ONLY available in *kdialog*.

@@ -118,17 +118,22 @@ MessageDlg(EncloseText$("This is a simple message dialog. Close it with ENTER or
 + **DCalendarDlg$**(text$, ok$, cancel$) - Display a calendar widget with today's date pre-selected.
     + Use TAB and SHFT-TAB to move between the fields.
     + On exit, the date is returned in the form dd/mm/yyyy, e.g. 23/08/2018
-    + ONLY available in dialog - for kdialog and zenity, see KCalendarDlg$() and ZCalendarDlg$()
-    + DCalendarDlg$ and ZCalendarDlg$ are fully compatible.
-    + *EXAMPLE: print DCalendarDlg$("\"Pick a date\"", "Pick", "Escape")*
-
+    + ONLY available in *dialog* - for *kdialog* and *zenity*, see *KCalendarDlg$()* and *ZCalendarDlg$()*
+    + *DCalendarDlg$()* and *ZCalendarDlg$()* are fully compatible.
+    + *Example:* 
+```
+print DCalendarDlg$("\"Pick a date\"", "Pick", "Escape")
+```
 ![DCalendarDlg](./imgs/DCalendarDlg.png)
 
 + **TransientInfoDlg**(text$)- Display a simple message  that will exit immediately after displaying the message to the user.
     + The screen is not cleared when dialog exits, so that the message will remain on the screen until the calling program clears it later.
     + This is useful when you want to inform the user that some operations are carrying on that may require some time to finish.
-    + ONLY available in dialog - it should work in whiptail but doesn't.
+    + ONLY available in *dialog* - it should work in *whiptail* but doesn't.
+    + If yhou need a cross-library notification system, try *NotifyDlg()* in the *linuxmisc* library.
 	+ Returns nothing.
-	+ *EXAMPLE: TransientInfoDlg("\"This will stay onscreen until you press a key\"")*
-	
+	+ *Example:* 
+```
+TransientInfoDlg("\"This will stay onscreen until you press a key\"")
+```	
 ![TransientInfoDlg](./imgs/TransientInfoDlg.png)

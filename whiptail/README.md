@@ -114,6 +114,7 @@ MessageDlg(EncloseText$("This is a simple message dialog. Close it with O or ENT
 
 **These routines will only work with whiptail.**
 
+None - whiptail is the least evolved of the four.
 
 
 

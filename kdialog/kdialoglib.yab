@@ -204,6 +204,80 @@ export sub KCalendarDlg$(text$)
 	return system$(inputstr$)
 end sub
 
+export sub KGetDirDlg$(startdir$)
+	//Select a directory to open.
+	//If startdir$ = "" it defaults to the HOME directory
+	//Result is returned as a string value
+	//This value is probably terminated with a linefeed - use StripLFoffSysCmd$() 
+	//in the linuxmisc library to get rid of it. Also, once you have you will want
+	//to use EncloseText() to surround it with double quotes, just in case it has 
+	//spaces in it.
+	local a$
+	//ONLY available in kdialog, but zenity has a comparable set of commands.
+	if startdir$ = "" startdir$ = "~/"
+	a$ = system$("kdialog --getexistingdirectory " + EncloseText$(startdir$))
+	if a$ = "\n" a$ = "" //if user selects Cancel return a proper empty string
+	return a$
+end sub
+
+export sub KOpenFileDlg$(startdir$, filter$)
+	//Select a file to open.
+	//If startdir$ = "" it defaults to the HOME directory
+	//filter$ should be formatted like this: .yab or  .doc or  .pdf - only ONE of these!
+	//if filter$ = "" it defaults to all files
+	//This will NOT reveal dotfiles like ~/.bashrc
+	//Result is returned as a string value
+	//This value is probably terminated with a linefeed - use StripLFoffSysCmd$() 
+	//in the linuxmisc library to get rid of it. Also, once you have you will want
+	//to use EncloseText() to surround it with double quotes, just in case it has 
+	//spaces in it.
+	//ONLY available in kdialog, but zenity has a comparable set of commands.
+	local a$
+	if startdir$ = "" startdir$ = "~/"
+	a$ =  system$("kdialog --getopenfilename " + EncloseText$(startdir$) + " " + filter$)
+	if a$ = "\n" a$ = "" //if user selects Cancel return a proper empty string
+	return a$
+end sub
+
+export sub KOpenURLDlg$(startdir$, filter$)
+	//Same as KOpenFileDlg() but result starts with file://
+	//ONLY available in kdialog.
+	local a$
+	if startdir$ = "" startdir$ = "~/"
+	a$ = system$("kdialog --getopenurl " + EncloseText$(startdir$) + " " + filter$)
+	if a$ = "\n" a$ = "" //if user selects Cancel return a proper empty string
+	return a$
+end sub
+
+export sub KSaveFileDlg$(startdir$, filter$)
+	//Select or create a file to save.
+	//If startdir$ = "" it defaults to the HOME directory
+	//filter$ should be formatted like this: .yab or  .doc or  .pdf - only ONE of these!
+	//if filter$ = "" it defaults to all files
+	//This will NOT reveal dotfiles like ~/.bashrc
+	//Result is returned as a string value
+	//This value is probably terminated with a linefeed - use StripLFoffSysCmd$() 
+	//in the linuxmisc library to get rid of it. Also, once you have you will want
+	//to use EncloseText() to surround it with double quotes, just in case it has 
+	//spaces in it.
+	//ONLY available in kdialog, but zenity has a comparable set of commands.
+	local a$	
+	if startdir$ = "" startdir$ = "~/"
+	a$ = system$("kdialog --getsavefilename " + EncloseText$(startdir$) + " " + filter$)
+	if a$ = "\n" a$ = "" //if user selects Cancel return a proper empty string
+	return a$
+end sub
+
+export sub KSaveURLDlg$(startdir$, filter$)
+	//same as KSaveFileDlg$, but result starts with file://
+	//ONLY available in kdialog, but zenity has a comparable set of commands.
+	local a$
+	if startdir$ = "" startdir$ = "~/"
+	a$ = system$("kdialog --getsaveurl " + EncloseText$(startdir$) + " " + filter$)
+	if a$ = "\n" a$ = "" //if user selects Cancel return a proper empty string
+	return a$
+end sub
+
 //SUPPORTIVE SUBROUTINES
 
 export sub getcmd$()

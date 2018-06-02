@@ -135,7 +135,6 @@ Convert an image file to a different format, optionally with a different filenam
     + Returns nothing
     + **System utility used:** *dzen2*
 
-![NotifyDlg](./imgs/NotifyDlg2.png)
 ![NotifyDlg](./imgs/NotifyDlg1.png)
 
 + **OpenCalcurse$**() - Opens the *calcurse* text-mode calendar app. Only the default calendar is provided for in this routine. 

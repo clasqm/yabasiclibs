@@ -38,10 +38,11 @@ Get it here: https://github.com/clasqm/yabasiclibs
 
 ## What will *not* be included
 
-+ Routines to use GUI apps. There is no possible way to wite a routine for every graphical text editor in Linux. And that is just the text editors. My routines are very straightforward and you should be able to adapt them to your own needs.
++ Routines to use GUI apps. There is no possible way to write a routine for every graphical text editor in Linux. And that is just the text editors. My routines are very straightforward and you should be able to adapt them to your own needs.
 + Anything to do with emacs. Friends don't let friends use emacs.
 + In *linuxmisclib*, routines that start up in a new xterm. Well, maybe much later.
-+ The entire set of libraries focuses on sane defaults and getting basic functionality into yabasic. There are a lot of obscure switches (esp. in kdialog and zenity) that will not be implemented!
++ In *dialog*, the directory- and file-selectors. Too clunky to be allowed to live, and there is nothing compatible in *whiptail* anyway.
++ The entire set of libraries focuses on sane defaults and getting basic functionality into yabasic. There are a lot of obscure switches (esp. in *kdialog* and *zenity*) that will not be implemented!
 
 ![Thanks](./imgs/thanks.png)
 

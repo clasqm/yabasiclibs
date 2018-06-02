@@ -2,7 +2,7 @@
 
 This folder contains a library for yabasic that allows the use of the Linux command *zenity* to display a variety of dialogs in graphical mode.
 
-The library will test for the presence of the zenity command and will exit gracefully if it is not present.Zenity is a GTK program, so the colours and styles will follow that of your GNOME defaults. It may also take a moment or two to pop up - there are a lot of libraries to load! If speed is of the essence, stick to the *dialog* or *whiptail* libraries.
+The library will test for the presence of the zenity command and will exit gracefully if it is not present.Zenity is a GTK program, so the colours and styles will follow that of your GNOME defaults. It may also take a moment or two to pop up - there are a lot of libraries to load! If speed is of the essence, stick to the *dialog*, *clasquinator* or *whiptail* libraries.
 
 The entire set of libraries focuses on sane defaults and getting basic functionality into yabasic. There are a lot of options that will not be implemented!
 
@@ -120,8 +120,8 @@ MessageDlg(EncloseText$("This is a simple message dialog. Close it with ENTER or
     + The value *cancel$* is the text of the reject button, normally Cancel.
     + The value *text$* has no effect on zenity, but is used here for compatibility reasons and must be supplied.
     + On exit, the date is returned in the form dd/mm/yyy, e.g. 23/05/2018
-    + ONLY available in Zenity. - for dialog and kdialog, see DCalendarDlg$() and KCalendarDlg$()
-    + DCalendarDlg$ and ZCalendarDlg$ are fully compatible.
+    + ONLY available in *zenity* - for *dialog* and *kdialog*, see *DCalendarDlg$()* and *KCalendarDlg$()*
+    + *DCalendarDlg$* and *ZCalendarDlg$* are fully compatible.
     + *EXAMPLE: print ZCalendarDlg$("\"Pick a date\"", "Pick", "Escape")*
 
 ![ZCalendarDlg](./imgs/ZCalendarDlg.png)
