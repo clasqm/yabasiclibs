@@ -50,14 +50,29 @@ This library poaches as many ideas as possible from the other four dialog-provid
 
 + **ClearDlg**() - on dialog and whiptail, this clears the dialog from your terminal. Same as the yabasic command CLEAR SCREEN, but may work better if you are expecting to issue another Linux command immediately. On zenity, clasquinator and kdialog, dummy routines are provided for compatibility so that you do not need to rewrite your code.
 
-+ **EncloseText$**(thestring$) - A simplified version of the *EncloseString$*() routine that can be found in the linuxmisclib library
-    + Not required in clasquinator, where only a dummy routine is provided for compatibility.
++ **EncloseText$**(thestring$) - A simplified version of the *EncloseString$*() routine that can be found in the *linuxmisclib* library
+    + Encloses a string in double quotes, if it isn't already.
+    + Therefore *a$ = EncloseText$("This is text")* gives the same result as *a$ = "\"This is text\""*
+    + Mostly for use with filenames that may include spaces.
 
 + **getcmd$**() - returns the command set available.
     + This is really just for me, to stop me from getting confused while I am editing four libraries simultaneously. 
     + However, you could use it to test which utility (or library, in the case of clasquinator) is currently in use and if it is safe to use routines not in the common list.
     + e.g, *if getcmd$() = "clasquinator" SubmenuDlg(options ....)*
     + or  *if getcmd$() = "zenity" ZNotifyDlg("this is a notification")*
+
++ **GetDirDlg$**(title$, text$, start$) - Select a directory to open.
+    + Displays the available directories but require user to type it in.
+    + The value *title$* is the title on top of the widget
+    + The value *start$* is the initial directory to start from. If blank or not supplied,this defaults to the current directory.
+    + Data entry is CASE-SENSITIVE, but you do not need to type the quote marks supplied for filenames with spaces
+    + Result is returned as a string value with quote marks and extra (leading or trailing) spaces stripped off.
+    + ONLY available in *clasquinator*, but there are equivalents in *zenity* and *kdialog*.
+    + *EXAMPLE*:
+```
+a$ = GetDirDlg$("Pick a folder", "Which directory would you like to see?","~")
+```
+![GetDirDlg](./imgs/GetDirDlg.png)
 
 + **InputDlg$**(text$, title$, ok$, cancel$) - Presents a one-line dialog into which the user can type a string answer.
     + The value *title$* is the title on top of the widget

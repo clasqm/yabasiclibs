@@ -78,13 +78,63 @@ end sub
 #COM######### E ###########
 
 export sub EncloseText$(thestring$)
-	//Not required in clasquinator, where only a dummy routine is 
-	//provided for compatibility.
+	//A simplified version of the EncloseString$() routine
+	//that can be found in the linuxmisclib library
+	//Encloses a string in double quotes, if it isn't already.
+	//Therefore a$ = EncloseText$("This is text") gives the same result as
+	// a$ = "\"This is text\""
+	//mostly for use with text strings that may include spaces.
+	local type$, type2$
+	type$ = chr$(34)
+	if left$(thestring$,1) <> type$ thestring$ = type$ + thestring$
+	if right$(thestring$,1) <> type$ thestring$ = thestring$ + type$
 	return thestring$
 end sub
 
 #COM######### F ###########
 #COM######### G ###########
+
+export sub GetDirDlg$(title$, text$, start$)
+	//Select a directory to open.
+	//displays the available directories but require user to type it in.
+	//start$ is the initial directory to start from. If blank or not supplied.
+	//this defaults to the current directory.
+	//Data entry is CASE-SENSITIVE, but you do not need to type the quote marks
+	//supplied for filenames with spaces 
+	//Result is returned as a string value
+	//ONLY available in clasquinator, but there are equivalents in Zenity and kdialog
+	local a$, original$,items,w$(1),item$, b$
+	clasquinator_initialise()
+	text$ = trimtext$(text$): title$ = trimtext$(title$)
+	if peek$("os") = "unix" then
+		if start$ = "" then
+			start$ = system$("pwd")
+			start$ = left$(start$, len(start$) - 1) //strip off trailing \n
+		endif
+		a$ = system$("cd " + start$ + " && ls -1 -d1 */ | cut -f1 -d'/'")
+		items= token(a$,w$(), "\n")
+	elseif peek$("os") = "windows"
+		//system("dir /W /X /A:D " + start$)
+	endif
+	for f = 1 to items
+		if instr(w$(f), " ") w$(f) = EncloseText$(w$(f))
+	next f
+	original$ = getscreen$(0,0,screenwidth-1, screenheight-1)
+	clear screen
+	fill_line_with_symbols(0,0, "-")
+	fill_line_with_symbols(3,0, "-")
+	print color(title_colour$) at (int(screenwidth - len(title$)) /2, 0) title$;
+	print at (0,4) "";
+	wordwrap (w$(), screenwidth -1, items)
+	b$ = "!@#$%^&*()"
+	while(instr(a$, trimtext$(b$)) = 0)
+		fill_line_with_blanks(2)
+		print at (1,1) text$
+		line input b$
+	wend
+	putscreen original$, 0,0
+	return trimtext$(b$)
+end sub
 #COM######### H ###########
 #COM######### I ###########
 
@@ -96,7 +146,7 @@ export sub InputDlg$(text$, title$, ok$, cancel$)
 	//The values ok$ and cancel$ are retained for compatibility only,
 	//but actually do nothing and may be omitted. 
 	local a$, original$
-	ok$ = trimtext$(ok$): text$ = trimtext$(text$): title$ = trimtext$(title$)
+	text$ = trimtext$(text$): title$ = trimtext$(title$)
 	original$ = get_screen$ (1,5)
 	fill_line_with_blanks(0): fill_line_with_blanks(1): fill_line_with_blanks(2):fill_line_with_blanks(3): fill_line_with_blanks(4)
 	fill_line_with_symbols(0,0, "-")
@@ -341,7 +391,7 @@ end sub
 
 sub fill_line_with_blanks(lin)
 	//fill a line with completely black spaces
-	//for some starnge reason this does not work with a for ... next loop
+	//for some strange reason this does not work with a for ... next loop
 	local a$
 	a$ = str$(screenwidth) + ",1:"
 	for f = 1 to screenwidth
@@ -349,6 +399,13 @@ sub fill_line_with_blanks(lin)
 	next f
 	a$ = a$ + ", blb"
 	putscreen a$, 0, lin
+end sub
+
+sub fill_current_line_with_blanks()
+	//fill the current line with completely black spaces
+	for f = 1 to screenwidth
+		print colour("black","black") " ";
+	next f
 end sub
 
 sub calculate_button_size(button$)
@@ -362,5 +419,17 @@ sub trimtext$(text$)
 	return text$
 end sub
 
-
-	
+sub wordwrap(w$(),width, arraylimit)
+	local row$
+	for f = 1 to arraylimit
+		if len(row$) = 0 then
+			row$ = row$ + w$(f)
+		elseif len(row$ + "  "  + w$(f) ) <= width
+			row$ = row$ + "  "  + w$(f)
+		else
+			print row$
+			row$ =  w$(f)
+		endif
+	next f
+	if len(row$) > 0  print row$
+end sub

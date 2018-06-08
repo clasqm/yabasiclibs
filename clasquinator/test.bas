@@ -37,7 +37,16 @@ clear screen
 	//a$ = MenuDlg$("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above"):print a$
 
 //test RadioDlg
-	a = RadioDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Magic"): print a
+	//a = RadioDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Magic"): print a
 	//a$ = RadioDlg$("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Science"):print a$	
 
+
+//test GetDirDlg$()
+	//for f = 1 to 300: print "testing  1 2 3 ";: next f
+	//a$ = GetDirDlg$("Pick a folder", "Which directory would you like to see?","~")
+	//b$ = inkey$ //just to see the screen being restored
+	//clear screen
+	//print at(0,5) "The contents of ~/" + a$ + ": "
+	//b$ = system$("ls ~/\"" + a$ + "\""): print b$
+	//b$ = inkey$
 exit

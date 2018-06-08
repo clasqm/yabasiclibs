@@ -19,8 +19,6 @@ export sub EncloseText$(thestring$)
 	//Therefore a$ = EncloseText$("This is text") gives the same result as
 	// a$ = "\"This is text\""
 	//mostly for use with text strings that may include spaces.
-	//Not required in clasquinator, where only a dummy routine is 
-	//provided for compatibility.
 	local type$, type2$
 	type$ = chr$(34)
 	if left$(thestring$,1) <> type$ thestring$ = type$ + thestring$

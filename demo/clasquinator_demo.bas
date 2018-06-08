@@ -9,11 +9,14 @@ MessageDlg(welcomemessage$, "Ok")
 LikeIt()
 //TextFileDlg("README.md", "The README file", "OK")
 name$ = PasswordDlg$("Please enter your banking password", "Banking password?", "OK","Cancel")
-MessageDlg("KIDDING! I was just kidding!", "haha")
+MessageDlg("KIDDING! I was just kidding!", "Haha")
 name$= "But for the record, you entered: " + name$
 MessageDlg(name$, "Ok")
 //MenuDlg("Remember that clunky text menu at the start?It could look like this ...", "This is a REAL menu!", "Cool!", "No biggie", "dialog#whiptail#kdialog#zenity") 
 MessageDlg("Unfortunately, clasquinator has no calendar widget ATM", "Ok")
+MessageDlg("You can select a directory ...", "OK")
+a$ = GetDirDlg$("Pick a folder", "Which directory would you like to choose?","..")
+MessageDlg(a$ + ". Good choice!", "OK")
 exit
 
 sub LikeIt()

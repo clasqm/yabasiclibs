@@ -29,8 +29,7 @@ You should **not** use this library and one of the others that provides dialogs 
 + **EncloseText$**(thestring$) - A simplified version of the *EncloseString$*() routine that can be found in the linuxmisclib library
     + Encloses a string in double quotes, if it isn't already.
     + Therefore *a$ = EncloseText$("This is text")* gives the same result as *a$ = "\"This is text\""*
-    + Mostly for use with text strings that may include spaces.
-    + Not required in clasquinator, where only a dummy routine is provided for compatibility.
+    + Mostly for use with filenames that may include spaces.
 
 + **getcmd$**() - returns the command set available.
     + This is really just for me, to stop me from getting confused while I am editing four libraries simultaneously. 

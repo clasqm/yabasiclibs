@@ -52,10 +52,12 @@
 
 <ul>
 <li><p><strong>ClearDlg</strong>() - on dialog and whiptail, this clears the dialog from your terminal. Same as the yabasic command CLEAR SCREEN, but may work better if you are expecting to issue another Linux command immediately. On zenity, clasquinator and kdialog, dummy routines are provided for compatibility so that you do not need to rewrite your code.</p></li>
-<li><p><strong>EncloseText$</strong>(thestring$) - A simplified version of the <em>EncloseString$</em>() routine that can be found in the linuxmisclib library</p>
+<li><p><strong>EncloseText$</strong>(thestring$) - A simplified version of the <em>EncloseString$</em>() routine that can be found in the <em>linuxmisclib</em> library</p>
 
 <ul>
-<li>Not required in clasquinator, where only a dummy routine is provided for compatibility.</li>
+<li>Encloses a string in double quotes, if it isn't already.</li>
+<li>Therefore <em>a$ = EncloseText$("This is text")</em> gives the same result as <em>a$ = "\"This is text\""</em></li>
+<li>Mostly for use with filenames that may include spaces.</li>
 </ul></li>
 <li><p><strong>getcmd$</strong>() - returns the command set available.</p>
 
@@ -64,6 +66,21 @@
 <li>However, you could use it to test which utility (or library, in the case of clasquinator) is currently in use and if it is safe to use routines not in the common list.</li>
 <li>e.g, <em>if getcmd$() = "clasquinator" SubmenuDlg(options ....)</em></li>
 <li>or  <em>if getcmd$() = "zenity" ZNotifyDlg("this is a notification")</em></li>
+</ul></li>
+<li><p><strong>GetDirDlg$</strong>(title$, text$, start$) - Select a directory to open.</p>
+
+<ul>
+<li>Displays the available directories but require user to type it in.</li>
+<li>The value <em>title$</em> is the title on top of the widget</li>
+<li>The value <em>start$</em> is the initial directory to start from. If blank or not supplied,this defaults to the current directory.</li>
+<li>Data entry is CASE-SENSITIVE, but you do not need to type the quote marks supplied for filenames with spaces</li>
+<li>Result is returned as a string value with quote marks and extra (leading or trailing) spaces stripped off.</li>
+<li>ONLY available in <em>clasquinator</em>, but there are equivalents in <em>zenity</em> and <em>kdialog</em>.</li>
+<li><em>EXAMPLE</em>:
+<code>
+a$ = GetDirDlg$("Pick a folder", "Which directory would you like to see?","~")
+</code>
+<img src="./imgs/GetDirDlg.png" alt="GetDirDlg" title="" /></li>
 </ul></li>
 <li><p><strong>InputDlg$</strong>(text$, title$, ok$, cancel$) - Presents a one-line dialog into which the user can type a string answer.</p>
 
