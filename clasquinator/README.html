@@ -70,17 +70,29 @@
 <li><p><strong>GetDirDlg$</strong>(title$, text$, start$) - Select a directory to open.</p>
 
 <ul>
-<li>Displays the available directories but require user to type it in.</li>
+<li>Displays the available directories but requires user to type it in.</li>
 <li>The value <em>title$</em> is the title on top of the widget</li>
 <li>The value <em>start$</em> is the initial directory to start from. If blank or not supplied,this defaults to the current directory.</li>
-<li>Data entry is CASE-SENSITIVE, but you do not need to type the quote marks supplied for filenames with spaces</li>
+<li>Data entry is CASE-SENSITIVE, but you do not need to type the quote marks supplied for filenames with spaces.</li>
 <li>Result is returned as a string value with quote marks and extra (leading or trailing) spaces stripped off.</li>
 <li>ONLY available in <em>clasquinator</em>, but there are equivalents in <em>zenity</em> and <em>kdialog</em>.</li>
-<li><em>EXAMPLE</em>:
+<li>Currently only works in linux. I'll get to a windows version soon.</li>
+<li><em>Example</em>:
 <code>
 a$ = GetDirDlg$("Pick a folder", "Which directory would you like to see?","~")
 </code>
 <img src="./imgs/GetDirDlg.png" alt="GetDirDlg" title="" /></li>
+</ul></li>
+<li><p><strong>GetFileDlg$</strong>(title$, text$, start$) - Select a file to open.</p>
+
+<ul>
+<li>Displays the available files but requires user to type it in.</li>
+<li>The value <em>title$</em> is the title on top of the widget</li>
+<li>The value <em>start$</em> is the initial directory to start from. If blank or not supplied,this defaults to the current directory.</li>
+<li>Data entry is CASE-SENSITIVE, but you do not need to type the quote marks supplied for filenames with spaces.</li>
+<li>Result is returned as a string value with quote marks and extra (leading or trailing) spaces stripped off.</li>
+<li>ONLY available in <em>clasquinator</em>, but there are equivalents in <em>zenity</em> and <em>kdialog</em>.</li>
+<li>Currently only works in linux. I'll get to a windows version soon.</li>
 </ul></li>
 <li><p><strong>InputDlg$</strong>(text$, title$, ok$, cancel$) - Presents a one-line dialog into which the user can type a string answer.</p>
 
@@ -95,6 +107,18 @@ a$ = GetDirDlg$("Pick a folder", "Which directory would you like to see?","~")
 a$ = InputDlg$("What is your name?", "Who are you?")
 </code>
 <img src="./imgs/InputDlg.png" alt="InputDlg" title="" /></li>
+</ul></li>
+<li><p><strong>MakeDirDlg$</strong>(title$, text$, start$) - Create a directory.</p>
+
+<ul>
+<li>Same as <em>GetDirDlg$()</em> but allows user to type a new filename so that it can be created.</li>
+<li>Will not allow duplicates to be selected.</li>
+</ul></li>
+<li><p><strong>MakeFileDlg$</strong>(title$, text$, start$) - Create a file.</p>
+
+<ul>
+<li>Same as <em>GetFileDlg$()</em> but allows user to type a new filename so that it can be created.</li>
+<li>Will not allow duplicates to be selected.</li>
 </ul></li>
 <li><p><strong>MenuDlg</strong>(text$, title$, ok$, cancel$, menustring$) - Create a menu of options for the user to choose from.</p>
 
@@ -141,9 +165,9 @@ MessageDlg("This is a simple message dialog. Close it with ENTER or o.","OK")
 <li><p><strong>YesNoDlg</strong>(text$,yes$, no$) - Displays a dialog with text (normally a question) and the options to reply yes or no.</p>
 
 <ul>
-<li>The first letter of the yes$ and no$ variables will become the hotkeys for those buttons, so make sure they are different.</li>
-<li>no$ is actually a dummy here: pressing anything other than the hotkey for yes$ will return a no</li>
-<li>NOTE: pressing ENTER means NO</li>
+<li>The first letter of the <em>yes$</em> and <em>no$</em> variables will become the hotkeys for those buttons, so make sure they are different. Hotkeys are case-insensitive.</li>
+<li><em>no$</em> is actually a dummy here: pressing anything other than the hotkey for <em>yes$</em> will return a no.</li>
+<li>NOTE: pressing ENTER means NO. If this is not what you want, just swap the labels <em>yes$</em> and <em>no$</em> around, and <em>yes$</em> will become the dummy that is the default on every keypress except the hotkey for <em>no$</em>.</li>
 <li>Returns 1 for yes and 0 for no.</li>
 <li>If you would rather get the same result in string format, use <em>YesNoDlg$</em>(text$,yes$, no$)</li>
 <li><em>Example:</em>

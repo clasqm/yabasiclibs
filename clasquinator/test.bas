@@ -40,7 +40,6 @@ clear screen
 	//a = RadioDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Magic"): print a
 	//a$ = RadioDlg$("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Science"):print a$	
 
-
 //test GetDirDlg$()
 	//for f = 1 to 300: print "testing  1 2 3 ";: next f
 	//a$ = GetDirDlg$("Pick a folder", "Which directory would you like to see?","~")
@@ -49,4 +48,29 @@ clear screen
 	//print at(0,5) "The contents of ~/" + a$ + ": "
 	//b$ = system$("ls ~/\"" + a$ + "\""): print b$
 	//b$ = inkey$
+
+//test GetFileDlg$()
+	//for f = 1 to 300: print "testing  1 2 3 ";: next f
+	//a$ = GetFileDlg$("Pick a file", "Please select a file?","~")
+	//b$ = inkey$ //just to see the screen being restored
+	//clear screen
+	//print at(0,5) "You chose " + a$
+	//b$ = inkey$
+
+
+//test MakeDirDlg$()
+	//for f = 1 to 300: print "testing  1 2 3 ";: next f
+	//a$ = MakeDirDlg$("Create a folder", "Which directory would you like to create?","~")
+	//b$ = inkey$ //just to see the screen being restored
+	//clear screen
+	//print at(0,5) "you would have created the directory ~/" + a$
+	//b$ = inkey$
+
+//test MakeFileDlg$()
+	for f = 1 to 300: print "testing  1 2 3 ";: next f
+	a$ = MakeFileDlg$("Pick a file", "Please select a file?","~")
+	b$ = inkey$ //just to see the screen being restored
+	clear screen
+	print at(0,5) "you would have created the file ~/" + a$
+	b$ = inkey$
 exit

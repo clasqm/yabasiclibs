@@ -94,6 +94,7 @@ end sub
 #COM######### F ###########
 #COM######### G ###########
 
+
 export sub GetDirDlg$(title$, text$, start$)
 	//Select a directory to open.
 	//displays the available directories but require user to type it in.
@@ -103,38 +104,21 @@ export sub GetDirDlg$(title$, text$, start$)
 	//supplied for filenames with spaces 
 	//Result is returned as a string value
 	//ONLY available in clasquinator, but there are equivalents in Zenity and kdialog
-	local a$, original$,items,w$(1),item$, b$
-	clasquinator_initialise()
-	text$ = trimtext$(text$): title$ = trimtext$(title$)
-	if peek$("os") = "unix" then
-		if start$ = "" then
-			start$ = system$("pwd")
-			start$ = left$(start$, len(start$) - 1) //strip off trailing \n
-		endif
-		a$ = system$("cd " + start$ + " && ls -1 -d1 */ | cut -f1 -d'/'")
-		items= token(a$,w$(), "\n")
-	elseif peek$("os") = "windows"
-		//system("dir /W /X /A:D " + start$)
-	endif
-	for f = 1 to items
-		if instr(w$(f), " ") w$(f) = EncloseText$(w$(f))
-	next f
-	original$ = getscreen$(0,0,screenwidth-1, screenheight-1)
-	clear screen
-	fill_line_with_symbols(0,0, "-")
-	fill_line_with_symbols(3,0, "-")
-	print color(title_colour$) at (int(screenwidth - len(title$)) /2, 0) title$;
-	print at (0,4) "";
-	wordwrap (w$(), screenwidth -1, items)
-	b$ = "!@#$%^&*()"
-	while(instr(a$, trimtext$(b$)) = 0)
-		fill_line_with_blanks(2)
-		print at (1,1) text$
-		line input b$
-	wend
-	putscreen original$, 0,0
-	return trimtext$(b$)
+	return getanydlg$(title$, text$, start$,1)
 end sub
+
+export sub GetFileDlg$(title$, text$, start$)
+	//Select a file to open.
+	//displays the available directories but require user to type it in.
+	//start$ is the initial directory to start from. If blank or not supplied.
+	//this defaults to the current directory.
+	//Data entry is CASE-SENSITIVE, but you do not need to type the quote marks
+	//supplied for filenames with spaces 
+	//Result is returned as a string value
+	//ONLY available in clasquinator, but there are equivalents in Zenity and kdialog
+	return getanydlg$(title$, text$, start$,0)
+end sub
+
 #COM######### H ###########
 #COM######### I ###########
 
@@ -162,6 +146,21 @@ end sub
 #COM######### K ###########
 #COM######### L ###########
 #COM######### M ###########
+
+export sub MakeDirDlg$(title$, text$, start$)
+	//same as GetDirDlg$() but allows user to type a new
+	//filename so that it can be created. Will not allow
+	//duplicates to be selected.
+	return getanydlg$(title$, text$, start$,3)
+end sub
+
+export sub MakeFileDlg$(title$, text$, start$)
+	//same as GetFileDlg$() but allows user to type a new
+	//filename so that it can be created. Will not allow
+	//duplicates to be selected.
+	return getanydlg$(title$, text$, start$,2)
+end sub
+
 
 export sub MenuDlg(text$, title$, ok$, cancel$, menustring$)
 	//Create a menu of options for the user to choose from
@@ -432,4 +431,58 @@ sub wordwrap(w$(),width, arraylimit)
 		endif
 	next f
 	if len(row$) > 0  print row$
+end sub
+
+sub getanydlg$(title$, text$, start$, type)
+	//type = 0 for files, 1 for directories to open
+	//and type = 2 for files, 3 for directories to create.
+	local a$, original$,items,w$(1),item$, b$, commstring$
+	clasquinator_initialise()
+	text$ = trimtext$(text$): title$ = trimtext$(title$)
+	if peek$("os") = "unix" then
+		switch type
+			case 0
+			case 2
+				commstring$ = "cd " + start$ + " && ls -p | grep -v /"
+				break
+			case 1
+			case 3
+				commstring$ = "cd " + start$ + " && ls -1 -d1 */ | cut -f1 -d'/'"
+				break
+		end switch
+		if start$ = "" then
+			start$ = system$("pwd")
+			start$ = left$(start$, len(start$) - 1) //strip off trailing \n
+		endif
+		a$ = system$(commstring$)
+		items= token(a$,w$(), "\n")
+	elseif peek$("os") = "windows"
+		//system("dir /W /X /A:D " + start$)
+	endif
+	for f = 1 to items
+		if instr(w$(f), " ") w$(f) = EncloseText$(w$(f))
+	next f
+	original$ = getscreen$(0,0,screenwidth-1, screenheight-1)
+	clear screen
+	fill_line_with_symbols(0,0, "-")
+	fill_line_with_symbols(3,0, "-")
+	print color(title_colour$) at (int(screenwidth - len(title$)) /2, 0) title$;
+	print at (0,4) "";
+	wordwrap (w$(), screenwidth -1, items)
+	b$ = "!@#$%^&*()"
+	if type < 2  then
+		while(instr(a$, trimtext$(b$)) = 0)
+			fill_line_with_blanks(2)
+			print at (1,1) text$
+			line input b$
+		wend
+	else
+		repeat
+			fill_line_with_blanks(2)
+			print at (1,1) text$
+			line input b$
+		until(instr(a$, trimtext$(b$)) = 0)
+	endif
+	putscreen original$, 0,0
+	return trimtext$(b$)
 end sub

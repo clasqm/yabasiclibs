@@ -4,7 +4,7 @@ import clasquinatorlib
  
 MessageDlg("This is the clasquinator demo", "Ok")
 name$ = InputDlg$("Let's get acquainted. What is your name?", "Who are you?", "OK", "Cancel")
-welcomemessage$ = "Welcome , " + name$ + ". Let's get this show on the road!"
+welcomemessage$ = "Welcome, " + name$ + ". Let's get this show on the road!"
 MessageDlg(welcomemessage$, "Ok")
 LikeIt()
 //TextFileDlg("README.md", "The README file", "OK")
@@ -17,6 +17,8 @@ MessageDlg("Unfortunately, clasquinator has no calendar widget ATM", "Ok")
 MessageDlg("You can select a directory ...", "OK")
 a$ = GetDirDlg$("Pick a folder", "Which directory would you like to choose?","..")
 MessageDlg(a$ + ". Good choice!", "OK")
+a$ = GetFileDlg$("Pick a ffile", "Now let's pick a file in that directory","../" + a$)
+MessageDlg(a$ + ". Another good choice!", "OK")
 exit
 
 sub LikeIt()
@@ -25,5 +27,6 @@ sub LikeIt()
 	else
 		MessageDlg("Fair enough. But let us look at the README.", "Ok")
 	endif
+	MessageDlg("Oops, I haven't written that yet", "OK")
 end sub
 

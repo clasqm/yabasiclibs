@@ -62,17 +62,27 @@ This library poaches as many ideas as possible from the other four dialog-provid
     + or  *if getcmd$() = "zenity" ZNotifyDlg("this is a notification")*
 
 + **GetDirDlg$**(title$, text$, start$) - Select a directory to open.
-    + Displays the available directories but require user to type it in.
+    + Displays the available directories but requires user to type it in.
     + The value *title$* is the title on top of the widget
     + The value *start$* is the initial directory to start from. If blank or not supplied,this defaults to the current directory.
-    + Data entry is CASE-SENSITIVE, but you do not need to type the quote marks supplied for filenames with spaces
+    + Data entry is CASE-SENSITIVE, but you do not need to type the quote marks supplied for filenames with spaces.
     + Result is returned as a string value with quote marks and extra (leading or trailing) spaces stripped off.
     + ONLY available in *clasquinator*, but there are equivalents in *zenity* and *kdialog*.
-    + *EXAMPLE*:
+    + Currently only works in linux. I'll get to a windows version soon.
+    + *Example*:
 ```
 a$ = GetDirDlg$("Pick a folder", "Which directory would you like to see?","~")
 ```
 ![GetDirDlg](./imgs/GetDirDlg.png)
+
++ **GetFileDlg$**(title$, text$, start$) - Select a file to open.
+    + Displays the available files but requires user to type it in.
+    + The value *title$* is the title on top of the widget
+    + The value *start$* is the initial directory to start from. If blank or not supplied,this defaults to the current directory.
+    + Data entry is CASE-SENSITIVE, but you do not need to type the quote marks supplied for filenames with spaces.
+    + Result is returned as a string value with quote marks and extra (leading or trailing) spaces stripped off.
+    + ONLY available in *clasquinator*, but there are equivalents in *zenity* and *kdialog*.
+    + Currently only works in linux. I'll get to a windows version soon.
 
 + **InputDlg$**(text$, title$, ok$, cancel$) - Presents a one-line dialog into which the user can type a string answer.
     + The value *title$* is the title on top of the widget
@@ -85,6 +95,14 @@ a$ = GetDirDlg$("Pick a folder", "Which directory would you like to see?","~")
 a$ = InputDlg$("What is your name?", "Who are you?")
 ```
 ![InputDlg](./imgs/InputDlg.png)
+
++ **MakeDirDlg$**(title$, text$, start$) - Create a directory.
+    + Same as *GetDirDlg$()* but allows user to type a new filename so that it can be created.
+    + Will not allow duplicates to be selected.
+
++ **MakeFileDlg$**(title$, text$, start$) - Create a file.
+    + Same as *GetFileDlg$()* but allows user to type a new filename so that it can be created.
+    + Will not allow duplicates to be selected.
 
 + **MenuDlg**(text$, title$, ok$, cancel$, menustring$) - Create a menu of options for the user to choose from.
     + **To Be Done**
@@ -115,9 +133,9 @@ MessageDlg("This is a simple message dialog. Close it with ENTER or o.","OK")
     + **To Be Done**
 
 + **YesNoDlg**(text$,yes$, no$) - Displays a dialog with text (normally a question) and the options to reply yes or no.
-    + The first letter of the yes$ and no$ variables will become the hotkeys for those buttons, so make sure they are different.
-    + no$ is actually a dummy here: pressing anything other than the hotkey for yes$ will return a no
-    + NOTE: pressing ENTER means NO
+    + The first letter of the *yes$* and *no$* variables will become the hotkeys for those buttons, so make sure they are different. Hotkeys are case-insensitive.
+    + *no$* is actually a dummy here: pressing anything other than the hotkey for *yes$* will return a no.
+    + NOTE: pressing ENTER means NO. If this is not what you want, just swap the labels *yes$* and *no$* around, and *yes$* will become the dummy that is the default on every keypress except the hotkey for *no$*.
     + Returns 1 for yes and 0 for no.
     + If you would rather get the same result in string format, use *YesNoDlg$*(text$,yes$, no$)
     + *Example:*
