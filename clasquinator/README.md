@@ -48,10 +48,13 @@ This library is currently still in the development stages and not really usable.
 
 ## Variables
 
-This library requires a small number of global variables. You do not need to initialize them, but don't use the following variable names in your program
+This library requires a small number of *global* variables. You do not need to initialize them, but don't use the following variable names in your program.
+
 + *menu_colour$*
 + *title_colour$*
 + *trigger_colour$*
++ *screenheight*
++ *screenwidth*
 
 ## Routines available:
 
@@ -76,6 +79,7 @@ This library poaches as many ideas as possible from the other four dialog-provid
     + The value *start$* is the initial directory to start from. If blank or not supplied,this defaults to the current directory.
     + Data entry is CASE-SENSITIVE, but you do not need to type the quote marks supplied for filenames with spaces.
     + Result is returned as a string value with quote marks and extra (leading or trailing) spaces stripped off.
+    + An empty string is returned, if there are no existing directories.
     + ONLY available in *clasquinator*, but there are equivalents in *zenity* and *kdialog*.
     + Currently only works in linux. I'll get to a windows version soon.
     + *Example*:
@@ -90,6 +94,7 @@ a$ = GetDirDlg$("Pick a folder", "Which directory would you like to see?","~")
     + The value *start$* is the initial directory to start from. If blank or not supplied,this defaults to the current directory.
     + Data entry is CASE-SENSITIVE, but you do not need to type the quote marks supplied for filenames with spaces.
     + Result is returned as a string value with quote marks and extra (leading or trailing) spaces stripped off.
+    + An empty string is returned. if there are no existing files. 
     + ONLY available in *clasquinator*, but there are equivalents in *zenity* and *kdialog*.
     + Currently only works in linux. I'll get to a windows version soon.
 
@@ -126,6 +131,15 @@ a$ = InputDlg$("What is your name?", "Who are you?")
 MenuDlg$("File menu","Open#Close#Exit",1, "File#Edit#Help")
 SubMenuDlg$("File menu","Open#Close#Exit","File#Edit#Help") 
 ```
++ *Examples:*
+```
+a$ = MenuDlg$("Main Menu", "File#Edit#Help", 0)
+```
+![MenuDlg](./imgs/MenuDlg.png)
+```
+a$ = MenuDlg$("Help Menu", "Help#About", 1, "File#Edit#Help")
+```
+![SubMenuDlg](./imgs/SubMenuDlg.png)
 
 + **MessageDlg**(text$, ok$) - Display a simple message with an OK button.
     + The value *ok$* is the text of the accept button, normally OK.
@@ -142,7 +156,7 @@ MessageDlg("This is a simple message dialog. Close it with ENTER or o.","OK")
 
 + **RadioDlg$**(title$, menustring$, level, mainmenustring$) - in *clasquinator*, this is an alias to *MenuDlg$()*, provided for compatibility.
 
-+ **SubmenuDlg$**(title$, menustring$, mainmenustring$) - see *MenuDlg$()*.
++ **SubMenuDlg$**(title$, menustring$, mainmenustring$) - see *MenuDlg$()*.
 
 + **TestForDialogUtility$**\(\) - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.
     + in *clasquinator*, this is a dummy routine provided for compatibility. It will always return an empty string.

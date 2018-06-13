@@ -12,21 +12,21 @@ name$ = PasswordDlg$("Please enter your banking password", "Banking password?", 
 MessageDlg("KIDDING! I was just kidding!", "Haha")
 name$= "But for the record, you entered: " + name$
 MessageDlg(name$, "Ok")
-name$ ="Remember that clunky text menu at the start?It could look much nicer now."
+name$ ="Remember that clunky text menu at the start? It could look much nicer now."
 MessageDlg(name$, "Ok")
 while(a$ <> "q")
 	a$ = ShowMenu$()
 wend
 MessageDlg("Unfortunately, clasquinator has no calendar widget ATM", "Ok")
 MessageDlg("You can select a directory ...", "OK")
-a$ = GetDirDlg$("Pick a folder", "Which directory would you like to choose?","..")
-MessageDlg(a$ + ". Good choice!", "OK")
-a$ = GetFileDlg$("Pick a file", "Now let's pick a file in that directory","../" + a$)
-MessageDlg(a$ + ". Another good choice!", "OK")
+a$ = GetDirDlg$("Pick a folder (case-sensitive!)", "Which directory would you like to choose?","..")
+MessageDlg("You chose " + a$ + ". Good choice!", "OK")
+b$ = GetFileDlg$("Pick a file (case-sensitive!)", "Now let's pick a file in that directory","../" + a$)
+MessageDlg("You chose " + b$ + " in "+ a$ + ". Another good choice!", "OK")
 exit
 
 sub ShowMenu$()
-local a$, b$
+local a$, b$, c
 a$ =MenuDlg$("Main Menu", "Graphical#Textual#Quit", 0)
 switch a$
 	case "g"
@@ -41,7 +41,7 @@ switch a$
 		end switch
 		break
 	case "t"
-		b$ =MenuDlg$("Textual Menu", "Clasquinator#Dialog#Whiptail", 1, "Graphical#Textual#Quit")
+		b$ =SubMenuDlg$("Textual Menu", "Clasquinator#Dialog#Whiptail", "Graphical#Textual#Quit")
 		switch b$
 			case "c"
 				MessageDlg("You chose Clasquinator", "OK")
@@ -55,7 +55,8 @@ switch a$
 		end switch
 		break
 	default
-		MessageDlg("Quitting the menu so soon?", "Yes")
+		c = YesNoDlg("Quitting the menu demo so soon?", "Yes", "No")
+		if c = 0 a$ = ""
 		break
 end switch
 return a$

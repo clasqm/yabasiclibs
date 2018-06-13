@@ -63,8 +63,6 @@
 //be trimmed, but multiple spaces within text$ will 
 //be maintained.
 
-//COMMON ROUTINES
-
 #COM######### A ###########
 #COM######### B ###########
 #COM######### C ###########
@@ -115,6 +113,7 @@ export sub GetFileDlg$(title$, text$, start$)
 	//Data entry is CASE-SENSITIVE, but you do not need to type the quote marks
 	//supplied for filenames with spaces 
 	//Result is returned as a string value
+	
 	//ONLY available in clasquinator, but there are equivalents in Zenity and kdialog
 	return getanydlg$(title$, text$, start$,0)
 end sub
@@ -187,6 +186,7 @@ export sub MenuDlg$(title$, menustring$, level,mainmenustring$)
 	switch level
 		case 0
 			original$ = get_screen$ (1,4)
+			fill_line_with_blanks(0)
 			startline = 0
 			break
 		case 1
@@ -195,32 +195,17 @@ export sub MenuDlg$(title$, menustring$, level,mainmenustring$)
 			fill_line_with_symbols(0, 0, "=")	
 			printmenu(mainmenustring$,startline,menu_colour$)
 			startline = 2
-			
 			break
 	end switch
 	fill_line_with_blanks(startline + 1):fill_line_with_blanks(startline + 1): fill_line_with_blanks(startline + 2) 
 	fill_line_with_symbols(startline, 0, "=")
 	print color(title_colour$) at (int(screenwidth - len(title$)) /2, startline) title$;
-	//print at (1,startline + 1) menustring$
 	printmenu(menustring$,startline, trigger_colour$)
 	fill_line_with_symbols(startline + 2, 0, "-")
 	fill_line_with_blanks(startline + 3)
 	a$ = inkey$
 	put_screen(1,original$)
 	return lower$(a$)
-end sub
-
-sub printmenu(menustring$,startline, active_colour$)
-	local w$(1),items, size
-	items= token(menustring$,w$(), "#")
-	size = 1: print at (0, startline + 1) " ";
-	for f = 1 to items
-		if len(w$(f)) + 2 < screenwidth then
-		print color(active_colour$) left$(w$(f),1);
-		print color(menu_colour$) mid$(w$(f),2) + "  ";
-		size = size + len(w$(f)) + 2
-		endif
-	next f
 end sub
 
 export sub MessageDlg(text$, ok$)
@@ -372,7 +357,7 @@ export sub clasquinator_initialise()
 	//user resized the terminal window.
 	//You can just put the following line in all your programs
 	//    if getcmd$() = "clasquinator" clasquinator_initialise()
-	//that way it won't affect any other library and yoiu can still change libraries
+	//that way it won't affect any other library and you can still change libraries
 	//with a minimum of fuss.
 	if screenwidth <> peek("screenwidth") or screenheight <> peek("screenheight") then
 		screenwidth=peek("screenwidth")
@@ -390,7 +375,7 @@ sub get_screen$(pos,lines)
 	clasquinator_initialise()
 	if pos > 1 pos = 1: if pos < 0 pos = 0
 	if pos =1 content$ = getscreen$(0,0, screenwidth - 1,lines-1)
-	if pos = 0 content$ = getscreen$(0, screenheight - lines - 1, screenwidth-1, screenheight - 1)
+	if pos = 0 content$ = getscreen$(0, screenheight - lines - 1, screenwidth-1, screenheight - 1) 
 	return content$
 end sub
 
@@ -473,7 +458,6 @@ sub getanydlg$(title$, text$, start$, type)
 	//type = 0 for files, 1 for directories to open
 	//and type = 2 for files, 3 for directories to create.
 	local a$, original$,items,w$(1),item$, b$, commstring$
-	clasquinator_initialise()
 	text$ = trimtext$(text$): title$ = trimtext$(title$)
 	if peek$("os") = "unix" then
 		switch type
@@ -491,6 +475,7 @@ sub getanydlg$(title$, text$, start$, type)
 			start$ = left$(start$, len(start$) - 1) //strip off trailing \n
 		endif
 		a$ = system$(commstring$)
+		if (a$ = "" or a$ = "\n") and (type = 0 or type = 1) return ""
 		items= token(a$,w$(), "\n")
 	elseif peek$("os") = "windows"
 		//system("dir /W /X /A:D " + start$)
@@ -498,6 +483,7 @@ sub getanydlg$(title$, text$, start$, type)
 	for f = 1 to items
 		if instr(w$(f), " ") w$(f) = EncloseText$(w$(f))
 	next f
+	clasquinator_initialise() // needed since we don't use get_screen$() here
 	original$ = getscreen$(0,0,screenwidth-1, screenheight-1)
 	clear screen
 	fill_line_with_symbols(0,0, "-")
@@ -521,4 +507,17 @@ sub getanydlg$(title$, text$, start$, type)
 	endif
 	putscreen original$, 0,0
 	return trimtext$(b$)
+end sub
+
+sub printmenu(menustring$,startline, active_colour$)
+	local w$(1),items, size
+	items= token(menustring$,w$(), "#")
+	size = 1: print at (0, startline + 1) " ";
+	for f = 1 to items
+		if len(w$(f)) + 2 < screenwidth then
+		print color(active_colour$) left$(w$(f),1);
+		print color(menu_colour$) mid$(w$(f),2) + "  ";
+		size = size + len(w$(f)) + 2
+		endif
+	next f
 end sub

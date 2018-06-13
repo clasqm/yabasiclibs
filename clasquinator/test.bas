@@ -43,27 +43,42 @@ clear screen
 //test GetDirDlg$()
 	//for f = 1 to 300: print "testing  1 2 3 ";: next f
 	//a$ = GetDirDlg$("Pick a folder", "Which directory would you like to see?","~")
-	//b$ = inkey$ //just to see the screen being restored
-	//clear screen
-	//print at(0,5) "The contents of ~/" + a$ + ": "
-	//b$ = system$("ls ~/\"" + a$ + "\""): print b$
-	//b$ = inkey$
+	//if a$ <> "" then
+	//	b$ = inkey$ //just to see the screen being restored
+	//	clear screen
+	//	print at(0,5) "The contents of ~/" + a$ + ": "
+	//	b$ = system$("ls ~/\"" + a$ + "\""): print b$
+	//	b$ = inkey$
+	//else
+	//	b$ = inkey$ //just to see the screen being restored
+	//	clear screen
+	//	print at(0,5) "No directories to select!"
+	//	b$ = inkey$
+	//endif
+
 
 //test GetFileDlg$()
 	//for f = 1 to 300: print "testing  1 2 3 ";: next f
-	//a$ = GetFileDlg$("Pick a file", "Please select a file?","~")
-	//b$ = inkey$ //just to see the screen being restored
-	//clear screen
-	//print at(0,5) "You chose " + a$
-	//b$ = inkey$
+	//a$ = GetFileDlg$("Pick a file", "Please select a file?","./test")
+	//if a$ <> "" then
+	//	b$ = inkey$ //just to see the screen being restored
+	//	clear screen
+	//	print at(0,5) "You chose " + a$
+	//	b$ = inkey$
+	//else
+	//	b$ = inkey$ //just to see the screen being restored
+	//	clear screen
+	//	print at(0,5) "No files to select!"
+	//	b$ = inkey$
+	//endif
 
 
 //test MakeDirDlg$()
 	//for f = 1 to 300: print "testing  1 2 3 ";: next f
-	//a$ = MakeDirDlg$("Create a folder", "Which directory would you like to create?","~")
+	//a$ = MakeDirDlg$("Create a folder", "Which directory would you like to create?","./test")
 	//b$ = inkey$ //just to see the screen being restored
 	//clear screen
-	//print at(0,5) "you would have created the directory ~/" + a$
+	//print at(0,5) "you would have created the directory ./test/" + a$
 	//b$ = inkey$
 
 //test MakeFileDlg$()
@@ -74,12 +89,13 @@ clear screen
 	//print at(0,5) "you would have created the file ~/" + a$
 	//b$ = inkey$
 
-//test MenuDlg$  this tests for the H in help
-		for f = 1 to 300: print "testing  1 2 3 ";: next f
-		a$ = MenuDlg$("Main Menu", "File#Edit#Help", 0)
-		b$ = inkey$ //just to see the screen being restored
-		if a$ = "h" then
-			a$ = MenuDlg$("Help Menu", "Help#About", 1, "File#Edit#Help")
-			b$ = inkey$ //just to see the screen being restored
-		endif
+//test MenuDlg$  this tests for the H in the Help item only
+//see the demo program for more extensive use
+		//for f = 1 to 300: print "testing  1 2 3 ";: next f
+		//a$ = MenuDlg$("Main Menu", "File#Edit#Help", 0)
+		//b$ = inkey$ //just to see the screen being restored
+		//if a$ = "h" then
+		//	a$ = MenuDlg$("Help Menu", "Help#About", 1, "File#Edit#Help")
+		//	b$ = inkey$ //just to see the screen being restored
+		//endif
 exit

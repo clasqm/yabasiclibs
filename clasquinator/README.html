@@ -50,10 +50,15 @@
 
 <h2>Variables</h2>
 
-<p>This library requires a small number of global variables. You do not need to initialize them, but don't use the following variable names in your program
-+ <em>menu_colour$</em>
-+ <em>title_colour$</em>
-+ <em>trigger_colour$</em></p>
+<p>This library requires a small number of <em>global</em> variables. You do not need to initialize them, but don't use the following variable names in your program.</p>
+
+<ul>
+<li><em>menu_colour$</em></li>
+<li><em>title_colour$</em></li>
+<li><em>trigger_colour$</em></li>
+<li><em>screenheight</em></li>
+<li><em>screenwidth</em></li>
+</ul>
 
 <h2>Routines available:</h2>
 
@@ -84,6 +89,7 @@
 <li>The value <em>start$</em> is the initial directory to start from. If blank or not supplied,this defaults to the current directory.</li>
 <li>Data entry is CASE-SENSITIVE, but you do not need to type the quote marks supplied for filenames with spaces.</li>
 <li>Result is returned as a string value with quote marks and extra (leading or trailing) spaces stripped off.</li>
+<li>An empty string is returned, if there are no existing directories.</li>
 <li>ONLY available in <em>clasquinator</em>, but there are equivalents in <em>zenity</em> and <em>kdialog</em>.</li>
 <li>Currently only works in linux. I'll get to a windows version soon.</li>
 <li><em>Example</em>:
@@ -100,6 +106,7 @@ a$ = GetDirDlg$("Pick a folder", "Which directory would you like to see?","~")
 <li>The value <em>start$</em> is the initial directory to start from. If blank or not supplied,this defaults to the current directory.</li>
 <li>Data entry is CASE-SENSITIVE, but you do not need to type the quote marks supplied for filenames with spaces.</li>
 <li>Result is returned as a string value with quote marks and extra (leading or trailing) spaces stripped off.</li>
+<li>An empty string is returned. if there are no existing files. </li>
 <li>ONLY available in <em>clasquinator</em>, but there are equivalents in <em>zenity</em> and <em>kdialog</em>.</li>
 <li>Currently only works in linux. I'll get to a windows version soon.</li>
 </ul></li>
@@ -145,6 +152,15 @@ MenuDlg$("File menu","Open#Close#Exit",1, "File#Edit#Help")
 SubMenuDlg$("File menu","Open#Close#Exit","File#Edit#Help")
 </code></li>
 </ul></li>
+<li><p><em>Examples:</em>
+<code>
+a$ = MenuDlg$("Main Menu", "File#Edit#Help", 0)
+</code>
+<img src="./imgs/MenuDlg.png" alt="MenuDlg" title="" />
+<code>
+a$ = MenuDlg$("Help Menu", "Help#About", 1, "File#Edit#Help")
+</code>
+<img src="./imgs/SubMenuDlg.png" alt="SubMenuDlg" title="" /></p></li>
 <li><p><strong>MessageDlg</strong>(text$, ok$) - Display a simple message with an OK button.</p>
 
 <ul>
@@ -163,7 +179,7 @@ MessageDlg("This is a simple message dialog. Close it with ENTER or o.","OK")
 <li>Supplied for compatibility purposes, but here it is just an alias for <em>InputDlg</em>() - inputs are not obfuscated with asterisks.</li>
 </ul></li>
 <li><p><strong>RadioDlg$</strong>(title$, menustring$, level, mainmenustring$) - in <em>clasquinator</em>, this is an alias to <em>MenuDlg$()</em>, provided for compatibility.</p></li>
-<li><p><strong>SubmenuDlg$</strong>(title$, menustring$, mainmenustring$) - see <em>MenuDlg$()</em>.</p></li>
+<li><p><strong>SubMenuDlg$</strong>(title$, menustring$, mainmenustring$) - see <em>MenuDlg$()</em>.</p></li>
 <li><p><strong>TestForDialogUtility$</strong>() - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.</p>
 
 <ul>
