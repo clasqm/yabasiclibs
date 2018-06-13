@@ -50,7 +50,7 @@ a$ = InputDlg$(EncloseText$("What is your name?"), EncloseText$("Who are you?"),
 ![InputDlg](./imgs/InputDlg.png)
 
 + **MenuDlg**(text$, title$, ok$, cancel$, menustring$) - Create a menu of options for the user to choose from
-    + The value *title$* is the title on top of the widget
+    + The value *title$* is the title on top of the widget.
     + The value *ok$* is the text of the accept button, normally OK.
     + The value *cancel$* is the text of the reject button, normally Cancel.
     + The value *menustring$* is the list of menu options as a single string, separated by hash signs (#). Spaces are allowed.

@@ -42,9 +42,18 @@
 
 <p>If the text of a message (usually in the variable <em>text$</em>) is too long to fit in one line, it will be truncated. This may vary with the width of the user's terminal window, so be conservative!</p>
 
-<p>Excessive quote marks (required in other libraries and often supplied by EncloseText$() or \"\") will be removed by the library to maintain compatibility. Excessive spaces at the front and back of <em>text$</em> will be trimmed, but multiple spaces within <em>text$</em> will be maintained.</p>
+<p>Excessive quote marks (required in other libraries and often supplied by EncloseText$() or \"\") will be removed by the library to maintain compatibility. </p>
+
+<p>Excessive spaces at the <em>front and back</em> of <em>text$</em> will be trimmed, but multiple spaces <em>within</em> <em>text$</em> will be maintained.</p>
 
 <p>This library is currently still in the development stages and not really usable. But watch this space!</p>
+
+<h2>Variables</h2>
+
+<p>This library requires a small number of global variables. You do not need to initialize them, but don't use the following variable names in your program
++ <em>menu_colour$</em>
++ <em>title_colour$</em>
++ <em>trigger_colour$</em></p>
 
 <h2>Routines available:</h2>
 
@@ -112,18 +121,29 @@ a$ = InputDlg$("What is your name?", "Who are you?")
 
 <ul>
 <li>Same as <em>GetDirDlg$()</em> but allows user to type a new filename so that it can be created.</li>
-<li>Will not allow duplicates to be selected.</li>
+<li>Will not allow duplicate filenames to be selected.</li>
 </ul></li>
 <li><p><strong>MakeFileDlg$</strong>(title$, text$, start$) - Create a file.</p>
 
 <ul>
 <li>Same as <em>GetFileDlg$()</em> but allows user to type a new filename so that it can be created.</li>
-<li>Will not allow duplicates to be selected.</li>
+<li>Will not allow duplicate filenames to be selected.</li>
 </ul></li>
-<li><p><strong>MenuDlg</strong>(text$, title$, ok$, cancel$, menustring$) - Create a menu of options for the user to choose from.</p>
+<li><p><strong>MenuDlg</strong>(title$, menustring$, level, mainmenustring$) - Create a one-line menu of options for the user to choose from.</p>
 
 <ul>
-<li><strong>To Be Done</strong></li>
+<li>The value <em>title$</em> is the title on top of the widget.</li>
+<li>The value <em>menustring$</em> is the list of menu options as a single string, separated by hash signs (#). Spaces are allowed.</li>
+<li>The value <em>level</em> can be either 0 for a primary menu or 1 for a submenu.</li>
+<li>If <em>level</em> = 1 <em>mainmenu$</em> must also be supplied, otherwise it is not required. This is the <em>menustring$</em> of the originating menu.</li>
+<li>The first letter of menu item automatically becomes the trigger. Both lower and upper case variants will activate it. It is up to you to ensure that you do not use menu items that start with the same letter.</li>
+<li>Menus will only be displayed to the width of the terminal, so keep them short!</li>
+<li>Results are returned as a string variable, which will be the trigger in <em>lowercase</em>.</li>
+<li>Submenus can also be created with the <em>SubMenuDlg$(title$, menustring$)</em> routine, which is an alias to this one and does not require the <em>level</em> parameter.Therefore the following two commands are completely equivalent:
+<code>
+MenuDlg$("File menu","Open#Close#Exit",1, "File#Edit#Help")
+SubMenuDlg$("File menu","Open#Close#Exit","File#Edit#Help")
+</code></li>
 </ul></li>
 <li><p><strong>MessageDlg</strong>(text$, ok$) - Display a simple message with an OK button.</p>
 
@@ -142,16 +162,8 @@ MessageDlg("This is a simple message dialog. Close it with ENTER or o.","OK")
 <ul>
 <li>Supplied for compatibility purposes, but here it is just an alias for <em>InputDlg</em>() - inputs are not obfuscated with asterisks.</li>
 </ul></li>
-<li><p><strong>RadioDlg</strong>(text$, title$, ok$, cancel$, menustring$, selected$) - Create a menu of options for the user to choose from.</p>
-
-<ul>
-<li><strong>To Be Done</strong></li>
-</ul></li>
-<li><p><strong>SubmenuDlg</strong>(text$, title$, ok$, cancel$, menustring$) - Create a secondary menu of options for the user to choose from.</p>
-
-<ul>
-<li><strong>To Be Done</strong></li>
-</ul></li>
+<li><p><strong>RadioDlg$</strong>(title$, menustring$, level, mainmenustring$) - in <em>clasquinator</em>, this is an alias to <em>MenuDlg$()</em>, provided for compatibility.</p></li>
+<li><p><strong>SubmenuDlg$</strong>(title$, menustring$, mainmenustring$) - see <em>MenuDlg$()</em>.</p></li>
 <li><p><strong>TestForDialogUtility$</strong>() - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.</p>
 
 <ul>

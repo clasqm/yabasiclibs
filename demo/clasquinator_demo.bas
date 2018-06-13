@@ -1,7 +1,7 @@
 #!yabasic
 clear screen
 import clasquinatorlib
- 
+ for f = 1 to 300: print "testing  1 2 3 ";: next f
 MessageDlg("This is the clasquinator demo", "Ok")
 name$ = InputDlg$("Let's get acquainted. What is your name?", "Who are you?", "OK", "Cancel")
 welcomemessage$ = "Welcome, " + name$ + ". Let's get this show on the road!"
@@ -12,14 +12,54 @@ name$ = PasswordDlg$("Please enter your banking password", "Banking password?", 
 MessageDlg("KIDDING! I was just kidding!", "Haha")
 name$= "But for the record, you entered: " + name$
 MessageDlg(name$, "Ok")
-//MenuDlg("Remember that clunky text menu at the start?It could look like this ...", "This is a REAL menu!", "Cool!", "No biggie", "dialog#whiptail#kdialog#zenity") 
+name$ ="Remember that clunky text menu at the start?It could look much nicer now."
+MessageDlg(name$, "Ok")
+while(a$ <> "q")
+	a$ = ShowMenu$()
+wend
 MessageDlg("Unfortunately, clasquinator has no calendar widget ATM", "Ok")
 MessageDlg("You can select a directory ...", "OK")
 a$ = GetDirDlg$("Pick a folder", "Which directory would you like to choose?","..")
 MessageDlg(a$ + ". Good choice!", "OK")
-a$ = GetFileDlg$("Pick a ffile", "Now let's pick a file in that directory","../" + a$)
+a$ = GetFileDlg$("Pick a file", "Now let's pick a file in that directory","../" + a$)
 MessageDlg(a$ + ". Another good choice!", "OK")
 exit
+
+sub ShowMenu$()
+local a$, b$
+a$ =MenuDlg$("Main Menu", "Graphical#Textual#Quit", 0)
+switch a$
+	case "g"
+		b$ =MenuDlg$("Graphical Menu", "Kdialog#Zenity", 1, "Graphical#Textual#Quit")
+		switch b$
+			case "k"
+				MessageDlg("You chose Kdialog", "OK")
+				break
+			case "z"
+				MessageDlg("You chose Zenity", "OK")
+				break
+		end switch
+		break
+	case "t"
+		b$ =MenuDlg$("Textual Menu", "Clasquinator#Dialog#Whiptail", 1, "Graphical#Textual#Quit")
+		switch b$
+			case "c"
+				MessageDlg("You chose Clasquinator", "OK")
+				break
+			case "d"
+				MessageDlg("You chose Dialog", "OK")
+				break
+			case "w"
+				MessageDlg("You chose Whiptail", "OK")
+				break
+		end switch
+		break
+	default
+		MessageDlg("Quitting the menu so soon?", "Yes")
+		break
+end switch
+return a$
+end sub
 
 sub LikeIt()
 	if YesNoDlg("Do you like what you are seeing so far?", "Yes", "No") then

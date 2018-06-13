@@ -67,10 +67,19 @@ clear screen
 	//b$ = inkey$
 
 //test MakeFileDlg$()
-	for f = 1 to 300: print "testing  1 2 3 ";: next f
-	a$ = MakeFileDlg$("Pick a file", "Please select a file?","~")
-	b$ = inkey$ //just to see the screen being restored
-	clear screen
-	print at(0,5) "you would have created the file ~/" + a$
-	b$ = inkey$
+	//for f = 1 to 300: print "testing  1 2 3 ";: next f
+	//a$ = MakeFileDlg$("Pick a file", "Please select a file?","~")
+	//b$ = inkey$ //just to see the screen being restored
+	//clear screen
+	//print at(0,5) "you would have created the file ~/" + a$
+	//b$ = inkey$
+
+//test MenuDlg$  this tests for the H in help
+		for f = 1 to 300: print "testing  1 2 3 ";: next f
+		a$ = MenuDlg$("Main Menu", "File#Edit#Help", 0)
+		b$ = inkey$ //just to see the screen being restored
+		if a$ = "h" then
+			a$ = MenuDlg$("Help Menu", "Help#About", 1, "File#Edit#Help")
+			b$ = inkey$ //just to see the screen being restored
+		endif
 exit

@@ -40,9 +40,18 @@ This will make the menu react to the "1" key being pressed, rather than "f" or "
 
 If the text of a message (usually in the variable *text$*) is too long to fit in one line, it will be truncated. This may vary with the width of the user's terminal window, so be conservative!
 
-Excessive quote marks (required in other libraries and often supplied by EncloseText$() or \"\") will be removed by the library to maintain compatibility. Excessive spaces at the front and back of *text$* will be trimmed, but multiple spaces within *text$* will be maintained.
+Excessive quote marks (required in other libraries and often supplied by EncloseText$() or \"\") will be removed by the library to maintain compatibility. 
+
+Excessive spaces at the *front and back* of *text$* will be trimmed, but multiple spaces *within* *text$* will be maintained.
 
 This library is currently still in the development stages and not really usable. But watch this space!
+
+## Variables
+
+This library requires a small number of global variables. You do not need to initialize them, but don't use the following variable names in your program
++ *menu_colour$*
++ *title_colour$*
++ *trigger_colour$*
 
 ## Routines available:
 
@@ -98,14 +107,25 @@ a$ = InputDlg$("What is your name?", "Who are you?")
 
 + **MakeDirDlg$**(title$, text$, start$) - Create a directory.
     + Same as *GetDirDlg$()* but allows user to type a new filename so that it can be created.
-    + Will not allow duplicates to be selected.
+    + Will not allow duplicate filenames to be selected.
 
 + **MakeFileDlg$**(title$, text$, start$) - Create a file.
     + Same as *GetFileDlg$()* but allows user to type a new filename so that it can be created.
-    + Will not allow duplicates to be selected.
+    + Will not allow duplicate filenames to be selected.
 
-+ **MenuDlg**(text$, title$, ok$, cancel$, menustring$) - Create a menu of options for the user to choose from.
-    + **To Be Done**
++ **MenuDlg**(title$, menustring$, level, mainmenustring$) - Create a one-line menu of options for the user to choose from.
+    + The value *title$* is the title on top of the widget.
+    + The value *menustring$* is the list of menu options as a single string, separated by hash signs (#). Spaces are allowed.
+    + The value *level* can be either 0 for a primary menu or 1 for a submenu.
+    + If *level* = 1 *mainmenu$* must also be supplied, otherwise it is not required. This is the *menustring$* of the originating menu.
+    + The first letter of menu item automatically becomes the trigger. Both lower and upper case variants will activate it. It is up to you to ensure that you do not use menu items that start with the same letter.
+    + Menus will only be displayed to the width of the terminal, so keep them short!
+    + Results are returned as a string variable, which will be the trigger in *lowercase*.
+    + Submenus can also be created with the *SubMenuDlg$(title$, menustring$)* routine, which is an alias to this one and does not require the *level* parameter.Therefore the following two commands are completely equivalent:
+```
+MenuDlg$("File menu","Open#Close#Exit",1, "File#Edit#Help")
+SubMenuDlg$("File menu","Open#Close#Exit","File#Edit#Help") 
+```
 
 + **MessageDlg**(text$, ok$) - Display a simple message with an OK button.
     + The value *ok$* is the text of the accept button, normally OK.
@@ -120,11 +140,9 @@ MessageDlg("This is a simple message dialog. Close it with ENTER or o.","OK")
 + **PasswordDlg$**(text$, title$, ok$, cancel$)
     + Supplied for compatibility purposes, but here it is just an alias for *InputDlg*() - inputs are not obfuscated with asterisks.
 
-+ **RadioDlg**(text$, title$, ok$, cancel$, menustring$, selected$) - Create a menu of options for the user to choose from.
-    + **To Be Done**
++ **RadioDlg$**(title$, menustring$, level, mainmenustring$) - in *clasquinator*, this is an alias to *MenuDlg$()*, provided for compatibility.
 
-+ **SubmenuDlg**(text$, title$, ok$, cancel$, menustring$) - Create a secondary menu of options for the user to choose from.
-    + **To Be Done**
++ **SubmenuDlg$**(title$, menustring$, mainmenustring$) - see *MenuDlg$()*.
 
 + **TestForDialogUtility$**\(\) - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.
     + in *clasquinator*, this is a dummy routine provided for compatibility. It will always return an empty string.

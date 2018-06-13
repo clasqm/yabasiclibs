@@ -161,19 +161,66 @@ export sub MakeFileDlg$(title$, text$, start$)
 	return getanydlg$(title$, text$, start$,2)
 end sub
 
-
-export sub MenuDlg(text$, title$, ok$, cancel$, menustring$)
-	//Create a menu of options for the user to choose from
-	//The value *title$* is the title on top of the widget
-	//The value *ok$* is the text of the accept button, normally OK.
-	//The value *cancel$* is the text of the reject button, normally Cancel.
-	//The value menustring$ is the list of menu options as a single string, separated by hash signs (#). Spaces are allowed.
-	//If the number of options exceed the available space in the widget, the list will be scrollable.
-	//The result is returned as a numeric value, starting from 1
+export sub MenuDlg$(title$, menustring$, level,mainmenustring$)
+	//Create a one-line menu of options for the user to choose from.
+	//The value title$ is the title on top of the widget.
+	//The value menustring$ is the list of menu options as a single 
+	//string, separated by hash signs (#). Spaces are allowed.
+	//The value level can be either 0 for a primary menu 
+	//or 1 for a submenu.
+	//If level = 1 mainmenu$ must also be supplied, otherwise it is not required
+	//The first letter of menu item automatically becomes the trigger. 
+	//Both lower and upper case variants will activate it. 
+	//It is up to you to ensure that you do not use menu items 
+	//that start with the same letter.
+	//Menus will only be displayed to the width of the terminal, 
+	//so keep them short!
+	//Results are returned as a string variable, 
+	//which will be the trigger in *lowercase*.
+	//Submenus can also be created with the SubMenuDlg$(title$, menustring$, mainmenustring$) 
+	//routine, which is an alias to this one and does not require the *level* 
+	//parameter.Therefore the following two commands are completely equivalent:
+	//MenuDlg$("File menu","Open#Close#Exit",1)
+	//SubMenuDlg$("File menu","Open#Close#Exit") 
+	//RadioDlg$() is an alias to this routine, supplied for compatibility.
+	local original$,startline,w$(1),x$(1)
+	switch level
+		case 0
+			original$ = get_screen$ (1,4)
+			startline = 0
+			break
+		case 1
+			original$ = get_screen$ (1,6)
+			fill_line_with_blanks(0):fill_line_with_blanks(1)
+			fill_line_with_symbols(0, 0, "=")	
+			printmenu(mainmenustring$,startline,menu_colour$)
+			startline = 2
+			
+			break
+	end switch
+	fill_line_with_blanks(startline + 1):fill_line_with_blanks(startline + 1): fill_line_with_blanks(startline + 2) 
+	fill_line_with_symbols(startline, 0, "=")
+	print color(title_colour$) at (int(screenwidth - len(title$)) /2, startline) title$;
+	//print at (1,startline + 1) menustring$
+	printmenu(menustring$,startline, trigger_colour$)
+	fill_line_with_symbols(startline + 2, 0, "-")
+	fill_line_with_blanks(startline + 3)
+	a$ = inkey$
+	put_screen(1,original$)
+	return lower$(a$)
 end sub
 
-export sub MenuDlg$(text$, title$, ok$, cancel$, menustring$)
-	return str$(MenuDlg(text$, title$, ok$, cancel$, menustring$))
+sub printmenu(menustring$,startline, active_colour$)
+	local w$(1),items, size
+	items= token(menustring$,w$(), "#")
+	size = 1: print at (0, startline + 1) " ";
+	for f = 1 to items
+		if len(w$(f)) + 2 < screenwidth then
+		print color(active_colour$) left$(w$(f),1);
+		print color(menu_colour$) mid$(w$(f),2) + "  ";
+		size = size + len(w$(f)) + 2
+		endif
+	next f
 end sub
 
 export sub MessageDlg(text$, ok$)
@@ -210,28 +257,16 @@ end sub
 #COM######### Q ###########
 #COM######### R ###########
 
-export sub RadioDlg(text$, title$, ok$, cancel$, menustring$,selected$)
-	//Create a menu of options for the user to choose from
-	//Same as MenuDlg$(), except that you can indicate which item in
-	//menustring$ is currently selected or active.
-	//The value *title$* is the title on top of the widget
-	//The value *ok$* is the text of the accept button, normally OK.
-	//The value *cancel$* is the text of the reject button, normally Cancel.
-	//The value menustring$ is the list of menu options as a single string, 
-	//separated by hash signs (#). Spaces are allowed.
-	//If the number of options exceed the available space in the widget, the list will be scrollable.
-	//The value selected$ is the currently selected item and must correspond to one of the items in 
-	//menustring$ - case sensitive!
-	//Just moving the cursor is not enough here - the value in the menu must be
-	//explicitly selected with SPACE.
-	//The result is returned as a numeric value, starting from 1
-end sub
-
-export sub RadioDlg$(text$, title$, ok$, cancel$, menustring$,selected$)
-	return str$(RadioDlg(text$, title$, ok$, cancel$, menustring$,selected$))
+export sub RadioDlg$(title$, menustring$, level,mainmenustring$)
+	return MenuDlg$(title$, menustring$, level,mainmenustring$)
 end sub
 
 #COM######### S ###########
+
+export sub SubMenuDlg$(title$, menustring$,mainmenustring$)
+	return MenuDlg$(title$, menustring$, 1,mainmenustring$)
+end sub
+
 #COM######### T ###########
 
 export sub TestForDialogUtility$()
@@ -427,6 +462,7 @@ sub wordwrap(w$(),width, arraylimit)
 			row$ = row$ + "  "  + w$(f)
 		else
 			print row$
+			wordwrap = wordwrap + 1 //keep track of the number of lines used
 			row$ =  w$(f)
 		endif
 	next f
