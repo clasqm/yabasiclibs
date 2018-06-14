@@ -447,8 +447,7 @@ sub wordwrap(w$(),width, arraylimit)
 			row$ = row$ + "  "  + w$(f)
 		else
 			print row$
-			wordwrap = wordwrap + 1 //keep track of the number of lines used
-			row$ =  w$(f)
+			row$ = w$(f)
 		endif
 	next f
 	if len(row$) > 0  print row$
@@ -457,7 +456,7 @@ end sub
 sub getanydlg$(title$, text$, start$, type)
 	//type = 0 for files, 1 for directories to open
 	//and type = 2 for files, 3 for directories to create.
-	local a$, original$,items,w$(1),item$, b$, commstring$
+	local a$, original$,items,w$(1),item$, b$, commstring$,linefeed$
 	text$ = trimtext$(text$): title$ = trimtext$(title$)
 	if peek$("os") = "unix" then
 		switch type
@@ -474,13 +473,31 @@ sub getanydlg$(title$, text$, start$, type)
 			start$ = system$("pwd")
 			start$ = left$(start$, len(start$) - 1) //strip off trailing \n
 		endif
-		a$ = system$(commstring$)
-		if (a$ = "" or a$ = "\n") and (type = 0 or type = 1) return ""
-		items= token(a$,w$(), "\n")
-	elseif peek$("os") = "windows"
-		//system("dir /W /X /A:D " + start$)
+		linefeed$ = "\n"
+		elseif peek$("os") = "windows"
+			switch type
+			case 0
+			case 2
+				commstring$ = "dir /b /a-d " + start$
+				break
+			case 1
+			case 3
+				commstring$ = "dir /b /ad " + start$
+				break
+		end switch
+		if start$ = "" then
+			start$ = system$("echo %cd%")
+			start$ = left$(start$, len(start$) - 2) //strip off trailing \r\n
+		endif
+		linefeed$ = "\r"
 	endif
+	a$ = system$(commstring$)
+	if (a$ = "" or a$ = "\n" or instr(a$, "File Not Found")) and (type = 0 or type = 1) return ""
+	items= token(a$,w$(), linefeed$)	
 	for f = 1 to items
+		if instr(w$(f), "\r") w$(f) = left$(w$(f), len(w$(f)) - 1)
+		if instr(w$(f), "\n") w$(f) = left$(w$(f), len(w$(f)) - 1)
+		w$(f) = trimtext$(w$(f))
 		if instr(w$(f), " ") w$(f) = EncloseText$(w$(f))
 	next f
 	clasquinator_initialise() // needed since we don't use get_screen$() here

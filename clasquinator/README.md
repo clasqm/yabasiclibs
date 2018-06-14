@@ -2,7 +2,7 @@
 
 This folder contains a library for yabasic that allows yabasic to display a variety of dialogs in text mode without making use of external commands.
 
-*Some* routines will also be made available in graphics mode, but keep in mind that you only have one graphics window to play with. if you use these, you will not have the graphics window for your own use.
+*Some* routines will perhaps also be made available in graphics mode, but keep in mind that you only have one graphics window to play with. if you use these, you will not have the graphics window for your own use.
 
 The library is written as a textmode application and must be run in a terminal. It will not be useful in a headless script.
 
@@ -10,23 +10,23 @@ The entire set of libraries focuses on sane defaults and getting basic functiona
 
 The images below are for illustration only. The exact appearance of the dialogs will depend on your system settings.
 
-Developed on elementary OS 0.4 "Loki" (i.e. Linux), but it should work on any \*NIX system that will run yabasic. I don't have a Windows machine to test this on, so please let me know if anything works/doesn't work on that side.
+Developed on elementary OS 0.4 "Loki" (i.e. Linux), but it should work on any *NIX system that will run yabasic. Testing on Windows has been far more sketchy, since I don't have a windows box here, but I did what I could in my lunch break at work ;-).
 
 The library should exist either in the same folder as your program (symlinks work) or in the standard yabasic library location on your system.
 
 To use the library, use the command 
-
-    import clasquinatorlib
-
+```
+import clasquinatorlib
+```
 You should **not** use this library and one of the others in this set that provides dialogs concurrently, because they replicate subroutine names. Pick the right one for your program and stick with it!
 
-Unlike the other libraries, you cannot use \n to break a line in your text variables. Keep that in mind if compatibility between the libraries is important.
+Unlike the other libraries, you cannot use *\n* to break a line in your text variables. Keep that in mind if compatibility between the libraries is important.
 
 By default, widgets are drawn in <span style="color:cyan; background-color:black">cyan</span>, with button and menu triggers in <span style="color:red; background-color:black">red</span> and the title in <span style="color:blue; background-color:black">blue</span>. But you can override this by setting the GLOBAL variables *menu_colour$*, *title_colour$* and *trigger_colour$*.
 
 The colours available are the normal ones yabasic can handle, namely "black", "white", "red", "blue", "green", "yellow", "cyan" and "magenta" (which can be abbreviated as "bla", "whi", "red", "blu", "gre", "yel", "cya" and "mag" respectively). The library does not check if the two colours are identical, or if they complement each other visually. If you want to make your menus unreadable, more power to you!
 
-The background colour of widgets is always black, but your program's colours will be restored to whatever they were before.
+The background colour of widgets is always black (well, actually, it is whatever your terminal's default background colour is), but your program's colours will be restored to whatever they were before.
 
 The "buttons" are not mouse-aware.
 
@@ -81,7 +81,7 @@ This library poaches as many ideas as possible from the other four dialog-provid
     + Result is returned as a string value with quote marks and extra (leading or trailing) spaces stripped off.
     + An empty string is returned, if there are no existing directories.
     + ONLY available in *clasquinator*, but there are equivalents in *zenity* and *kdialog*.
-    + Currently only works in linux. I'll get to a windows version soon.
+    + Now works in windows, but there are display bugs to work out.
     + *Example*:
 ```
 a$ = GetDirDlg$("Pick a folder", "Which directory would you like to see?","~")
@@ -96,7 +96,7 @@ a$ = GetDirDlg$("Pick a folder", "Which directory would you like to see?","~")
     + Result is returned as a string value with quote marks and extra (leading or trailing) spaces stripped off.
     + An empty string is returned. if there are no existing files. 
     + ONLY available in *clasquinator*, but there are equivalents in *zenity* and *kdialog*.
-    + Currently only works in linux. I'll get to a windows version soon.
+    + Now works in windows, but there are display bugs to work out.
 
 + **InputDlg$**(text$, title$, ok$, cancel$) - Presents a one-line dialog into which the user can type a string answer.
     + The value *title$* is the title on top of the widget
@@ -113,10 +113,12 @@ a$ = InputDlg$("What is your name?", "Who are you?")
 + **MakeDirDlg$**(title$, text$, start$) - Create a directory.
     + Same as *GetDirDlg$()* but allows user to type a new filename so that it can be created.
     + Will not allow duplicate filenames to be selected.
+    + Now works in windows, but there are display bugs to work out.
 
 + **MakeFileDlg$**(title$, text$, start$) - Create a file.
     + Same as *GetFileDlg$()* but allows user to type a new filename so that it can be created.
     + Will not allow duplicate filenames to be selected.
+    + Now works in windows, but there are display bugs to work out.
 
 + **MenuDlg**(title$, menustring$, level, mainmenustring$) - Create a one-line menu of options for the user to choose from.
     + The value *title$* is the title on top of the widget.

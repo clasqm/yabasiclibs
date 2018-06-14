@@ -41,20 +41,24 @@ clear screen
 	//a$ = RadioDlg$("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Science"):print a$	
 
 //test GetDirDlg$()
-	//for f = 1 to 300: print "testing  1 2 3 ";: next f
-	//a$ = GetDirDlg$("Pick a folder", "Which directory would you like to see?","~")
-	//if a$ <> "" then
-	//	b$ = inkey$ //just to see the screen being restored
-	//	clear screen
-	//	print at(0,5) "The contents of ~/" + a$ + ": "
-	//	b$ = system$("ls ~/\"" + a$ + "\""): print b$
-	//	b$ = inkey$
-	//else
-	//	b$ = inkey$ //just to see the screen being restored
-	//	clear screen
-	//	print at(0,5) "No directories to select!"
-	//	b$ = inkey$
-	//endif
+	for f = 1 to 300: print "testing  1 2 3 ";: next f
+	a$ = GetDirDlg$("Pick a folder", "Which directory would you like to see?",".")
+	if a$ <> "" then
+		b$ = inkey$ //just to see the screen being restored
+		clear screen
+		print at(0,5) "The contents of " + a$ + ": "
+		if peek$("os") = "unix" then
+			b$ = system$("ls \"" + a$ + "\""): print b$ //linux
+		else
+			b$ = system$("dir /w \"" + a$ + "\"")  //windows
+		endif
+		b$ = inkey$
+	else
+		b$ = inkey$ //just to see the screen being restored
+		clear screen
+		print at(0,5) "No directories to select!"
+		b$ = inkey$
+	endif
 
 
 //test GetFileDlg$()
