@@ -113,7 +113,6 @@ export sub GetFileDlg$(title$, text$, start$)
 	//Data entry is CASE-SENSITIVE, but you do not need to type the quote marks
 	//supplied for filenames with spaces 
 	//Result is returned as a string value
-	
 	//ONLY available in clasquinator, but there are equivalents in Zenity and kdialog
 	return getanydlg$(title$, text$, start$,0)
 end sub
@@ -197,7 +196,8 @@ export sub MenuDlg$(title$, menustring$, level,mainmenustring$)
 			startline = 2
 			break
 	end switch
-	fill_line_with_blanks(startline + 1):fill_line_with_blanks(startline + 1): fill_line_with_blanks(startline + 2) 
+	for f = startline to startline + 2: fill_line_with_blanks(f):next f
+	//fill_line_with_blanks(startline + 1): fill_line_with_blanks(startline + 2) 
 	fill_line_with_symbols(startline, 0, "=")
 	print color(title_colour$) at (int(screenwidth - len(title$)) /2, startline) title$;
 	printmenu(menustring$,startline, trigger_colour$)
@@ -216,7 +216,7 @@ export sub MessageDlg(text$, ok$)
 	ok$ = trimtext$(ok$): text$ = trimtext$(text$)
 	trigger$ = left$(ok$,1)
 	original$ = get_screen$ (1,3)
-	fill_line_with_blanks(0): fill_line_with_blanks(1): fill_line_with_blanks(2)
+	for f = 0 to 2: fill_line_with_blanks(f):next f
 	fill_line_with_symbols(1,0, "-")
 	spaceleft = screenwidth - calculate_button_size(ok$) - 2
 	print color(menu_colour$) at(1, 0) left$(text$, spaceleft);
@@ -248,9 +248,37 @@ end sub
 
 #COM######### S ###########
 
+export sub StringDisplayDlg(string$, title$, exit$)
+	//Displays a string in a box in the middle of the screen.
+	//Any key exits if the string has been completed,
+	//or shows the next screen if there is more.
+	//The value title$ is the title on top of the widget
+	//The value exit$ is the title of the button. Normally OK
+	//This button is a dummy, just for looks.
+	//It works better if you keep your string reasonably short,
+	//since there is no escape button if you make the user
+	//page through 100 pages!
+	//Returns nothing.
+	local original$, a$, widgetwidth, widgetheight, continu
+	clasquinator_initialise() // needed since we don't use get_screen$() here
+	original$ = getscreen$(0,0,screenwidth-1, screenheight - 3)
+	widgetwidth = screenwidth - 5 
+	widgetheight = screenheight - 5
+	continu = 1
+	repeat
+		clasquinator_initialise()
+		drawwidget(title$, exit$, widgetwidth, widgetheight)
+		continu = fillwidget(string$,widgetwidth, widgetheight,continu)
+		a$ = inkey$
+	until(continu = 0)
+	//clear screen
+	put_full_screen(original$)
+end sub
+
 export sub SubMenuDlg$(title$, menustring$,mainmenustring$)
 	return MenuDlg$(title$, menustring$, 1,mainmenustring$)
 end sub
+
 
 #COM######### T ###########
 
@@ -260,12 +288,25 @@ export sub TestForDialogUtility$()
 end sub 
 
 export sub TextFileDlg(filename$, title$, exit$)
-	//Displays a text file.
+	//Displays a text file in the middle of the screen.
+	//Any key exits if the string has been completed,
+	//or shows the next screen if there is more.
 	//The value title$ is the title on top of the widget
 	//The value exit$ is the title of the button. Normally OK
-	//Text wrapping varies from one dialog-provider to the next.
-	//It is better if you preformat your text file.
-	//Returns nothing
+	//This button is a dummy, just for looks.
+	//It works better if you keep your file reasonably short,
+	//since there is no escape button if you make the user
+	//page through 100 pages!
+	//Returns nothing.
+	local string$,handle,a$
+	//filename$ = EncloseText$(trimtext$(filename$))
+	handle = open (filename$, "r")
+	while(not EOF(handle))
+		line input #1 a$
+		string$ = string$ + a$ + " # "
+	wend
+	close handle	
+	StringDisplayDlg(string$, title$, exit$)
 end sub
 
 #COM######### U ###########
@@ -318,22 +359,6 @@ end sub
 #COM######### Z ###########
 
 
-//CLASQUINATOR-SPECIFIC ROUTINES
-
-export sub SubmenuDlg(text$, title$, ok$, cancel$, menustring$)
-	//Create a secondary menu of options for the user to choose from
-	//The value *title$* is the title on top of the widget
-	//The value *ok$* is the text of the accept button, normally OK.
-	//The value *cancel$* is the text of the reject button, normally Cancel.
-	//The value menustring$ is the list of menu options as a single string, separated by hash signs (#). Spaces are allowed.
-	//If the number of options exceed the available space in the widget, the list will be scrollable.
-	//The result is returned as a numeric value, starting from 1
-end sub
-
-export sub SubmenuDlg$(text$, title$, ok$, cancel$, menustring$)
-	return str$(SubmenuDlg(text$, title$, ok$, cancel$, menustring$))
-end sub
-
 //SUPPORTIVE SUBROUTINES
 
 export sub getcmd$()
@@ -374,8 +399,8 @@ sub get_screen$(pos,lines)
 	local content$
 	clasquinator_initialise()
 	if pos > 1 pos = 1: if pos < 0 pos = 0
-	if pos =1 content$ = getscreen$(0,0, screenwidth - 1,lines-1)
-	if pos = 0 content$ = getscreen$(0, screenheight - lines - 1, screenwidth-1, screenheight - 1) 
+	if pos =1 content$ = getscreen$(0,0, screenwidth - 1,lines - 1)
+	if pos = 0 content$ = getscreen$(0, screenheight - lines - 1, screenwidth - 1, screenheight - 1) 
 	return content$
 end sub
 
@@ -390,41 +415,68 @@ sub put_screen(pos,content$,lines)
 	if pos = 0 putscreen content$, 0, screenheight - lines - 1
 end sub
 
+sub put_full_screen(content$)
+	//only for restoring a FULL screen grab.
+	//The value content$ is the string you grabbed earlier with the get_screen$() routine
+	clasquinator_initialise()
+	putscreen content$, 0, 1
+end sub
+
 sub fill_line_with_symbols(lin, mode, symbol$)
 	//fill a line with blanks (i.e. clear it) prior to placing information there
 	//mode = 0 means using the normal print (default)
 	//mode = 1 means using reverse print
 	//symbol$ can be any character you wish, like -, = or #
 	// If supplied, it will be used to draw the line instead of spaces.
+	local n
 	if symbol$ = "" symbol$ = " "
 	if len(symbol$) > 1 symbol$ = left$(symbol$,1)
 	print at (0, lin) " ";
-	for f = 1 to screenwidth -2
+	for n = 1 to screenwidth -2
 		if mode = 1 then
-			print colour ("black", menu_colour$) at (f, lin) symbol$;
+			print colour ("black", menu_colour$) at (n, lin) symbol$;
 		else
-			print colour (menu_colour$, "black") at (f, lin) symbol$;
+			print colour (menu_colour$, "black") at (n, lin) symbol$;
 		endif
-	next f
+	next n
+end sub
+
+sub fill_widget_line_with_symbols(lin, widgetwidth, mode, symbol$)
+	//fill a widget line with blanks (i.e. clear it) or symbols prior to placing information there
+	//mode = 0 means using the normal print (default)
+	//mode = 1 means using reverse print
+	//symbol$ can be any character you wish, like -, = or #
+	// If supplied, it will be used to draw the line instead of spaces.
+	local n
+	if symbol$ = "" symbol$ = " "
+	if len(symbol$) > 1 symbol$ = left$(symbol$,1)
+	print at (3, lin) "";
+	for n = 3 to widgetwidth +1
+		if mode = 1 then
+			print colour ("black", menu_colour$) at (n, lin) symbol$;
+		else
+			print colour (menu_colour$, "black") at (n, lin) symbol$;
+		endif
+	next n
 end sub
 
 sub fill_line_with_blanks(lin)
 	//fill a line with completely black spaces
-	//for some strange reason this does not work with a for ... next loop
-	local a$
+	local a$, n
 	a$ = str$(screenwidth) + ",1:"
-	for f = 1 to screenwidth
+	for n = 1 to screenwidth
 		a$ = a$ + " :Bla:Bla,"
-	next f
+	next n
 	a$ = a$ + ", blb"
 	putscreen a$, 0, lin
 end sub
 
 sub fill_current_line_with_blanks()
 	//fill the current line with completely black spaces
-	for f = 1 to screenwidth
+	local n
+	for n = 1 to screenwidth
 		print colour("black","black") " ";
-	next f
+	next n
 end sub
 
 sub calculate_button_size(button$)
@@ -438,25 +490,35 @@ sub trimtext$(text$)
 	return text$
 end sub
 
-sub wordwrap(w$(),width, arraylimit)
-	local row$
+sub wordwrap(w$(),width, arraylimit,startline)
+	local row$,f
+	//print at (0,startline) "";
 	for f = 1 to arraylimit
 		if len(row$) = 0 then
 			row$ = row$ + w$(f)
 		elseif len(row$ + "  "  + w$(f) ) <= width
 			row$ = row$ + "  "  + w$(f)
 		else
-			print row$
+			fill_line_with_blanks(startline)
+			fill_line_with_blanks(startline + 1)
+			print at (0,startline) row$;
+			startline = startline + 1
+			if startline > screenheight - 5 break: break
 			row$ = w$(f)
 		endif
 	next f
-	if len(row$) > 0  print row$
+	if len(row$) > 0  then
+		fill_line_with_blanks(startline)
+		fill_line_with_blanks(startline + 1)
+		print at (0,startline) row$;
+	endif	
+	return startline + 1
 end sub
 
 sub getanydlg$(title$, text$, start$, type)
 	//type = 0 for files, 1 for directories to open
 	//and type = 2 for files, 3 for directories to create.
-	local a$, original$,items,w$(1),item$, b$, commstring$,linefeed$
+	local a$, original$,items,w$(1),item$, b$, commstring$,linefeed$, n, endline
 	text$ = trimtext$(text$): title$ = trimtext$(title$)
 	if peek$("os") = "unix" then
 		switch type
@@ -494,20 +556,23 @@ sub getanydlg$(title$, text$, start$, type)
 	a$ = system$(commstring$)
 	if (a$ = "" or a$ = "\n" or instr(a$, "File Not Found")) and (type = 0 or type = 1) return ""
 	items= token(a$,w$(), linefeed$)	
-	for f = 1 to items
-		if instr(w$(f), "\r") w$(f) = left$(w$(f), len(w$(f)) - 1)
-		if instr(w$(f), "\n") w$(f) = left$(w$(f), len(w$(f)) - 1)
-		w$(f) = trimtext$(w$(f))
-		if instr(w$(f), " ") w$(f) = EncloseText$(w$(f))
-	next f
+	for n = 1 to items
+		if instr(w$(n), "\r") w$(n) = left$(w$(n), len(w$(n)) - 1)
+		if instr(w$(n), "\n") w$(n) = left$(w$(n), len(w$(n)) - 1)
+		w$(n) = trimtext$(w$(n))
+		if instr(w$(n), " ") w$(n) = EncloseText$(w$(n))
+	next n
 	clasquinator_initialise() // needed since we don't use get_screen$() here
-	original$ = getscreen$(0,0,screenwidth-1, screenheight-1)
-	clear screen
+	original$ = getscreen$(0,0,screenwidth-1, screenheight-2)
+	//clear screen
+	for n = 0 to 4
+		fill_line_with_blanks(n)
+	next n
 	fill_line_with_symbols(0,0, "-")
 	fill_line_with_symbols(3,0, "-")
 	print color(title_colour$) at (int(screenwidth - len(title$)) /2, 0) title$;
-	print at (0,4) "";
-	wordwrap (w$(), screenwidth -1, items)
+	endline = wordwrap (w$(), screenwidth -1, items, 4)
+	fill_line_with_symbols(endline, 0, "=")
 	b$ = "!@#$%^&*()"
 	if type < 2  then
 		while(instr(a$, trimtext$(b$)) = 0)
@@ -527,7 +592,7 @@ sub getanydlg$(title$, text$, start$, type)
 end sub
 
 sub printmenu(menustring$,startline, active_colour$)
-	local w$(1),items, size
+	local w$(1),items, size,f
 	items= token(menustring$,w$(), "#")
 	size = 1: print at (0, startline + 1) " ";
 	for f = 1 to items
@@ -537,4 +602,71 @@ sub printmenu(menustring$,startline, active_colour$)
 		size = size + len(w$(f)) + 2
 		endif
 	next f
+end sub
+
+sub drawwidget(title$, exit$, widgetwidth, widgetheight)
+	local widget_colour$, f
+	for f = 3 to widgetheight + 1
+		fill_widget_line_with_symbols(f, widgetwidth, 0, " ")
+		print color (menu_colour$, menu_colour$) at(3,f) " ";
+		print color (menu_colour$, menu_colour$) at(widgetwidth + 1,f) " ";
+	next f
+	fill_widget_line_with_symbols(3, widgetwidth, 1, " ")
+	fill_widget_line_with_symbols(widgetheight + 1, widgetwidth, 1, " ")
+	switch left$(menu_colour$,3)
+		case "bla"
+		case "red"
+		case "blu"
+		case "mag"
+			widget_colour$ = "white"
+			break
+		case "whi"
+		case "yel"
+		case "cya"
+		case "gre"
+			widget_colour$ = "black"
+			break
+	end switch
+	print color(widget_colour$,menu_colour$) at (int(screenwidth - len(title$)) /2, 3) title$;
+	////////////////////////////////////
+	//FOR FUTURE USE
+	//print color(widget_colour$,menu_colour$) at (5, widgetheight + 1) "Pg";
+	//print color(trigger_colour$,menu_colour$) "D";
+	//print color(widget_colour$,menu_colour$) "wn";
+	//print color("black",menu_colour$) "  Pg";
+	//print color(trigger_colour$,menu_colour$) "U";
+	//print color("widget_colour$,menu_colour$) "p";
+	////////////////////////////////////
+	print color(trigger_colour$,menu_colour$) at(widgetwidth - len(exit$) - 2,widgetheight + 1) left$(exit$,1);
+	print color(widget_colour$,menu_colour$) mid$(exit$, 2);
+end sub
+
+sub fillwidget(string$,widgetwidth, widgetheight, continu)
+	local row$, w$(1), arraylimit, startx, starty, n
+	startx = screenwidth - widgetwidth
+	starty = 4
+	arraylimit = token(string$, w$(), " ")
+	for n = continu to arraylimit
+		if len(row$) = 0 and w$(n) <> "#" then
+			row$ = row$ + w$(n)
+		elseif w$(n) ="#" 
+			print at (startx,starty) "";
+			print row$;
+			starty = starty + 1
+			row$ = ""
+		elseif len(row$ + "  "  + w$(n) ) <= widgetwidth - 4
+			row$ = row$ + "  "  + w$(n)
+		else
+			print at (startx,starty) "";
+			print row$;
+			row$ = w$(n)
+			starty = starty + 1
+			if starty > widgetheight -1 return n
+		endif
+	next n
+	if len(row$) > 0  then
+		print at (startx, starty) "";
+		print row$;
+	endif
+	return 0
 end sub

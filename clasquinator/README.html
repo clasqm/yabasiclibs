@@ -2,7 +2,7 @@
 
 <p>This folder contains a library for yabasic that allows yabasic to display a variety of dialogs in text mode without making use of external commands.</p>
 
-<p><em>Some</em> routines will perhaps also be made available in graphics mode, but keep in mind that you only have one graphics window to play with. if you use these, you will not have the graphics window for your own use.</p>
+<p><em>Some</em> routines will perhaps also be made available in graphics mode. Maybe, one day. I am a better text mode programmer, what can I say? </p>
 
 <p>The library is written as a textmode application and must be run in a terminal. It will not be useful in a headless script.</p>
 
@@ -49,7 +49,7 @@ You should <strong>not</strong> use this library and one of the others in this s
 
 <h2>Variables</h2>
 
-<p>This library requires a small number of <em>global</em> variables. You do not need to initialize them, but don't use the following variable names in your program.</p>
+<p>This library requires a small number of <em>global</em> variables. You do not need to initialize them, but don't use the following variable names in your program unless you have a very good reason.</p>
 
 <ul>
 <li><em>menu_colour$</em></li>
@@ -180,16 +180,47 @@ MessageDlg("This is a simple message dialog. Close it with ENTER or o.","OK")
 <li>Supplied for compatibility purposes, but here it is just an alias for <em>InputDlg</em>() - inputs are not obfuscated with asterisks.</li>
 </ul></li>
 <li><p><strong>RadioDlg$</strong>(title$, menustring$, level, mainmenustring$) - in <em>clasquinator</em>, this is an alias to <em>MenuDlg$()</em>, provided for compatibility.</p></li>
+<li><p><strong>StringDisplayDlg</strong>(string$, title$, exit$) - Displays a string in a box in the middle of the screen. </p>
+
+<ul>
+<li>This box will always be three lines from the top and bottom of the terminal and three columns from the left and right. Resing the terminal will count as a keypress in some operating system!</li>
+<li><em>Any</em> key exits if the string has been completed,or shows the next screen if there is more.</li>
+<li>The value <em>title$</em> is the title on top of the widget.</li>
+<li>The value <em>exit$</em> is the title of the button, normally <em>OK</em>.</li>
+<li>This button is a dummy, just for looks.</li>
+<li>It works better if you keep your string reasonably short, since there is no escape button if you make the user page through 100 pages!</li>
+<li>To open up a new line, embed " # " (a hash mark surrounded by spaces) in your string. You can even open up multiple lines with " # # " and so on.</li>
+<li>Returns nothing</li>
+<li><em>Example:</em>
+<code>
+a$ = "This is the string to display. Let's make it long so that wordwrap is enforced."
+StringDisplayDlg(a$, "String Display Test", "OK")
+</code>
+<img src="./imgs/StringDisplayDlg.png" alt="StringDisplayDlg" title="" /></li>
+</ul></li>
 <li><p><strong>SubMenuDlg$</strong>(title$, menustring$, mainmenustring$) - see <em>MenuDlg$()</em>.</p></li>
 <li><p><strong>TestForDialogUtility$</strong>() - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.</p>
 
 <ul>
 <li>in <em>clasquinator</em>, this is a dummy routine provided for compatibility. It will always return an empty string.</li>
 </ul></li>
-<li><p><strong>TextFileDlg</strong>(filename$, title$, exit$) - Displays a text file.</p>
+<li><p><strong>TextFileDlg</strong>(filename$, title$, exit$) - Displays a text file in a box in the middle of the screen. </p>
 
 <ul>
-<li><strong>To Be Done</strong></li>
+<li>This box will always be three lines from the top and bottom of the terminal and three columns from the left and right. Resing the terminal will count as a keypress in some operating system!</li>
+<li><em>Any</em> key exits if the file has been completed,or shows the next screen if there is more.</li>
+<li>The value <em>title$</em> is the title on top of the widget.</li>
+<li>The value <em>exit$</em> is the title of the button, normally <em>OK</em>.</li>
+<li>This button is a dummy, just for looks.</li>
+<li>It works better if you keep your file reasonably short, since there is no escape button if you make the user page through 100 pages!</li>
+<li>This is meant for simple text files. Trying to feed it complex HTML or Markdown documents is not recommended.</li>
+<li>It is actually better if your text file is not formatted with hard returns. Rather let this routine handle the word wrapping.</li>
+<li>Returns nothing.</li>
+<li><em>Example:</em>
+<code>
+TextFileDlg("./pg4.txt", "The Gettysburg Address", "OK")
+</code>
+<img src="./imgs/TextFileDlg.png" alt="TextFileDlg" title="" /></li>
 </ul></li>
 <li><p><strong>YesNoDlg</strong>(text$,yes$, no$) - Displays a dialog with text (normally a question) and the options to reply yes or no.</p>
 
