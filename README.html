@@ -12,28 +12,28 @@
 <li><a href="https://clasqm.github.io/yabasiclibs/clasquinator/">clasquinator.yab</a> - a yabasic library that attempts to reproduce the functionality of the other four dialog-providing libraries purely from within yabasic.
 <ul>
 <li><em>This library is not 100% compatible with the other four and likely never will be!</em></li>
-<li>This library should work in yabasic for Windows too, but ATM I don't have a Windows box to test that on.</li>
-<li>Currently in planning stage. </li>
+<li>This library should work in yabasic for Windows too, but testing has been very extensive.</li>
+<li>Currently in pre-alpha. </li>
 </ul></li>
-<li><a href="https://clasqm.github.io/yabasiclibs/dialog/">dialoglib.yab</a> - allows the use of the Linux command <em>dialog</em> to display a variety of dialogs in text mode.
+<li><a href="https://clasqm.github.io/yabasiclibs/dialog/">dialoglib.yab</a> - allows the use of the Linux command <em>dialog</em> to display a variety of graphical dialogs in text mode.
 <ul>
-<li>Currently in pre-alpha stage.</li>
+<li>Currently in alpha stage.</li>
 </ul></li>
-<li><a href="https://clasqm.github.io/yabasiclibs/kdialog/">kdialoglib.yab</a> - allows the use of the Linux command <em>kdialog</em> to display a variety of dialogs in text mode.
+<li><a href="https://clasqm.github.io/yabasiclibs/kdialog/">kdialoglib.yab</a> - allows the use of the Linux command <em>kdialog</em> to display a variety of graphical dialogs.
 <ul>
-<li>Currently in pre-alpha stage.</li>
+<li>Currently in alpha stage.</li>
 </ul></li>
 <li><a href="https://clasqm.github.io/yabasiclibs/linuxmisc/">linuxmisclib.yab</a> - allows the use of a variety of common Linux text-mode commands and applications. Also contains a few routines that I just found myself doing over and over.
 <ul>
-<li>Currently in pre-alpha stage.</li>
+<li>Currently in alpha stage.</li>
 </ul></li>
 <li><a href="https://clasqm.github.io/yabasiclibs/whiptail/">whiptaillib.yab</a> - allows the use of the Linux command <em>whiptail</em> to display a variety of dialogs in text mode.
 <ul>
-<li>Currently in pre-alpha stage.</li>
+<li>Currently in alpha stage.</li>
 </ul></li>
-<li><a href="https://clasqm.github.io/yabasiclibs/zenity/">zenitylib.yab</a> - allows the use of the Linux command <em>zenity</em> to display a variety of dialogs in graphical mode.
+<li><a href="https://clasqm.github.io/yabasiclibs/zenity/">zenitylib.yab</a> - allows the use of the Linux command <em>zenity</em> to display a variety of graphical dialogs.
 <ul>
-<li>Currently in pre-alpha stage.</li>
+<li>Currently in alpha stage.</li>
 </ul></li>
 </ul>
 
@@ -48,14 +48,14 @@
 
 <p>Please note that the libraries that give access to dialog boxes cannot be mixed in the same program, as they will create an unholy mess of namespace confusion. Pick one and stick with it! However, the <em>linuxmisclib</em> library can be safely combined with any one of the others.</p>
 
-<p>The dialog-providing routines have common commands as well as dialog-specific ones. If your program sticks religiously to the common routines, you will be able to change it from, say, zenity to kdialog by changing a single <em>import</em> statement.</p>
+<p>The four external dialog-providing routines have common commands as well as dialog-specific ones. If your program sticks religiously to the common routines, you will be able to change it from, say, zenity to kdialog by changing a single <em>import</em> statement.</p>
 
 <p>Get it here: https://github.com/clasqm/yabasiclibs </p>
 
 <h2>What will <em>not</em> be included</h2>
 
 <ul>
-<li>Routines to use GUI apps. There is no possible way to write a routine for every graphical text editor in Linux. And that is just the text editors. My routines are very straightforward and you should be able to adapt them to your own needs.</li>
+<li>Routines to use other GUI apps. There is no possible way to write a routine for every graphical text editor in Linux. And that is just the text editors. My routines are very straightforward and you should be able to adapt them to your own needs.</li>
 <li>Anything to do with emacs. Friends don't let friends use emacs.</li>
 <li>In <em>linuxmisclib</em>, routines that start up in a new xterm. Well, maybe much later.</li>
 <li>In <em>dialog</em>, the directory- and file-selectors. Too clunky to be allowed to live, and there is nothing compatible in <em>whiptail</em> anyway.</li>
