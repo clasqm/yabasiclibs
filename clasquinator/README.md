@@ -56,6 +56,22 @@ This library requires a small number of *global* variables. You do not need to i
 + *screenheight*
 + *screenwidth*
 
+## External utilities required
+
+I didn't quite manage to get away with writing this library without making *any* system calls. You will need the following commands to be installed on your system.
+
++ Linux
+    + ls
+    + grep
+    + pwd
+    + cut
++ Windows
+    + echo
+    + cd
+    + dir
+
+If you don't have these, your system is broken and you really, really need to reinstall your operating system. So I'm not going to worry about it.
+
 ## Routines available:
 
 This library poaches as many ideas as possible from the other four dialog-providing libraries, but there is not 100% compatibility here, so we will not divide things into Common and Clasquinator-specific sections.
