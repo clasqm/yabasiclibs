@@ -312,6 +312,47 @@ end sub
 #COM######### U ###########
 #COM######### V ###########
 #COM######### W ###########
+
+export sub WaitDlg(onoff, text$)
+	//display a small box with a one-line "Please wait" message
+	//while you do something else that does NOT involve printing to screen
+	//(if you do, it will be wiped out when you close the dialog).
+	//Keep your message short! You only have thirty characters to play with.
+	//To display the message, onoff should be 1.
+	//To remove the dialog, just use WaitDlg(0)
+	//Returns nothing.
+	local textlimit, hsize, startline, startcol, offset, f, n
+	static original$
+	switch onoff
+		case 0
+			clasquinator_initialise() // just in case the terminal was resized while other stuff was happening.
+			put_screen(1, original$)
+			original$ = "" //clear out some memory
+			break
+		case 1
+			clasquinator_initialise() // needed since we use the global variables here before we run get_screen$()
+			textlimit = 30
+			text$ = left$(trimtext$(text$), textlimit)
+			hsize = textlimit + 4
+			startcol = int((screenwidth - hsize)/2) -1
+			startline = int((screenheight - 4)/2) - 1
+			original$ = get_screen$(1, startline + 5)
+			offset = int((textlimit - len(text$))/2)
+			for f = startline to startline + 4
+				print color (menu_colour$, menu_colour$) at(startcol, f) " ";
+				print color (menu_colour$, menu_colour$) at(startcol + hsize, f) " ";
+				for n = startcol + 1 to startcol + hsize -1
+					if f = startline or f = startline + 4 then
+						print color (menu_colour$, menu_colour$) at(n,f) " ";
+					else
+						print at(n,f) " ";
+					endif
+				next n
+			next f
+			print at(startcol + offset + 2, startline + 2) text$;
+			break
+	end switch	
+end sub
 #COM######### X ###########
 #COM######### Y ###########
 
@@ -604,15 +645,8 @@ sub printmenu(menustring$,startline, active_colour$)
 	next f
 end sub
 
-sub drawwidget(title$, exit$, widgetwidth, widgetheight)
-	local widget_colour$, f
-	for f = 3 to widgetheight + 1
-		fill_widget_line_with_symbols(f, widgetwidth, 0, " ")
-		print color (menu_colour$, menu_colour$) at(3,f) " ";
-		print color (menu_colour$, menu_colour$) at(widgetwidth + 1,f) " ";
-	next f
-	fill_widget_line_with_symbols(3, widgetwidth, 1, " ")
-	fill_widget_line_with_symbols(widgetheight + 1, widgetwidth, 1, " ")
+sub getwidgetcolour$()
+	local widget_colour$
 	switch left$(menu_colour$,3)
 		case "bla"
 		case "red"
@@ -627,6 +661,19 @@ sub drawwidget(title$, exit$, widgetwidth, widgetheight)
 			widget_colour$ = "black"
 			break
 	end switch
+	return widget_colour$
+end sub
+
+sub drawwidget(title$, exit$, widgetwidth, widgetheight)
+	local widget_colour$, f
+	for f = 3 to widgetheight + 1
+		fill_widget_line_with_symbols(f, widgetwidth, 0, " ")
+		print color (menu_colour$, menu_colour$) at(3,f) " ";
+		print color (menu_colour$, menu_colour$) at(widgetwidth + 1,f) " ";
+	next f
+	fill_widget_line_with_symbols(3, widgetwidth, 1, " ")
+	fill_widget_line_with_symbols(widgetheight + 1, widgetwidth, 1, " ")
+	widget_colour$ = getwidgetcolour$()
 	print color(widget_colour$,menu_colour$) at (int(screenwidth - len(title$)) /2, 3) title$;
 	////////////////////////////////////
 	//FOR FUTURE USE

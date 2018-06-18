@@ -109,7 +109,22 @@ clear screen
 	//b$ = inkey$ //just to see the screen being restored
 
 //test TextFiledlg
+	//for f = 1 to 300: print "testing 1 2 3 ";: next f
+	//TextFileDlg("./pg4.txt", "The Gettysburg Address", "OK")
+	//b$ = inkey$ //just to see the screen being restored
+
+//test WaitDlg
 	for f = 1 to 300: print "testing 1 2 3 ";: next f
-	TextFileDlg("./pg4.txt", "The Gettysburg Address", "OK")
-	b$ = inkey$ //just to see the screen being restored
+	//WaitDlg(1, "This is 30 characters of text.")
+	//WaitDlg(1, "This is more than 30 characters of text.")
+	//WaitDlg(1, "Please wait")	
+	//wait 4 //this is where you would do other stuff
+	//WaitDlg(0)
+	//b$ = inkey$ //just to see the screen being restored
+
+
+
+
+
+
 exit

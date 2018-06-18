@@ -244,6 +244,23 @@ TextFileDlg("./pg4.txt", "The Gettysburg Address", "OK")
 </code>
 <img src="./imgs/TextFileDlg.png" alt="TextFileDlg" title="" /></li>
 </ul></li>
+<li><p><strong>WaitDlg</strong>(onoff, text$) - Display a small box with a centred one-line "Please wait" message or anything else that requires no response.</p>
+
+<ul>
+<li>Use this while you do something else that may take a while that does NOT involve printing to screen.</li>
+<li>If you do print, it will be wiped out when you close the dialog.</li>
+<li>Keep your message short! You only have thirty characters to play with.</li>
+<li>To display the message, <em>onoff</em> should be 1.</li>
+<li>To remove the dialog, just use <em>WaitDlg(0)</em>.</li>
+<li>Returns nothing.</li>
+<li><em>Example:</em>
+<code>
+WaitDlg(1, "Please wait") <br />
+wait 4 //this is where you would do other stuff
+WaitDlg(0)
+</code>
+<img src="./imgs/WaitDlg.png" alt="WaitDlg" title="" /></li>
+</ul></li>
 <li><p><strong>YesNoDlg</strong>(text$,yes$, no$) - Displays a dialog with text (normally a question) and the options to reply yes or no.</p>
 
 <ul>

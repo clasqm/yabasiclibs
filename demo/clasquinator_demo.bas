@@ -24,6 +24,8 @@ a$ = GetDirDlg$("Pick a folder (case-sensitive!)", "Which directory would you li
 MessageDlg("You chose " + a$ + ". Good choice!", "OK")
 b$ = GetFileDlg$("Pick a file (case-sensitive!)", "Now let's pick a file in that directory","../" + a$)
 MessageDlg("You chose " + b$ + " in "+ a$ + ". Another good choice!", "OK")
+WaitDlg(1,"Thank you for playing!")
+pause 4 :WaitDlg(0)
 if peek$("os") = "unix" then
 	system("../standalone_apps/yabscreenfetch")
 	b$ = inkey$

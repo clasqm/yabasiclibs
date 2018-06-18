@@ -211,6 +211,22 @@ TextFileDlg("./pg4.txt", "The Gettysburg Address", "OK")
 ```
 ![TextFileDlg](./imgs/TextFileDlg.png)
 
+
++ **WaitDlg**(onoff, text$) - Display a small box with a centred one-line "Please wait" message or anything else that requires no response.
+    + Use this while you do something else that may take a while that does NOT involve printing to screen.
+    + If you do print, it will be wiped out when you close the dialog.
+    + Keep your message short! You only have thirty characters to play with.
+    + To display the message, *onoff* should be 1.
+    + To remove the dialog, just use *WaitDlg(0)*.
+    + Returns nothing.
+    + *Example:*
+```
+WaitDlg(1, "Please wait")	
+wait 4 //this is where you would do other stuff
+WaitDlg(0)
+```
+![WaitDlg](./imgs/WaitDlg.png)
+
 + **YesNoDlg**(text$,yes$, no$) - Displays a dialog with text (normally a question) and the options to reply yes or no.
     + The first letter of the *yes$* and *no$* variables will become the hotkeys for those buttons, so make sure they are different. Hotkeys are case-insensitive.
     + *no$* is actually a dummy here: pressing anything other than the hotkey for *yes$* will return a no.
