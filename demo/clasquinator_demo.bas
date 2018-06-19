@@ -2,28 +2,46 @@
 clear screen
 import clasquinatorlib
  for f = 1 to 400: print "testing  1 2 3 ";: next f
+//c$ = inkey$ //trace fault
 MessageDlg("This is the clasquinator demo", "Ok")
+//c$ = inkey$ //trace fault
 ShowIntro()
+//c$ = inkey$ //trace fault
 name$ = InputDlg$("Let's get acquainted. What is your name?", "Who are you?", "OK", "Cancel")
+//c$ = inkey$ //trace fault
 welcomemessage$ = "Welcome, " + name$ + ". Let's get this show on the road!"
 MessageDlg(welcomemessage$, "Ok")
+//c$ = inkey$ //trace fault
 LikeIt()
+//c$ = inkey$ //trace fault
 //TextFileDlg("README.md", "The README file", "OK")
+//c$ = inkey$ //trace fault
 name$ = PasswordDlg$("Please enter your banking password", "Banking password?", "OK","Cancel")
+//c$ = inkey$ //trace fault
 MessageDlg("KIDDING! I was just kidding!", "Haha")
+//c$ = inkey$ //trace fault
 name$= "But for the record, you entered: " + name$
 MessageDlg(name$, "Ok")
+//c$ = inkey$ //trace fault
 name$ ="Remember that clunky text menu at the start? It could look much nicer now."
 MessageDlg(name$, "Ok")
 while(a$ <> "q")
 	a$ = ShowMenu$()
 wend
-MessageDlg("Unfortunately, clasquinator has no calendar widget ATM", "Ok")
+//c$ = inkey$ //trace fault
+//MessageDlg("Unfortunately, clasquinator has no calendar widget ATM", "Ok")
 MessageDlg("You can select a directory ...", "OK")
+//c$ = inkey$ //trace fault
+MessageDlg("There are different styles available for this. We will show two of these.", "Ok")
+//c$ = inkey$ //trace fault
 a$ = GetDirDlg$("Pick a folder (case-sensitive!)", "Which directory would you like to choose?","..")
+//c$ = inkey$ //trace fault
 MessageDlg("You chose " + a$ + ". Good choice!", "OK")
-b$ = GetFileDlg$("Pick a file (case-sensitive!)", "Now let's pick a file in that directory","../" + a$)
+//c$ = inkey$ //trace fault
+b$ = GetFileDlg2$("Pick a file (case-sensitive!)", "Now let's pick a file in that directory","../" + a$)
+//c$ = inkey$ //trace fault
 MessageDlg("You chose " + b$ + " in "+ a$ + ". Another good choice!", "OK")
+//c$ = inkey$ //trace fault
 WaitDlg(1,"Thank you for playing!")
 pause 4 :WaitDlg(0)
 if peek$("os") = "unix" then

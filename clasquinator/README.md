@@ -104,6 +104,15 @@ a$ = GetDirDlg$("Pick a folder", "Which directory would you like to see?","~")
 ```
 ![GetDirDlg](./imgs/GetDirDlg.png)
 
++ **GetDirDlg2$**(title$, text$, start$) - Select a directory to open.
+    + Same as GetDirDlg$() but looks different.
+    + *Example*:
+```
+a$ = GetDirDlg2$("Pick a folder", "Which directory would you like to see?","~")
+```
+![GetDirDlg2](./imgs/GetDirDlg2.png)
+
+
 + **GetFileDlg$**(title$, text$, start$) - Select a file to open.
     + Displays the available files but requires user to type it in.
     + The value *title$* is the title on top of the widget
@@ -113,6 +122,9 @@ a$ = GetDirDlg$("Pick a folder", "Which directory would you like to see?","~")
     + An empty string is returned. if there are no existing files. 
     + ONLY available in *clasquinator*, but there are equivalents in *zenity* and *kdialog*.
     + Now works in windows, but there are display bugs to work out.
+
++ **GetFileDlg2$**(title$, text$, start$) - Same as GetFileDlg$() but looks different.
+    + see *GetDirDlg2$()* for an example.
 
 + **InputDlg$**(text$, title$, ok$, cancel$) - Presents a one-line dialog into which the user can type a string answer.
     + The value *title$* is the title on top of the widget
@@ -131,12 +143,18 @@ a$ = InputDlg$("What is your name?", "Who are you?")
     + Will not allow duplicate filenames to be selected.
     + Now works in windows, but there are display bugs to work out.
 
++ **MakeDirDlg2$**(title$, text$, start$) - Same as MakeDirDlg$() but looks different.
+    + see *GetDirDlg2$()* for an example.
+
 + **MakeFileDlg$**(title$, text$, start$) - Create a file.
     + Same as *GetFileDlg$()* but allows user to type a new filename so that it can be created.
     + Will not allow duplicate filenames to be selected.
     + Now works in windows, but there are display bugs to work out.
 
-+ **MenuDlg**(title$, menustring$, level, mainmenustring$) - Create a one-line menu of options for the user to choose from.
++ **MakeFileDlg2$**(title$, text$, start$) - Same as MakeFileDlg$() but looks different.
+    + see *GetDirDlg2$()* for an example.
+
++ **MenuDlg$**(title$, menustring$, level, mainmenustring$) - Create a one-line menu of options for the user to choose from.
     + The value *title$* is the title on top of the widget.
     + The value *menustring$* is the list of menu options as a single string, separated by hash signs (#). Spaces are allowed.
     + The value *level* can be either 0 for a primary menu or 1 for a submenu.

@@ -105,6 +105,11 @@ export sub GetDirDlg$(title$, text$, start$)
 	return getanydlg$(title$, text$, start$,1)
 end sub
 
+export sub GetDirDlg2$(title$, text$, start$)
+	//same as GetDirDlg$() but looks different
+	return getanydlg$(title$, text$, start$,1, " ")
+end sub
+
 export sub GetFileDlg$(title$, text$, start$)
 	//Select a file to open.
 	//displays the available directories but require user to type it in.
@@ -115,6 +120,11 @@ export sub GetFileDlg$(title$, text$, start$)
 	//Result is returned as a string value
 	//ONLY available in clasquinator, but there are equivalents in Zenity and kdialog
 	return getanydlg$(title$, text$, start$,0)
+end sub
+
+export sub GetFileDlg2$(title$, text$, start$)
+	//same as GetFileDlg$() but looks different
+	return getanydlg$(title$, text$, start$,0, " ")
 end sub
 
 #COM######### H ###########
@@ -152,11 +162,21 @@ export sub MakeDirDlg$(title$, text$, start$)
 	return getanydlg$(title$, text$, start$,3)
 end sub
 
+export sub MakeDirDlg2$(title$, text$, start$)
+	//same as MakeDirDlg$() but looks different
+	return getanydlg$(title$, text$, start$,3, " ")
+end sub
+
 export sub MakeFileDlg$(title$, text$, start$)
 	//same as GetFileDlg$() but allows user to type a new
 	//filename so that it can be created. Will not allow
 	//duplicates to be selected.
 	return getanydlg$(title$, text$, start$,2)
+end sub
+
+export sub MakeFileDlg2$(title$, text$, start$)
+	//same as MakeFileDlg$() but looks different
+	return getanydlg$(title$, text$, start$,2, " ")
 end sub
 
 export sub MenuDlg$(title$, menustring$, level,mainmenustring$)
@@ -272,7 +292,7 @@ export sub StringDisplayDlg(string$, title$, exit$)
 		a$ = inkey$
 	until(continu = 0)
 	//clear screen
-	put_full_screen(original$)
+	put_screen(1, original$)
 end sub
 
 export sub SubMenuDlg$(title$, menustring$,mainmenustring$)
@@ -322,12 +342,12 @@ export sub WaitDlg(onoff, text$)
 	//To remove the dialog, just use WaitDlg(0)
 	//Returns nothing.
 	local textlimit, hsize, startline, startcol, offset, f, n
-	static original$
+	static original2$
 	switch onoff
 		case 0
 			clasquinator_initialise() // just in case the terminal was resized while other stuff was happening.
-			put_screen(1, original$)
-			original$ = "" //clear out some memory
+			put_screen(1, original2$)
+			original2$ = "" //clear out some memory
 			break
 		case 1
 			clasquinator_initialise() // needed since we use the global variables here before we run get_screen$()
@@ -336,7 +356,7 @@ export sub WaitDlg(onoff, text$)
 			hsize = textlimit + 4
 			startcol = int((screenwidth - hsize)/2) -1
 			startline = int((screenheight - 4)/2) - 1
-			original$ = get_screen$(1, startline + 5)
+			original2$ = get_screen$(1, startline + 5)
 			offset = int((textlimit - len(text$))/2)
 			for f = startline to startline + 4
 				print color (menu_colour$, menu_colour$) at(startcol, f) " ";
@@ -456,13 +476,6 @@ sub put_screen(pos,content$,lines)
 	if pos = 0 putscreen content$, 0, screenheight - lines - 1
 end sub
 
-sub put_full_screen(content$)
-	//only for restoring a FULL screen grab.
-	//The value content$ is the string you grabbed earlier with the get_screen$() routine
-	clasquinator_initialise()
-	putscreen content$, 0, 1
-end sub
-
 sub fill_line_with_symbols(lin, mode, symbol$)
 	//fill a line with blanks (i.e. clear it) prior to placing information there
 	//mode = 0 means using the normal print (default)
@@ -556,11 +569,20 @@ sub wordwrap(w$(),width, arraylimit,startline)
 	return startline + 1
 end sub
 
-sub getanydlg$(title$, text$, start$, type)
+sub getanydlg$(title$, text$, start$, type, altsymbol$)
 	//type = 0 for files, 1 for directories to open
 	//and type = 2 for files, 3 for directories to create.
-	local a$, original$,items,w$(1),item$, b$, commstring$,linefeed$, n, endline
+	local a$, original$,items,w$(1),item$, b$, commstring$,linefeed$, n, endline, widgetcolour$, widgetbackgroundcolour$
+	clasquinator_initialise() // needed since we don't use get_screen$() here
 	text$ = trimtext$(text$): title$ = trimtext$(title$)
+	if altsymbol$ = "" then
+		altsymbol$ = "-"
+		widgetcolour$ = title_colour$
+		widgetbackgroundcolour$ = "black"
+	else
+		widgetcolour$ = getwidgetcolour$()
+		widgetbackgroundcolour$ = menu_colour$
+	endif
 	if peek$("os") = "unix" then
 		switch type
 			case 0
@@ -603,17 +625,16 @@ sub getanydlg$(title$, text$, start$, type)
 		w$(n) = trimtext$(w$(n))
 		if instr(w$(n), " ") w$(n) = EncloseText$(w$(n))
 	next n
-	clasquinator_initialise() // needed since we don't use get_screen$() here
 	original$ = getscreen$(0,0,screenwidth-1, screenheight-2)
 	//clear screen
 	for n = 0 to 4
 		fill_line_with_blanks(n)
 	next n
-	fill_line_with_symbols(0,0, "-")
-	fill_line_with_symbols(3,0, "-")
-	print color(title_colour$) at (int(screenwidth - len(title$)) /2, 0) title$;
+	fill_line_with_symbols(0,(altsymbol$ <> "-"), altsymbol$)
+	fill_line_with_symbols(3,(altsymbol$ <> "-"), altsymbol$)
+	print color(widgetcolour$, widgetbackgroundcolour$) at (int(screenwidth - len(title$)) /2, 0) title$;
 	endline = wordwrap (w$(), screenwidth -1, items, 4)
-	fill_line_with_symbols(endline, 0, "=")
+	fill_line_with_symbols(endline, (altsymbol$ <> "-"), altsymbol$)
 	b$ = "!@#$%^&*()"
 	if type < 2  then
 		while(instr(a$, trimtext$(b$)) = 0)

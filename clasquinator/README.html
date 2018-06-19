@@ -119,6 +119,16 @@ a$ = GetDirDlg$("Pick a folder", "Which directory would you like to see?","~")
 </code>
 <img src="./imgs/GetDirDlg.png" alt="GetDirDlg" title="" /></li>
 </ul></li>
+<li><p><strong>GetDirDlg2$</strong>(title$, text$, start$) - Select a directory to open.</p>
+
+<ul>
+<li>Same as GetDirDlg$() but looks different.</li>
+<li><em>Example</em>:
+<code>
+a$ = GetDirDlg2$("Pick a folder", "Which directory would you like to see?","~")
+</code>
+<img src="./imgs/GetDirDlg2.png" alt="GetDirDlg2" title="" /></li>
+</ul></li>
 <li><p><strong>GetFileDlg$</strong>(title$, text$, start$) - Select a file to open.</p>
 
 <ul>
@@ -130,6 +140,11 @@ a$ = GetDirDlg$("Pick a folder", "Which directory would you like to see?","~")
 <li>An empty string is returned. if there are no existing files. </li>
 <li>ONLY available in <em>clasquinator</em>, but there are equivalents in <em>zenity</em> and <em>kdialog</em>.</li>
 <li>Now works in windows, but there are display bugs to work out.</li>
+</ul></li>
+<li><p><strong>GetFileDlg2$</strong>(title$, text$, start$) - Same as GetFileDlg$() but looks different.</p>
+
+<ul>
+<li>see <em>GetDirDlg2$()</em> for an example.</li>
 </ul></li>
 <li><p><strong>InputDlg$</strong>(text$, title$, ok$, cancel$) - Presents a one-line dialog into which the user can type a string answer.</p>
 
@@ -152,6 +167,11 @@ a$ = InputDlg$("What is your name?", "Who are you?")
 <li>Will not allow duplicate filenames to be selected.</li>
 <li>Now works in windows, but there are display bugs to work out.</li>
 </ul></li>
+<li><p><strong>MakeDirDlg2$</strong>(title$, text$, start$) - Same as MakeDirDlg$() but looks different.</p>
+
+<ul>
+<li>see <em>GetDirDlg2$()</em> for an example.</li>
+</ul></li>
 <li><p><strong>MakeFileDlg$</strong>(title$, text$, start$) - Create a file.</p>
 
 <ul>
@@ -159,7 +179,12 @@ a$ = InputDlg$("What is your name?", "Who are you?")
 <li>Will not allow duplicate filenames to be selected.</li>
 <li>Now works in windows, but there are display bugs to work out.</li>
 </ul></li>
-<li><p><strong>MenuDlg</strong>(title$, menustring$, level, mainmenustring$) - Create a one-line menu of options for the user to choose from.</p>
+<li><p><strong>MakeFileDlg2$</strong>(title$, text$, start$) - Same as MakeFileDlg$() but looks different.</p>
+
+<ul>
+<li>see <em>GetDirDlg2$()</em> for an example.</li>
+</ul></li>
+<li><p><strong>MenuDlg$</strong>(title$, menustring$, level, mainmenustring$) - Create a one-line menu of options for the user to choose from.</p>
 
 <ul>
 <li>The value <em>title$</em> is the title on top of the widget.</li>
