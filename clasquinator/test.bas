@@ -101,9 +101,9 @@ clear screen
 	//b$ = inkey$ //just to see the screen being restored
 
 //test TextFiledlg
-	for f = 1 to 300: print "testing 1 2 3 ";: next f
-	TextFileDlg2("./pg4.txt", "The Gettysburg Address", "OK")
-	b$ = inkey$ //just to see the screen being restored
+	//for f = 1 to 300: print "testing 1 2 3 ";: next f
+	//TextFileDlg2("./pg4.txt", "The Gettysburg Address", "OK")
+	//b$ = inkey$ //just to see the screen being restored
 
 //test WaitDlg
 	//for f = 1 to 300: print "testing 1 2 3 ";: next f

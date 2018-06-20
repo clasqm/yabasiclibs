@@ -4,13 +4,13 @@ Extension libraries for yabasic.
 
 A series of libraries for [yabasic](http://www.yabasic.de/) , the BASIC dialect by [Marc Ihm](https://github.com/marcIhm), that give access to a number of common utilities on Linux. Not tested on other UNIX platforms, but it should be possible to adjust them accordingly.
 
-This software is still very much in the pre-alpha stage. The routines in the libraries work, but need a lot of optimization and error-trapping.
+This software is still very much in the alpha stage. The routines in the libraries work, but need a lot of optimization and error-trapping.
 
 ## The libraries
 + [clasquinator.yab](https://clasqm.github.io/yabasiclibs/clasquinator/) - a yabasic library that attempts to reproduce the functionality of the other four dialog-providing libraries purely from within yabasic.
     + *This library is not 100% compatible with the other four and likely never will be!*
-    + This library should work in yabasic for Windows too, but testing has been very extensive.
-    + Currently in pre-alpha. 
+    + This library should work in yabasic for Windows too, but testing has been not been very extensive on that platform.
+    + Currently in alpha. 
 + [dialoglib.yab](https://clasqm.github.io/yabasiclibs/dialog/) - allows the use of the Linux command *dialog* to display a variety of graphical dialogs in text mode.
     + Currently in alpha stage.
 + [kdialoglib.yab](https://clasqm.github.io/yabasiclibs/kdialog/) - allows the use of the Linux command *kdialog* to display a variety of graphical dialogs.
