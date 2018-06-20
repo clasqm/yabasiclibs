@@ -76,20 +76,25 @@ If you don't have these, your system is broken and you really, really need to re
 
 This library poaches as many ideas as possible from the other four dialog-providing libraries, but there is not 100% compatibility here, so we will not divide things into Common and Clasquinator-specific sections.
 
-+ **ClearDlg**() - on dialog and whiptail, this clears the dialog from your terminal. Same as the yabasic command CLEAR SCREEN, but may work better if you are expecting to issue another Linux command immediately. On zenity, clasquinator and kdialog, dummy routines are provided for compatibility so that you do not need to rewrite your code.
++ **ClearDlg**()
+    + On *dialog* and *whiptail*, this clears the dialog from your terminal. Same as the yabasic command CLEAR SCREEN, but may work better if you are expecting to issue another Linux command immediately.
+    + On *zenity*, *clasquinator* and *kdialog*, dummy routines are provided for compatibility so that you do not need to rewrite your code.
 
-+ **EncloseText$**(thestring$) - A simplified version of the *EncloseString$*() routine that can be found in the *linuxmisclib* library
++ **EncloseText$**(thestring$)
+    + A simplified version of the *EncloseString$*() routine that can be found in the *linuxmisclib* library
     + Encloses a string in double quotes, if it isn't already.
     + Therefore *a$ = EncloseText$("This is text")* gives the same result as *a$ = "\"This is text\""*
     + Mostly for use with filenames that may include spaces.
 
-+ **getcmd$**() - returns the command set available.
++ **getcmd$**()
+    + Returns the command set available.
     + This is really just for me, to stop me from getting confused while I am editing four libraries simultaneously. 
     + However, you could use it to test which utility (or library, in the case of clasquinator) is currently in use and if it is safe to use routines not in the common list.
     + e.g, *if getcmd$() = "clasquinator" SubmenuDlg(options ....)*
     + or  *if getcmd$() = "zenity" ZNotifyDlg("this is a notification")*
 
-+ **GetDirDlg$**(title$, text$, start$) - Select a directory to open.
++ **GetDirDlg$**(title$, text$, start$)
+    + Select a directory to open.
     + Displays the available directories but requires user to type it in.
     + The value *title$* is the title on top of the widget
     + The value *start$* is the initial directory to start from. If blank or not supplied,this defaults to the current directory.
@@ -104,7 +109,8 @@ a$ = GetDirDlg$("Pick a folder", "Which directory would you like to see?","~")
 ```
 ![GetDirDlg](./imgs/GetDirDlg.png)
 
-+ **GetDirDlg2$**(title$, text$, start$) - Select a directory to open.
++ **GetDirDlg2$**(title$, text$, start$)
+    + Select a directory to open.
     + Same as GetDirDlg$() but looks different.
     + *Example*:
 ```
@@ -113,7 +119,8 @@ a$ = GetDirDlg2$("Pick a folder", "Which directory would you like to see?","~")
 ![GetDirDlg2](./imgs/GetDirDlg2.png)
 
 
-+ **GetFileDlg$**(title$, text$, start$) - Select a file to open.
++ **GetFileDlg$**(title$, text$, start$)
+    + Select a file to open.
     + Displays the available files but requires user to type it in.
     + The value *title$* is the title on top of the widget
     + The value *start$* is the initial directory to start from. If blank or not supplied,this defaults to the current directory.
@@ -123,10 +130,12 @@ a$ = GetDirDlg2$("Pick a folder", "Which directory would you like to see?","~")
     + ONLY available in *clasquinator*, but there are equivalents in *zenity* and *kdialog*.
     + Now works in windows, but there are display bugs to work out.
 
-+ **GetFileDlg2$**(title$, text$, start$) - Same as GetFileDlg$() but looks different.
++ **GetFileDlg2$**(title$, text$, start$)
+    + Same as GetFileDlg$() but looks different.
     + see *GetDirDlg2$()* for an example.
 
-+ **InputDlg$**(text$, title$, ok$, cancel$) - Presents a one-line dialog into which the user can type a string answer.
++ **InputDlg$**(text$, title$, ok$, cancel$)
+    + Presents a one-line dialog into which the user can type a string answer.
     + The value *title$* is the title on top of the widget
     + The values *ok$* and *cancel$* are not used in clasquinator and may be omitted. They are kept in the code for compatibility reasons.
     + ENTER accepts the input, which can also be an empty string.
@@ -138,23 +147,35 @@ a$ = InputDlg$("What is your name?", "Who are you?")
 ```
 ![InputDlg](./imgs/InputDlg.png)
 
-+ **MakeDirDlg$**(title$, text$, start$) - Create a directory.
++ **InputDlg2$**(text$, title$, ok$, cancel$)
+    + same as *InputDlg$*() but looks different.
+    + *Example:*
+```
+a$ = InputDlg2$("What is your name?", "Who are you?")
+```
+![InputDlg2](./imgs/InputDlg2.png)
+
++ **MakeDirDlg$**(title$, text$, start$)
+    + Create a directory.
     + Same as *GetDirDlg$()* but allows user to type a new filename so that it can be created.
     + Will not allow duplicate filenames to be selected.
-    + Now works in windows, but there are display bugs to work out.
 
-+ **MakeDirDlg2$**(title$, text$, start$) - Same as MakeDirDlg$() but looks different.
++ **MakeDirDlg2$**(title$, text$, start$)
+    + Same as MakeDirDlg$() but looks different.
     + see *GetDirDlg2$()* for an example.
 
-+ **MakeFileDlg$**(title$, text$, start$) - Create a file.
++ **MakeFileDlg$**(title$, text$, start$)
+    + Create a file.
     + Same as *GetFileDlg$()* but allows user to type a new filename so that it can be created.
     + Will not allow duplicate filenames to be selected.
     + Now works in windows, but there are display bugs to work out.
 
-+ **MakeFileDlg2$**(title$, text$, start$) - Same as MakeFileDlg$() but looks different.
++ **MakeFileDlg2$**(title$, text$, start$)
+    + Same as MakeFileDlg$() but looks different.
     + see *GetDirDlg2$()* for an example.
 
-+ **MenuDlg$**(title$, menustring$, level, mainmenustring$) - Create a one-line menu of options for the user to choose from.
++ **MenuDlg$**(title$, menustring$, level, mainmenustring$)
+    + Create a one-line menu of options for the user to choose from.
     + The value *title$* is the title on top of the widget.
     + The value *menustring$* is the list of menu options as a single string, separated by hash signs (#). Spaces are allowed.
     + The value *level* can be either 0 for a primary menu or 1 for a submenu.
@@ -167,7 +188,8 @@ a$ = InputDlg$("What is your name?", "Who are you?")
 MenuDlg$("File menu","Open#Close#Exit",1, "File#Edit#Help")
 SubMenuDlg$("File menu","Open#Close#Exit","File#Edit#Help") 
 ```
-+ *Examples:*
+*Examples:*
+
 ```
 a$ = MenuDlg$("Main Menu", "File#Edit#Help", 0)
 ```
@@ -177,22 +199,39 @@ a$ = MenuDlg$("Help Menu", "Help#About", 1, "File#Edit#Help")
 ```
 ![SubMenuDlg](./imgs/SubMenuDlg.png)
 
-+ **MessageDlg**(text$, ok$) - Display a simple message with an OK button.
+As you would expect by now there are commands called *MenuDlg2$()* and *SubMenuDlg2$()* to change the appearance of the menus.
+```
+a$ = SubMenuDlg2$("Help Menu", "Help#About", "File#Edit#Help")
+```
+![SubMenuDlg2](./imgs/SubMenuDlg2.png)
+
++ **MessageDlg**(text$, ok$)
++ **MessageDlg2**(text$, ok$)
+    + Display a simple message with an OK button.
     + The value *ok$* is the text of the accept button, normally OK.
     + You only have one line to play with, so keep those messages short!
     + Returns nothing, therefore does not actually trap the keypress. But the trigger is highlighted to ensure uniformity among the library's widgets
-    + *Example:*
+    + *Examples:*
 ```
-MessageDlg("This is a simple message dialog. Close it with ENTER or o.","OK")
+MessageDlg("This is a simple message dialog. Close it with ENTER or O.","OK")
 ```
 ![MessageDlg](./imgs/MessageDlg.png)
+```
+MessageDlg2("This is a simple message dialog. Close it with ENTER or O.","OK")
+```
+![MessageDlg2](./imgs/MessageDlg2.png)
 
 + **PasswordDlg$**(text$, title$, ok$, cancel$)
-    + Supplied for compatibility purposes, but here it is just an alias for *InputDlg*() - inputs are not obfuscated with asterisks.
++ **PasswordDlg2$**(text$, title$, ok$, cancel$)
+    + Supplied for compatibility purposes, but here it is just an alias for *InputDlg$*() - inputs are not obfuscated with asterisks.
 
-+ **RadioDlg$**(title$, menustring$, level, mainmenustring$) - in *clasquinator*, this is an alias to *MenuDlg$()*, provided for compatibility.
++ **RadioDlg$**(title$, menustring$, level, mainmenustring$)
++ **RadioDlg2$**(title$, menustring$, level, mainmenustring$)
+    * In *clasquinator*, this is an alias to *MenuDlg$()*, provided for compatibility.
 
-+ **StringDisplayDlg**(string$, title$, exit$) - Displays a string in a box in the middle of the screen. 
++ **StringDisplayDlg**(string$, title$, exit$)
++ **StringDisplayDlg2**(string$, title$, exit$)
+    + Displays a string in a box in the middle of the screen. 
     + This box will always be three lines from the top and bottom of the terminal and three columns from the left and right. Resing the terminal will count as a keypress in some operating system!
     + *Any* key exits if the string has been completed,or shows the next screen if there is more.
     + The value *title$* is the title on top of the widget.
@@ -205,15 +244,26 @@ MessageDlg("This is a simple message dialog. Close it with ENTER or o.","OK")
 ```
 a$ = "This is the string to display. Let's make it long so that wordwrap is enforced."
 StringDisplayDlg(a$, "String Display Test", "OK")
+OR
+a$ = "This is the string to display. Let's make it long so that wordwrap is enforced."
+StringDisplayDlg2(a$, "String Display Test", "OK")
 ```
 ![StringDisplayDlg](./imgs/StringDisplayDlg.png)
+(Composite of two commands pictured above)
 
-+ **SubMenuDlg$**(title$, menustring$, mainmenustring$) - see *MenuDlg$()*.
++ **SubMenuDlg$**(title$, menustring$, mainmenustring$)
++ **SubMenuDlg2$**(title$, menustring$, mainmenustring$)
+    + see *MenuDlg$()*.
 
-+ **TestForDialogUtility$**\(\) - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.
++ **TestForDialogUtility$**\(\)
+    + Routine to test if the called utility actually exists on the system.
+    + An empty string returned means it does, otherwise an error message is returned.
     + in *clasquinator*, this is a dummy routine provided for compatibility. It will always return an empty string.
 
-+ **TextFileDlg**(filename$, title$, exit$) - Displays a text file in a box in the middle of the screen. 
++ **TextFileDlg**(filename$, title$, exit$)
++ **TextFileDlg2**(filename$, title$, exit$)
+    + Displays a text file in a box in the middle of the screen.
+    + In appearance this looks exactly like *StringDisplayDlg()* or *StringDisplayDlg2()*, respectively.
     + This box will always be three lines from the top and bottom of the terminal and three columns from the left and right. Resing the terminal will count as a keypress in some operating system!
     + *Any* key exits if the file has been completed,or shows the next screen if there is more.
     + The value *title$* is the title on top of the widget.
@@ -225,12 +275,13 @@ StringDisplayDlg(a$, "String Display Test", "OK")
     + Returns nothing.
     + *Example:*
 ```
-TextFileDlg("./pg4.txt", "The Gettysburg Address", "OK")
+TextFileDlg2("./pg4.txt", "The Gettysburg Address", "OK")
 ```
 ![TextFileDlg](./imgs/TextFileDlg.png)
 
 
-+ **WaitDlg**(onoff, text$) - Display a small box with a centred one-line "Please wait" message or anything else that requires no response.
++ **WaitDlg**(onoff, text$)
+    + Display a small box with a centred one-line "Please wait" message or anything else that requires no response.
     + Use this while you do something else that may take a while that does NOT involve printing to screen.
     + If you do print, it will be wiped out when you close the dialog.
     + Keep your message short! You only have thirty characters to play with.
@@ -238,6 +289,7 @@ TextFileDlg("./pg4.txt", "The Gettysburg Address", "OK")
     + To remove the dialog, just use *WaitDlg(0)*.
     + Returns nothing.
     + *Example:*
+   
 ```
 WaitDlg(1, "Please wait")	
 wait 4 //this is where you would do other stuff
@@ -245,7 +297,8 @@ WaitDlg(0)
 ```
 ![WaitDlg](./imgs/WaitDlg.png)
 
-+ **YesNoDlg**(text$,yes$, no$) - Displays a dialog with text (normally a question) and the options to reply yes or no.
++ **YesNoDlg**(text$,yes$, no$)
+    + Displays a dialog with text (normally a question) and the options to reply yes or no.
     + The first letter of the *yes$* and *no$* variables will become the hotkeys for those buttons, so make sure they are different. Hotkeys are case-insensitive.
     + *no$* is actually a dummy here: pressing anything other than the hotkey for *yes$* will return a no.
     + NOTE: pressing ENTER means NO. If this is not what you want, just swap the labels *yes$* and *no$* around, and *yes$* will become the dummy that is the default on every keypress except the hotkey for *no$*.

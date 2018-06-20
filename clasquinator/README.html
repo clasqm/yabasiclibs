@@ -86,25 +86,33 @@ You should <strong>not</strong> use this library and one of the others in this s
 <p>This library poaches as many ideas as possible from the other four dialog-providing libraries, but there is not 100% compatibility here, so we will not divide things into Common and Clasquinator-specific sections.</p>
 
 <ul>
-<li><p><strong>ClearDlg</strong>() - on dialog and whiptail, this clears the dialog from your terminal. Same as the yabasic command CLEAR SCREEN, but may work better if you are expecting to issue another Linux command immediately. On zenity, clasquinator and kdialog, dummy routines are provided for compatibility so that you do not need to rewrite your code.</p></li>
-<li><p><strong>EncloseText$</strong>(thestring$) - A simplified version of the <em>EncloseString$</em>() routine that can be found in the <em>linuxmisclib</em> library</p>
+<li><p><strong>ClearDlg</strong>()</p>
 
 <ul>
+<li>On <em>dialog</em> and <em>whiptail</em>, this clears the dialog from your terminal. Same as the yabasic command CLEAR SCREEN, but may work better if you are expecting to issue another Linux command immediately.</li>
+<li>On <em>zenity</em>, <em>clasquinator</em> and <em>kdialog</em>, dummy routines are provided for compatibility so that you do not need to rewrite your code.</li>
+</ul></li>
+<li><p><strong>EncloseText$</strong>(thestring$)</p>
+
+<ul>
+<li>A simplified version of the <em>EncloseString$</em>() routine that can be found in the <em>linuxmisclib</em> library</li>
 <li>Encloses a string in double quotes, if it isn't already.</li>
 <li>Therefore <em>a$ = EncloseText$("This is text")</em> gives the same result as <em>a$ = "\"This is text\""</em></li>
 <li>Mostly for use with filenames that may include spaces.</li>
 </ul></li>
-<li><p><strong>getcmd$</strong>() - returns the command set available.</p>
+<li><p><strong>getcmd$</strong>()</p>
 
 <ul>
+<li>Returns the command set available.</li>
 <li>This is really just for me, to stop me from getting confused while I am editing four libraries simultaneously. </li>
 <li>However, you could use it to test which utility (or library, in the case of clasquinator) is currently in use and if it is safe to use routines not in the common list.</li>
 <li>e.g, <em>if getcmd$() = "clasquinator" SubmenuDlg(options ....)</em></li>
 <li>or  <em>if getcmd$() = "zenity" ZNotifyDlg("this is a notification")</em></li>
 </ul></li>
-<li><p><strong>GetDirDlg$</strong>(title$, text$, start$) - Select a directory to open.</p>
+<li><p><strong>GetDirDlg$</strong>(title$, text$, start$)</p>
 
 <ul>
+<li>Select a directory to open.</li>
 <li>Displays the available directories but requires user to type it in.</li>
 <li>The value <em>title$</em> is the title on top of the widget</li>
 <li>The value <em>start$</em> is the initial directory to start from. If blank or not supplied,this defaults to the current directory.</li>
@@ -119,9 +127,10 @@ a$ = GetDirDlg$("Pick a folder", "Which directory would you like to see?","~")
 </code>
 <img src="./imgs/GetDirDlg.png" alt="GetDirDlg" title="" /></li>
 </ul></li>
-<li><p><strong>GetDirDlg2$</strong>(title$, text$, start$) - Select a directory to open.</p>
+<li><p><strong>GetDirDlg2$</strong>(title$, text$, start$)</p>
 
 <ul>
+<li>Select a directory to open.</li>
 <li>Same as GetDirDlg$() but looks different.</li>
 <li><em>Example</em>:
 <code>
@@ -129,9 +138,10 @@ a$ = GetDirDlg2$("Pick a folder", "Which directory would you like to see?","~")
 </code>
 <img src="./imgs/GetDirDlg2.png" alt="GetDirDlg2" title="" /></li>
 </ul></li>
-<li><p><strong>GetFileDlg$</strong>(title$, text$, start$) - Select a file to open.</p>
+<li><p><strong>GetFileDlg$</strong>(title$, text$, start$)</p>
 
 <ul>
+<li>Select a file to open.</li>
 <li>Displays the available files but requires user to type it in.</li>
 <li>The value <em>title$</em> is the title on top of the widget</li>
 <li>The value <em>start$</em> is the initial directory to start from. If blank or not supplied,this defaults to the current directory.</li>
@@ -141,14 +151,16 @@ a$ = GetDirDlg2$("Pick a folder", "Which directory would you like to see?","~")
 <li>ONLY available in <em>clasquinator</em>, but there are equivalents in <em>zenity</em> and <em>kdialog</em>.</li>
 <li>Now works in windows, but there are display bugs to work out.</li>
 </ul></li>
-<li><p><strong>GetFileDlg2$</strong>(title$, text$, start$) - Same as GetFileDlg$() but looks different.</p>
+<li><p><strong>GetFileDlg2$</strong>(title$, text$, start$)</p>
 
 <ul>
+<li>Same as GetFileDlg$() but looks different.</li>
 <li>see <em>GetDirDlg2$()</em> for an example.</li>
 </ul></li>
-<li><p><strong>InputDlg$</strong>(text$, title$, ok$, cancel$) - Presents a one-line dialog into which the user can type a string answer.</p>
+<li><p><strong>InputDlg$</strong>(text$, title$, ok$, cancel$)</p>
 
 <ul>
+<li>Presents a one-line dialog into which the user can type a string answer.</li>
 <li>The value <em>title$</em> is the title on top of the widget</li>
 <li>The values <em>ok$</em> and <em>cancel$</em> are not used in clasquinator and may be omitted. They are kept in the code for compatibility reasons.</li>
 <li>ENTER accepts the input, which can also be an empty string.</li>
@@ -160,33 +172,47 @@ a$ = InputDlg$("What is your name?", "Who are you?")
 </code>
 <img src="./imgs/InputDlg.png" alt="InputDlg" title="" /></li>
 </ul></li>
-<li><p><strong>MakeDirDlg$</strong>(title$, text$, start$) - Create a directory.</p>
+<li><p><strong>InputDlg2$</strong>(text$, title$, ok$, cancel$)</p>
 
 <ul>
+<li>same as <em>InputDlg$</em>() but looks different.</li>
+<li><em>Example:</em>
+<code>
+a$ = InputDlg2$("What is your name?", "Who are you?")
+</code>
+<img src="./imgs/InputDlg2.png" alt="InputDlg2" title="" /></li>
+</ul></li>
+<li><p><strong>MakeDirDlg$</strong>(title$, text$, start$)</p>
+
+<ul>
+<li>Create a directory.</li>
 <li>Same as <em>GetDirDlg$()</em> but allows user to type a new filename so that it can be created.</li>
 <li>Will not allow duplicate filenames to be selected.</li>
-<li>Now works in windows, but there are display bugs to work out.</li>
 </ul></li>
-<li><p><strong>MakeDirDlg2$</strong>(title$, text$, start$) - Same as MakeDirDlg$() but looks different.</p>
+<li><p><strong>MakeDirDlg2$</strong>(title$, text$, start$)</p>
 
 <ul>
+<li>Same as MakeDirDlg$() but looks different.</li>
 <li>see <em>GetDirDlg2$()</em> for an example.</li>
 </ul></li>
-<li><p><strong>MakeFileDlg$</strong>(title$, text$, start$) - Create a file.</p>
+<li><p><strong>MakeFileDlg$</strong>(title$, text$, start$)</p>
 
 <ul>
+<li>Create a file.</li>
 <li>Same as <em>GetFileDlg$()</em> but allows user to type a new filename so that it can be created.</li>
 <li>Will not allow duplicate filenames to be selected.</li>
 <li>Now works in windows, but there are display bugs to work out.</li>
 </ul></li>
-<li><p><strong>MakeFileDlg2$</strong>(title$, text$, start$) - Same as MakeFileDlg$() but looks different.</p>
+<li><p><strong>MakeFileDlg2$</strong>(title$, text$, start$)</p>
 
 <ul>
+<li>Same as MakeFileDlg$() but looks different.</li>
 <li>see <em>GetDirDlg2$()</em> for an example.</li>
 </ul></li>
-<li><p><strong>MenuDlg$</strong>(title$, menustring$, level, mainmenustring$) - Create a one-line menu of options for the user to choose from.</p>
+<li><p><strong>MenuDlg$</strong>(title$, menustring$, level, mainmenustring$)</p>
 
 <ul>
+<li>Create a one-line menu of options for the user to choose from.</li>
 <li>The value <em>title$</em> is the title on top of the widget.</li>
 <li>The value <em>menustring$</em> is the list of menu options as a single string, separated by hash signs (#). Spaces are allowed.</li>
 <li>The value <em>level</em> can be either 0 for a primary menu or 1 for a submenu.</li>
@@ -198,38 +224,62 @@ a$ = InputDlg$("What is your name?", "Who are you?")
 <code>
 MenuDlg$("File menu","Open#Close#Exit",1, "File#Edit#Help")
 SubMenuDlg$("File menu","Open#Close#Exit","File#Edit#Help")
-</code></li>
+</code>
+<em>Examples:</em></li>
 </ul></li>
-<li><p><em>Examples:</em>
-<code>
+</ul>
+
+<p><code>
 a$ = MenuDlg$("Main Menu", "File#Edit#Help", 0)
 </code>
 <img src="./imgs/MenuDlg.png" alt="MenuDlg" title="" />
 <code>
 a$ = MenuDlg$("Help Menu", "Help#About", 1, "File#Edit#Help")
 </code>
-<img src="./imgs/SubMenuDlg.png" alt="SubMenuDlg" title="" /></p></li>
-<li><p><strong>MessageDlg</strong>(text$, ok$) - Display a simple message with an OK button.</p>
+<img src="./imgs/SubMenuDlg.png" alt="SubMenuDlg" title="" /></p>
+
+<p>As you would expect by now there are commands called <em>MenuDlg2$()</em> and <em>SubMenuDlg2$()</em> to change the appearance of the menus.
+<code>
+a$ = SubMenuDlg2$("Help Menu", "Help#About", "File#Edit#Help")
+</code>
+<img src="./imgs/SubMenuDlg2.png" alt="SubMenuDlg2" title="" /></p>
 
 <ul>
+<li><strong>MessageDlg</strong>(text$, ok$)</li>
+<li><p><strong>MessageDlg2</strong>(text$, ok$)</p>
+
+<ul>
+<li>Display a simple message with an OK button.</li>
 <li>The value <em>ok$</em> is the text of the accept button, normally OK.</li>
 <li>You only have one line to play with, so keep those messages short!</li>
 <li>Returns nothing, therefore does not actually trap the keypress. But the trigger is highlighted to ensure uniformity among the library's widgets</li>
-<li><em>Example:</em>
+<li><em>Examples:</em>
 <code>
-MessageDlg("This is a simple message dialog. Close it with ENTER or o.","OK")
+MessageDlg("This is a simple message dialog. Close it with ENTER or O.","OK")
 </code>
-<img src="./imgs/MessageDlg.png" alt="MessageDlg" title="" /></li>
+<img src="./imgs/MessageDlg.png" alt="MessageDlg" title="" />
+<code>
+MessageDlg2("This is a simple message dialog. Close it with ENTER or O.","OK")
+</code>
+<img src="./imgs/MessageDlg2.png" alt="MessageDlg2" title="" /></li>
 </ul></li>
-<li><p><strong>PasswordDlg$</strong>(text$, title$, ok$, cancel$)</p>
+<li><p><strong>PasswordDlg$</strong>(text$, title$, ok$, cancel$)</p></li>
+<li><p><strong>PasswordDlg2$</strong>(text$, title$, ok$, cancel$)</p>
 
 <ul>
-<li>Supplied for compatibility purposes, but here it is just an alias for <em>InputDlg</em>() - inputs are not obfuscated with asterisks.</li>
+<li>Supplied for compatibility purposes, but here it is just an alias for <em>InputDlg$</em>() - inputs are not obfuscated with asterisks.</li>
 </ul></li>
-<li><p><strong>RadioDlg$</strong>(title$, menustring$, level, mainmenustring$) - in <em>clasquinator</em>, this is an alias to <em>MenuDlg$()</em>, provided for compatibility.</p></li>
-<li><p><strong>StringDisplayDlg</strong>(string$, title$, exit$) - Displays a string in a box in the middle of the screen. </p>
+<li><p><strong>RadioDlg$</strong>(title$, menustring$, level, mainmenustring$)</p></li>
+<li><p><strong>RadioDlg2$</strong>(title$, menustring$, level, mainmenustring$)</p>
 
 <ul>
+<li>In <em>clasquinator</em>, this is an alias to <em>MenuDlg$()</em>, provided for compatibility.</li>
+</ul></li>
+<li><p><strong>StringDisplayDlg</strong>(string$, title$, exit$)</p></li>
+<li><p><strong>StringDisplayDlg2</strong>(string$, title$, exit$)</p>
+
+<ul>
+<li>Displays a string in a box in the middle of the screen. </li>
 <li>This box will always be three lines from the top and bottom of the terminal and three columns from the left and right. Resing the terminal will count as a keypress in some operating system!</li>
 <li><em>Any</em> key exits if the string has been completed,or shows the next screen if there is more.</li>
 <li>The value <em>title$</em> is the title on top of the widget.</li>
@@ -242,18 +292,32 @@ MessageDlg("This is a simple message dialog. Close it with ENTER or o.","OK")
 <code>
 a$ = "This is the string to display. Let's make it long so that wordwrap is enforced."
 StringDisplayDlg(a$, "String Display Test", "OK")
+OR
+a$ = "This is the string to display. Let's make it long so that wordwrap is enforced."
+StringDisplayDlg2(a$, "String Display Test", "OK")
 </code>
-<img src="./imgs/StringDisplayDlg.png" alt="StringDisplayDlg" title="" /></li>
+<img src="./imgs/StringDisplayDlg.png" alt="StringDisplayDlg" title="" />
+(Composite of two commands pictured above)</li>
 </ul></li>
-<li><p><strong>SubMenuDlg$</strong>(title$, menustring$, mainmenustring$) - see <em>MenuDlg$()</em>.</p></li>
-<li><p><strong>TestForDialogUtility$</strong>() - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.</p>
+<li><p><strong>SubMenuDlg$</strong>(title$, menustring$, mainmenustring$)</p></li>
+<li><p><strong>SubMenuDlg2$</strong>(title$, menustring$, mainmenustring$)</p>
 
 <ul>
+<li>see <em>MenuDlg$()</em>.</li>
+</ul></li>
+<li><p><strong>TestForDialogUtility$</strong>()</p>
+
+<ul>
+<li>Routine to test if the called utility actually exists on the system.</li>
+<li>An empty string returned means it does, otherwise an error message is returned.</li>
 <li>in <em>clasquinator</em>, this is a dummy routine provided for compatibility. It will always return an empty string.</li>
 </ul></li>
-<li><p><strong>TextFileDlg</strong>(filename$, title$, exit$) - Displays a text file in a box in the middle of the screen. </p>
+<li><p><strong>TextFileDlg</strong>(filename$, title$, exit$)</p></li>
+<li><p><strong>TextFileDlg2</strong>(filename$, title$, exit$)</p>
 
 <ul>
+<li>Displays a text file in a box in the middle of the screen.</li>
+<li>In appearance this looks exactly like <em>StringDisplayDlg()</em> or <em>StringDisplayDlg2()</em>, respectively.</li>
 <li>This box will always be three lines from the top and bottom of the terminal and three columns from the left and right. Resing the terminal will count as a keypress in some operating system!</li>
 <li><em>Any</em> key exits if the file has been completed,or shows the next screen if there is more.</li>
 <li>The value <em>title$</em> is the title on top of the widget.</li>
@@ -265,30 +329,35 @@ StringDisplayDlg(a$, "String Display Test", "OK")
 <li>Returns nothing.</li>
 <li><em>Example:</em>
 <code>
-TextFileDlg("./pg4.txt", "The Gettysburg Address", "OK")
+TextFileDlg2("./pg4.txt", "The Gettysburg Address", "OK")
 </code>
 <img src="./imgs/TextFileDlg.png" alt="TextFileDlg" title="" /></li>
 </ul></li>
-<li><p><strong>WaitDlg</strong>(onoff, text$) - Display a small box with a centred one-line "Please wait" message or anything else that requires no response.</p>
+<li><p><strong>WaitDlg</strong>(onoff, text$)</p>
 
 <ul>
+<li>Display a small box with a centred one-line "Please wait" message or anything else that requires no response.</li>
 <li>Use this while you do something else that may take a while that does NOT involve printing to screen.</li>
 <li>If you do print, it will be wiped out when you close the dialog.</li>
 <li>Keep your message short! You only have thirty characters to play with.</li>
 <li>To display the message, <em>onoff</em> should be 1.</li>
 <li>To remove the dialog, just use <em>WaitDlg(0)</em>.</li>
 <li>Returns nothing.</li>
-<li><em>Example:</em>
-<code>
+<li><em>Example:</em></li>
+</ul></li>
+</ul>
+
+<p><code>
 WaitDlg(1, "Please wait") <br />
 wait 4 //this is where you would do other stuff
 WaitDlg(0)
 </code>
-<img src="./imgs/WaitDlg.png" alt="WaitDlg" title="" /></li>
-</ul></li>
-<li><p><strong>YesNoDlg</strong>(text$,yes$, no$) - Displays a dialog with text (normally a question) and the options to reply yes or no.</p>
+<img src="./imgs/WaitDlg.png" alt="WaitDlg" title="" /></p>
 
 <ul>
+<li><strong>YesNoDlg</strong>(text$,yes$, no$)
+<ul>
+<li>Displays a dialog with text (normally a question) and the options to reply yes or no.</li>
 <li>The first letter of the <em>yes$</em> and <em>no$</em> variables will become the hotkeys for those buttons, so make sure they are different. Hotkeys are case-insensitive.</li>
 <li><em>no$</em> is actually a dummy here: pressing anything other than the hotkey for <em>yes$</em> will return a no.</li>
 <li>NOTE: pressing ENTER means NO. If this is not what you want, just swap the labels <em>yes$</em> and <em>no$</em> around, and <em>yes$</em> will become the dummy that is the default on every keypress except the hotkey for <em>no$</em>.</li>

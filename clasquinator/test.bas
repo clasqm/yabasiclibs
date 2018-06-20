@@ -8,7 +8,7 @@ clear screen
 
 //test simple message dialog
 	//for f = 1 to 300: print "testing  1 2 3 ";: next f
-	//MessageDlg("\"  This is a simple message dialog. Close it with ENTER or o.\"","OK")
+	//MessageDlg("\"  This is a simple message dialog. Close it with ENTER or O.\"","OK")
 	//a$ = inkey$
 	
 //test yesno dialog
@@ -25,24 +25,16 @@ clear screen
 
 // test InputDlg$
 	//for f = 1 to 300: print "testing  1 2 3 ";: next f
-	//a$ =  InputDlg$("What is your name?", "Who are you?")
+	//a$ =  InputDlg2$("What is your name?", "Who are you?")
 	//b$ = inkey$
 	//print a$
 
 //test PasswordDlg
 	//print PasswordDlg$("\"You can enter a password here\"","\"Password entry\"", "Ok", "Cancel")
 
-//test MenuDlg
-	//a = MenuDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above"): print a
-	//a$ = MenuDlg$("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above"):print a$
-
-//test RadioDlg
-	//a = RadioDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Magic"): print a
-	//a$ = RadioDlg$("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Science"):print a$	
-
 //test GetDirDlg$()
-	for f = 1 to 300: print "testing  1 2 3 ";: next f
-	a$ = GetDirDlg$("Pick a folder", "Which directory would you like to see?","")
+	//for f = 1 to 300: print "testing  1 2 3 ";: next f
+	//a$ = GetDirDlg$("Pick a folder", "Which directory would you like to see?","")
 	//if a$ <> "" then
 	//	b$ = inkey$ //just to see the screen being restored
 	//	clear screen
@@ -104,18 +96,18 @@ clear screen
 
 //test StringDisplayDlg
 	//for f = 1 to 300: print "testing123";: next f
-	//a$ = "This is the string to display. # # Let's make it long so that wordwrap is enforced."
+	//a$ = "This is the string to display. Let's make it long so that wordwrap is enforced."
 	//StringDisplayDlg(a$, "String Display Test", "OK")
 	//b$ = inkey$ //just to see the screen being restored
 
 //test TextFiledlg
-	//for f = 1 to 300: print "testing 1 2 3 ";: next f
-	//TextFileDlg("./pg4.txt", "The Gettysburg Address", "OK")
-	//b$ = inkey$ //just to see the screen being restored
+	for f = 1 to 300: print "testing 1 2 3 ";: next f
+	TextFileDlg2("./pg4.txt", "The Gettysburg Address", "OK")
+	b$ = inkey$ //just to see the screen being restored
 
 //test WaitDlg
 	//for f = 1 to 300: print "testing 1 2 3 ";: next f
-	//WaitDlg(1, "This is 30 characters of text.")
+	//''WaitDlg(1, "This is 30 characters of text.")
 	//WaitDlg(1, "This is more than 30 characters of text.")
 	//WaitDlg(1, "Please wait")	
 	//wait 4 //this is where you would do other stuff
