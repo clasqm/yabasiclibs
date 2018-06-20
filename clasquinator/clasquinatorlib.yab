@@ -614,17 +614,17 @@ sub getanydlg$(title$, text$, start$, type, altsymbol$)
 			start$ = system$("echo %cd%")
 			start$ = left$(start$, len(start$) - 2) //strip off trailing \r\n
 		endif
-		linefeed$ = "\r"
+		linefeed$ = "\n\r"
 	endif
 	a$ = system$(commstring$)
 	if (a$ = "" or a$ = "\n" or instr(a$, "File Not Found")) and (type = 0 or type = 1) return ""
 	items= token(a$,w$(), linefeed$)	
-	for n = 1 to items
-		if instr(w$(n), "\r") w$(n) = left$(w$(n), len(w$(n)) - 1)
-		if instr(w$(n), "\n") w$(n) = left$(w$(n), len(w$(n)) - 1)
-		w$(n) = trimtext$(w$(n))
-		if instr(w$(n), " ") w$(n) = EncloseText$(w$(n))
-	next n
+	//for n = 1 to items
+		//if instr(w$(n), "\r") w$(n) = left$(w$(n), len(w$(n)) - 1)
+		//if instr(w$(n), "\n") w$(n) = left$(w$(n), len(w$(n)) - 1)
+		//w$(n) = trimtext$(w$(n))
+		//if instr(w$(n), " ") w$(n) = EncloseText$(w$(n))
+	//next n
 	original$ = getscreen$(0,0,screenwidth-1, screenheight-2)
 	//clear screen
 	for n = 0 to 4

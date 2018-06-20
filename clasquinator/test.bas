@@ -41,8 +41,8 @@ clear screen
 	//a$ = RadioDlg$("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Science"):print a$	
 
 //test GetDirDlg$()
-	//for f = 1 to 300: print "testing  1 2 3 ";: next f
-	//a$ = GetDirDlg2$("Pick a folder", "Which directory would you like to see?",".")
+	for f = 1 to 300: print "testing  1 2 3 ";: next f
+	a$ = GetDirDlg$("Pick a folder", "Which directory would you like to see?","")
 	//if a$ <> "" then
 	//	b$ = inkey$ //just to see the screen being restored
 	//	clear screen
@@ -62,7 +62,7 @@ clear screen
 
 //test GetFileDlg$()
 	//for f = 1 to 300: print "testing  1 2 3 ";: next f
-	//a$ = GetFileDlg$("Pick a file", "Please select a file?","./test")
+	//a$ = GetFileDlg$("Pick a file", "Please select a file?",".")
 	//if a$ <> "" then
 	//	b$ = inkey$ //just to see the screen being restored
 	//	clear screen
@@ -114,13 +114,13 @@ clear screen
 	//b$ = inkey$ //just to see the screen being restored
 
 //test WaitDlg
-	for f = 1 to 300: print "testing 1 2 3 ";: next f
-	WaitDlg(1, "This is 30 characters of text.")
+	//for f = 1 to 300: print "testing 1 2 3 ";: next f
+	//WaitDlg(1, "This is 30 characters of text.")
 	//WaitDlg(1, "This is more than 30 characters of text.")
 	//WaitDlg(1, "Please wait")	
-	wait 4 //this is where you would do other stuff
-	WaitDlg(0)
-	b$ = inkey$ //just to see the screen being restored
+	//wait 4 //this is where you would do other stuff
+	//WaitDlg(0)
+	//b$ = inkey$ //just to see the screen being restored
 
 
 
