@@ -411,7 +411,7 @@ export sub WaitDlg(onoff, text$)
 			original2$ = "" //clear out some memory
 			break
 		case 1
-			clasquinator_initialise() // needed since we use the global variables here before we run get_screen$()
+			clasquinator_initialise()
 			textlimit = 30
 			text$ = left$(trimtext$(text$), textlimit)
 			hsize = textlimit + 4
@@ -580,11 +580,10 @@ sub fill_line_with_blanks(lin)
 	local a$, n
 	a$ = str$(screenwidth) + ",1:"
 	for n = 1 to screenwidth
-		print colour("black","black") " ";
 		a$ = a$ + " :Bla:Bla,"
 	next n
 	a$ = a$ + ", blb"
-	//putscreen a$, 0, lin
+	putscreen a$, 0, lin
 end sub
 
 sub fill_current_line_with_blanks()
