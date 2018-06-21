@@ -33,10 +33,10 @@ clear screen
 	//print PasswordDlg$("\"You can enter a password here\"","\"Password entry\"", "Ok", "Cancel")
 
 //test GetDirDlg$()
-	//for f = 1 to 300: print "testing  1 2 3 ";: next f
-	//a$ = GetDirDlg$("Pick a folder", "Which directory would you like to see?","")
-	//if a$ <> "" then
-	//	b$ = inkey$ //just to see the screen being restored
+	for f = 1 to 300: print "testing  1 2 3 ";: next f
+	a$ = GetDirDlg4$("Pick a folder", "Which directory would you like to see?","")
+	if a$ <> "" then
+		b$ = inkey$ //just to see the screen being restored
 	//	clear screen
 	//	print at(0,5) "The contents of " + a$ + ": "
 	//	if peek$("os") = "unix" then
@@ -50,7 +50,7 @@ clear screen
 	//	clear screen
 	//	print at(0,5) "No directories to select!"
 	//	b$ = inkey$
-	//endif
+	endif
 
 //test GetFileDlg$()
 	//for f = 1 to 300: print "testing  1 2 3 ";: next f
@@ -107,7 +107,7 @@ clear screen
 
 //test WaitDlg
 	//for f = 1 to 300: print "testing 1 2 3 ";: next f
-	//''WaitDlg(1, "This is 30 characters of text.")
+	//WaitDlg2(1, "This is 30 characters of text.")
 	//WaitDlg(1, "This is more than 30 characters of text.")
 	//WaitDlg(1, "Please wait")	
 	//wait 4 //this is where you would do other stuff

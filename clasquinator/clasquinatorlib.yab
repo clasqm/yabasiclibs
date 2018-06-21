@@ -110,6 +110,16 @@ export sub GetDirDlg2$(title$, text$, start$)
 	return getanydlg$(title$, text$, start$,1, " ")
 end sub
 
+export sub GetDirDlg3$(title$, text$, start$)
+	//same as GetDirDlg$() but looks different
+	return getanydlg$(title$, text$, start$,1, "*")
+end sub
+
+export sub GetDirDlg4$(title$, text$, start$)
+	//same as GetDirDlg$() but looks different
+	return getanydlg$(title$, text$, start$,1, "#")
+end sub
+
 export sub GetFileDlg$(title$, text$, start$)
 	//Select a file to open.
 	//displays the available directories but require user to type it in.
@@ -125,6 +135,16 @@ end sub
 export sub GetFileDlg2$(title$, text$, start$)
 	//same as GetFileDlg$() but looks different
 	return getanydlg$(title$, text$, start$,0, " ")
+end sub
+
+export sub GetFileDlg3$(title$, text$, start$)
+	//same as GetFileDlg$() but looks different
+	return getanydlg$(title$, text$, start$,0, "*")
+end sub
+
+export sub GetFileDlg4$(title$, text$, start$)
+	//same as GetFileDlg$() but looks different
+	return getanydlg$(title$, text$, start$,0, "#")
 end sub
 
 #COM######### H ###########
@@ -145,7 +165,7 @@ export sub InputDlg$(text$, title$, ok$, cancel$, altsymbol$)
 		altsymbol$ = "-"
 		widgetcolour$ = title_colour$
 		widgetbackgroundcolour$ = "black"
-	elseif altsymbol$ = " "
+	else
 		widgetcolour$ = getwidgetcolour$()
 		widgetbackgroundcolour$ = menu_colour$
 	endif
@@ -167,6 +187,16 @@ export sub InputDlg2$(text$, title$, ok$, cancel$)
 	return InputDlg$(text$, title$, ok$, cancel$, " ")
 end sub
 
+export sub InputDlg3$(text$, title$, ok$, cancel$)
+	//same as InputDlg, but looks different
+	return InputDlg$(text$, title$, ok$, cancel$, "*")
+end sub
+
+export sub InputDlg4$(text$, title$, ok$, cancel$)
+	//same as InputDlg, but looks different
+	return InputDlg$(text$, title$, ok$, cancel$, "#")
+end sub
+
 #COM######### J ###########
 #COM######### K ###########
 #COM######### L ###########
@@ -183,6 +213,17 @@ export sub MakeDirDlg2$(title$, text$, start$)
 	//same as MakeDirDlg$() but looks different
 	return getanydlg$(title$, text$, start$,3, " ")
 end sub
+
+export sub MakeDirDlg3$(title$, text$, start$)
+	//same as MakeDirDlg$() but looks different
+	return getanydlg$(title$, text$, start$,3, "*")
+end sub
+
+export sub MakeDirDlg4$(title$, text$, start$)
+	//same as MakeDirDlg$() but looks different
+	return getanydlg$(title$, text$, start$,3, "#")
+end sub
+
 
 export sub MakeFileDlg$(title$, text$, start$)
 	//same as GetFileDlg$() but allows user to type a new
@@ -225,7 +266,7 @@ export sub MenuDlg$(title$, menustring$, level,mainmenustring$, altsymbol$)
 		altsymbol$ = "-"
 		widgetcolour$ = title_colour$
 		widgetbackgroundcolour$ = "black"
-	elseif altsymbol$ = " "
+	else
 		widgetcolour$ = getwidgetcolour$()
 		widgetbackgroundcolour$ = menu_colour$
 	endif
@@ -260,6 +301,16 @@ export sub MenuDlg2$(title$, menustring$, level,mainmenustring$)
 	return MenuDlg$(title$, menustring$, level, mainmenustring$, " ")
 end sub
 
+export sub MenuDlg3$(title$, menustring$, level,mainmenustring$)
+	//Same as MenuDlg$() but looks different.
+	return MenuDlg$(title$, menustring$, level, mainmenustring$, "*")
+end sub
+
+export sub MenuDlg4$(title$, menustring$, level,mainmenustring$)
+	//Same as MenuDlg$() but looks different.
+	return MenuDlg$(title$, menustring$, level, mainmenustring$, "#")
+end sub
+
 export sub MessageDlg(text$, ok$, altsymbol$)
 	//display a simple message with an OK button 
 	//The value *ok$* is the text of the accept button, normally OK.
@@ -272,8 +323,8 @@ export sub MessageDlg(text$, ok$, altsymbol$)
 	for f = 0 to 2: fill_line_with_blanks(f):next f
 	if altsymbol$ = "" then
 		fill_line_with_symbols(1,0, "-")
-	elseif altsymbol$ = " "
-		fill_line_with_symbols(1,1, " ")
+	else
+		fill_line_with_symbols(1,1, altsymbol$)
 	endif
 	spaceleft = screenwidth - calculate_button_size(ok$) - 2
 	print color(menu_colour$) at(1, 0) left$(text$, spaceleft);
@@ -288,6 +339,14 @@ end sub
 
 export sub MessageDlg2(text$, ok$)
 	MessageDlg(text$, ok$, " ")
+end sub
+
+export sub MessageDlg3(text$, ok$)
+	MessageDlg(text$, ok$, "*")
+end sub
+
+export sub MessageDlg4(text$, ok$)
+	MessageDlg(text$, ok$, "#")
 end sub
 
 #COM######### N ###########
@@ -306,15 +365,33 @@ export sub PasswordDlg2$(text$, title$, ok$, cancel$)
 	return InputDlg$(text$, title$, ok$, cancel$, " ")
 end sub
 
+export sub PasswordDlg3$(text$, title$, ok$, cancel$)
+	return InputDlg$(text$, title$, ok$, cancel$, "*")
+end sub
+
+export sub PasswordDlg4$(text$, title$, ok$, cancel$)
+	return InputDlg$(text$, title$, ok$, cancel$, "#")
+end sub
+
 #COM######### Q ###########
 #COM######### R ###########
 
 export sub RadioDlg$(title$, menustring$, level,mainmenustring$)
+	//Supplied for compatibility purposes, but here is just an 
+	//alias for InputDlg2$()
 	return MenuDlg$(title$, menustring$, level,mainmenustring$)
 end sub
 
 export sub RadioDlg2$(title$, menustring$, level,mainmenustring$)
 	return MenuDlg$(title$, menustring$, level,mainmenustring$, " ")
+end sub
+
+export sub RadioDlg3$(title$, menustring$, level,mainmenustring$)
+	return MenuDlg$(title$, menustring$, level,mainmenustring$, "*")
+end sub
+
+export sub RadioDlg4$(title$, menustring$, level,mainmenustring$)
+	return MenuDlg$(title$, menustring$, level,mainmenustring$, "#")
 end sub
 
 #COM######### S ###########
@@ -325,6 +402,7 @@ export sub StringDisplayDlg(string$, title$, exit$, altsymbol$)
 	//or shows the next screen if there is more.
 	//The value title$ is the title on top of the widget
 	//The value exit$ is the title of the button. Normally OK
+	//The value altsymbol$ is for internal use only
 	//This button is a dummy, just for looks.
 	//It works better if you keep your string reasonably short,
 	//since there is no escape button if you make the user
@@ -349,12 +427,28 @@ export sub StringDisplayDlg2(string$, title$, exit$)
 	StringDisplayDlg(string$, title$, exit$, " ")
 end sub
 
+export sub StringDisplayDlg3(string$, title$, exit$)
+	StringDisplayDlg(string$, title$, exit$, "*")
+end sub
+
+export sub StringDisplayDlg4(string$, title$, exit$)
+	StringDisplayDlg(string$, title$, exit$, "#")
+end sub
+
 export sub SubMenuDlg$(title$, menustring$,mainmenustring$)
 	return MenuDlg$(title$, menustring$, 1,mainmenustring$)
 end sub
 
 export sub SubMenuDlg2$(title$, menustring$,mainmenustring$)
 	return MenuDlg$(title$, menustring$, 1,mainmenustring$, " ")
+end sub
+
+export sub SubMenuDlg3$(title$, menustring$,mainmenustring$)
+	return MenuDlg$(title$, menustring$, 1,mainmenustring$, "*")
+end sub
+
+export sub SubMenuDlg4$(title$, menustring$,mainmenustring$)
+	return MenuDlg$(title$, menustring$, 1,mainmenustring$, "#")
 end sub
 
 #COM######### T ###########
@@ -370,6 +464,7 @@ export sub TextFileDlg(filename$, title$, exit$, altsymbol$)
 	//or shows the next screen if there is more.
 	//The value title$ is the title on top of the widget
 	//The value exit$ is the title of the button. Normally OK
+	//The value altsymbol$ is for internal use only
 	//This button is a dummy, just for looks.
 	//It works better if you keep your file reasonably short,
 	//since there is no escape button if you make the user
@@ -390,19 +485,28 @@ export sub TextFileDlg2(filename$, title$, exit$)
 	TextFileDlg(filename$, title$, exit$, " ")
 end sub
 
+export sub TextFileDlg3(filename$, title$, exit$)
+	TextFileDlg(filename$, title$, exit$, "*")
+end sub
+
+export sub TextFileDlg4(filename$, title$, exit$)
+	TextFileDlg(filename$, title$, exit$, "#")
+end sub
+
 #COM######### U ###########
 #COM######### V ###########
 #COM######### W ###########
 
-export sub WaitDlg(onoff, text$)
+export sub WaitDlg(onoff, text$, altsymbol$)
 	//display a small box with a one-line "Please wait" message
 	//while you do something else that does NOT involve printing to screen
 	//(if you do, it will be wiped out when you close the dialog).
 	//Keep your message short! You only have thirty characters to play with.
-	//To display the message, onoff should be 1.
+	//To display the message, onoff should be 1 and text$ must be supplied.
 	//To remove the dialog, just use WaitDlg(0)
+	//The value altsymbol$ is for internal use only
 	//Returns nothing.
-	local textlimit, hsize, startline, startcol, offset, f, n
+	local textlimit, hsize, startline, startcol, offset, f, n, widgetbackgroundcolour$, widgetcolour$, sidesymbol$
 	static original2$
 	switch onoff
 		case 0
@@ -419,12 +523,22 @@ export sub WaitDlg(onoff, text$)
 			startline = int((screenheight - 4)/2) - 1
 			original2$ = get_screen$(1, startline + 5)
 			offset = int((textlimit - len(text$))/2)
+			if altsymbol$ = "" then
+				altsymbol$ = "-"
+				sidesymbol$ = "|"
+				widgetcolour$ = title_colour$
+				widgetbackgroundcolour$ = "black"
+			else
+				sidesymbol$ = altsymbol$
+				widgetcolour$ = getwidgetcolour$()
+				widgetbackgroundcolour$ = menu_colour$
+			endif
 			for f = startline to startline + 4
-				print color (menu_colour$, menu_colour$) at(startcol, f) " ";
-				print color (menu_colour$, menu_colour$) at(startcol + hsize, f) " ";
+				print color (widgetcolour$, widgetbackgroundcolour$) at(startcol, f) sidesymbol$;
+				print color (widgetcolour$, widgetbackgroundcolour$) at(startcol + hsize, f) sidesymbol$;
 				for n = startcol + 1 to startcol + hsize -1
 					if f = startline or f = startline + 4 then
-						print color (menu_colour$, menu_colour$) at(n,f) " ";
+						print color (widgetcolour$, widgetbackgroundcolour$) at(n,f) altsymbol$;
 					else
 						print at(n,f) " ";
 					endif
@@ -434,6 +548,22 @@ export sub WaitDlg(onoff, text$)
 			break
 	end switch	
 end sub
+
+export sub WaitDlg2(onoff, text$)
+	//same as WaitDlg() but looks different
+	WaitDlg(onoff, text$, " ")
+end sub
+
+export sub WaitDlg3(onoff, text$)
+	//same as WaitDlg() but looks different
+	WaitDlg(onoff, text$, "*")
+end sub
+
+export sub WaitDlg3(onoff, text$)
+	//same as WaitDlg() but looks different
+	WaitDlg(onoff, text$, "#")
+end sub
+
 #COM######### X ###########
 #COM######### Y ###########
 
@@ -640,7 +770,7 @@ sub getanydlg$(title$, text$, start$, type, altsymbol$)
 		altsymbol$ = "-"
 		widgetcolour$ = title_colour$
 		widgetbackgroundcolour$ = "black"
-	elseif altsymbol$ = " "
+	else
 		widgetcolour$ = getwidgetcolour$()
 		widgetbackgroundcolour$ = menu_colour$
 	endif
@@ -753,10 +883,10 @@ sub drawwidget(title$, exit$, widgetwidth, widgetheight,altsymbol$)
 		sidesymbol$ = "|"
 		widgetcolour$ = title_colour$
 		widgetbackgroundcolour$ = "black"
-	elseif altsymbol$ = " "
+	else 
 		widgetcolour$ = getwidgetcolour$()
 		widgetbackgroundcolour$ = menu_colour$
-		sidesymbol$ = " "
+		sidesymbol$ = altsymbol$
 	endif
 	text$ = trimtext$(text$): title$ = trimtext$(title$)
 	for f = 3 to widgetheight + 1

@@ -138,7 +138,32 @@ a$ = GetDirDlg2$("Pick a folder", "Which directory would you like to see?","~")
 </code>
 <img src="./imgs/GetDirDlg2.png" alt="GetDirDlg2" title="" /></li>
 </ul></li>
-<li><p><strong>GetFileDlg$</strong>(title$, text$, start$)</p>
+<li><p><strong>GetDirDlg3$</strong>(title$, text$, start$)</p>
+
+<ul>
+<li>Select a directory to open.</li>
+<li>Same as GetDirDlg$() but looks different.</li>
+<li><em>Example</em>:
+<code>
+a$ = GetDirDlg3$("Pick a folder", "Which directory would you like to see?","~")
+</code>
+<img src="./imgs/GetDirDlg3.png" alt="GetDirDlg3" title="" /></li>
+</ul></li>
+<li><p><strong>GetDirDlg4$</strong>(title$, text$, start$)</p>
+
+<ul>
+<li>Select a directory to open.</li>
+<li>Same as GetDirDlg$() but looks different.</li>
+<li><em>Example</em>:
+<code>
+a$ = GetDirDlg4$("Pick a folder", "Which directory would you like to see?","~")
+</code>
+<img src="./imgs/GetDirDlg4.png" alt="GetDirDlg4" title="" /></li>
+</ul></li>
+<li><p><strong>GetFileDlg$</strong>(title$, text$, start$)</p></li>
+<li><strong>GetFileDlg2$</strong>(title$, text$, start$)</li>
+<li><strong>GetFileDlg3$</strong>(title$, text$, start$)</li>
+<li><p><strong>GetFileDlg4$</strong>(title$, text$, start$)</p>
 
 <ul>
 <li>Select a file to open.</li>
@@ -151,66 +176,58 @@ a$ = GetDirDlg2$("Pick a folder", "Which directory would you like to see?","~")
 <li>ONLY available in <em>clasquinator</em>, but there are equivalents in <em>zenity</em> and <em>kdialog</em>.</li>
 <li>Now works in windows, but there are display bugs to work out.</li>
 </ul></li>
-<li><p><strong>GetFileDlg2$</strong>(title$, text$, start$)</p>
-
-<ul>
-<li>Same as GetFileDlg$() but looks different.</li>
-<li>see <em>GetDirDlg2$()</em> for an example.</li>
-</ul></li>
-<li><p><strong>InputDlg$</strong>(text$, title$, ok$, cancel$)</p>
-
+<li><p><strong>InputDlg$</strong>(text$, title$, ok$, cancel$)</p></li>
+<li><strong>InputDlg2$</strong>(text$, title$, ok$, cancel$)</li>
+<li><strong>InputDlg3$</strong>(text$, title$, ok$, cancel$)</li>
+<li><strong>InputDlg4$</strong>(text$, title$, ok$, cancel$)
 <ul>
 <li>Presents a one-line dialog into which the user can type a string answer.</li>
-<li>The value <em>title$</em> is the title on top of the widget</li>
+<li>The value <em>title$</em> is the title on top of the widget.</li>
 <li>The values <em>ok$</em> and <em>cancel$</em> are not used in clasquinator and may be omitted. They are kept in the code for compatibility reasons.</li>
 <li>ENTER accepts the input, which can also be an empty string.</li>
 <li>The empty string counts as the equivalent of a cancel button.</li>
 <li>The result is returned as a string value.</li>
-<li><em>Example:</em>
+<li><em>Examples:</em>
 <code>
 a$ = InputDlg$("What is your name?", "Who are you?")
 </code>
 <img src="./imgs/InputDlg.png" alt="InputDlg" title="" /></li>
 </ul></li>
-<li><p><strong>InputDlg2$</strong>(text$, title$, ok$, cancel$)</p>
+</ul>
 
-<ul>
-<li>same as <em>InputDlg$</em>() but looks different.</li>
-<li><em>Example:</em>
-<code>
+<p><code>
 a$ = InputDlg2$("What is your name?", "Who are you?")
 </code>
-<img src="./imgs/InputDlg2.png" alt="InputDlg2" title="" /></li>
-</ul></li>
-<li><p><strong>MakeDirDlg$</strong>(title$, text$, start$)</p>
+<img src="./imgs/InputDlg2.png" alt="InputDlg2" title="" /></p>
+
+<ul>
+<li><strong>MakeDirDlg$</strong>(title$, text$, start$)</li>
+<li><strong>MakeDirDlg2$</strong>(title$, text$, start$)</li>
+<li><strong>MakeDirDlg3$</strong>(title$, text$, start$)</li>
+<li><p><strong>MakeDirDlg4$</strong>(title$, text$, start$)</p>
 
 <ul>
 <li>Create a directory.</li>
 <li>Same as <em>GetDirDlg$()</em> but allows user to type a new filename so that it can be created.</li>
 <li>Will not allow duplicate filenames to be selected.</li>
+<li>see <em>GetDirDlg$()</em> for examples.</li>
 </ul></li>
-<li><p><strong>MakeDirDlg2$</strong>(title$, text$, start$)</p>
-
-<ul>
-<li>Same as MakeDirDlg$() but looks different.</li>
-<li>see <em>GetDirDlg2$()</em> for an example.</li>
-</ul></li>
-<li><p><strong>MakeFileDlg$</strong>(title$, text$, start$)</p>
+<li><p><strong>MakeFileDlg$</strong>(title$, text$, start$)</p></li>
+<li><strong>MakeFileDlg2$</strong>(title$, text$, start$)</li>
+<li><strong>MakeFileDlg3$</strong>(title$, text$, start$)</li>
+<li><p><strong>MakeFileDlg4$</strong>(title$, text$, start$)</p>
 
 <ul>
 <li>Create a file.</li>
 <li>Same as <em>GetFileDlg$()</em> but allows user to type a new filename so that it can be created.</li>
 <li>Will not allow duplicate filenames to be selected.</li>
 <li>Now works in windows, but there are display bugs to work out.</li>
+<li>see <em>GetDirDlg$()</em> for examples.</li>
 </ul></li>
-<li><p><strong>MakeFileDlg2$</strong>(title$, text$, start$)</p>
-
-<ul>
-<li>Same as MakeFileDlg$() but looks different.</li>
-<li>see <em>GetDirDlg2$()</em> for an example.</li>
-</ul></li>
-<li><p><strong>MenuDlg$</strong>(title$, menustring$, level, mainmenustring$)</p>
-
+<li><p><strong>MenuDlg$</strong>(title$, menustring$, level, mainmenustring$)</p></li>
+<li><strong>MenuDlg2$</strong>(title$, menustring$, level, mainmenustring$)</li>
+<li><strong>MenuDlg3$</strong>(title$, menustring$, level, mainmenustring$)</li>
+<li><strong>MenuDlg4$</strong>(title$, menustring$, level, mainmenustring$)
 <ul>
 <li>Create a one-line menu of options for the user to choose from.</li>
 <li>The value <em>title$</em> is the title on top of the widget.</li>
@@ -238,7 +255,7 @@ a$ = MenuDlg$("Help Menu", "Help#About", 1, "File#Edit#Help")
 </code>
 <img src="./imgs/SubMenuDlg.png" alt="SubMenuDlg" title="" /></p>
 
-<p>As you would expect by now there are commands called <em>MenuDlg2$()</em> and <em>SubMenuDlg2$()</em> to change the appearance of the menus.
+<p>As you would expect by now there are commands called <em>MenuDlg2$()</em> and <em>SubMenuDlg2$()</em> and so on to change the appearance of the menus.
 <code>
 a$ = SubMenuDlg2$("Help Menu", "Help#About", "File#Edit#Help")
 </code>
@@ -246,7 +263,9 @@ a$ = SubMenuDlg2$("Help Menu", "Help#About", "File#Edit#Help")
 
 <ul>
 <li><strong>MessageDlg</strong>(text$, ok$)</li>
-<li><p><strong>MessageDlg2</strong>(text$, ok$)</p>
+<li><strong>MessageDlg2</strong>(text$, ok$)</li>
+<li><strong>MessageDlg3</strong>(text$, ok$)</li>
+<li><p><strong>MessageDlg4</strong>(text$, ok$)</p>
 
 <ul>
 <li>Display a simple message with an OK button.</li>
@@ -264,20 +283,25 @@ MessageDlg2("This is a simple message dialog. Close it with ENTER or O.","OK")
 <img src="./imgs/MessageDlg2.png" alt="MessageDlg2" title="" /></li>
 </ul></li>
 <li><p><strong>PasswordDlg$</strong>(text$, title$, ok$, cancel$)</p></li>
-<li><p><strong>PasswordDlg2$</strong>(text$, title$, ok$, cancel$)</p>
+<li><strong>PasswordDlg2$</strong>(text$, title$, ok$, cancel$)</li>
+<li><strong>PasswordDlg3$</strong>(text$, title$, ok$, cancel$)</li>
+<li><p><strong>PasswordDlg4$</strong>(text$, title$, ok$, cancel$)</p>
 
 <ul>
 <li>Supplied for compatibility purposes, but here it is just an alias for <em>InputDlg$</em>() - inputs are not obfuscated with asterisks.</li>
 </ul></li>
 <li><p><strong>RadioDlg$</strong>(title$, menustring$, level, mainmenustring$)</p></li>
-<li><p><strong>RadioDlg2$</strong>(title$, menustring$, level, mainmenustring$)</p>
+<li><strong>RadioDlg2$</strong>(title$, menustring$, level, mainmenustring$)</li>
+<li><strong>RadioDlg3$</strong>(title$, menustring$, level, mainmenustring$)</li>
+<li><p><strong>RadioDlg4$</strong>(title$, menustring$, level, mainmenustring$)</p>
 
 <ul>
 <li>In <em>clasquinator</em>, this is an alias to <em>MenuDlg$()</em>, provided for compatibility.</li>
 </ul></li>
 <li><p><strong>StringDisplayDlg</strong>(string$, title$, exit$)</p></li>
-<li><p><strong>StringDisplayDlg2</strong>(string$, title$, exit$)</p>
-
+<li><strong>StringDisplayDlg2</strong>(string$, title$, exit$)</li>
+<li><strong>StringDisplayDlg3</strong>(string$, title$, exit$)</li>
+<li><strong>StringDisplayDlg4</strong>(string$, title$, exit$)
 <ul>
 <li>Displays a string in a box in the middle of the screen. </li>
 <li>This box will always be three lines from the top and bottom of the terminal and three columns from the left and right. Resing the terminal will count as a keypress in some operating system!</li>
@@ -296,11 +320,17 @@ OR
 a$ = "This is the string to display. Let's make it long so that wordwrap is enforced."
 StringDisplayDlg2(a$, "String Display Test", "OK")
 </code>
-<img src="./imgs/StringDisplayDlg.png" alt="StringDisplayDlg" title="" />
-(Composite of two commands pictured above)</li>
+<img src="./imgs/StringDisplayDlg.png" alt="StringDisplayDlg" title="" /></li>
 </ul></li>
-<li><p><strong>SubMenuDlg$</strong>(title$, menustring$, mainmenustring$)</p></li>
-<li><p><strong>SubMenuDlg2$</strong>(title$, menustring$, mainmenustring$)</p>
+</ul>
+
+<p><em>(Composite of two commands pictured above)</em></p>
+
+<ul>
+<li><strong>SubMenuDlg$</strong>(title$, menustring$, mainmenustring$)</li>
+<li><strong>SubMenuDlg2$</strong>(title$, menustring$, mainmenustring$)</li>
+<li><strong>SubMenuDlg4$</strong>(title$, menustring$, mainmenustring$)</li>
+<li><p><strong>SubMenuDlg4$</strong>(title$, menustring$, mainmenustring$)</p>
 
 <ul>
 <li>see <em>MenuDlg$()</em>.</li>
@@ -313,11 +343,13 @@ StringDisplayDlg2(a$, "String Display Test", "OK")
 <li>in <em>clasquinator</em>, this is a dummy routine provided for compatibility. It will always return an empty string.</li>
 </ul></li>
 <li><p><strong>TextFileDlg</strong>(filename$, title$, exit$)</p></li>
-<li><p><strong>TextFileDlg2</strong>(filename$, title$, exit$)</p>
+<li><strong>TextFileDlg2</strong>(filename$, title$, exit$)</li>
+<li><strong>TextFileDlg3</strong>(filename$, title$, exit$)</li>
+<li><p><strong>TextFileDlg4</strong>(filename$, title$, exit$)</p>
 
 <ul>
 <li>Displays a text file in a box in the middle of the screen.</li>
-<li>In appearance this looks exactly like <em>StringDisplayDlg()</em> or <em>StringDisplayDlg2()</em>, respectively.</li>
+<li>In appearance this looks exactly like <em>StringDisplayDlg()</em> or <em>StringDisplayDlg2()</em> and so on, respectively.</li>
 <li>This box will always be three lines from the top and bottom of the terminal and three columns from the left and right. Resing the terminal will count as a keypress in some operating system!</li>
 <li><em>Any</em> key exits if the file has been completed,or shows the next screen if there is more.</li>
 <li>The value <em>title$</em> is the title on top of the widget.</li>
@@ -333,22 +365,24 @@ TextFileDlg2("./pg4.txt", "The Gettysburg Address", "OK")
 </code>
 <img src="./imgs/TextFileDlg.png" alt="TextFileDlg" title="" /></li>
 </ul></li>
-<li><p><strong>WaitDlg</strong>(onoff, text$)</p>
-
+<li><p><strong>WaitDlg</strong>(onoff, text$)</p></li>
+<li><strong>WaitDlg2</strong>(onoff, text$)</li>
+<li><strong>WaitDlg3</strong>(onoff, text$)</li>
+<li><strong>WaitDlg4</strong>(onoff, text$)
 <ul>
 <li>Display a small box with a centred one-line "Please wait" message or anything else that requires no response.</li>
 <li>Use this while you do something else that may take a while that does NOT involve printing to screen.</li>
 <li>If you do print, it will be wiped out when you close the dialog.</li>
 <li>Keep your message short! You only have thirty characters to play with.</li>
-<li>To display the message, <em>onoff</em> should be 1.</li>
-<li>To remove the dialog, just use <em>WaitDlg(0)</em>.</li>
+<li>To display the message, <em>onoff</em> should be 1 and <em>text$</em> must be supplied.</li>
+<li>To remove the dialog and bring the original screen back up, just use <em>WaitDlg(0)</em>. This works even if you used <em>WaitDlg2()</em> to create the dialog.</li>
 <li>Returns nothing.</li>
 <li><em>Example:</em></li>
 </ul></li>
 </ul>
 
 <p><code>
-WaitDlg(1, "Please wait") <br />
+WaitDlg2(1, "Please wait") <br />
 wait 4 //this is where you would do other stuff
 WaitDlg(0)
 </code>
