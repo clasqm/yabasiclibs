@@ -3,51 +3,51 @@ clear screen
 import clasquinatorlib
  for f = 1 to 400: print "testing  1 2 3 ";: next f
 
-MessageDlg("This is the clasquinator demo", "Ok")
+MessageDlg3("This is the clasquinator demo", "Ok")
 
 ShowIntro()
 
-name$ = InputDlg$("Let's get acquainted. What is your name?", "Who are you?", "OK", "Cancel")
+name$ = InputDlg3$("Let's get acquainted. What is your name?", "Who are you?", "OK", "Cancel")
 
 welcomemessage$ = "Welcome, " + name$ + ". Let's get this show on the road!"
-MessageDlg(welcomemessage$, "Ok")
+MessageDlg3(welcomemessage$, "Ok")
 
 LikeIt()
 
-//TextFileDlg("README.md", "The README file", "OK")
+//TextFileDlg3("README.md", "The README file", "OK")
 
-name$ = PasswordDlg$("Please enter your banking password", "Banking password?", "OK","Cancel")
+name$ = PasswordDlg3$("Please enter your banking password", "Banking password?", "OK","Cancel")
 
-MessageDlg("KIDDING! I was just kidding!", "Haha")
+MessageDlg3("KIDDING! I was just kidding!", "Haha")
 
 name$= "But for the record, you entered: " + name$
-MessageDlg(name$, "Ok")
+MessageDlg3(name$, "Ok")
 
-MessageDlg("I'm bored. Let's change the colour scheme", "Change!")
+MessageDlg3("I'm bored. Let's change the colour scheme", "Change!")
 ChangeColour("white", "green", "yellow")
 
 name$ ="Remember that clunky text menu at the start?"
-MessageDlg(name$, "Yeah")
+MessageDlg3(name$, "Yeah")
 while(a$ <> "q")
 	a$ = ShowMenu$()
 wend
 
-//MessageDlg("Unfortunately, clasquinator has no calendar widget ATM", "Ok")
-MessageDlg("You can select a directory ...", "OK")
-a$ = GetDirDlg$("Pick a folder (case-sensitive!)", "Which directory would you like to choose?", "..")
-MessageDlg("You chose " + a$ + ". Good choice!", "OK")
+//MessageDlg3("Unfortunately, clasquinator has no calendar widget ATM", "Ok")
+MessageDlg3("You can select a directory ...", "OK")
+a$ = GetDirDlg3$("Pick a folder (case-sensitive!)", "Which directory would you like to choose?", "..")
+MessageDlg3("You chose " + a$ + ". Good choice!", "OK")
 if peek$("os") = "unix" then
-	b$ = GetFileDlg$("Pick a file (case-sensitive!)", "Now let's pick a file in that directory","../" + a$)
+	b$ = GetFileDlg3$("Pick a file (case-sensitive!)", "Now let's pick a file in that directory","../" + a$)
 elseif peek$("os") = "windows"
-	b$ = GetFileDlg$("Pick a file (case-sensitive!)", "Now let's pick a file in that directory","..\\" + a$)
+	b$ = GetFileDlg3$("Pick a file (case-sensitive!)", "Now let's pick a file in that directory","..\\" + a$)
 endif
 
-MessageDlg("You chose " + b$ + " in "+ a$ + ". Another good choice!", "OK")
+MessageDlg3("You chose " + b$ + " in "+ a$ + ". Another good choice!", "OK")
 
 ChangeColour("cyan", "blue", "red")
 
-WaitDlg(1,"Thank you for playing!")
-pause 4 :WaitDlg(0)
+WaitDlg3(1,"Thank you for playing!")
+pause 4 :WaitDlg3(0)
 if peek$("os") = "unix" then
 	system("../standalone_apps/yabscreenfetch")
 	b$ = inkey$
@@ -61,40 +61,40 @@ sub ShowIntro()
 	read b$
 	if b$ <> "end_of_data" a$ = a$ + b$ + " # # "
 	wend
-	 StringDisplayDlg(a$, "Welcome!", "Ok")
+	 StringDisplayDlg3(a$, "Welcome!", "Ok")
 end sub
 
 sub ShowMenu$()
 local a$, b$, c
-a$ =MenuDlg$("Main Menu", "Graphical#Textual#Quit", 0)
+a$ =MenuDlg3$("Main Menu", "Graphical#Textual#Quit", 0)
 switch a$
 	case "g"
-		b$ =MenuDlg$("Graphical Menu", "Kdialog#Zenity", 1, "Graphical#Textual#Quit")
+		b$ =MenuDlg3$("Graphical Menu", "Kdialog#Zenity", 1, "Graphical#Textual#Quit")
 		switch b$
 			case "k"
-				MessageDlg("You chose Kdialog", "OK")
+				MessageDlg3("You chose Kdialog", "OK")
 				break
 			case "z"
-				MessageDlg("You chose Zenity", "OK")
+				MessageDlg3("You chose Zenity", "OK")
 				break
 		end switch
 		break
 	case "t"
-		b$ =SubMenuDlg$("Textual Menu", "Clasquinator#Dialog#Whiptail", "Graphical#Textual#Quit")
+		b$ =SubMenuDlg3$("Textual Menu", "Clasquinator#Dialog#Whiptail", "Graphical#Textual#Quit")
 		switch b$
 			case "c"
-				MessageDlg("You chose Clasquinator", "OK")
+				MessageDlg3("You chose Clasquinator", "OK")
 				break
 			case "d"
-				MessageDlg("You chose Dialog", "OK")
+				MessageDlg3("You chose Dialog", "OK")
 				break
 			case "w"
-				MessageDlg("You chose Whiptail", "OK")
+				MessageDlg3("You chose Whiptail", "OK")
 				break
 		end switch
 		break
 	default
-		c = YesNoDlg("Quitting the menu demo so soon?", "Yes", "No")
+		c = YesNoDlg3("Quitting the menu demo so soon?", "Yes", "No")
 		if c = 0 a$ = ""
 		break
 end switch
@@ -102,12 +102,12 @@ return a$
 end sub
 
 sub LikeIt()
-	if YesNoDlg("Do you like what you are seeing so far?", "Yes", "No") then
-		MessageDlg("Cool! Let's throw up a text file.", "ok")
+	if YesNoDlg3("Do you like what you are seeing so far?", "Yes", "No") then
+		MessageDlg3("Cool! Let's throw up a text file.", "ok")
 	else
-		MessageDlg("Fair enough. But let's throw up a text file.", "Ok")
+		MessageDlg3("Fair enough. But let's throw up a text file.", "Ok")
 	endif
-	TextFileDlg("pg4.txt", "The Gettysburg Address", "OK")
+	TextFileDlg3("pg4.txt", "The Gettysburg Address", "OK")
 end sub
 
 label welcome

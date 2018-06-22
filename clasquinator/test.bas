@@ -12,13 +12,14 @@ clear screen
 	//a$ = inkey$
 	
 //test yesno dialog
-	//for f = 1 to 300: print "testing  1 2 3 ";: next f
+	for f = 1 to 300: print "testing  1 2 3 ";: next f
 	//if YesNoDlg("Can you see this? Press Y if you can.", "Yes!", "No") then
-	//	print colour ("yellow") at (0,7)"      Eureka!     "
-	//else
-	//	print colour ("yellow") at (0,7)"      bummer     "
-	//endif
-	//a$ = inkey$
+	if YesNoDlg4("Erase all data from the hard drive?.", "No!", "Yes") then
+		print colour ("yellow") at (0,7)"      Eureka!     "
+	else
+		print colour ("yellow") at (0,7)"      bummer     "
+	endif
+	a$ = inkey$
 
 //test TextFileDlg
 	//TextFileDlg("README.md", "\"The README for this library\"","\"All done!\"")
@@ -33,10 +34,10 @@ clear screen
 	//print PasswordDlg$("\"You can enter a password here\"","\"Password entry\"", "Ok", "Cancel")
 
 //test GetDirDlg$()
-	for f = 1 to 300: print "testing  1 2 3 ";: next f
-	a$ = GetDirDlg4$("Pick a folder", "Which directory would you like to see?","")
-	if a$ <> "" then
-		b$ = inkey$ //just to see the screen being restored
+	//for f = 1 to 300: print "testing  1 2 3 ";: next f
+	//a$ = GetDirDlg4$("Pick a folder", "Which directory would you like to see?","")
+	//if a$ <> "" then
+	//	b$ = inkey$ //just to see the screen being restored
 	//	clear screen
 	//	print at(0,5) "The contents of " + a$ + ": "
 	//	if peek$("os") = "unix" then
@@ -50,7 +51,7 @@ clear screen
 	//	clear screen
 	//	print at(0,5) "No directories to select!"
 	//	b$ = inkey$
-	endif
+	//endif
 
 //test GetFileDlg$()
 	//for f = 1 to 300: print "testing  1 2 3 ";: next f

@@ -22,11 +22,7 @@ You should **not** use this library and one of the others in this set that provi
 
 Unlike the other libraries, you cannot use *\n* to break a line in your text variables. Keep that in mind if compatibility between the libraries is important.
 
-By default, widgets are drawn in <span style="color:cyan; background-color:black">cyan</span>, with button and menu triggers in <span style="color:red; background-color:black">red</span> and the title in <span style="color:blue; background-color:black">blue</span>. But you can override this by setting the GLOBAL variables *menu_colour$*, *title_colour$* and *trigger_colour$*.
-
-The colours available are the normal ones yabasic can handle, namely "black", "white", "red", "blue", "green", "yellow", "cyan" and "magenta" (which can be abbreviated as "bla", "whi", "red", "blu", "gre", "yel", "cya" and "mag" respectively). The library does not check if the two colours are identical, or if they complement each other visually. If you want to make your menus unreadable, more power to you!
-
-The background colour of widgets is always black (well, actually, it is whatever your terminal's default background colour is), but your program's colours will be restored to whatever they were before.
+By default, widgets are drawn in <span style="color:cyan; background-color:black">cyan</span>, with button and menu triggers in <span style="color:red; background-color:black">red</span> and the title in <span style="color:blue; background-color:black">blue</span>. But you can override this by setting the GLOBAL variables *menu_colour$*, *title_colour$* and *trigger_colour$*. There is a routine ChangeColour() to make this easier.
 
 The "buttons" are not mouse-aware.
 
@@ -76,6 +72,17 @@ If you don't have these, your system is broken and you really, really need to re
 
 This library poaches as many ideas as possible from the other four dialog-providing libraries, but there is not 100% compatibility here, so we will not divide things into Common and Clasquinator-specific sections.
 
++ **ChangeColour**(menu$, title$, trigger$)
+    + Change the three colours used in this library.
+    + The value *menu$* is used to draw most elements.
+    + The value *title$* is used to print the title of those widgets that have them (but only in the default command set, in the others like *blablaDlg2()*, *blablaDlg3()* and so on it is calculated to either black or white for legibility). 
+    + The value *trigger$* is the highlighted letter on buttons and menu items.
+    + The colours available are the normal ones yabasic can handle, namely "black", "white", "red", "blue", "green", "yellow", "cyan" and "magenta" (which can be abbreviated as "bla", "whi", "red", "blu", "gre", "yel", "cya" and "mag" respectively).
+    + The library does not check if the two colours are identical, or if they complement each other visually. If you want to make your menus unreadable, more power to you! 
+    +The background colour of widgets is always black (well, actually, it is whatever your terminal's default background colour is), but your program's colours will be restored to whatever they were when a widget closes.
+    + To return to the default set, use the command
+*ChangeColourToDefault*().
+
 + **ClearDlg**()
     + On *dialog* and *whiptail*, this clears the dialog from your terminal. Same as the yabasic command CLEAR SCREEN, but may work better if you are expecting to issue another Linux command immediately.
     + On *zenity*, *clasquinator* and *kdialog*, dummy routines are provided for compatibility so that you do not need to rewrite your code.
@@ -104,6 +111,7 @@ This library poaches as many ideas as possible from the other four dialog-provid
     + ONLY available in *clasquinator*, but there are equivalents in *zenity* and *kdialog*.
     + Now works in windows, but there are display bugs to work out.
     + *Example*:
+
 ```
 a$ = GetDirDlg$("Pick a folder", "Which directory would you like to see?","~")
 ```
@@ -113,6 +121,7 @@ a$ = GetDirDlg$("Pick a folder", "Which directory would you like to see?","~")
     + Select a directory to open.
     + Same as GetDirDlg$() but looks different.
     + *Example*:
+
 ```
 a$ = GetDirDlg2$("Pick a folder", "Which directory would you like to see?","~")
 ```
@@ -122,6 +131,7 @@ a$ = GetDirDlg2$("Pick a folder", "Which directory would you like to see?","~")
     + Select a directory to open.
     + Same as GetDirDlg$() but looks different.
     + *Example*:
+
 ```
 a$ = GetDirDlg3$("Pick a folder", "Which directory would you like to see?","~")
 ```
@@ -131,6 +141,7 @@ a$ = GetDirDlg3$("Pick a folder", "Which directory would you like to see?","~")
     + Select a directory to open.
     + Same as GetDirDlg$() but looks different.
     + *Example*:
+
 ```
 a$ = GetDirDlg4$("Pick a folder", "Which directory would you like to see?","~")
 ```
@@ -148,8 +159,6 @@ a$ = GetDirDlg4$("Pick a folder", "Which directory would you like to see?","~")
     + Result is returned as a string value with quote marks and extra (leading or trailing) spaces stripped off.
     + An empty string is returned. if there are no existing files. 
     + ONLY available in *clasquinator*, but there are equivalents in *zenity* and *kdialog*.
-    + Now works in windows, but there are display bugs to work out.
-
 
 + **InputDlg$**(text$, title$, ok$, cancel$)
 + **InputDlg2$**(text$, title$, ok$, cancel$)
@@ -162,6 +171,7 @@ a$ = GetDirDlg4$("Pick a folder", "Which directory would you like to see?","~")
     + The empty string counts as the equivalent of a cancel button.
     + The result is returned as a string value.
     + *Examples:*
+
 ```
 a$ = InputDlg$("What is your name?", "Who are you?")
 ```
@@ -188,7 +198,6 @@ a$ = InputDlg2$("What is your name?", "Who are you?")
     + Create a file.
     + Same as *GetFileDlg$()* but allows user to type a new filename so that it can be created.
     + Will not allow duplicate filenames to be selected.
-    + Now works in windows, but there are display bugs to work out.
     + see *GetDirDlg$()* for examples.
 
 + **MenuDlg$**(title$, menustring$, level, mainmenustring$)
@@ -220,6 +229,7 @@ a$ = MenuDlg$("Help Menu", "Help#About", 1, "File#Edit#Help")
 ![SubMenuDlg](./imgs/SubMenuDlg.png)
 
 As you would expect by now there are commands called *MenuDlg2$()* and *SubMenuDlg2$()* and so on to change the appearance of the menus.
+
 ```
 a$ = SubMenuDlg2$("Help Menu", "Help#About", "File#Edit#Help")
 ```
@@ -234,6 +244,7 @@ a$ = SubMenuDlg2$("Help Menu", "Help#About", "File#Edit#Help")
     + You only have one line to play with, so keep those messages short!
     + Returns nothing, therefore does not actually trap the keypress. But the trigger is highlighted to ensure uniformity among the library's widgets
     + *Examples:*
+
 ```
 MessageDlg("This is a simple message dialog. Close it with ENTER or O.","OK")
 ```
@@ -269,6 +280,7 @@ MessageDlg2("This is a simple message dialog. Close it with ENTER or O.","OK")
     + To open up a new line, embed " # " (a hash mark surrounded by spaces) in your string. You can even open up multiple lines with " # # " and so on.
     + Returns nothing
     + *Example:*
+
 ```
 a$ = "This is the string to display. Let's make it long so that wordwrap is enforced."
 StringDisplayDlg(a$, "String Display Test", "OK")
@@ -278,7 +290,7 @@ StringDisplayDlg2(a$, "String Display Test", "OK")
 ```
 ![StringDisplayDlg](./imgs/StringDisplayDlg.png)
 
-*(Composite of two commands pictured above)*
+*(Composite of the commands StringDisplayDlg() and StringDisplayDlg2() pictured above)*
 
 + **SubMenuDlg$**(title$, menustring$, mainmenustring$)
 + **SubMenuDlg2$**(title$, menustring$, mainmenustring$)
@@ -307,6 +319,7 @@ StringDisplayDlg2(a$, "String Display Test", "OK")
     + It is actually better if your text file is not formatted with hard returns. Rather let this routine handle the word wrapping.
     + Returns nothing.
     + *Example:*
+
 ```
 TextFileDlg2("./pg4.txt", "The Gettysburg Address", "OK")
 ```
@@ -324,23 +337,35 @@ TextFileDlg2("./pg4.txt", "The Gettysburg Address", "OK")
     + To remove the dialog and bring the original screen back up, just use *WaitDlg(0)*. This works even if you used *WaitDlg2()* to create the dialog.
     + Returns nothing.
     + *Example:*
-   
+
 ```
-WaitDlg2(1, "Please wait")	
+WaitDlg2(1, "Please wait")
 wait 4 //this is where you would do other stuff
 WaitDlg(0)
 ```
 ![WaitDlg](./imgs/WaitDlg.png)
 
 + **YesNoDlg**(text$,yes$, no$)
++ **YesNoDlg2**(text$,yes$, no$)
++ **YesNoDlg3**(text$,yes$, no$)
++ **YesNoDlg4**(text$,yes$, no$)
     + Displays a dialog with text (normally a question) and the options to reply yes or no.
     + The first letter of the *yes$* and *no$* variables will become the hotkeys for those buttons, so make sure they are different. Hotkeys are case-insensitive.
     + *no$* is actually a dummy here: pressing anything other than the hotkey for *yes$* will return a no.
+    + Instead of "Yes" and "No", these labels could also ber something like "Accept" and "Cancel". This is why this library does not have a separate *AcceptCancelDlg* routine.
     + NOTE: pressing ENTER means NO. If this is not what you want, just swap the labels *yes$* and *no$* around, and *yes$* will become the dummy that is the default on every keypress except the hotkey for *no$*.
+    + e.g. *YesNoDlg(text$, no$, yes$, altsymbol$)* - See the second example below.
+	+ This will also reverse the way they are displayed. This routine only tests for the button on the left.
     + Returns 1 for yes and 0 for no.
-    + If you would rather get the same result in string format, use *YesNoDlg$*(text$,yes$, no$)
-    + *Example:*
+    + *Examples:*
+
 ```
 YesNoDlg("Can you see this? Press Y if you can.", "Yes!", "No")
 ```
 ![YesNoDlg](./imgs/YesNoDlg.png)
+
+```
+
+YesNoDlg4("Erase all data from the hard drive?.", "No!", "Yes")
+```
+![YesNoDlg4](./imgs/YesNoDlg4.png)

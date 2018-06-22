@@ -22,6 +22,15 @@ do
 			system("yabasic clasquinator_demo.bas")
 			break
 		case "6"
+			system("yabasic clasquinator_demo2.bas")
+			break
+		case "7"
+			system("yabasic clasquinator_demo3.bas")
+			break
+		case "8"
+			system("yabasic clasquinator_demo4.bas")
+			break
+		case "9"
 			exit
 			break
 		default
@@ -49,16 +58,34 @@ sub InitialMenu()
 	print "Which of the following systems would you like to demo?"
 	print "(Don't worry, this is the only time you will see such a clunky menu!)"
 	print
-	print"Please press keys 1 to 6"
-	print "(any other key will use the default)"
+	print"Please press keys 1 to 9 (any other key will use the default)"
 	print
-	print "1. Dialog (default)"
+	print "1. Dialog (default)",
+	//print ,
 	print "2. Whiptail"
-	print "3. Kdialog"
-	Print "4. Zenity"
-	print "5. Clasquinator"
 	print
-	print "6. EXIT"
+	print "3. Kdialog",
+	print ,
+	print "4. Zenity"
+	print
+	print "5. ---- Clasquinator (plain) ----"
+	print
+	print "6. ";
+	print reverse "        ";
+	print " Clasquinator2 ";
+	print reverse "       "
+	print
+	print "7. ";
+	print reverse "********";
+	print " Clasquinator3 ";
+	print reverse "*******"
+	print
+	print "8. ";
+	print reverse "########";
+	print " Clasquinator4 ";
+	print reverse "#######"
+	print
+	print "9. EXIT"
 	print
 end sub
 
