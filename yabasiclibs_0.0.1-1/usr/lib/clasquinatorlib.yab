@@ -1,0 +1,959 @@
+//This folder contains a library for yabasic that allows yabasic to display 
+//a variety of dialogs in text mode without making use of external commands.
+
+//*Some* routines will also be made available in graphics mode, but keep 
+//in mind that you only have one graphics window to play with. if you use 
+//these, you will not have the graphics window for your own use.
+
+//The library is written as a textmode application and must be run in a terminal. 
+//It will not be useful in a headless script.
+
+//The entire set of libraries focuses on sane defaults and getting basic 
+//functionality into yabasic.
+
+//Developed on elementary OS 0.4 "Loki" (i.e. Linux), but it should work on 
+//any *NIX system that will run yabasic. I don't have a Windows machine to 
+//test this on, so please let me know if anything works/doesn't work on that side.
+
+//The library should exist either in the same folder as your program 
+//(symlinks work) or in the standard yabasic library location on your system.
+
+//To use the library, use the command 
+
+//    import clasquinatorlib
+
+//Unlike the other libraries, you cannot use \n to break a line in your
+//text variables. Keep that in mind if compatibility between the 
+//libraries is important.
+
+//You should **not** use this library and one of the others in this set that 
+//provides dialogs concurrently, because they replicate subroutine names. 
+//Pick the right one for your program and stick with it!
+
+//By default, widgets are drawn in cyan, with button and menu 
+//triggers in red and the title in blue. But you can override this by setting 
+//GLOBAL variables menu_colour$, title_colour$ and trigger_colour$.
+
+//The colours available are the normal ones yabasic can 
+//handle, namely "black", "white", "red", "blue", "green", 
+//"yellow", "cyan" and "magenta" (which can be abbreviated 
+//as "bla", "whi", "red", "blu", "gre", "yel", "cya" and "mag" 
+//respectively). The library does not check if the two colours 
+//are identical, or if they complement each other visually. 
+//If you want to make your menus unreadable, more power to you!
+
+//The background colour of widgets is always black, but your 
+//program's colours will be restored to whatever they were before.
+
+//The "buttons" are not mouse-aware.
+
+//The first letter of each button or menu item automatically 
+//becomes the trigger. Both lower and upper case variants 
+//will activate it. It is up to you to ensure that you do not 
+//use menu items that start with the same letter. 
+
+//If the text of a message (usually in the variable text$) 
+//is too long to fit in one line, it will be truncated. This may 
+//vary with the width of the user's terminal window, 
+//so be conservative!
+
+//Excessive quote marks (required in other libraries} will 
+//be removed by the library to maintain compatibility. 
+//Excessive spaces at the front and back of text$ will 
+//be trimmed, but multiple spaces within text$ will 
+//be maintained.
+
+#COM######### A ###########
+#COM######### B ###########
+#COM######### C ###########
+
+export sub ChangeColour(menu$, title$, trigger$)
+	//Change the three colours used in this library.
+	//The value menu$ is used to draw most elements
+	//The value title$ is used to print the title of those widgets that have them
+	//(but only in the default command set, in the others it is calculated 
+	//to black or white for legibility). 
+	//The value trigger$ is the highlighted letter on buttons and menu item$
+	//To return to the default set, use the command
+	//ChangeColour("cyan", "blue", "red") or ChangeColour("cya", "blu", "red")
+	menu_colour$ = menu$
+	title_colour$ = title$
+	trigger_colour$ = trigger$
+end sub
+
+export sub ChangeColourToDefault()
+	ChangeColour("cyan", "blue", "red")
+end sub
+
+export sub ClearDlg()
+	//dummy routine for compatibility, since
+	//it does not really make sense in clasquinator
+end sub
+
+#COM######### D ###########
+#COM######### E ###########
+
+export sub EncloseText$(thestring$)
+	//A simplified version of the EncloseString$() routine
+	//that can be found in the linuxmisclib library
+	//Encloses a string in double quotes, if it isn't already.
+	//Therefore a$ = EncloseText$("This is text") gives the same result as
+	// a$ = "\"This is text\""
+	//mostly for use with text strings that may include spaces.
+	local type$, type2$
+	type$ = chr$(34)
+	if left$(thestring$,1) <> type$ thestring$ = type$ + thestring$
+	if right$(thestring$,1) <> type$ thestring$ = thestring$ + type$
+	return thestring$
+end sub
+
+#COM######### F ###########
+#COM######### G ###########
+
+
+export sub GetDirDlg$(title$, text$, start$)
+	//Select a directory to open.
+	//displays the available directories but require user to type it in.
+	//start$ is the initial directory to start from. If blank or not supplied.
+	//this defaults to the current directory.
+	//Data entry is CASE-SENSITIVE, but you do not need to type the quote marks
+	//supplied for filenames with spaces 
+	//Result is returned as a string value
+	//ONLY available in clasquinator, but there are equivalents in Zenity and kdialog
+	return getanydlg$(title$, text$, start$,1)
+end sub
+
+export sub GetDirDlg2$(title$, text$, start$)
+	//same as GetDirDlg$() but looks different
+	return getanydlg$(title$, text$, start$,1, " ")
+end sub
+
+export sub GetDirDlg3$(title$, text$, start$)
+	return getanydlg$(title$, text$, start$,1, "*")
+end sub
+
+export sub GetDirDlg4$(title$, text$, start$)
+	return getanydlg$(title$, text$, start$,1, "#")
+end sub
+
+export sub GetFileDlg$(title$, text$, start$)
+	//Select a file to open.
+	//displays the available directories but require user to type it in.
+	//start$ is the initial directory to start from. If blank or not supplied.
+	//this defaults to the current directory.
+	//Data entry is CASE-SENSITIVE, but you do not need to type the quote marks
+	//supplied for filenames with spaces 
+	//Result is returned as a string value
+	//ONLY available in clasquinator, but there are equivalents in Zenity and kdialog
+	return getanydlg$(title$, text$, start$,0)
+end sub
+
+export sub GetFileDlg2$(title$, text$, start$)
+	//same as GetFileDlg$() but looks different
+	return getanydlg$(title$, text$, start$,0, " ")
+end sub
+
+export sub GetFileDlg3$(title$, text$, start$)
+	return getanydlg$(title$, text$, start$,0, "*")
+end sub
+
+export sub GetFileDlg4$(title$, text$, start$)
+	return getanydlg$(title$, text$, start$,0, "#")
+end sub
+
+#COM######### H ###########
+#COM######### I ###########
+
+export sub InputDlg$(text$, title$, ok$, cancel$, altsymbol$)
+	//Presents a one-line dialog into which the 
+	//user can type a string answer.
+	//ENTER accepts the input, which can also be an empty string
+	//The empty string counts as the equivalent of a cancel button
+	//The values ok$ and cancel$ are retained for compatibility only,
+	//but actually do nothing and may be omitted. 
+	//The value altsymbol$ is for internal use only
+	local a$, original$, f, widgetcolour$, widgetbackgroundcolour$
+	clasquinator_initialise()
+	original$ = get_screen$ (1,5)
+	if altsymbol$ = "" then
+		altsymbol$ = "-"
+		widgetcolour$ = title_colour$
+		widgetbackgroundcolour$ = "black"
+	else
+		widgetcolour$ = getwidgetcolour$()
+		widgetbackgroundcolour$ = menu_colour$
+	endif
+	text$ = trimtext$(text$): title$ = trimtext$(title$)
+	for f = 0 to 4
+		fill_line_with_blanks(f)
+	next f
+	fill_line_with_symbols(0,(altsymbol$ <> "-"), altsymbol$)
+	fill_line_with_symbols(3,(altsymbol$ <> "-"), altsymbol$)
+	print color(widgetcolour$, widgetbackgroundcolour$) at (int(screenwidth - len(title$)) /2, 0) title$;
+	print at (1,1) text$
+	line input a$
+	put_screen(1,original$)
+	return a$
+end sub
+
+export sub InputDlg2$(text$, title$, ok$, cancel$)
+	//same as InputDlg, but looks different
+	return InputDlg$(text$, title$, ok$, cancel$, " ")
+end sub
+
+export sub InputDlg3$(text$, title$, ok$, cancel$)
+	return InputDlg$(text$, title$, ok$, cancel$, "*")
+end sub
+
+export sub InputDlg4$(text$, title$, ok$, cancel$)
+	return InputDlg$(text$, title$, ok$, cancel$, "#")
+end sub
+
+#COM######### J ###########
+#COM######### K ###########
+#COM######### L ###########
+#COM######### M ###########
+
+export sub MakeDirDlg$(title$, text$, start$)
+	//same as GetDirDlg$() but allows user to type a new
+	//filename so that it can be created. Will not allow
+	//duplicates to be selected.
+	return getanydlg$(title$, text$, start$,3)
+end sub
+
+export sub MakeDirDlg2$(title$, text$, start$)
+	//same as MakeDirDlg$() but looks different
+	return getanydlg$(title$, text$, start$,3, " ")
+end sub
+
+export sub MakeDirDlg3$(title$, text$, start$)
+	return getanydlg$(title$, text$, start$,3, "*")
+end sub
+
+export sub MakeDirDlg4$(title$, text$, start$)
+	return getanydlg$(title$, text$, start$,3, "#")
+end sub
+
+export sub MakeFileDlg$(title$, text$, start$)
+	//same as GetFileDlg$() but allows user to type a new
+	//filename so that it can be created. Will not allow
+	//duplicates to be selected.
+	return getanydlg$(title$, text$, start$,2)
+end sub
+
+export sub MakeFileDlg2$(title$, text$, start$)
+	//same as MakeFileDlg$() but looks different
+	return getanydlg$(title$, text$, start$,2, " ")
+end sub
+
+export sub MakeFileDlg3$(title$, text$, start$)
+	return getanydlg$(title$, text$, start$,2, "*")
+end sub
+
+export sub MakeFileDlg4$(title$, text$, start$)
+	return getanydlg$(title$, text$, start$,2, "#")
+end sub
+
+export sub MenuDlg$(title$, menustring$, level,mainmenustring$, altsymbol$)
+	//Create a one-line menu of options for the user to choose from.
+	//The value title$ is the title on top of the widget.
+	//The value menustring$ is the list of menu options as a single 
+	//string, separated by hash signs (#). Spaces are allowed.
+	//The value level can be either 0 for a primary menu 
+	//or 1 for a submenu.
+	//The value altsymbol$ is for internal use only
+	//If level = 1 mainmenu$ must also be supplied, otherwise it is not required
+	//The first letter of menu item automatically becomes the trigger. 
+	//Both lower and upper case variants will activate it. 
+	//It is up to you to ensure that you do not use menu items 
+	//that start with the same letter.
+	//Menus will only be displayed to the width of the terminal, 
+	//so keep them short!
+	//Results are returned as a string variable, 
+	//which will be the trigger in *lowercase*.
+	//Submenus can also be created with the SubMenuDlg$(title$, menustring$, mainmenustring$) 
+	//routine, which is an alias to this one and does not require the *level* 
+	//parameter.Therefore the following two commands are completely equivalent:
+	//MenuDlg$("File menu","Open#Close#Exit",1)
+	//SubMenuDlg$("File menu","Open#Close#Exit") 
+	//RadioDlg$() is an alias to this routine, supplied for compatibility.
+	local original$,startline,w$(1),x$(1),  f, widgetcolour$, widgetbackgroundcolour$
+	clasquinator_initialise()
+	if altsymbol$ = "" then
+		altsymbol$ = "-"
+		widgetcolour$ = title_colour$
+		widgetbackgroundcolour$ = "black"
+	else
+		widgetcolour$ = getwidgetcolour$()
+		widgetbackgroundcolour$ = menu_colour$
+	endif
+	original$ = get_screen$ (1,6)
+	switch level
+		case 0
+			fill_line_with_blanks(0)
+			startline = 0
+			break
+		case 1
+			fill_line_with_blanks(0):fill_line_with_blanks(1)
+			fill_line_with_symbols(0, (altsymbol$ <> "-"), altsymbol$)	
+			printmenu(mainmenustring$,startline,menu_colour$)
+			startline = 2
+			break
+	end switch
+	for f = startline to startline + 2
+		fill_line_with_blanks(f)
+	next f
+	fill_line_with_symbols(startline, (altsymbol$ <> "-"), altsymbol$)
+	print color(widgetcolour$, widgetbackgroundcolour$) at (int(screenwidth - len(title$)) /2, startline) title$;
+	printmenu(menustring$,startline, trigger_colour$)
+	fill_line_with_symbols(startline + 2, (altsymbol$ <> "-"), altsymbol$)
+	fill_line_with_blanks(startline + 3)
+	a$ = inkey$
+	put_screen(1,original$)
+	return lower$(a$)
+end sub
+
+export sub MenuDlg2$(title$, menustring$, level,mainmenustring$)
+	//Same as MenuDlg$() but looks different.
+	return MenuDlg$(title$, menustring$, level, mainmenustring$, " ")
+end sub
+
+export sub MenuDlg3$(title$, menustring$, level,mainmenustring$)
+	return MenuDlg$(title$, menustring$, level, mainmenustring$, "*")
+end sub
+
+export sub MenuDlg4$(title$, menustring$, level,mainmenustring$)
+	return MenuDlg$(title$, menustring$, level, mainmenustring$, "#")
+end sub
+
+export sub MessageDlg(text$, ok$, altsymbol$)
+	//display a simple message with an OK button 
+	//The value *ok$* is the text of the accept button, normally OK.
+	//The value altsymbol$ is for internal use only
+	//returns nothing
+	local a$, original$, spaceleft, trigger$
+	clasquinator_initialise()
+	ok$ = trimtext$(ok$): text$ = trimtext$(text$)
+	trigger$ = left$(ok$,1)
+	original$ = get_screen$ (1,3)
+	for f = 0 to 2: fill_line_with_blanks(f):next f
+	if altsymbol$ = "" then
+		fill_line_with_symbols(1,0, "-")
+	else
+		fill_line_with_symbols(1,1, altsymbol$)
+	endif
+	spaceleft = screenwidth - calculate_button_size(ok$) - 2
+	print color(menu_colour$) at(1, 0) left$(text$, spaceleft);
+	print color(menu_colour$) at (screenwidth - calculate_button_size(ok$) - 1, 0) "<";
+	print color(trigger_colour$) at (screenwidth - calculate_button_size(ok$) , 0) trigger$;
+	print color(menu_colour$) at (screenwidth - calculate_button_size(ok$) + 1, 0) right$(ok$, len(ok$) -1) + ">";
+	a$ = inkey$
+	//Since there is only one button and the routine returns nothing,
+	//there is no point in trapping the actual keypress but it is best to look consistent.
+	put_screen(1,original$)
+end sub
+
+export sub MessageDlg2(text$, ok$)
+	MessageDlg(text$, ok$, " ")
+end sub
+
+export sub MessageDlg3(text$, ok$)
+	MessageDlg(text$, ok$, "*")
+end sub
+
+export sub MessageDlg4(text$, ok$)
+	MessageDlg(text$, ok$, "#")
+end sub
+
+#COM######### N ###########
+#COM######### O ###########
+#COM######### P ###########
+
+export sub PasswordDlg$(text$, title$, ok$, cancel$)
+	//Supplied for compatibility purposes, but here is just an 
+	//alias for InputDlg$() - inputs are not obfuscated with asterisks
+	return InputDlg$(text$, title$, ok$, cancel$)
+end sub
+
+export sub PasswordDlg2$(text$, title$, ok$, cancel$)
+	return InputDlg$(text$, title$, ok$, cancel$, " ")
+end sub
+
+export sub PasswordDlg3$(text$, title$, ok$, cancel$)
+	return InputDlg$(text$, title$, ok$, cancel$, "*")
+end sub
+
+export sub PasswordDlg4$(text$, title$, ok$, cancel$)
+	return InputDlg$(text$, title$, ok$, cancel$, "#")
+end sub
+
+#COM######### Q ###########
+#COM######### R ###########
+
+export sub RadioDlg$(title$, menustring$, level,mainmenustring$)
+	//Supplied for compatibility purposes, but here is just an 
+	//alias for InputDlg2$()
+	return MenuDlg$(title$, menustring$, level,mainmenustring$)
+end sub
+
+export sub RadioDlg2$(title$, menustring$, level,mainmenustring$)
+	return MenuDlg$(title$, menustring$, level,mainmenustring$, " ")
+end sub
+
+export sub RadioDlg3$(title$, menustring$, level,mainmenustring$)
+	return MenuDlg$(title$, menustring$, level,mainmenustring$, "*")
+end sub
+
+export sub RadioDlg4$(title$, menustring$, level,mainmenustring$)
+	return MenuDlg$(title$, menustring$, level,mainmenustring$, "#")
+end sub
+
+#COM######### S ###########
+
+export sub StringDisplayDlg(string$, title$, exit$, altsymbol$)
+	//Displays a string in a box in the middle of the screen.
+	//Any key exits if the string has been completed,
+	//or shows the next screen if there is more.
+	//The value title$ is the title on top of the widget
+	//The value exit$ is the title of the button. Normally OK
+	//The value altsymbol$ is for internal use only
+	//This button is a dummy, just for looks.
+	//It works better if you keep your string reasonably short,
+	//since there is no escape button if you make the user
+	//page through 100 pages!
+	//Returns nothing.
+	local original$, a$, widgetwidth, widgetheight, continu
+	clasquinator_initialise()
+	original$ = getscreen$(0,0,screenwidth-1, screenheight - 3)
+	widgetwidth = screenwidth - 5 
+	widgetheight = screenheight - 5
+	continu = 1
+	repeat
+		clasquinator_initialise()
+		drawwidget(title$, exit$, widgetwidth, widgetheight, altsymbol$)
+		continu = fillwidget(string$,widgetwidth, widgetheight,continu)
+		a$ = inkey$
+	until(continu = 0)
+	put_screen(1, original$)
+end sub
+
+export sub StringDisplayDlg2(string$, title$, exit$)
+	StringDisplayDlg(string$, title$, exit$, " ")
+end sub
+
+export sub StringDisplayDlg3(string$, title$, exit$)
+	StringDisplayDlg(string$, title$, exit$, "*")
+end sub
+
+export sub StringDisplayDlg4(string$, title$, exit$)
+	StringDisplayDlg(string$, title$, exit$, "#")
+end sub
+
+export sub SubMenuDlg$(title$, menustring$,mainmenustring$)
+	return MenuDlg$(title$, menustring$, 1,mainmenustring$)
+end sub
+
+export sub SubMenuDlg2$(title$, menustring$,mainmenustring$)
+	return MenuDlg$(title$, menustring$, 1,mainmenustring$, " ")
+end sub
+
+export sub SubMenuDlg3$(title$, menustring$,mainmenustring$)
+	return MenuDlg$(title$, menustring$, 1,mainmenustring$, "*")
+end sub
+
+export sub SubMenuDlg4$(title$, menustring$,mainmenustring$)
+	return MenuDlg$(title$, menustring$, 1,mainmenustring$, "#")
+end sub
+
+#COM######### T ###########
+
+export sub TestForDialogUtility$()
+	//dummy routine for compatibility, since
+	//it does not really make sense in clasquinator
+end sub 
+
+export sub TextFileDlg(filename$, title$, exit$, altsymbol$)
+	//Displays a text file in the middle of the screen.
+	//Any key exits if the string has been completed,
+	//or shows the next screen if there is more.
+	//The value title$ is the title on top of the widget
+	//The value exit$ is the title of the button. Normally OK
+	//The value altsymbol$ is for internal use only
+	//This button is a dummy, just for looks.
+	//It works better if you keep your file reasonably short,
+	//since there is no escape button if you make the user
+	//page through 100 pages!
+	//Returns nothing.
+	local string$,handle,a$
+	//filename$ = EncloseText$(trimtext$(filename$))
+	handle = open (filename$, "r")
+	while(not EOF(handle))
+		line input #1 a$
+		string$ = string$ + a$ + " # "
+	wend
+	close handle	
+	StringDisplayDlg(string$, title$, exit$, altsymbol$)
+end sub
+
+export sub TextFileDlg2(filename$, title$, exit$)
+	TextFileDlg(filename$, title$, exit$, " ")
+end sub
+
+export sub TextFileDlg3(filename$, title$, exit$)
+	TextFileDlg(filename$, title$, exit$, "*")
+end sub
+
+export sub TextFileDlg4(filename$, title$, exit$)
+	TextFileDlg(filename$, title$, exit$, "#")
+end sub
+
+#COM######### U ###########
+#COM######### V ###########
+#COM######### W ###########
+
+export sub WaitDlg(onoff, text$, altsymbol$)
+	//display a small box with a one-line "Please wait" message
+	//while you do something else that does NOT involve printing to screen
+	//(if you do, it will be wiped out when you close the dialog).
+	//Keep your message short! You only have thirty characters to play with.
+	//To display the message, onoff should be 1 and text$ must be supplied.
+	//To remove the dialog, just use WaitDlg(0)
+	//The value altsymbol$ is for internal use only
+	//Returns nothing.
+	local textlimit, hsize, startline, startcol, offset, f, n, widgetbackgroundcolour$, widgetcolour$, sidesymbol$
+	static original2$
+	switch onoff
+		case 0
+			clasquinator_initialise() // just in case the terminal was resized while other stuff was happening.
+							//although you are probably screwed if it did, since original2$ will 
+							//now be the wrong dimension
+			put_screen(1, original2$)
+			original2$ = "" //clear out some memory
+			break
+		case 1
+			clasquinator_initialise()
+			textlimit = 30
+			text$ = left$(trimtext$(text$), textlimit)
+			hsize = textlimit + 4
+			startcol = int((screenwidth - hsize)/2) -1
+			startline = int((screenheight - 4)/2) - 1
+			original2$ = get_screen$(1, startline + 5)
+			offset = int((textlimit - len(text$))/2)
+			if altsymbol$ = "" then
+				altsymbol$ = "-"
+				sidesymbol$ = "|"
+				widgetcolour$ = title_colour$
+				widgetbackgroundcolour$ = "black"
+			else
+				sidesymbol$ = altsymbol$
+				widgetcolour$ = getwidgetcolour$()
+				widgetbackgroundcolour$ = menu_colour$
+			endif
+			for f = startline to startline + 4
+				print color (widgetcolour$, widgetbackgroundcolour$) at(startcol, f) sidesymbol$;
+				print color (widgetcolour$, widgetbackgroundcolour$) at(startcol + hsize, f) sidesymbol$;
+				for n = startcol + 1 to startcol + hsize -1
+					if f = startline or f = startline + 4 then
+						print color (widgetcolour$, widgetbackgroundcolour$) at(n,f) altsymbol$;
+					else
+						print at(n,f) " ";
+					endif
+				next n
+			next f
+			print at(startcol + offset + 2, startline + 2) text$;
+			break
+	end switch	
+end sub
+
+export sub WaitDlg2(onoff, text$)
+	//same as WaitDlg() but looks different
+	WaitDlg(onoff, text$, " ")
+end sub
+
+export sub WaitDlg3(onoff, text$)
+	WaitDlg(onoff, text$, "*")
+end sub
+
+export sub WaitDlg4(onoff, text$)
+	WaitDlg(onoff, text$, "#")
+end sub
+
+#COM######### X ###########
+#COM######### Y ###########
+
+export sub YesNoDlg(text$,yes$, no$, altsymbol$)
+	//Displays a dialog with text (normally a question) and the options
+	//to reply yes or no (or accept/cancel).
+	//The first letter of the yes$ and no$ variables will become the hotkeys
+	//for those buttons, so make sure they are different.
+	//no$ is actually a dummy here: pressing anything other than the 
+	//hotkey for yes$ will return a no
+	//NOTE: pressing ENTER means NO
+	//If that doesn't work for your program, reverse the two variables, e.g.
+	//YesNoDlg(text$, no$, yes$, altsymbol$)
+	//This will also reverse the way they are displayed. This routine only
+	//tests for the button on the left.
+	//The value altsymbol$ is for internal use only
+	//returns 1 for yes and 0 for no.
+	local a$, original$, trigger$, triggerno$,yespos, nopos, f
+	clasquinator_initialise()
+	if altsymbol$ = "" altsymbol$ = "-"
+	yes$ = trimtext$(yes$): text$ = trimtext$(text$): no$ = trimtext$(no$)
+	trigger$ = left$(yes$, 1)
+	triggerno$ = left$(no$, 1)
+	yespos = int(len(text$)/3) - int(len(yes$)/2 -1)
+	nopos = int(len(text$)/3*2) - int(len(yes$)/2 +1)	
+	while(yespos+len(yes$)+2 > nopos -1)
+		nopos=nopos + 1
+	wend
+	original$ = get_screen$ (1,4)
+	for f = 0 to 3
+		fill_line_with_blanks(f)
+	next f
+	fill_line_with_symbols(2,(altsymbol$ <> "-"), altsymbol$)
+	print color(menu_colour$) at (1,0) text$;
+	print color(menu_colour$) at (yespos, 1) "<";
+	print color(trigger_colour$) at (yespos + 1,1) trigger$;
+	print color(menu_colour$) at (yespos + 2,1) mid$(yes$,2) + ">";
+	print color(menu_colour$) at (nopos, 1) "<";
+	print color(trigger_colour$) at (nopos + 1,1) triggerno$;
+	print color(menu_colour$) at (nopos + 2,1) mid$(no$,2) + ">";
+	a$ = inkey$
+	put_screen(1,original$)
+	if lower$(a$) = lower$(trigger$) then
+		return 1
+	else
+		return 0
+	endif
+end sub
+
+export sub YesNoDlg2(text$,yes$, no$)
+	return YesNoDlg(text$,yes$, no$, " ")
+end sub
+
+export sub YesNoDlg3(text$,yes$, no$)
+	return YesNoDlg(text$,yes$, no$, "*")
+end sub
+
+export sub YesNoDlg4(text$,yes$, no$)
+	return YesNoDlg(text$,yes$, no$, "#")
+end sub
+
+
+#COM######### Z ###########
+
+
+//SUPPORTIVE SUBROUTINES
+
+export sub getcmd$()
+	//This is really just for me, to stop me from
+	//getting confused while I am editing four
+	//libraries simultaneously.
+	//However, you could use it to test which utility
+	//(or library, in the case of clasquinator)
+	//is currently running and if it is safe to use routines
+	//not in the common list.
+	//e.g if getcmd$() = "clasquinator" SubmenuDlg(options ....)
+	return "clasquinator"
+end sub
+
+export sub clasquinator_initialise()
+	//sets up the GLOBAL numeric variables screenwidth and screenheight
+	//and also sets up the GLOBAL variables for widget colours to defaults.
+	//Sorry about that, but these really will be used all over and passing them locally
+	//just is not feasible.
+	//Must be run before you can run any other commands (this should be automatic)
+	//and called again before every dialog-creating command to see if your 
+	//user resized the terminal window.
+	//This should all have been taken care of automatically, but if you have weird problems,
+	//you can just put the following line in all your programs
+	//    if getcmd$() = "clasquinator" clasquinator_initialise()
+	//that way it won't affect any other library and you can still change libraries
+	//with a minimum of fuss.
+	if screenwidth <> peek("screenwidth") or screenheight <> peek("screenheight") then
+		screenwidth=peek("screenwidth")
+		screenheight=peek("screenheight")
+	endif
+	if menu_colour$ = "" ChangeColourToDefault()
+	if title_colour$ = "" ChangeColourToDefault()
+	if trigger_colour$ = "" ChangeColourToDefault()
+end sub
+
+sub get_screen$(pos,lines)
+	//The value *pos* must be either 1 for top or 0 for bottom.
+	//The value *lines* indicates the number of lines you want to grab 
+	local content$
+	if pos > 1 pos = 1: if pos < 0 pos = 0
+	if pos =1 content$ = getscreen$(0,0, screenwidth - 1,lines - 1)
+	if pos = 0 content$ = getscreen$(0, screenheight - lines - 1, screenwidth - 1, screenheight - 1) 
+	return content$
+end sub
+
+sub put_screen(pos,content$,lines)
+	//The value *pos* must be either 1 for top or 0 for bottom.
+	//if pos equals 1 the lines value is not required
+	//if pos equals 0 the lines value must be supplied
+	//The value content$ is the string you grabbed earlier with the get_screen$() routine
+	clasquinator_initialise()
+	if pos > 1 pos = 1: if pos < 0 pos = 0
+	if pos = 1 putscreen content$, 0, 0
+	if pos = 0 putscreen content$, 0, screenheight - lines - 1
+end sub
+
+sub fill_line_with_symbols(lin, mode, symbol$)
+	//fill a line with blanks (i.e. clear it) prior to placing information there
+	//mode = 0 means using the normal print (default)
+	//mode = 1 means using reverse print
+	//symbol$ can be any character you wish, like -, = or #
+	// If supplied, it will be used to draw the line instead of spaces.
+	local n
+	if symbol$ = "" symbol$ = " "
+	if len(symbol$) > 1 symbol$ = left$(symbol$,1)
+	print at (0, lin) " ";
+	for n = 1 to screenwidth -2
+		if mode = 1 then
+			print colour ("black", menu_colour$) at (n, lin) symbol$;
+		else
+			print colour (menu_colour$, "black") at (n, lin) symbol$;
+		endif
+	next n
+end sub
+
+sub fill_widget_line_with_symbols(lin, widgetwidth, mode, symbol$)
+	//fill a widget line with blanks (i.e. clear it) or symbols prior to placing information there
+	//mode = 0 means using the normal print (default)
+	//mode = 1 means using reverse print
+	//symbol$ can be any character you wish, like -, = or #
+	// If supplied, it will be used to draw the line instead of spaces.
+	local n
+	if symbol$ = "" symbol$ = " "
+	if len(symbol$) > 1 symbol$ = left$(symbol$,1)
+	print at (3, lin) "";
+	for n = 3 to widgetwidth +1
+		if mode = 1 then
+			print colour ("black", menu_colour$) at (n, lin) symbol$;
+		else
+			print colour (menu_colour$, "black") at (n, lin) symbol$;
+		endif
+	next n
+end sub
+
+sub fill_line_with_blanks(lin)
+	//fill a line with completely black spaces
+	local a$, n
+	a$ = str$(screenwidth) + ",1:"
+	for n = 1 to screenwidth
+		a$ = a$ + " :Bla:Bla,"
+	next n
+	a$ = a$ + ", blb"
+	putscreen a$, 0, lin
+end sub
+
+sub calculate_button_size(button$)
+	return len(button$) + 3
+end sub
+
+sub trimtext$(text$)
+	if left$(text$,1) = "\"" or left$(text$,1) = "'" text$ = right$(text$, len(text$) - 1) 
+	if right$(text$,1) = "\"" or right$(text$,1) = "'" text$ = left$(text$, len(text$) - 1) 
+	text$ =trim$(text$)
+	return text$
+end sub
+
+sub wordwrap(w$(),width, arraylimit,startline)
+	local row$,f
+	//print at (0,startline) "";
+	for f = 1 to arraylimit
+		if len(row$) = 0 then
+			row$ = row$ + w$(f)
+		elseif len(row$ + "  "  + w$(f) ) <= width
+			row$ = row$ + "  "  + w$(f)
+		else
+			fill_line_with_blanks(startline)
+			fill_line_with_blanks(startline + 1)
+			print at (0,startline) row$;
+			startline = startline + 1
+			if startline > screenheight - 5 break: break
+			row$ = w$(f)
+		endif
+	next f
+	if len(row$) > 0  then
+		fill_line_with_blanks(startline)
+		fill_line_with_blanks(startline + 1)
+		print at (0,startline) row$;
+	endif	
+	return startline + 1
+end sub
+
+sub getanydlg$(title$, text$, start$, type, altsymbol$)
+	//type = 0 for files, 1 for directories to open
+	//and type = 2 for files, 3 for directories to create.
+	local a$, original$,items,w$(1),item$, b$, commstring$,linefeed$, n, endline, widgetcolour$, widgetbackgroundcolour$
+	clasquinator_initialise()
+	text$ = trimtext$(text$): title$ = trimtext$(title$)
+	if altsymbol$ = "" then
+		altsymbol$ = "-"
+		widgetcolour$ = title_colour$
+		widgetbackgroundcolour$ = "black"
+	else
+		widgetcolour$ = getwidgetcolour$()
+		widgetbackgroundcolour$ = menu_colour$
+	endif
+	if peek$("os") = "unix" then
+		switch type
+			case 0
+			case 2
+				commstring$ = "cd " + start$ + " && ls -p | grep -v /"
+				break
+			case 1
+			case 3
+				commstring$ = "cd " + start$ + " && ls -1 -d1 */ | cut -f1 -d'/'"
+				break
+		end switch
+		if start$ = "" then
+			start$ = system$("pwd")
+			start$ = left$(start$, len(start$) - 1) //strip off trailing \n
+		endif
+		linefeed$ = "\n"
+		elseif peek$("os") = "windows"
+			switch type
+			case 0
+			case 2
+				commstring$ = "dir /b /a-d " + start$
+				break
+			case 1
+			case 3
+				commstring$ = "dir /b /ad " + start$
+				break
+		end switch
+		if start$ = "" then
+			start$ = system$("echo %cd%")
+			start$ = left$(start$, len(start$) - 2) //strip off trailing \r\n
+		endif
+		linefeed$ = "\n\r"
+	endif
+	a$ = system$(commstring$)
+	if (a$ = "" or a$ = "\n" or instr(a$, "File Not Found")) and (type = 0 or type = 1) return ""
+	items= token(a$,w$(), linefeed$)	
+	original$ = getscreen$(0,0,screenwidth-1, screenheight-2)
+	for n = 0 to 4
+		fill_line_with_blanks(n)
+	next n
+	fill_line_with_symbols(0,(altsymbol$ <> "-"), altsymbol$)
+	fill_line_with_symbols(3,(altsymbol$ <> "-"), altsymbol$)
+	print color(widgetcolour$, widgetbackgroundcolour$) at (int(screenwidth - len(title$)) /2, 0) title$;
+	endline = wordwrap (w$(), screenwidth -1, items, 4)
+	fill_line_with_symbols(endline, (altsymbol$ <> "-"), altsymbol$)
+	b$ = "!@#$%^&*()"
+	if type < 2  then
+		while(instr(a$, trimtext$(b$)) = 0)
+			fill_line_with_blanks(2)
+			print at (1,1) text$
+			line input b$
+		wend
+	else
+		repeat
+			fill_line_with_blanks(2)
+			print at (1,1) text$
+			line input b$
+		until(instr(a$, trimtext$(b$)) = 0)
+	endif
+	putscreen original$, 0,0
+	return trimtext$(b$)
+end sub
+
+sub printmenu(menustring$,startline, active_colour$)
+	local w$(1),items, size,f
+	items= token(menustring$,w$(), "#")
+	size = 1: print at (0, startline + 1) " ";
+	for f = 1 to items
+		if len(w$(f)) + 2 < screenwidth then
+		print color(active_colour$) left$(w$(f),1);
+		print color(menu_colour$) mid$(w$(f),2) + "  ";
+		size = size + len(w$(f)) + 2
+		endif
+	next f
+end sub
+
+sub getwidgetcolour$()
+	local widget_colour$
+	switch left$(menu_colour$,3)
+		case "bla"
+		case "red"
+		case "blu"
+		case "mag"
+			widget_colour$ = "white"
+			break
+		case "whi"
+		case "yel"
+		case "cya"
+		case "gre"
+			widget_colour$ = "black"
+			break
+	end switch
+	return widget_colour$
+end sub
+
+sub drawwidget(title$, exit$, widgetwidth, widgetheight,altsymbol$)
+	local widget_colour$, f, widgetcolour$, widgetbackgroundcolour$, sidesymbol$
+	if altsymbol$ = "" then
+		altsymbol$ = "-"
+		sidesymbol$ = "|"
+		widgetcolour$ = title_colour$
+		widgetbackgroundcolour$ = "black"
+	else 
+		widgetcolour$ = getwidgetcolour$()
+		widgetbackgroundcolour$ = menu_colour$
+		sidesymbol$ = altsymbol$
+	endif
+	text$ = trimtext$(text$): title$ = trimtext$(title$)
+	for f = 3 to widgetheight + 1
+		fill_widget_line_with_symbols(f, widgetwidth, 0, " ")
+		print color (widgetcolour$, widgetbackgroundcolour$) at(3,f) sidesymbol$;
+		print color (widgetcolour$, widgetbackgroundcolour$) at(widgetwidth + 1,f) sidesymbol$;
+	next f
+	fill_widget_line_with_symbols(3, widgetwidth, (altsymbol$ <> "-"), altsymbol$)
+	fill_widget_line_with_symbols(widgetheight + 1, widgetwidth, (altsymbol$ <> "-"), altsymbol$)
+	print color(widgetcolour$,widgetbackgroundcolour$) at (int(screenwidth - len(title$)) /2, 3) title$;
+	////////////////////////////////////
+	//FOR FUTURE USE
+	//print color(widget_colour$,menu_colour$) at (5, widgetheight + 1) "Pg";
+	//print color(trigger_colour$,menu_colour$) "D";
+	//print color(widget_colour$,menu_colour$) "wn";
+	//print color("black",menu_colour$) "  Pg";
+	//print color(trigger_colour$,menu_colour$) "U";
+	//print color("widget_colour$,menu_colour$) "p";
+	////////////////////////////////////
+	print color(trigger_colour$,widgetbackgroundcolour$) at(widgetwidth - len(exit$) - 2,widgetheight + 1) left$(exit$,1);
+	print color(widgetcolour$,widgetbackgroundcolour$) mid$(exit$, 2);
+end sub
+
+sub fillwidget(string$,widgetwidth, widgetheight, continu)
+	local row$, w$(1), arraylimit, startx, starty, n
+	startx = screenwidth - widgetwidth
+	starty = 4
+	arraylimit = token(string$, w$(), " ")
+	for n = continu to arraylimit
+		if len(row$) = 0 and w$(n) <> "#" then
+			row$ = row$ + w$(n)
+		elseif w$(n) ="#" 
+			print at (startx,starty) "";
+			print row$;
+			starty = starty + 1
+			row$ = ""
+		elseif len(row$ + "  "  + w$(n) ) <= widgetwidth - 4
+			row$ = row$ + "  "  + w$(n)
+		else
+			print at (startx,starty) "";
+			print row$;
+			row$ = w$(n)
+			starty = starty + 1
+			if starty > widgetheight -2 return n
+		endif
+	next n
+	if len(row$) > 0  then
+		print at (startx, starty) "";
+		print row$;
+	endif
+	return 0
+end sub
