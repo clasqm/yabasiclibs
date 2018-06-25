@@ -18,6 +18,7 @@ The library should exist either in the same folder as your program (symlinks wor
 Developed on elementary OS 0.4 "Loki" and Lubuntu 18.04 (i.e. Linux), but it should work on any *NIX system that will run yabasic. Testing on Windows has been far more sketchy, since I don't have a windows box here, but I did what I could in my lunch break at work ;-). Don't tell my boss.
 
 ## The libraries
++ [compat.yab](https://clasqm.github.io/yabasiclibs/compat/) - a yabasic library that makes the importing of BASIC programs from other dialects a little easier by creating aliases for existing yabasic commands.
 + [clasquinator.yab](https://clasqm.github.io/yabasiclibs/clasquinator/) - a yabasic library that attempts to reproduce the functionality of the other four dialog-providing libraries purely from within yabasic.
     + *This library is not 100% compatible with the other four and likely never will be!*
     + This library should work in yabasic for Windows too, but testing has been not been very extensive on that platform.

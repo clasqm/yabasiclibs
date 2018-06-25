@@ -1,0 +1,46 @@
+<h1>Compat.yab</h1>
+
+<p>Yabasic libraries (c) Michel Clasquin-Johnson 2018.
+Licensed accordingto the MIT license</p>
+
+<p>If you are reading this as a man page, be advised that you can see it in glorious HTML, with pictures even, at https://clasqm.github.io/</p>
+
+<h2>Compatibility Library for yab</h2>
+
+<p>by Michel Clasquin-Johnson
+clasqm@gmail.com</p>
+
+<p>Created to make the importing of BASIC programs from other dialects a little easier by creating aliases for existing yabasic commands. But keep in mind that these routines are case-sensitive, so your ported applications must be in lowercase.</p>
+
+<p>This is just a beginning. Please help make this a community project by sending me ideas for other commands that can be included. If possible, include what the command does, how many parameters it requires, and from which version of BASIC it comes. If you can write the routine yourself, even better! Send it, and I'll include it in the next version.</p>
+
+<p><strong>Usage</strong>: from within yabasic, use </p>
+
+<pre><code>IMPORT compatlib
+</code></pre>
+
+<p>Now you can use the routines below like yabasic had always known about them.</p>
+
+<h2>Routines available</h2>
+
+<ul>
+<li>ucase$(z$)
+<ul>
+<li>upper$ in yabasic</li>
+</ul></li>
+<li>lcase$(z$)
+<ul>
+<li>lower$ in yabasic</li>
+<li>cls()</li>
+<li>clear screen in yabasic</li>
+<li>About as close as we can get - sorry but you'll have to use the brackets</li>
+</ul></li>
+<li>sys(z$)
+<ul>
+<li>system() in yabasic</li>
+</ul></li>
+<li>sys$(z$)
+<ul>
+<li>system$() in yabasic</li>
+</ul></li>
+</ul>

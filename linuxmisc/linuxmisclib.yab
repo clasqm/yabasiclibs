@@ -225,6 +225,15 @@ end sub
 
 ########## G ###########
 
+export sub GetEnvVar$(var$)
+	//Get an environment variable
+	//Shortcut to peek$("env",  "NAME")
+	//Do not precede the value var$ with the $ character.
+	//Inspired by a library by Martin Medvold
+	//Example: a$ = GetEnvVar$("PATH")
+	return peek$("env", var$)
+end sub
+
 ########## H ###########
 
 ########## I ###########

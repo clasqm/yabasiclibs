@@ -1,7 +1,7 @@
 # linuxmisclib.yab
 
 A yabasic library (c) Michel Clasquin-Johnson 2018.
-Licensed accordingto the MIT license.
+Licensed according to the MIT license.
 
 If you are reading this as a man page, be advised that you can see it in glorious HTML, with pictures even, at https://clasqm.github.io/
 
@@ -106,6 +106,13 @@ Convert an image file to a different format, optionally with a different filenam
         + 0 if it is just a regular file. 
     + This does NOT test for hard links. 
     + **System commands used:** *test*.
+
++ **GetEnvVar$**(var$)
+    + Get an environment variable
+    + Shortcut to *peek$("env",  "NAME")*
+    + Do *not* precede the value *var$* with the $ character as you would do in bash.
+    + Inspired by a library by Martin Medvold
+    + *Example: *a$ = GetEnvVar$("PATH")*
 
 + **IsFileZeroByte**(pathname$) - determines if a passed filename is a zero-byte file.
     + **Returns** 
