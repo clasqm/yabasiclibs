@@ -9,7 +9,7 @@ Extension libraries for yabasic.
 
 A series of libraries for [yabasic](http://www.yabasic.de/) , the BASIC dialect by [Marc Ihm](https://github.com/marcIhm), that give access to a number of common utilities on Linux, mostly intended to provide standard dialogs. Not tested on other UNIX platforms, but it should be possible to adjust them accordingly.
 
-This does not make yabasic able to write full-on graphical programs, like its derivative [yab](http://yab.orgfree.com/) on the Haiku platform, but it does allow you to use yabasic as the backend for "wizard" style applications.
+This does not make yabasic able to write full-on graphical programs, like its own derivative [yab](http://yab.orgfree.com/) on the Haiku platform, but it does allow you to use yabasic as the backend for "wizard"-style applications.
 
 This software is still very much in the alpha stage. The routines in the libraries work, but need a lot of optimization and error-trapping.
 
