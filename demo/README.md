@@ -10,4 +10,6 @@ It will give you the choice of which of the dialog-providing demos to run. Each 
     yabasic zenity_demo.bas
     yabasic whiptail_demo.bas
     yabasic clasquinator_demo.bas
-
+    yabasic clasquinator_demo2.bas
+    yabasic clasquinator_demo3.bas
+    yabasic clasquinator_demo4.bas

@@ -1,6 +1,11 @@
-# clasquinator
+# clasquinatorlib.yab
 
-This folder contains a library for yabasic that allows yabasic to display a variety of dialogs in text mode without making use of external commands.
+A yabasic library (c) Michel Clasquin-Johnson 2018.
+Licensed accordingto the MIT license
+
+If you are reading this as a man page, be advised that you can see it in glorious HTML, with pictures even, at https://clasqm.github.io/
+
+This library for yabasic allows yabasic to display a variety of dialogs in text mode without making use of external commands.
 
 *Some* routines will perhaps also be made available in graphics mode. Maybe, one day. I am a better text mode programmer, what can I say? 
 
@@ -10,7 +15,7 @@ The entire set of libraries focuses on sane defaults and getting basic functiona
 
 The images below are for illustration only. The exact appearance of the dialogs will depend on your system settings.
 
-Developed on elementary OS 0.4 "Loki" (i.e. Linux), but it should work on any *NIX system that will run yabasic. Testing on Windows has been far more sketchy, since I don't have a windows box here, but I did what I could in my lunch break at work ;-).
+Developed on elementary OS 0.4 "Loki" and Lubuntu 18.04 (i.e. Linux), but it should work on any *NIX system that will run yabasic. Testing on Windows has been far more sketchy, since I don't have a windows box here, but I did what I could in my lunch break at work ;-).
 
 The library should exist either in the same folder as your program (symlinks work) or in the standard yabasic library location on your system.
 

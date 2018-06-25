@@ -1,6 +1,11 @@
-# Miscellaneous commands
+# linuxmisclib.yab
 
-This folder contains a library for *yabasic* that allows the use of a variety of common Linux commands in text mode. For example, opening a text file in the *nano* text editor will make it unnecessary for you to write your own text editing routine.
+A yabasic library (c) Michel Clasquin-Johnson 2018.
+Licensed accordingto the MIT license.
+
+If you are reading this as a man page, be advised that you can see it in glorious HTML, with pictures even, at https://clasqm.github.io/
+
+This library for yabasic allows the use of a variety of common Linux commands in text mode. For example, opening a text file in the *nano* text editor will make it unnecessary for you to write your own text editing routine.
 
 This library also contains some routines ported from my libraries originally developed under yab for Haiku.
 
@@ -8,7 +13,7 @@ These routines make heavy use of *system()* and *system$()* commands, and some w
 
 All routines are case-sensitive.
 
-Developed on elementary OS 0.4 "Loki" (i.e. Linux), but it should work on any system that will run both yabasic and the command in question.
+Developed on elementary OS 0.4 "Loki" and Lubuntu 18.04 (i.e. Linux), but it should work on any system that will run both yabasic and the command in question.
 
 The *yabasic* I use for development is version 2.78.5, compiled and installed from source obtained at www.yabasic.de.
 
