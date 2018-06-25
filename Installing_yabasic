@@ -1,3 +1,5 @@
+If your linux distro has yabasic in its repos, then please ignore everything below and use that instead. Yes, really.
+
 The yabasic website at www.yabasic.de offers RPM and DEB packages. The DEB found there didn't work for me, so I made my own - it requires a recent x86_64 (64-bit) distro to run on.
 
 Get it here: https://github.com/clasqm/yabasic/tree/master/build
