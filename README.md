@@ -21,9 +21,12 @@ Developed on elementary OS 0.4 "Loki" and Lubuntu 18.04 (i.e. Linux), but it sho
 + [clasquinator.yab](https://clasqm.github.io/yabasiclibs/clasquinator/) - a yabasic library that attempts to reproduce the functionality of the other four dialog-providing libraries purely from within yabasic.
     + *This library is not 100% compatible with the other four and likely never will be!*
     + This library should work in yabasic for Windows too, but testing has been not been very extensive on that platform.
+    + Most routines offer more than one style variation to the dialogs. Below we will demonstrate two of these. 
     + Currently in alpha stage.
     
 ![clasquinator](./clasquinator/imgs/InputDlg.png)
+
+![clasquinator2](./clasquinator/imgs/InputDlg2.png)
 
 + [dialoglib.yab](https://clasqm.github.io/yabasiclibs/dialog/) - allows the use of the Linux command *dialog* to display a variety of graphical dialogs in text mode.
     + Currently in alpha stage.
