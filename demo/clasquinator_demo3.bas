@@ -46,8 +46,8 @@ MessageDlg3("You chose " + b$ + " in "+ a$ + ". Another good choice!", "OK")
 
 ChangeColour("cyan", "blue", "red")
 
-WaitDlg3(1,"Thank you for playing!")
-pause 4 :WaitDlg3(0)
+WaitDlg(1,"Thank you for playing!")
+pause 4 :WaitDlg(0)
 if peek$("os") = "unix" then
 	system("../standalone_apps/yabscreenfetch")
 	b$ = inkey$
@@ -80,7 +80,7 @@ switch a$
 		end switch
 		break
 	case "t"
-		b$ =SubMenuDlg3$("Textual Menu", "Clasquinator#Dialog#Whiptail", "Graphical#Textual#Quit")
+		b$ =SubMenuDlg33$("Textual Menu", "Clasquinator#Dialog#Whiptail", "Graphical#Textual#Quit")
 		switch b$
 			case "c"
 				MessageDlg3("You chose Clasquinator", "OK")
