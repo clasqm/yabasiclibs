@@ -58,7 +58,7 @@ export sub ArraySort(z())
                 line input #handle item$
                 z(f) = val(item$)
         next f
-        close handle
+        close handlehandle
 	system("rm " + tempfile1$)
         system("rm " + tempfile2$)
 end sub
@@ -266,7 +266,6 @@ export sub IsItATextFile(filename$)
 		return 0
 	endif
 end sub
-
 
 ########## J ###########
 
@@ -611,6 +610,90 @@ end sub
 
 ########## R ###########
 
+export sub RandInt()
+	//returns a random integer between 0 and 32767
+	//devised at a time when yab's own RAN() command was malfunctioning
+	return val(system$("echo $RANDOM"))
+end sub
+
+export sub RandInt0To9()
+	//returns a random integer between 0 and 9, inclusive
+	//devised at a time when yab's own RAN() command was malfunctioning
+	return val(mid$(time$, 8,1))
+end sub
+
+export sub ReplaceinArray$(w$(),instring$,outstring$)
+	//Globally replace all occurences of instring$ in a one-dimensional string array with outstring$.
+	//Case-sensitive.
+	//If you are going to use this on code of any kind, you will 
+	//have to look into using escape codes.
+	//Even in plain text, you will probably need to escape 
+	//double quote marks (") and forward slashes(\\).
+	//Unlike using mid$(), this one can change the length of the strings in the array:
+	//instring$ and outstring$ need not the the same size.
+	//returns a string delimited with linefeeds.
+	//your receiving routine can turn it back into an array with the token function.
+	//e.g. num = token(b$,a$(),"\n")
+	//This can even be the original array.
+	local f, returned$
+	if arraydim(w$()) <> 1 return
+	for f = 1 to arraysize(w$(),1)
+		returned$ = returned$ + ReplaceinLine$(w$(f), instring$, outstring$) + "\n"
+	next f
+	return returned$
+end sub
+
+export sub ReplaceinFile(infilename$,instring$,outstring$, outfilename$)
+	//Globally replace all occurences of instring$ in the file infilename$ 
+	//with outstring$ and writes the results to the file outfilename$.
+	//if outfilename$ is not supplied, it will write the result to the original file.
+	//Case-sensitive.
+	//If you are going to use this on code of any kind, you will 
+	//have to look into using escape codes.
+	//Even in plain text, you will probably need to escape 
+	//double quote marks (") and forward slashes(\\).
+	//Unlike using mid$(), this one can change the length of the strings:
+	//instring$ and outstring$ need not the the same size.
+	//Limited to the string size that yabasic can handle - try not to use
+	// it on War and Peace.
+	//Returns nothing
+	local handle,bigstring$,a$
+	if outfilename$ = "" outfilename$ = infilename$
+	handle = open(infilename$,"r")
+	repeat
+		line input #handle a$
+		bigstring$ = bigstring$ + a$ + "\n"
+	until(eof(handle))
+	close handle
+	bigstring$ = ReplaceinLine$(bigstring$,instring$,outstring$)
+	handle = open(outfilename$,"w")
+	print #handle bigstring$
+	close handle
+end sub
+
+export sub ReplaceinLine$(line$,instring$,outstring$)
+	//Globally replace all occurences of instring$ in line$ with outstring$.
+	//Case-sensitive.
+	//If you are going to use this on code of any kind, you will 
+	//have to look into using escape codes.
+	//Even in plain text, you will probably need to escape 
+	//double quote marks (") and forward slashes(\\)
+	//Unlike using mid$(), this one can change the length of the string:
+	//instring$ and outstring$ need not the the same size.
+	local outline$, f
+	if instring$ = outstring$ return line$ //avoid infinite loop
+	if  instr(line$,instring$) = 0 return line$ // pattern not found
+	for f = 1 to len(line$)
+		if mid$(line$,f, len(instring$)) = instring$ then
+			outline$ = outline$ + outstring$
+			f = f + len(instring$) -1
+		else
+			outline$ = outline$ + mid$(line$, f, 1)
+		endif
+	next f
+	return outline$
+end sub
+
 ########## S ###########
 
 export sub Screensaver(onoff,type)
@@ -781,7 +864,8 @@ export sub WhereAmI$()
                 path$=system$("pwd")
         endif
          path$ = StripLFoffSysCmd$(path$)
-         // I prefer not to add the trailing slash at this point
+         // I prefer not to have the trailing slash at this point
+	 // You can always add it
         return path$
 end sub
 

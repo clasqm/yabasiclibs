@@ -19,7 +19,7 @@ Licensed according to the MIT license.</p>
 
 <p>The library should exist either in the same folder as your program (symlinks work, but if you have trouble with binding, just copy the library, it is not THAT big!) or in the standard yabasic library location on your system.</p>
 
-<p>To use the library, use the command </p>
+<p>To use the library, use the command</p>
 
 <pre><code>import linuxmisclib
 </code></pre>
@@ -111,7 +111,7 @@ Convert an image file to a different format, optionally with a different filenam
 <li><p><strong>FileExists</strong>(fullpathname$) - Test if a file exists.</p>
 
 <ul>
-<li>Returns 1 if the file exists, or returns 0 if the file does not exist. </li>
+<li>Returns 1 if the file exists, or returns 0 if the file does not exist.</li>
 <li>If only a filename is given, only the program's local directory will be searched.</li>
 <li>But you can also give a full pathname.</li>
 <li><strong>System commands used:</strong> none.</li>
@@ -168,7 +168,7 @@ Convert an image file to a different format, optionally with a different filenam
 <li>If you need something more powerful than <em>file</em>, I suggest you install <em>enca</em>. </li>
 <li><strong>System commands used:</strong> <em>file</em>.</li>
 </ul></li>
-<li><p><strong>KillPlay</strong>() - Stops any multimedia files currently playing </p>
+<li><p><strong>KillPlay</strong>() - Stops any multimedia files currently playing.</p>
 
 <ul>
 <li>Stops playing of multimedia files if they use either <em>ffplay</em> or <em>aplay</em>, such as files launched with 
@@ -177,7 +177,7 @@ Convert an image file to a different format, optionally with a different filenam
 <li><em>PlayVideo()</em> or </li>
 <li><em>PlayWav()</em>. </li>
 </ul></li>
-<li>Please note that this is a nuclear option: it will also affect any other programs making use of these utilities. </li>
+<li>Please note that this is a nuclear option: it will also affect any other programs making use of these utilities.</li>
 <li><strong>System commands used:</strong> <em>pkill</em>.</li>
 </ul></li>
 <li><p><strong>NotifyDlg</strong>(text$, duration, block) - Pop up a one-line notification.</p>
@@ -328,6 +328,60 @@ Convert an image file to a different format, optionally with a different filenam
 <ul>
 <li>You can find these fonts with <em>locate *.tlf</em>.</li>
 <li><strong>System commands used:</strong> <em>toilet</em>.</li>
+</ul></li>
+<li><p><strong>RandInt</strong>()</p>
+
+<ul>
+<li>Returns a random integer between 0 and 32767.</li>
+</ul></li>
+<li><p><strong>RandInt0To9</strong>()</p>
+
+<ul>
+<li>Returns a random integer between 0 and 9, inclusive.</li>
+</ul></li>
+<li><p><strong>ReplaceinArray$</strong>(w$(),instring$,outstring$) - Globally replace all occurences of <em>instring$</em> in a one-dimensional string array with <em>outstring$</em>.</p>
+
+<ul>
+<li>Case-sensitive.</li>
+<li>If you are going to use this on code of any kind, you will have to look into using escape codes.</li>
+<li>Even in plain text, you will probably need to escape double quote marks (") and forward slashes(\).</li>
+<li>Unlike using <em>mid$()</em>, this one can change the length of the strings in the array: <em>instring$</em> and <em>outstring$</em> need not the the same size.</li>
+<li>Returns a string delimited with linefeeds.</li>
+<li>Your receiving routine can turn it back into an array with the <em>token</em> or <em>split</em> functions.</li>
+<li>This can even be the original array.</li>
+<li><strong>System commands used:</strong> none.</li>
+<li><strong>Example:</strong>
+<code>
+dim a$(3)
+for f = 1 to 3
+a$(f) = "this is number " + str$(f)
+next f
+b$ = ReplaceinArray$(a$(), "number", "line")
+num = token(b$,a$(),"\n")
+for f = 1 to 3
+print a$(f)
+next f
+</code></li>
+</ul></li>
+<li><p><strong>ReplaceinFile</strong>(infilename$,instring$,outstring$, outfilename$) - Globally replace all occurences of <em>instring$</em> in the file <em>infilename$</em> with <em>outstring$</em> and writes the results to the file <em>outfilename$</em>.</p>
+
+<ul>
+<li>If <em>outfilename$</em> is not supplied, it will write the result to the original file.</li>
+<li>Case-sensitive.
++If you are going to use this on code of any kind, you will have to look into using escape codes.</li>
+<li>Even in plain text, you will probably need to escape double quote marks (") and forward slashes(\).</li>
+<li>Unlike using <em>mid$()</em>, this one can change the length of the strings: <em>instring$</em> and <em>outstring$</em> need not the the same size.</li>
+<li>Limited to the string size that yabasic can handle - try not to use it on <em>War and Peace</em>.</li>
+</ul></li>
+<li><p><strong>ReplaceinLine$</strong>(line$,instring$,outstring$) - Globally replace all occurences of <em>instring$</em> in the string <em>line$</em> with <em>outstring$</em>.</p>
+
+<ul>
+<li>Case-sensitive.</li>
+<li>If you are going to use this on code of any kind, you will have to look into using escape codes.</li>
+<li>Even in plain text, you will probably need to escape double quote marks (") and forward slashes(\).</li>
+<li>Unlike using <em>mid$()</em>, this one can change the length of the string: <em>instring$</em> and <em>outstring$</em> need not the the same size.</li>
+<li><strong>System commands used:</strong> none.</li>
+<li><strong>Example:</strong> <em>print ReplaceinLine$("superman","super","bat")</em> will print "batman".</li>
 </ul></li>
 <li><p><strong>Screensaver</strong>(onoff, type) - Starts or halts  the <em>termsaver</em> text-based screensaver application. </p>
 

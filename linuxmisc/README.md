@@ -19,7 +19,7 @@ The *yabasic* I use for development is version 2.78.5, compiled and installed fr
 
 The library should exist either in the same folder as your program (symlinks work, but if you have trouble with binding, just copy the library, it is not THAT big!) or in the standard yabasic library location on your system.
 
-To use the library, use the command 
+To use the library, use the command
 
     import linuxmisclib
 
@@ -89,7 +89,7 @@ Convert an image file to a different format, optionally with a different filenam
     + **System commands used:** none.
 
 + **FileExists**(fullpathname$) - Test if a file exists.
-    + Returns 1 if the file exists, or returns 0 if the file does not exist. 
+    + Returns 1 if the file exists, or returns 0 if the file does not exist.
     + If only a filename is given, only the program's local directory will be searched.
     + But you can also give a full pathname.
     + **System commands used:** none.
@@ -130,12 +130,12 @@ Convert an image file to a different format, optionally with a different filenam
     + If you need something more powerful than *file*, I suggest you install *enca*. 
     + **System commands used:** *file*.
 
-+ **KillPlay**() - Stops any multimedia files currently playing 
++ **KillPlay**() - Stops any multimedia files currently playing.
     + Stops playing of multimedia files if they use either *ffplay* or *aplay*, such as files launched with 
         + *PlayMP3()*, 
         + *PlayVideo()* or 
         + *PlayWav()*. 
-    + Please note that this is a nuclear option: it will also affect any other programs making use of these utilities. 
+    + Please note that this is a nuclear option: it will also affect any other programs making use of these utilities.
     + **System commands used:** *pkill*.
 
 + **NotifyDlg**(text$, duration, block) - Pop up a one-line notification.
@@ -249,6 +249,50 @@ Convert an image file to a different format, optionally with a different filenam
 + **PrintToilet$**(font$, text$) - Print *text$* in the *toilet* font *font$*
     + You can find these fonts with *locate \*.tlf*.
     + **System commands used:** *toilet*.
+
++ **RandInt**()
+    + Returns a random integer between 0 and 32767.
+
++ **RandInt0To9**()
+    + Returns a random integer between 0 and 9, inclusive.
+
++ **ReplaceinArray$**(w$(),instring$,outstring$) - Globally replace all occurences of *instring$* in a one-dimensional string array with *outstring$*.
+    + Case-sensitive.
+    + If you are going to use this on code of any kind, you will have to look into using escape codes.
+    + Even in plain text, you will probably need to escape double quote marks (") and forward slashes(\\).
+    + Unlike using *mid$()*, this one can change the length of the strings in the array: *instring$* and *outstring$* need not the the same size.
+    + Returns a string delimited with linefeeds.
+    + Your receiving routine can turn it back into an array with the *token* or *split* functions.
+    + This can even be the original array.
+    + **System commands used:** none.
+    + **Example:**
+````
+dim a$(3)
+for f = 1 to 3
+    a$(f) = "this is number " + str$(f)
+next f
+b$ = ReplaceinArray$(a$(), "number", "line")
+num = token(b$,a$(),"\n")
+for f = 1 to 3
+    print a$(f)
+next f
+````
+
++ **ReplaceinFile**(infilename$,instring$,outstring$, outfilename$) - Globally replace all occurences of *instring$* in the file *infilename$* with *outstring$* and writes the results to the file *outfilename$*.
+    + If *outfilename$* is not supplied, it will write the result to the original file.
+    + Case-sensitive.
+    +If you are going to use this on code of any kind, you will have to look into using escape codes.
+    + Even in plain text, you will probably need to escape double quote marks (") and forward slashes(\\).
+    + Unlike using *mid$()*, this one can change the length of the strings: *instring$* and *outstring$* need not the the same size.
+    + Limited to the string size that yabasic can handle - try not to use it on *War and Peace*.
+
++ **ReplaceinLine$**(line$,instring$,outstring$) - Globally replace all occurences of *instring$* in the string *line$* with *outstring$*.
+    + Case-sensitive.
+    + If you are going to use this on code of any kind, you will have to look into using escape codes.
+    + Even in plain text, you will probably need to escape double quote marks (") and forward slashes(\\).
+    + Unlike using *mid$()*, this one can change the length of the string: *instring$* and *outstring$* need not the the same size.
+    + **System commands used:** none.
+    + **Example:** *print ReplaceinLine$("superman","super","bat")* will print "batman".
 
 + **Screensaver**(onoff, type) - Starts or halts  the *termsaver* text-based screensaver application. 
     + Please note that work in your program is not necessarily suspended while this runs, because it gets launched in a separate process, but it is up to you to poll for the exiting condition. 
