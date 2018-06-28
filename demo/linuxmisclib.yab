@@ -1,1 +1,1137 @@
-../linuxmisc/linuxmisclib.yab
+
+//This library for *yabasic* allows the use of a variety of common Linux 
+//commands in text mode. For example, opening a text file in the nano
+//editor will make it unnecessary for you to write your own text editing routine.
+
+//This library also contains some routines ported from my libraries originally
+//developed under yab for Haiku.
+
+//These routines make heavy use of system() and system$() commands,
+//and some write temporary files, work on them, and read them back.
+//They. will.  slow. your. programs. down. a. lot.
+
+//All are case-sensitive.
+
+//Developed on elementary OS 0.4 "Loki" (i.e. Linux), but it should work
+//on any system that will run both yabasic and the command in question.
+
+//The *yabasic* I use for development is version 2.78.5, compiled and 
+//installed from source obtained at www.yabasic.de.
+
+//The library should exist either in the same folder as your program 
+//(symlinks work, but if you have trouble with binding, just copy the library, 
+//it is not THAT big!) or in the standard yabasic library location on your system.
+
+//To use the library, use the command 
+
+//    import linuxmisclib
+
+//before you start using any of the routines.
+
+//See the file *test.bas* for test routines that will show examples of how
+//to use these routines.
+
+//It is safe to use this library and ONE of the others in this set concurrently,
+
+//MAIN ROUTINES
+
+########## A ###########
+
+export sub ArraySort(z())
+	//sorts a ONE-dimensional numeric array
+	//Usage: ArraySort(a())
+	//do not try a() =  ArraySort(a()), it won't work
+	//your array should be global - I have had inconsistent results 
+	//with local arrays.
+        local tempfile1$, tempfile2$,upperlimit, handle, item$
+        tempfile1$ = TempDir$() + "/" + str$(RandInt())
+        tempfile2$ = TempDir$() + "/"  + str$(RandInt())
+        upperlimit =arraysize(z(),1)
+        handle = open(tempfile1$,"w")
+        for f = 1 to upperlimit
+                print #handle str$(z(f))
+        next f
+        close handle
+        system("sort -bn " + tempfile1$ + " > " + tempfile2$)
+        handle = open(tempfile2$,"r")
+        for f = 1 to upperlimit
+                line input #handle item$
+                z(f) = val(item$)
+        next f
+        close handlehandle
+	system("rm " + tempfile1$)
+        system("rm " + tempfile2$)
+end sub
+
+export sub ArraySort$(z$())
+	//sorts a ONE-dimensional string array (case-independent)
+	//Usage: ArraySort$(a$())
+	//do not try a$() =  ArraySort$(a$()), it won't work
+	//your array should be global - I have had inconsistent results 
+	//with local arrays.
+        local tempfile1$, tempfile2$,upperlimit, handle, item$
+        tempfile1$ = TempDir$() + "/" + str$(RandInt())
+        tempfile2$ = TempDir$() + "/" + str$(RandInt())
+        upperlimit =arraysize(z$(),1)
+        handle = open(tempfile1$,"w")
+        for f = 1 to upperlimit
+                print #handle z$(f)
+        next f
+        close handle
+        system("sort -bf " + tempfile1$ + " > " + tempfile2$)
+        handle = open(tempfile2$,"r")
+        for f = 1 to upperlimit
+                line input #handle item$
+                z$(f) = item$
+        next f
+        close handle
+        system("rm " + tempfile1$)
+        system("rm " + tempfile2$)
+end sub
+
+########## B ###########
+
+
+########## C ###########
+
+export sub ConvertFile$(infile$, outfile$)
+	//convert any text file format to any other format that
+	//pandoc (http://pandoc.org/) can handle. make sure that 
+	//your two filenames have the correct extension added,
+	// then pandoc will almost always get it right.
+	//e.g ConvertFile$("myfile.md", "myfile.docx")
+	//will convert a Markdown file to Microsoft .docx format
+	//NOTE: PDF output requires pdflatex or wkhtmltopdf to be 
+	//installed as well as pandoc. Use ConvertFile2PDF() for that.
+	//NOTE: Avoid RTF format output. Pandoc's version of
+	//this format seems nonstandard.
+	local UTest$
+	UTest$ = TestForUtility$("pandoc")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("pandoc " + infile$ + " -o " + outfile$)
+	endif
+end sub
+
+export sub ConvertFile2String$(infile$)
+	//Convert any text file format that pandoc 
+	//(http://pandoc.org/) can handle to text. 
+	//make sure that your filename has the correct
+	//extension, then pandoc will almost always get it right.
+	//e.g a$ = ConvertFile2String$("myfile.md")
+	//will convert a Markdown file and return the result 
+	//as the string variable a$.
+	//Unlike ConvertFile$(), this routine will NOT write an output file.
+	local UTest$
+	UTest$ = TestForUtility$("pandoc")
+	if UTest$ <> "" then
+	else
+		UTest$ = system$("pandoc -t plain " + infile$)
+	endif
+	return UTest$
+end sub
+
+export sub  ConvertFile2PDF$(infile$, outfile$)
+	//convert any text file format that pandoc (http://pandoc.org/)
+	//can handle to PDF. make sure that your infile's name has the 
+	//correct extension added, and that your outfile's name ends with .pdf,
+	// then pandoc will almost always get it right.
+	//e.g ConvertFile$("myfile.md", "myfile.pdf")
+	//will convert a Markdown file to pdf format
+	//This routine tests for the availability of both pandoc and 
+	//wkhtmltopdf.
+	local UTest$
+	UTest$ = TestForUtility$("wkhtmltopdf") 
+	if UTest$ <> "" return UTest$
+	UTest$ = TestForUtility$("pandoc")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("pandoc " + infile$ + " -t html5 -o " + outfile$)
+	endif
+end sub
+
+export sub ConvertImage(inputfile$, outputfile$)
+	//Convert an image file to a different format, optionally with
+	//a different filename.
+	//This routine will work with either Graphics magic OR Image magic
+	//if both are installed, Graphics magic takes precedence.
+	//The original file is left untouched.
+	//returns 1 for success and 0 for failure
+	if TestForUtility$("gm") = "" then
+		system("gm convert " + inputfile$ + " " + outputfile$)
+		return 1
+	elseif TestForUtility$("convert") = ""
+		system("convert " + inputfile$ + " " + outputfile$)
+		return 1
+	else
+		return 0
+	endif
+end sub
+
+########## D ###########
+
+########## E ###########
+
+export sub EncloseString$(thestring$,type)
+	//Encloses a string in either single or double quotes, if it isn't already
+	//mostly for use with long filenames that may include spaces.
+	//type is either 0 (single quote) or 1 (double quote)
+	local type$, type2$
+	if type = 0 then
+		type$ = chr$(39): type2$ = chr$(34)
+	else
+		type$ = chr$(34): type2$ = chr$(39)
+	endif
+	if left$(thestring$,1) <> type$ and left$(thestring$,1) <> type2$ thestring$ = type$ + thestring$
+	if right$(thestring$,1) <> type$ and right$(thestring$,1) <> type2$ thestring$ = thestring$ + type$
+	return thestring$
+end sub
+
+########## F ###########
+
+export sub FileExists(fullpathname$)
+	//test if a file exists
+	//returns 1 - file exists
+	//returns 0 - file does not exist
+        local handle
+        handle = open(fullpathname$,"r")
+        if handle then
+                close handle
+                return 1
+        else
+                return 0
+        endif
+end sub
+
+export sub FileorDir(pathname$)
+	//determines if a passed filename is a file or a directory
+	//returns 1 if the passed variable is a directory
+	//returns 0 if it is a file
+        local isadir$
+        isadir$ = system$("if test -d " + pathname$ + ";then echo 1; else echo 0;fi")
+	return val(isadir$)
+end sub
+
+export sub FileorLink(pathname$)
+	//determines if a passed filename is a file/directory or a symlink
+	//returns 1 if the passed variable is a link
+	//returns 0 if it is a file/directory
+        local isalink$
+        isalink$ = system$("if test -L " + pathname$ + ";then echo 1; else echo 0;fi")
+	return val(isalink$)
+end sub
+
+########## G ###########
+
+export sub GetEnvVar$(var$)
+	//Get an environment variable
+	//Shortcut to peek$("env",  "NAME")
+	//Do not precede the value var$ with the $ character.
+	//Inspired by a library by Martin Medvold
+	//Example: a$ = GetEnvVar$("PATH")
+	return peek$("env", var$)
+end sub
+
+########## H ###########
+
+########## I ###########
+
+export sub IsFileZeroByte(pathname$)
+	//determines if a passed filename is a zero-byte file
+	//returns 1 if the passed variable is larger than zero bytes
+	//returns 0 if it is zero bytes in size
+	//(note that this reverses the output of the test -s command)
+	//caution: will also retun 0 if file does not exist
+	//test for that with FileExists first
+	//caution: will also return 1 if file is actually a directory
+	//test for that with FileorDir first
+	//caution: If the file given is a symlink, this routine will report on the real, linked file
+        local isazero$
+        isazero$ = system$("if test -s " + pathname$ + ";then echo 0; else echo 1;fi")
+	return val(isazero$)
+end sub
+
+export sub IsItATextFile(filename$)
+	//Tests whether a given file is a text file or not
+	//anytjhing that does not have the string "text" in the results of the
+	//file command is assumed to be a binary file.
+	//This should work fine on Linux but may be problematic on BSD systerms
+	//where this command may reject shell scripts
+	//if you need something more powerful I suggest you install enca.
+	if instr(system$ ("file " + filename$), "text") then
+		return 1
+	else
+		return 0
+	endif
+end sub
+
+########## J ###########
+
+########## K ###########
+
+export sub KillPlay()
+	//Stops any multimedia files currently playing if they use either 
+	//ffplay or aplay. Please not that this is a nuclear option - it will 
+	//also affect any other programs making use of these utilities.
+	local UTest$
+	UTest$ = TestForUtility$("pkill")
+	if UTest$ = "" then
+		system("pkill ffplay")
+		system("pkill aplay")
+	endif
+end sub
+
+########## L ###########
+
+########## M ###########
+
+########## N ###########
+
+export sub NotifyDlg(text$, duration, block)
+	//Pop up a one-line notification.
+	//if duration is 0, the notification
+	//remains on screen until right-clicked, and
+	//displays an [X] button to mark the fact.
+	//otherwise, there is no button and the 
+	//notification disappears after the specified
+	//number of seconds.
+	//If block equals 0 the notification will launch in 
+	//a new process and your yabasic program can continue
+	//If block equals 1, your app will pause until the popup disappears.	
+	//Keep your notifications short - 
+	//you don't have much space to play with.
+	//Returns nothing
+	//system utility used: dzen2
+	local dothis$
+	if TestForUtility("dzen2") = 0 return
+	if duration = 0 then
+		dothis$ = "echo \" [X] " + text$ + "\" | dzen2 -ta l -x 50 -y 250 -w 590 -h 50 -p"
+	else
+		dothis$ = "echo \"" + text$ + "\" | dzen2 -ta l -x 50 -y 250 -w 590 -h 50 -p " + str$(duration)
+	endif
+	if block <> 0 dothis$ = dothis$ + " &" 
+	system(dothis$)
+end sub
+
+########## O ###########
+
+export sub OpenAbook$()
+	//Opens the abook text-mode contact manager.
+	//Only the default database is provided for in this routine.
+	local UTest$
+	UTest$ = TestForUtility$("abook")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("abook")
+	endif
+end sub
+
+export sub OpenBastet$()
+	//Opens the bastt CLI Tetris clone.
+	local UTest$
+	UTest$ = TestForUtility$("bastet")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("bastet")
+	endif
+end sub
+
+export sub OpenCalcurse$()
+	//Opens the calcurse text-mode calendar app.
+	//Only the default calendar is provided for in this routine.
+	local UTest$
+	UTest$ = TestForUtility$("calcurse")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("calcurse")
+	endif
+end sub
+
+export sub OpenDav$()
+	//same as OpeninDav$("")
+	local UTest$
+	UTest$ = TestForUtility$("dav")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("dav")
+	endif
+end sub
+
+export sub OpenGtypist$()
+	//Open the gtypist tying tutor program
+	local UTest$
+	UTest$ = TestForUtility$("gtypist")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("gtypist")
+	endif
+end sub
+
+export sub OpenHnb$()
+	//Open the hnb hierarchical notebook
+	local UTest$
+	UTest$ = TestForUtility$("hnb")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("hnb")
+	endif
+end sub
+
+export sub OpeninDav$(filename$)
+	//opens a given text file in the dav text editor.
+	//This might be called dav-text in your pakage system
+	//Must be run in a program that is already in a terminal
+	//For best results your filename should be enclosed in single
+	//quotation marks so that it will not get confused by spaces. This
+	//routine will not check for that.
+	local UTest$
+	UTest$ = TestForUtility$("dav")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("dav " + filename$)
+	endif
+end sub
+
+export sub OpeninDhex$(filename$)
+	//opens a given file in the dhex hexadecimal editor.
+	//must be run in a program that is already in a terminal,
+	//For best results your filename should be enclosed in single
+	//quotation marks so that it will not get confused by spaces. This
+	//routine will not check for that.
+	local UTest$
+	UTest$ = TestForUtility$("dhex")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("dehex " + filename$)
+	endif
+end sub
+
+export sub OpeninElinks$(URL$)
+	//Opens a URL in the elinks text-based browser
+	//Must be run in a program that is already in a terminal
+	//For best results your URL should be enclosed in single
+	//quotation marks so that it will not get confused by spaces.
+	//This routine will not check for that.
+	local UTest$
+	UTest$ = TestForUtility$("elinks")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("elinks " + URL$)
+	endif
+end sub
+
+export sub OpeninFbless$(file$)
+	//Opens a .FB2 ebook in the fbless ebook reader
+	//.FB2 is an obscure format these days, but you can convert .EPUBs
+	//and so on on sites like https://www.online-convert.com
+	//Must be run in a program that is already in a terminal
+	//For best results your URL should be enclosed in single
+	//quotation marks so that it will not get confused by spaces.
+	//This routine will not check for that.
+	local UTest$
+	UTest$ = TestForUtility$("fbless")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("fbless " + file$)
+	endif
+end sub
+
+export sub OpeninHte$(filename$)
+	//opens a given file in the hte hexadecimal editor.
+	//The package name for this might be "ht" on your system.
+	//This routine forces hte into hex mode even if it is a text 
+	//file, but you can explore the other modes with F6
+	//must be run in a program that is already in a terminal,
+	//For best results your filename should be enclosed in single
+	//quotation marks so that it will not get confused by spaces. This
+	//routine will not check for that.
+	local UTest$
+	UTest$ = TestForUtility$("hte")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("hte -b " + filename$)
+	endif
+end sub
+
+export sub OpeninHexcurse$(filename$)
+	//opens a given file in the hexcurse hexadecimal editor.
+	//must be run in a program that is already in a terminal,
+	//For best results your filename should be enclosed in single
+	//quotation marks so that it will not get confused by spaces. This
+	//routine will not check for that.
+	local UTest$
+	UTest$ = TestForUtility$("hexcurse")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("hexcurse " + filename$)
+	endif
+end sub
+
+export sub OpeninJed$(filename$)
+	//opens a given text file in the jed text editor.
+	//must be run in a program that is already in a terminal
+	//For best results your filename should be enclosed in single
+	//quotation marks so that it will not get confused by spaces. This
+	//routine will not check for that.
+	local UTest$
+	UTest$ = TestForUtility$("jed")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("jed " + filename$)
+	endif
+end sub
+
+export sub OpeninLinks$(URL$)
+	//Opens a URL in the links text-based browser
+	//Must be run in a program that is already in a terminal
+	//For best results your URL should be enclosed in single
+	//quotation marks so that it will not get confused by spaces.
+	//This routine will not check for that.
+	local UTest$
+	UTest$ = TestForUtility$("links")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("links " + URL$)
+	endif
+end sub
+
+export sub OpeninLynx$(URL$)
+	//Opens a URL in the lynx text-based browser
+	//Must be run in a program that is already in a terminal
+	//For best results your URL should be enclosed in single
+	//quotation marks so that it will not get confused by spaces.
+	//This routine will not check for that.
+	local UTest$
+	UTest$ = TestForUtility$("lynx")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("lynx " + URL$)
+	endif
+end sub
+
+export sub OpenInNano$(filename$)
+	//opens a given text file in the nano text editor.
+	//must be run in a program that is already in a terminal
+	//For best results your filename should be enclosed in single
+	//quotation marks so that it will not get confused by spaces. This
+	//routine will not check for that.
+	//
+	//No, I won't. Friends don't let friends use emacs
+	//but I'll consider vi if there is a demand
+	local UTest$
+	UTest$ = TestForUtility$("nano")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("nano " + filename$)
+	endif
+end sub
+
+export sub OpenInSc$(filename$)
+	//opens a given text file in the sc spreadsheet.
+	//must be run in a program that is already in a terminal
+	//For best results your filename should be enclosed in single
+	//quotation marks so that it will not get confused by spaces. This
+	//routine will not check for that.
+	local UTest$
+	UTest$ = TestForUtility$("sc")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("sc " + filename$)
+	endif
+end sub
+
+export sub OpeninTpp$(filename$)
+	//Opens a given  file in the tpp Text Presentation Program
+	//Must be run in a program that is already in a terminal
+	//For best results your filename should be enclosed in single
+	//quotation marks so that it will not get confused by spaces. This
+	//routine will not check for that. It is up to you to determine that 
+	//filename$ is a valid tpp data file.
+	//NOTE that if you want to use tpp's --huge facility, then figlet must
+	//also be installed. To see all tpp can do, run the command
+	//tpp /usr/share/doc/tpp/examples/tpp-features.tpp
+	local UTest$
+	UTest$ = TestForUtility$("tpp")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("tpp " + filename$)
+	endif
+end sub
+
+export sub OpeninTweak$(filename$)
+	//opens a given file in the tweak hexadecimal editor.
+	//must be run in a program that is already in a terminal
+	//For best results your filename should be enclosed in single
+	//quotation marks so that it will not get confused by spaces. This
+	//routine will not check for that.
+	//TIP: OpeninHte() is much more user-friendly
+	local UTest$
+	UTest$ = TestForUtility$("tweak")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("tweak " + filename$)
+	endif
+end sub
+
+export sub OpeninW3m$(URL$)
+	//Opens a URL in the w3m text-based browser
+	//Must be run in a program that is already in a terminal
+	//For best results your URL should be enclosed in single
+	//quotation marks so that it will not get confused by spaces.
+	//This routine will not check for that.
+	local UTest$
+	UTest$ = TestForUtility$("w3m")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("w3m " + URL$)
+	endif
+end sub
+
+export sub OpeninWordgrinder$(filename$)
+	//opens a given file in the wordgrinder word processor.
+	//must be run in a program that is already in a terminal
+	//For best results your filename should be enclosed in single
+	//quotation marks so that it will not get confused by spaces. This
+	//routine will not check for that.  It is up to you to determine that 
+	//filename$ is a valid wordgrinder data file.
+	//If filename$ is an empty string, wordgrinder will open with a new file.
+	local UTest$
+	UTest$ = TestForUtility$("wordgrinder")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("wordgrinder " + filename$)
+	endif
+end sub
+
+export sub OpenJed$()
+	//same as OpeninJed$("")
+	local UTest$
+	UTest$ = TestForUtility$("jed")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("jed")
+	endif
+end sub
+
+export sub OpenNano$()
+	//same as OpenInNano$("")
+	local UTest$
+	UTest$ = TestForUtility$("nano")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("nano")
+	endif
+end sub
+
+export sub OpenNinvader$()
+	//start the ninvaders game (Space Invaders clone)
+	local UTest$
+	UTest$ = TestForUtility$("ninvaders")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("ninvaders")
+	endif
+end sub
+
+export sub OpenPacman$()
+	//start the pacman4console game (pacman clone)
+	local UTest$
+	UTest$ = TestForUtility$("pacman4console")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("pacman4console")
+	endif
+end sub
+
+export sub OpenSc$()
+	//same as OpenInSc$("")
+	local UTest$
+	UTest$ = TestForUtility$("sc")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("sc")
+	endif
+end sub
+
+export sub OpenSpeedpad$()
+	//Opens the speedpad typing speed checker
+	local UTest$
+	UTest$ = TestForUtility$("speedpad")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("speedpad")
+	endif
+end sub
+
+export sub OpenTig$(gitdir$)
+	//Opens the tig CLI UI for git
+	//the value gitdir$ must be a valid git directory
+	local UTest$
+	UTest$ = TestForUtility$("tig")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("cd "+ gitdir$ + " && tig")
+	endif
+end sub
+
+
+export sub OpenTina$()
+	//Opens the tina text-based personal information manager
+	//Only the default database is provided for in this routine.
+	local UTest$
+	UTest$ = TestForUtility$("tina")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("tina")
+	endif
+end sub
+
+export sub OpenWordgrinder$()
+	//same as OpeninWordgrinder("")
+	local UTest$
+	UTest$ = TestForUtility$("wordgrinder")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("wordgrinder")
+	endif
+end sub
+
+
+########## P ###########
+
+export sub PlayMP3$(file$)
+	//Plays a .mp3 sound file. Launched in a separate process,
+	//so it cannot be stopped afterwards, unless you do a pkill ffplay
+	local UTest$
+	UTest$ = TestForUtility$("ffplay")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("ffplay -nodisp -loglevel quiet " + file$ + " &")
+	endif
+end sub
+
+export sub PlayVideo$(file$)
+	//Plays a video file (.mp4, .mov etc.) Launched in a separate process,
+	//so it cannot be stopped afterwards, unless you do a pkill ffplay.
+	//If played in an xterm, this will open a NEW window.
+	//In a fullscreen console, it will play in an ASCII-art format.
+	//This can also be used for MP3 files - It will then show the cover art
+	//unlike the audio only playing of PlayMP3().
+	local UTest$
+	UTest$ = TestForUtility$("ffplay")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("ffplay -loglevel quiet " + file$ + " &")
+	endif
+end sub
+
+export sub PlayWav$(file$)
+	//Plays a .wav sound file. Launched in a separate process,
+	//so it cannot be stopped afterwards unless you do a pkill aplay.
+	local UTest$
+	UTest$ = TestForUtility$("aplay")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("aplay -q " + file$ + " &")
+	endif
+end sub
+
+export sub PrintFiglet$(font$, text$)
+	//Print text$ in the figlet font font$
+	//you can find these fonts with locate *.flf
+	local UTest$
+	UTest$ = TestForUtility$("figlet")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		if font$ = "" then 
+			UTest$ = "figlet "
+		else
+			UTest$ = "figlet -f " + font$ + " "
+		endif
+		system(UTest$ + text$)
+	endif
+end sub
+
+export sub PrintToilet$(font$, text$)
+	//Print text$ in the toilet font font$
+	//you can find these fonts with locate *.tlf
+	local UTest$
+	UTest$ = TestForUtility$("toilet")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		if font$ = "" then 
+			UTest$ = "toilet "
+		else
+			UTest$ = "toilet -f " + font$ + " "
+		endif
+		system(UTest$ + text$)
+	endif
+end sub
+
+########## Q ###########
+
+########## R ###########
+
+export sub RandInt()
+	//returns a random integer between 0 and 32767
+	//devised at a time when yab's own RAN() command was malfunctioning
+	return val(system$("echo $RANDOM"))
+end sub
+
+export sub RandInt0To9()
+	//returns a random integer between 0 and 9, inclusive
+	//devised at a time when yab's own RAN() command was malfunctioning
+	return val(mid$(time$, 8,1))
+end sub
+
+export sub ReplaceinArray$(w$(),instring$,outstring$)
+	//Globally replace all occurences of instring$ in a one-dimensional string array with outstring$.
+	//Case-sensitive.
+	//If you are going to use this on code of any kind, you will 
+	//have to look into using escape codes.
+	//Even in plain text, you will probably need to escape 
+	//double quote marks (") and forward slashes(\\).
+	//Unlike using mid$(), this one can change the length of the strings in the array:
+	//instring$ and outstring$ need not the the same size.
+	//returns a string delimited with linefeeds.
+	//your receiving routine can turn it back into an array with the token function.
+	//e.g. num = token(b$,a$(),"\n")
+	//This can even be the original array.
+	local f, returned$
+	if arraydim(w$()) <> 1 return
+	for f = 1 to arraysize(w$(),1)
+		returned$ = returned$ + ReplaceinLine$(w$(f), instring$, outstring$) + "\n"
+	next f
+	return returned$
+end sub
+
+export sub ReplaceinFile(infilename$,instring$,outstring$, outfilename$)
+	//Globally replace all occurences of instring$ in the file infilename$ 
+	//with outstring$ and writes the results to the file outfilename$.
+	//if outfilename$ is not supplied, it will write the result to the original file.
+	//Case-sensitive.
+	//If you are going to use this on code of any kind, you will 
+	//have to look into using escape codes.
+	//Even in plain text, you will probably need to escape 
+	//double quote marks (") and forward slashes(\\).
+	//Unlike using mid$(), this one can change the length of the strings:
+	//instring$ and outstring$ need not the the same size.
+	//Limited to the string size that yabasic can handle - try not to use
+	// it on War and Peace.
+	//Returns nothing
+	local handle,bigstring$,a$
+	if outfilename$ = "" outfilename$ = infilename$
+	handle = open(infilename$,"r")
+	repeat
+		line input #handle a$
+		bigstring$ = bigstring$ + a$ + "\n"
+	until(eof(handle))
+	close handle
+	bigstring$ = ReplaceinLine$(bigstring$,instring$,outstring$)
+	handle = open(outfilename$,"w")
+	print #handle bigstring$
+	close handle
+end sub
+
+export sub ReplaceinLine$(line$,instring$,outstring$)
+	//Globally replace all occurences of instring$ in line$ with outstring$.
+	//Case-sensitive.
+	//If you are going to use this on code of any kind, you will 
+	//have to look into using escape codes.
+	//Even in plain text, you will probably need to escape 
+	//double quote marks (") and forward slashes(\\)
+	//Unlike using mid$(), this one can change the length of the string:
+	//instring$ and outstring$ need not the the same size.
+	local outline$, f
+	if instring$ = outstring$ return line$ //avoid infinite loop
+	if  instr(line$,instring$) = 0 return line$ // pattern not found
+	for f = 1 to len(line$)
+		if mid$(line$,f, len(instring$)) = instring$ then
+			outline$ = outline$ + outstring$
+			f = f + len(instring$) -1
+		else
+			outline$ = outline$ + mid$(line$, f, 1)
+		endif
+	next f
+	return outline$
+end sub
+
+########## S ###########
+
+export sub Screensaver(onoff,type)
+	//Starts or halts  the termsaver screensaver application.
+	//Please note that work in your program is not necessarily suspended while this runs,
+	//because it gets launched in a separate process, but it is up to you to poll for the exiting condition.
+	//values for onoff are 1 (start screensaver) and 0 (close screensaver), If 0,
+	//the second parameter may be omitted. 
+	//Closing the screensaver will likely close ALL termsaver instances on your system.
+	//You can also close it manually with CTRL-C
+	//values for type are 0 (24 hr clock), 1 (12 hr clock), 2 (the words Yabasic forever appear
+	//at random on your screen), 3 (scrolling MIMEtype information), and 4 (system monitor).
+	//This implementation only uses screensavers that do not need an Internet connection.
+	//See two ways to handle a screensaver in test.bas
+	local type$, UTest$
+	if onoff = 0 then
+		UTest$ = TestForUtility$("pkill")
+		if UTest$ = "" system("pkill termsaver && clear")
+	else
+		UTest$ = TestForUtility$("termsaver")
+		if UTest$ <> "" return
+		switch type
+		case 0 
+			type$ = "clock"
+			break
+		 case 1
+			type$ = "clock -m"
+			break
+		case 2
+			type$ = "randtxt -d 1 -w \"Yabasic forever\'"
+			break
+		case 3
+			type$ = "programmer -p /usr/share/mime/"
+			break
+		case 4
+			type$ = "sysmon"
+			break
+		default
+			break
+		end switch
+		system ("clear && termsaver " + type$ + " &")
+	endif
+end sub
+
+export sub ScreensaverCC(onoff,type)
+	//Starts or halts  the CacaLib screensaver applications.
+	//Please note that work in your program is not necessarily suspended while this runs,
+	//because it gets launched in a separate process, but it is up to you to poll for the exiting condition.
+	//Only use this one if you KNOW your application will be running in a fullscreen console
+	//because caca apps start a new window under X automatically.
+	//values for onoff are 1 (start screensaver) and 0 (close screensaver), If 0,
+	//the second parameter may be omitted. 
+	//Closing the screensaver will likely close ALL caca demo app instances on your system.
+	//You can also close it manually with ESC
+	//values for type are 0 (cacademo) and 1 (cacafire)
+	//See two ways to handle a screensaver in test.bas
+	local type$, UTest$
+	if onoff = 0 then
+		UTest$ = TestForUtility$("pkill")
+		if UTest$ = "" then 
+			system("pkill cacademo  && clear")
+			system("pkill cacafire  && clear")
+		endif
+	else
+		switch type
+		case 0 
+			UTest$ = TestForUtility$("cacademo")
+			if UTest$ = "" then
+				system("cacademo &")
+			else
+				return
+			endif
+			break
+		default
+			UTest$ = TestForUtility$("cacafire")
+			if UTest$ = "" then
+				system("cacafire &")
+			else
+				return
+			endif
+			break
+		end switch
+	endif
+end sub
+
+export sub ScreensaverClock()
+	//starts the tty-clock program in screensaver mode
+	local UTest$
+	UTest$ = TestForUtility$("tty-clock")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("tty-clock -xcS")
+	endif
+end sub
+
+export sub StripDoc$(filename$)
+	//Convert a Microsoft Word .doc (NOT .docx) file to text and return
+	//the result as a string variable.
+	local UTest$
+	UTest$ = TestForUtility$("antiword")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		return system$("antiword -t " + filename$)
+	endif
+end sub
+
+export sub StripLFoffSysCmd$(tempval$)
+	//remove LF from the results of a system call
+	//if the results of a System() or System$() command end on a LF (most do),
+	//strip the LF off and return the resulting string
+	if instr(tempval$, "\n", len(tempval$)) <> 0 then //if the string ends with a LF
+		tempval$ = left$(tempval$, len(tempval$)-1) //strip off trailing newline
+        endif
+        return tempval$
+end sub
+
+export sub StripPDF$(filename$)
+	//Convert a PDF or PS file to text and return
+	//the result as a string variable.
+	//Return may contain a bunch of error messages
+	//as well as the returned text.
+	local UTest$
+	UTest$ = TestForUtility$("pstotext")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		return system$("pstotext " + filename$)
+	endif
+end sub
+
+########## T ###########
+
+export sub TestForUtility$(utility$)
+	//internal routine to test if the called utility actually exists
+	//an empty string returned means it does.
+	//otherwise returns an error message
+	local which$
+	which$ = system$("which " + utility$)
+	if which$ = "" return "The required program " + utility$ + " does not exist on this system"
+end sub
+
+export sub TestForUtility(utility$)
+	//internal routine to test if the called utility actually exists
+	//same as TestForUtility$() but returns 1 if it exists, 0 if it does not
+	local which$
+	which$ = system$("which " + utility$)
+	if which$ = "" then 
+		return 0
+	else
+		return 1
+	endif
+end sub
+
+########## U ###########
+
+export sub URLExist$(URL$)
+	//tests whether a URL exists or not. Returns the STRING value "1"
+	//if it does. or "0" if it does not.
+	return StripLFoffSysCmd$(system$("if curl --output /dev/null --silent --head --fail \"" + URL$ + "\"; then echo \"1\"; else  echo \"0\"; fi"))
+end sub
+
+export sub URLExist(URL$)
+	//tests whether a URL exists or not. Returns the NUMERIC value 1
+	//if it does. or 0 if it does not.
+	return val(StripLFoffSysCmd$(system$("if curl --output /dev/null --silent --head --fail \"" + URL$ + "\"; then echo \"1\"; else  echo \"0\"; fi")))
+end sub
+
+########## V ###########
+
+########## W ###########
+
+export sub WhereAmI$()
+	local path$
+        if (peek("isbound")) then
+                path$=peek$("directory")
+        else
+                path$=system$("pwd")
+        endif
+         path$ = StripLFoffSysCmd$(path$)
+         // I prefer not to have the trailing slash at this point
+	 // You can always add it
+        return path$
+end sub
+
+export sub WikipediaDump$(searchterm$, language$) 
+	//Search wikipedia for a specific string, convert the
+	//article to text and return it as a string variable.
+	//if language$ is not supplied, English will be assumed
+	//See the README for the language codes supported.
+	//Searchterm$ may include spaces.
+	//NOTE: this routine may take a second or two to get going
+	local UTest$
+	UTest$ = TestForUtility$("wikipedia2text")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		if language$ = "" language$ = "en"
+		return system$("wikipedia2text -P -O -n -S -l " + language$ + " " + EncloseString$(searchterm$, 0))
+	endif
+end sub
+
+export sub WikipediaURL$(searchterm$, language$) 
+	//Search wikipedia for a specific string
+	//and return the URL as a string variable.
+	//if language$ is not supplied, English will be assumed
+	//See the README for the language codes supported.
+	//Searchterm$ may include spaces.
+	//NOTE: this routine may take a second or two to get going
+	local UTest$
+	UTest$ = TestForUtility$("wikipedia2text")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		if language$ = "" language$ = "en"
+		return system$("wikipedia2text -u -l " + language$ + " " + EncloseString$(searchterm$, 0))
+	endif
+end sub
+
+
+########## X ###########
+
+########## Y ###########
+
+########## Z ###########
+
+#====================================
+
+//SUPPORTIVE SUBROUTINES
+//These will not be available in your main program
+
+sub TempDir$()
+//returns the location of Linux's TMPDIR directory
+//technically not necessary, but a lot of my routines
+//ported from Haiku expect to see this.
+//note: no traling "/", you will have to add that.
+//edit the line below if necessary on a different Unix-like OS
+        return "/tmp"
+end sub
+
+

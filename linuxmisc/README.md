@@ -9,7 +9,7 @@ This library for yabasic allows the use of a variety of common Linux commands in
 
 This library also contains some routines ported from my libraries originally developed under yab for Haiku.
 
-These routines make heavy use of *system()* and *system$()* commands, and some write temporary files, work on them, and read them back. They. will.  slow. your. programs. down. a. lot. Also, ensuring that you (or your users) have the appropriate packages installed will be up to you. The routines themselves only check for the existence of the binary and exit if it is not found. All I can tell you is that every utility used here was found in the Ubuntu repositories. *apt-cache search* is your friend.
+These routines make heavy use of *system()* and *system$()* commands, and some write temporary files, work on them, and read them back. They. will.  slow. your. programs. down. a. lot. Also, ensuring that you (or your users) have the appropriate packages installed will be up to you. The routines themselves only check for the existence of the binary and exit with an error message if it is not found. All I can tell you is that every utility used here was found in the Debian/Ubuntu repositories. *apt-cache search* is your friend.
 
 All routines are case-sensitive.
 
@@ -149,14 +149,62 @@ Convert an image file to a different format, optionally with a different filenam
 
 ![NotifyDlg](./imgs/NotifyDlg1.png)
 
++ **OpenAbook$**() - Opens the *abook* text-mode contact manager.
+    + Only the default database is provided for in this routine.
+    + **System commands used:** *abook*.
+
++ **OpenBastet$**() - Opens the *bastet* CLI Tetris clone.
+    + **System commands used:** *bastet*.
+
 + **OpenCalcurse$**() - Opens the *calcurse* text-mode calendar app. Only the default calendar is provided for in this routine. 
     + **System commands used:** *calcurse*.
+
++ **OpenGtypist$**() - Open the gtypist tying tutor program.
+    + **System commands used:** *gtypist*
+
++ **OpenHnb$**() - Open the *hnb* hierarchical notebook.
+    + Only the default database is provided for in this routine.
+    + **System commands used:** *hnb*
+
++ **OpenInDav$**(filename$) - opens a given text file in the *dav* text editor in the same terminal window as your program. 
+    + Will fail and return an error message if *dav* does not exist on your system. 
+    + If *filename$* does not exist, *dav* will create one in memory and let you save it. 
+    + If *filename$* is an empty string (""), *dav* will open with a new, unnamed file. (You can also use the shortcut *OpenDav$*() for this).
+    + For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.
+    + You may have to CLEAR SCREEN and rebuild your screen afterwards.
+    + **System commands used:** *dav*.
+
++ **OpeninDhex$**(filename$)
+    + opens a given file in the *dhex* hexadecimal editor.
+    + Must be run in a program that is already in a terminal.
+    + For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.
+    + **System commands used:** *dhex*.
 
 + **OpeninElinks$**(URL$}: Opens a URL in the *elinks* text-based browser. 
     + Must be run in a program that is already in a terminal. 
     + Will fail and return an error message if *elinks* does not exist on your system. 
     + For best results your URL should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that. 
     + **System commands used:** *elinks*.
+
++ **OpeninFbless$**(file$) - Opens a .FB2 ebook in the *fbless* ebook reader
+    + .FB2 is an obscure format these days, but you can convert .EPUBs and so on on sites like [https://www.online-convert.com]
+    + Must be run in a program that is already in a terminal.
+   + For best results your URL should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.
+   + **System commands used:** *fbless*.
+
++ **OpeninHte$**(filename$)
+    + opens a given file in the *hte* hexadecimal editor.
+    + The package name for this utility might be "ht" on your system.
+    + This routine forces hte into hex mode even if it is a text file, but you can explore the other modes with F6.
+    + Must be run in a program that is already in a terminal.
+    + For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.
+    + **System commands used:** *hte*.
+
++ **OpeninHexcurse$**(filename$)
+    + opens a given file in the *hexcurse* hexadecimal editor.
+    + Must be run in a program that is already in a terminal.
+    + For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.
+    + **System commands used:** *hexcurse*.
 
 + **OpenInJed$**(filename$) - opens a given text file in the *jed* text editor in the same terminal window as your program. 
     + Will fail and return an error message if *jed* does not exist on your system. 
@@ -205,6 +253,13 @@ Convert an image file to a different format, optionally with a different filenam
     + To see all *tpp* can do, run the bash command *tpp /usr/share/doc/tpp/examples/tpp-features.tpp*. 
     + **System commands used:** *tpp*, *figlet* (optional).
 
++ **OpeninTweak$**(filename$)
+    + opens a given file in the *tweak* hexadecimal editor.
+    + Must be run in a program that is already in a terminal.
+    + For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.
+    + TIP: *OpeninHte()* is much more user-friendly!
+    + **System commands used:** *tweak*.
+
 + **OpeninW3m$**(URL$): Opens a URL in the *w3m* text-based browser. 
     + Must be run in a program that is already in a terminal. 
     + Will fail and return an error message if *w3m* does not exist on your system. 
@@ -216,8 +271,21 @@ Convert an image file to a different format, optionally with a different filenam
     + If filename$ is an empty string (""), *wordgrinder* will open with a new, unnamed file.
     + You can also use the shortcut *OpenWordgrinder$()* for this. 
     + For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.  
-    + It is up to you to determine that filename$ is a valid *wordgrinder* data file. 
+    + It is up to you to determine that *filename$* is a valid *wordgrinder* data file. 
     + **System commands used:** *wordgrinder*.
+
++ **OpenNinvader$**() - start the *ninvaders* game (Space Invaders clone)
+    + **System commands used:** *ninvaders*.
+
++ **OpenPacman$**() - Start the *pacman4console* game (pacman clone)
+    + **System commands used:** *pacman4console*.
+
++ **OpenSpeedpad$**() - Opens the *speedpad* typing speed checker.
+    + **System commands used:** *speedpad*.
+
++ **OpenTig$**(gitdir$) - Opens the *tig* CLI UI for git.
+    + The value *gitdir$* must be a valid git directory
+    + **System commands used:** *tig*.
 
 + **OpenTina$**() - Opens the *tina* text-based personal information manager. 
     + Only the default database is provided for in this routine. 
@@ -325,7 +393,10 @@ next f
         + 1 (*cacafire*)
     + See two ways to handle a screensaver in test.bas
     + **System commands used:** *cacademo*, *cacafire*, *pkill*, *clear*.
-   
+
++ **ScreensaverClock**() - starts the *tty-clock* program in screensaver mode.
+    + **System commands used:** *tty-clock*.
+
 + **StripDoc$**(filename$) - Convert a Microsoft Word .doc (NOT .docx) file to text and return the result as a string variable.
     + For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.
     + **System commands used:** *antiword*.

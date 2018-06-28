@@ -1,1 +1,197 @@
-../whiptail/whiptaillib.yab
+//COMMON ROUTINES
+
+#COM######### A ###########
+#COM######### B ###########
+#COM######### C ###########
+
+export sub ClearDlg()
+	//Same as the yabasic command CLEAR SCREEN,
+	//but may work better if you are expecting to issue
+	//another Linux command immediately.
+	system(getcmd$() + " --clear")
+	system("clear")
+end sub
+
+#COM######### D ###########
+#COM######### E ###########
+
+export sub EncloseText$(thestring$)
+	//A simplified version of the EncloseString$() routine
+	//that can be found in the linuxmisclib library
+	//Encloses a string in double quotes, if it isn't already.
+	//Therefore a$ = EncloseText$("This is text") gives the same result as
+	// a$ = "\"This is text\""
+	//mostly for use with text strings that may include spaces.
+	local type$, type2$
+	type$ = chr$(34)
+	if left$(thestring$,1) <> type$ thestring$ = type$ + thestring$
+	if right$(thestring$,1) <> type$ thestring$ = thestring$ + type$
+	return thestring$
+end sub
+
+#COM######### F ###########
+#COM######### G ###########
+#COM######### H ###########
+#COM######### I ###########
+
+export sub InputDlg$(text$, title$, ok$, cancel$)
+	//Presents a one-line dialog into which the 
+	//user can type a string answer.
+	local inputstr$
+	inputstr$ = "echo $(" + getcmd$() + " --title " + title$ + " --ok-button " + ok$ + " --cancel-button " + cancel$ + " --inputbox " + text$ + " 0 0 3>&1 1>&2 2>&3 )"
+	return system$(inputstr$)
+end sub
+
+#COM######### J ###########
+#COM######### K ###########
+#COM######### L ###########
+#COM######### M ###########
+
+export sub MenuDlg(text$, title$, ok$, cancel$, menustring$)
+	//Create a menu of options for the user to choose from
+	//The value *title$* is the title on top of the widget
+	//The value *ok$* is the text of the accept button, normally OK.
+	//The value *cancel$* is the text of the reject button, normally Cancel.
+	//The value menustring$ is the list of menu options as a single string, separated by hash signs (#). Spaces are allowed.
+	//If the number of options exceed the available space in the widget, the list will be scrollable.
+	//The result is returned as a numeric value, starting from 1
+	local input$, output,z$(1),num
+	input$ = getcmd$() + " --title \"" + title$ +"\" --ok-button \"" + ok$ + "\" --cancel-button \"" + cancel$ +  "\" --menu \"" + text$ + "\" 0 0 0"
+	num = token(menustring$, z$(),"#")
+	for f = 1 to num
+		input$ = input$ + " " + str$(f) + " \"" + z$(f) + "\"" 
+	next f
+	input$ = input$ + " 3>&1 1>&2 2>&3 "
+	output = val(system$(input$))
+	return output
+end sub
+
+export sub MenuDlg$(text$, title$, ok$, cancel$, menustring$)
+	return str$(MenuDlg(text$, title$, ok$, cancel$, menustring$))
+end sub
+
+export sub MessageDlg(text$, ok$)
+	//display a simple message with an OK button
+	//The value *ok$* is the text of the accept button, normally OK.
+	//returns nothing
+	system(getcmd$() + " --ok-button " + ok$ +" --msgbox " + text$ + " 0 0")
+end sub
+
+#COM######### N ###########
+#COM######### O ###########
+#COM######### P ###########
+
+export sub PasswordDlg$(text$, title$, ok$, cancel$)
+	//Presents a one-line dialog into which the 
+	//user can type a string answer with the text
+	//replaced with asterisks
+	local inputstr$
+	inputstr$ = "echo $(" + getcmd$() + " --title " + title$ + " --ok-button " + ok$ + " --cancel-button " + cancel$ + " --passwordbox " + text$ + " 0 0 3>&1 1>&2 2>&3 )"
+	//print inputstr$
+	return system$(inputstr$)
+end sub
+
+#COM######### Q ###########
+#COM######### R ###########
+
+export sub RadioDlg(text$, title$, ok$, cancel$, menustring$,selected$)
+	//Create a menu of options for the user to choose from
+	//Same as MenuDlg$(), except that you can indicate which item in
+	//menustring$ is currently selected or active.
+	//The value *title$* is the title on top of the widget
+	//The value *ok$* is the text of the accept button, normally OK.
+	//The value *cancel$* is the text of the reject button, normally Cancel.
+	//The value menustring$ is the list of menu options as a single string, 
+	//separated by hash signs (#). Spaces are allowed.
+	//If the number of options exceed the available space in the widget, the list will be scrollable.
+	//The value selected$ is the currently selected item and must correspond to one of the items in 
+	//menustring$ - case sensitive!
+	//Just moving the cursor is not enough here - the value in the menu must be
+	//explicitly selected with SPACE.
+	//The result is returned as a numeric value, starting from 1
+	local input$, output,z$(1),num
+	input$ = getcmd$() + " --title \"" + title$ +"\" --ok-button \"" + ok$ + "\" --cancel-button \"" + cancel$ +  "\" --radiolist \"" + text$ + "\" 0 0 0"
+	num = token(menustring$, z$(),"#")
+	for f = 1 to num
+		input$ = input$ + " " + str$(f) + " \"" + z$(f) + "\"" 
+		if z$(f) = selected$ then
+			input$ = input$ + " on"
+		else 
+			input$ = input$ + " off"
+		endif
+	next f
+	input$ = input$ + " 3>&1 1>&2 2>&3 "
+	output = val(system$(input$))
+	return output
+end sub
+
+export sub RadioDlg$(text$, title$, ok$, cancel$, menustring$,selected$)
+	return str$(RadioDlg(text$, title$, ok$, cancel$, menustring$,selected$))
+end sub
+
+#COM######### S ###########
+#COM######### T ###########
+
+export sub TestForDialogUtility$()
+	//internal routine to test if the called utility actually exists
+	//an empty string returned means it does.
+	local which$
+	which$ = system$("which " + getcmd$())
+	if which$ = "" then
+		return "The required program " + getcmd$() + " does not exist on this system"
+	else
+		return ""
+	endif
+end sub 
+
+export sub TextFileDlg(filename$, title$, exit$)
+	//Displays a text file.
+	//The value title$ is the title on top of the widget
+	//The value exit$ is the title of the button. Normally OK
+	//Text wrapping varies from one dialog-provider to the next.
+	//It is better if you preformat your text file.
+	//Returns nothing
+	system(getcmd$() + " --title " + title$ +" --ok-button " + exit$ + " --textbox " + filename$ + " 0 0")
+end sub
+
+#COM######### U ###########
+#COM######### V ###########
+#COM######### W ###########
+#COM######### X ###########
+#COM######### Y ###########
+
+export sub YesNoDlg(text$,yes$, no$)
+	//Displays a dialog with text (normally a question) and the options
+	//to reply yes or no.
+	//returns 1 for yes and 0 for no.
+	if system(getcmd$() + " --no-button " + no$ + " --yes-button " + yes$ + " --yesno " + text$ +" 0 0") then
+		return 0
+	else
+		return 1
+	endif
+end sub
+
+export sub YesNoDlg$(text$,yes$, no$)
+	return str$(YesNoDlg(text$,yes$, no$))
+end sub
+
+#COM######### Z ###########
+
+
+//WHIPTAIL-SPECIFIC ROUTINES
+
+
+//None - whiptail is the least capable of these utilikties
+
+//SUPPORTIVE SUBROUTINES
+
+export sub getcmd$()
+	//This is really just for me, to stop me from
+	//getting confused while I am editing four
+	//libraries simultaneously.
+	//However, you could use it to test which utility
+	//is currently running and if it is safe to use routines
+	//not in the common list.
+	//e.g if getcmd$() = "zenity" ZNotifyDlg("this is a notification")
+	return "whiptail"
+end sub

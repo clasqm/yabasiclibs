@@ -317,6 +317,29 @@ end sub
 
 ########## O ###########
 
+export sub OpenAbook$()
+	//Opens the abook text-mode contact manager.
+	//Only the default database is provided for in this routine.
+	local UTest$
+	UTest$ = TestForUtility$("abook")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("abook")
+	endif
+end sub
+
+export sub OpenBastet$()
+	//Opens the bastt CLI Tetris clone.
+	local UTest$
+	UTest$ = TestForUtility$("bastet")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("bastet")
+	endif
+end sub
+
 export sub OpenCalcurse$()
 	//Opens the calcurse text-mode calendar app.
 	//Only the default calendar is provided for in this routine.
@@ -329,18 +352,67 @@ export sub OpenCalcurse$()
 	endif
 end sub
 
-export sub OpeninJed$(filename$)
-	//opens a given text file in the jed text editor.
-	//must be run in a program that is already in a terminal
+export sub OpenDav$()
+	//same as OpeninDav$("")
+	local UTest$
+	UTest$ = TestForUtility$("dav")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("dav")
+	endif
+end sub
+
+export sub OpenGtypist$()
+	//Open the gtypist tying tutor program
+	local UTest$
+	UTest$ = TestForUtility$("gtypist")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("gtypist")
+	endif
+end sub
+
+export sub OpenHnb$()
+	//Open the hnb hierarchical notebook
+	local UTest$
+	UTest$ = TestForUtility$("hnb")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("hnb")
+	endif
+end sub
+
+export sub OpeninDav$(filename$)
+	//opens a given text file in the dav text editor.
+	//This might be called dav-text in your pakage system
+	//Must be run in a program that is already in a terminal
 	//For best results your filename should be enclosed in single
 	//quotation marks so that it will not get confused by spaces. This
 	//routine will not check for that.
 	local UTest$
-	UTest$ = TestForUtility$("jed")
+	UTest$ = TestForUtility$("dav")
 	if UTest$ <> "" then
 		return UTest$
 	else
-		system("jed " + filename$)
+		system("dav " + filename$)
+	endif
+end sub
+
+export sub OpeninDhex$(filename$)
+	//opens a given file in the dhex hexadecimal editor.
+	//must be run in a program that is already in a terminal,
+	//For best results your filename should be enclosed in single
+	//quotation marks so that it will not get confused by spaces. This
+	//routine will not check for that.
+	local UTest$
+	UTest$ = TestForUtility$("dhex")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("dehex " + filename$)
 	endif
 end sub
 
@@ -356,6 +428,71 @@ export sub OpeninElinks$(URL$)
 		return UTest$
 	else
 		system("elinks " + URL$)
+	endif
+end sub
+
+export sub OpeninFbless$(file$)
+	//Opens a .FB2 ebook in the fbless ebook reader
+	//.FB2 is an obscure format these days, but you can convert .EPUBs
+	//and so on on sites like https://www.online-convert.com
+	//Must be run in a program that is already in a terminal
+	//For best results your URL should be enclosed in single
+	//quotation marks so that it will not get confused by spaces.
+	//This routine will not check for that.
+	local UTest$
+	UTest$ = TestForUtility$("fbless")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("fbless " + file$)
+	endif
+end sub
+
+export sub OpeninHte$(filename$)
+	//opens a given file in the hte hexadecimal editor.
+	//The package name for this might be "ht" on your system.
+	//This routine forces hte into hex mode even if it is a text 
+	//file, but you can explore the other modes with F6
+	//must be run in a program that is already in a terminal,
+	//For best results your filename should be enclosed in single
+	//quotation marks so that it will not get confused by spaces. This
+	//routine will not check for that.
+	local UTest$
+	UTest$ = TestForUtility$("hte")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("hte -b " + filename$)
+	endif
+end sub
+
+export sub OpeninHexcurse$(filename$)
+	//opens a given file in the hexcurse hexadecimal editor.
+	//must be run in a program that is already in a terminal,
+	//For best results your filename should be enclosed in single
+	//quotation marks so that it will not get confused by spaces. This
+	//routine will not check for that.
+	local UTest$
+	UTest$ = TestForUtility$("hexcurse")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("hexcurse " + filename$)
+	endif
+end sub
+
+export sub OpeninJed$(filename$)
+	//opens a given text file in the jed text editor.
+	//must be run in a program that is already in a terminal
+	//For best results your filename should be enclosed in single
+	//quotation marks so that it will not get confused by spaces. This
+	//routine will not check for that.
+	local UTest$
+	UTest$ = TestForUtility$("jed")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("jed " + filename$)
 	endif
 end sub
 
@@ -441,6 +578,22 @@ export sub OpeninTpp$(filename$)
 	endif
 end sub
 
+export sub OpeninTweak$(filename$)
+	//opens a given file in the tweak hexadecimal editor.
+	//must be run in a program that is already in a terminal
+	//For best results your filename should be enclosed in single
+	//quotation marks so that it will not get confused by spaces. This
+	//routine will not check for that.
+	//TIP: OpeninHte() is much more user-friendly
+	local UTest$
+	UTest$ = TestForUtility$("tweak")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("tweak " + filename$)
+	endif
+end sub
+
 export sub OpeninW3m$(URL$)
 	//Opens a URL in the w3m text-based browser
 	//Must be run in a program that is already in a terminal
@@ -495,6 +648,28 @@ export sub OpenNano$()
 	endif
 end sub
 
+export sub OpenNinvader$()
+	//start the ninvaders game (Space Invaders clone)
+	local UTest$
+	UTest$ = TestForUtility$("ninvaders")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("ninvaders")
+	endif
+end sub
+
+export sub OpenPacman$()
+	//start the pacman4console game (pacman clone)
+	local UTest$
+	UTest$ = TestForUtility$("pacman4console")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("pacman4console")
+	endif
+end sub
+
 export sub OpenSc$()
 	//same as OpenInSc$("")
 	local UTest$
@@ -505,6 +680,30 @@ export sub OpenSc$()
 		system("sc")
 	endif
 end sub
+
+export sub OpenSpeedpad$()
+	//Opens the speedpad typing speed checker
+	local UTest$
+	UTest$ = TestForUtility$("speedpad")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("speedpad")
+	endif
+end sub
+
+export sub OpenTig$(gitdir$)
+	//Opens the tig CLI UI for git
+	//the value gitdir$ must be a valid git directory
+	local UTest$
+	UTest$ = TestForUtility$("tig")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("cd "+ gitdir$ + " && tig")
+	endif
+end sub
+
 
 export sub OpenTina$()
 	//Opens the tina text-based personal information manager
@@ -779,6 +978,17 @@ export sub ScreensaverCC(onoff,type)
 	endif
 end sub
 
+export sub ScreensaverClock()
+	//starts the tty-clock program in screensaver mode
+	local UTest$
+	UTest$ = TestForUtility$("tty-clock")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("tty-clock -xcS")
+	endif
+end sub
+
 export sub StripDoc$(filename$)
 	//Convert a Microsoft Word .doc (NOT .docx) file to text and return
 	//the result as a string variable.
@@ -923,16 +1133,5 @@ sub TempDir$()
 //edit the line below if necessary on a different Unix-like OS
         return "/tmp"
 end sub
-
-sub RandInt()
-//returns a random integer between 0 and 32767
-//used here to generate random filenames to place in TMPDIR
-        local a
-        a = int(ran(32768))
-        return a
-end sub
-
-
-
 
 

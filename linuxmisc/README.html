@@ -9,7 +9,7 @@ Licensed according to the MIT license.</p>
 
 <p>This library also contains some routines ported from my libraries originally developed under yab for Haiku.</p>
 
-<p>These routines make heavy use of <em>system()</em> and <em>system$()</em> commands, and some write temporary files, work on them, and read them back. They. will.  slow. your. programs. down. a. lot. Also, ensuring that you (or your users) have the appropriate packages installed will be up to you. The routines themselves only check for the existence of the binary and exit if it is not found. All I can tell you is that every utility used here was found in the Ubuntu repositories. <em>apt-cache search</em> is your friend.</p>
+<p>These routines make heavy use of <em>system()</em> and <em>system$()</em> commands, and some write temporary files, work on them, and read them back. They. will.  slow. your. programs. down. a. lot. Also, ensuring that you (or your users) have the appropriate packages installed will be up to you. The routines themselves only check for the existence of the binary and exit with an error message if it is not found. All I can tell you is that every utility used here was found in the Debian/Ubuntu repositories. <em>apt-cache search</em> is your friend.</p>
 
 <p>All routines are case-sensitive.</p>
 
@@ -196,10 +196,50 @@ Convert an image file to a different format, optionally with a different filenam
 <p><img src="./imgs/NotifyDlg1.png" alt="NotifyDlg" title="" /></p>
 
 <ul>
+<li><p><strong>OpenAbook$</strong>() - Opens the <em>abook</em> text-mode contact manager.</p>
+
+<ul>
+<li>Only the default database is provided for in this routine.</li>
+<li><strong>System commands used:</strong> <em>abook</em>.</li>
+</ul></li>
+<li><p><strong>OpenBastet$</strong>() - Opens the <em>bastet</em> CLI Tetris clone.</p>
+
+<ul>
+<li><strong>System commands used:</strong> <em>bastet</em>.</li>
+</ul></li>
 <li><p><strong>OpenCalcurse$</strong>() - Opens the <em>calcurse</em> text-mode calendar app. Only the default calendar is provided for in this routine. </p>
 
 <ul>
 <li><strong>System commands used:</strong> <em>calcurse</em>.</li>
+</ul></li>
+<li><p><strong>OpenGtypist$</strong>() - Open the gtypist tying tutor program.</p>
+
+<ul>
+<li><strong>System commands used:</strong> <em>gtypist</em></li>
+</ul></li>
+<li><p><strong>OpenHnb$</strong>() - Open the <em>hnb</em> hierarchical notebook.</p>
+
+<ul>
+<li>Only the default database is provided for in this routine.</li>
+<li><strong>System commands used:</strong> <em>hnb</em></li>
+</ul></li>
+<li><p><strong>OpenInDav$</strong>(filename$) - opens a given text file in the <em>dav</em> text editor in the same terminal window as your program. </p>
+
+<ul>
+<li>Will fail and return an error message if <em>dav</em> does not exist on your system. </li>
+<li>If <em>filename$</em> does not exist, <em>dav</em> will create one in memory and let you save it. </li>
+<li>If <em>filename$</em> is an empty string (""), <em>dav</em> will open with a new, unnamed file. (You can also use the shortcut <em>OpenDav$</em>() for this).</li>
+<li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
+<li>You may have to CLEAR SCREEN and rebuild your screen afterwards.</li>
+<li><strong>System commands used:</strong> <em>dav</em>.</li>
+</ul></li>
+<li><p><strong>OpeninDhex$</strong>(filename$)</p>
+
+<ul>
+<li>opens a given file in the <em>dhex</em> hexadecimal editor.</li>
+<li>Must be run in a program that is already in a terminal.</li>
+<li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
+<li><strong>System commands used:</strong> <em>dhex</em>.</li>
 </ul></li>
 <li><p><strong>OpeninElinks$</strong>(URL$}: Opens a URL in the <em>elinks</em> text-based browser. </p>
 
@@ -208,6 +248,32 @@ Convert an image file to a different format, optionally with a different filenam
 <li>Will fail and return an error message if <em>elinks</em> does not exist on your system. </li>
 <li>For best results your URL should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that. </li>
 <li><strong>System commands used:</strong> <em>elinks</em>.</li>
+</ul></li>
+<li><p><strong>OpeninFbless$</strong>(file$) - Opens a .FB2 ebook in the <em>fbless</em> ebook reader</p>
+
+<ul>
+<li>.FB2 is an obscure format these days, but you can convert .EPUBs and so on on sites like [https://www.online-convert.com]</li>
+<li>Must be run in a program that is already in a terminal.</li>
+<li>For best results your URL should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
+<li><strong>System commands used:</strong> <em>fbless</em>.</li>
+</ul></li>
+<li><p><strong>OpeninHte$</strong>(filename$)</p>
+
+<ul>
+<li>opens a given file in the <em>hte</em> hexadecimal editor.</li>
+<li>The package name for this utility might be "ht" on your system.</li>
+<li>This routine forces hte into hex mode even if it is a text file, but you can explore the other modes with F6.</li>
+<li>Must be run in a program that is already in a terminal.</li>
+<li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
+<li><strong>System commands used:</strong> <em>hte</em>.</li>
+</ul></li>
+<li><p><strong>OpeninHexcurse$</strong>(filename$)</p>
+
+<ul>
+<li>opens a given file in the <em>hexcurse</em> hexadecimal editor.</li>
+<li>Must be run in a program that is already in a terminal.</li>
+<li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
+<li><strong>System commands used:</strong> <em>hexcurse</em>.</li>
 </ul></li>
 <li><p><strong>OpenInJed$</strong>(filename$) - opens a given text file in the <em>jed</em> text editor in the same terminal window as your program. </p>
 
@@ -268,6 +334,15 @@ Convert an image file to a different format, optionally with a different filenam
 <li>To see all <em>tpp</em> can do, run the bash command <em>tpp /usr/share/doc/tpp/examples/tpp-features.tpp</em>. </li>
 <li><strong>System commands used:</strong> <em>tpp</em>, <em>figlet</em> (optional).</li>
 </ul></li>
+<li><p><strong>OpeninTweak$</strong>(filename$)</p>
+
+<ul>
+<li>opens a given file in the <em>tweak</em> hexadecimal editor.</li>
+<li>Must be run in a program that is already in a terminal.</li>
+<li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
+<li>TIP: <em>OpeninHte()</em> is much more user-friendly!</li>
+<li><strong>System commands used:</strong> <em>tweak</em>.</li>
+</ul></li>
 <li><p><strong>OpeninW3m$</strong>(URL$): Opens a URL in the <em>w3m</em> text-based browser. </p>
 
 <ul>
@@ -283,8 +358,29 @@ Convert an image file to a different format, optionally with a different filenam
 <li>If filename$ is an empty string (""), <em>wordgrinder</em> will open with a new, unnamed file.</li>
 <li>You can also use the shortcut <em>OpenWordgrinder$()</em> for this. </li>
 <li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.  </li>
-<li>It is up to you to determine that filename$ is a valid <em>wordgrinder</em> data file. </li>
+<li>It is up to you to determine that <em>filename$</em> is a valid <em>wordgrinder</em> data file. </li>
 <li><strong>System commands used:</strong> <em>wordgrinder</em>.</li>
+</ul></li>
+<li><p><strong>OpenNinvader$</strong>() - start the <em>ninvaders</em> game (Space Invaders clone)</p>
+
+<ul>
+<li><strong>System commands used:</strong> <em>ninvaders</em>.</li>
+</ul></li>
+<li><p><strong>OpenPacman$</strong>() - Start the <em>pacman4console</em> game (pacman clone)</p>
+
+<ul>
+<li><strong>System commands used:</strong> <em>pacman4console</em>.</li>
+</ul></li>
+<li><p><strong>OpenSpeedpad$</strong>() - Opens the <em>speedpad</em> typing speed checker.</p>
+
+<ul>
+<li><strong>System commands used:</strong> <em>speedpad</em>.</li>
+</ul></li>
+<li><p><strong>OpenTig$</strong>(gitdir$) - Opens the <em>tig</em> CLI UI for git.</p>
+
+<ul>
+<li>The value <em>gitdir$</em> must be a valid git directory</li>
+<li><strong>System commands used:</strong> <em>tig</em>.</li>
 </ul></li>
 <li><p><strong>OpenTina$</strong>() - Opens the <em>tina</em> text-based personal information manager. </p>
 
@@ -428,6 +524,11 @@ next f
 </ul></li>
 <li>See two ways to handle a screensaver in test.bas</li>
 <li><strong>System commands used:</strong> <em>cacademo</em>, <em>cacafire</em>, <em>pkill</em>, <em>clear</em>.</li>
+</ul></li>
+<li><p><strong>ScreensaverClock</strong>() - starts the <em>tty-clock</em> program in screensaver mode.</p>
+
+<ul>
+<li><strong>System commands used:</strong> <em>tty-clock</em>.</li>
 </ul></li>
 <li><p><strong>StripDoc$</strong>(filename$) - Convert a Microsoft Word .doc (NOT .docx) file to text and return the result as a string variable.</p>
 
