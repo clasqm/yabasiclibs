@@ -52,6 +52,7 @@ Licensed according to the MIT license.</p>
 <ul>
 <li>Do not try <em>a() =  ArraySort(a())</em>, it won't work.</li>
 <li>Your array should be global - I have had inconsistent results with local arrays.</li>
+<li>If you prefer, you can use the alias <em>SortArray()</em>.</li>
 <li><strong>System commands used:</strong> <em>sort</em>, <em>rm</em>.</li>
 </ul></li>
 <li><p><strong>ArraySort$</strong>(a$()) - sorts a ONE-dimensional string array (case-independent).</p>
@@ -59,6 +60,7 @@ Licensed according to the MIT license.</p>
 <ul>
 <li>Do not try <em>a$() =  ArraySort$(a$())</em>, it won't work.</li>
 <li>Your array should be global - I have had inconsistent results with local arrays.</li>
+<li>If you prefer, you can use the alias <em>SortArray$()</em>.</li>
 <li><strong>System commands used:</strong> <em>sort</em>, <em>rm</em>.</li>
 </ul></li>
 <li><p><strong>ConvertFile$</strong>(infile$, outfile$) - Convert any <a href="#pandocformats">text file format</a> to any other format that <em>pandoc</em> ( http://pandoc.org ) can handle.</p>
@@ -95,7 +97,7 @@ Convert an image file to a different format, optionally with a different filenam
 <li>Returns 1 for success and 0 for failure</li>
 <li><strong>System commands used</strong>: <em>gm</em> or <em>convert</em>.</li>
 </ul></li>
-<li><p><strong>EncloseString$</strong>(thestring$,type) - Encloses a string in either single or double quotes, if it isn't already.</p>
+<li><p><strong>EncloseString$</strong>(thestring$,type) - Enclose a string in either single or double quotes, if it isn't already.</p>
 
 <ul>
 <li>Mostly for use with long filenames that may include spaces. No error-checking is done here.</li>
@@ -104,9 +106,19 @@ Convert an image file to a different format, optionally with a different filenam
 
 <ul>
 <li>0 (single quote) or</li>
-<li>1 (double quote). </li>
+<li>1 (double quote).</li>
 </ul></li>
 <li><strong>System commands used:</strong> none.</li>
+</ul></li>
+<li><p><strong>FileDedupe$</strong>(infile$,outfile$) - Remove duplicate lines from a text file <em>infile$</em> and write the results to <em>outfile$</em>.</p>
+
+<ul>
+<li>Any existing <em>outfile$</em> will be overwritten!</li>
+<li>Will fail if <em>infile$</em> and <em>outfile$</em> are identical.</li>
+<li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
+<li>If you prefer, you can use the alias <em>DedupeFile$()</em>.</li>
+<li>Returns nothing.</li>
+<li><strong>System commands used:</strong> <em>awk</em>.</li>
 </ul></li>
 <li><p><strong>FileExists</strong>(fullpathname$) - Test if a file exists.</p>
 
@@ -136,6 +148,16 @@ Convert an image file to a different format, optionally with a different filenam
 </ul></li>
 <li>This does NOT test for hard links. </li>
 <li><strong>System commands used:</strong> <em>test</em>.</li>
+</ul></li>
+<li><p><strong>FileSort$</strong>(infile$,outfile$) - Sort a text file <em>infile$</em> and write the results to <em>outfile$</em>.</p>
+
+<ul>
+<li>Any existing <em>outfile$</em> will be overwritten!</li>
+<li>Will fail if <em>infile$</em> and <em>outfile$</em> are identical.</li>
+<li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
+<li>If you prefer, you can use the alias <em>SortFile$()</em>.</li>
+<li>Returns nothing if succesful, otherwise returns an error message.</li>
+<li><strong>System commands used:</strong> <em>sort</em>.</li>
 </ul></li>
 <li><p><strong>GetEnvVar$</strong>(var$)</p>
 
@@ -530,6 +552,9 @@ next f
 <ul>
 <li><strong>System commands used:</strong> <em>tty-clock</em>.</li>
 </ul></li>
+<li><p><strong>SortArray</strong>(z()) - An alias for <em>Arraysort()</em>.</p></li>
+<li><p><strong>SortArray$</strong>(z$()) - An alias for <em>Arraysort$()</em>.</p></li>
+<li><p><strong>SortFile$(infile$,outfile$)</strong> - an alias for <em>FileSort$()</em>.</p></li>
 <li><p><strong>StripDoc$</strong>(filename$) - Convert a Microsoft Word .doc (NOT .docx) file to text and return the result as a string variable.</p>
 
 <ul>

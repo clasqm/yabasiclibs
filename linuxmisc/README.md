@@ -46,11 +46,13 @@ It is safe to use this library and ONE of the others in this set concurrently,
 + **ArraySort**(a()) - sorts a ONE-dimensional numeric array.
     + Do not try *a() =  ArraySort(a())*, it won't work.
     + Your array should be global - I have had inconsistent results with local arrays.
+    + If you prefer, you can use the alias *SortArray()*.
     + **System commands used:** *sort*, *rm*.
 
 + **ArraySort$**(a$()) - sorts a ONE-dimensional string array (case-independent).
     + Do not try *a$() =  ArraySort$(a$())*, it won't work.
     + Your array should be global - I have had inconsistent results with local arrays.
+    + If you prefer, you can use the alias *SortArray$()*.
     + **System commands used:** *sort*, *rm*.
 
 + **ConvertFile$**(infile$, outfile$) - Convert any [text file format](#pandocformats) to any other format that *pandoc* ( http://pandoc.org ) can handle.
@@ -79,14 +81,22 @@ Convert an image file to a different format, optionally with a different filenam
     + Returns 1 for success and 0 for failure
    + **System commands used**: *gm* or *convert*.
 
-+ **EncloseString$**(thestring$,type) - Encloses a string in either single or double quotes, if it isn't already.
++ **EncloseString$**(thestring$,type) - Enclose a string in either single or double quotes, if it isn't already.
     + Mostly for use with long filenames that may include spaces. No error-checking is done here.
     + If you feed this routine a string that already contains quotes, your program will come to a halt. Use INSTR() to check for that first. 
 
     + *type* is either
         + 0 (single quote) or
-        + 1 (double quote). 
+        + 1 (double quote).
     + **System commands used:** none.
+
++ **FileDedupe$**(infile$,outfile$) - Remove duplicate lines from a text file *infile$* and write the results to *outfile$*.
+    + Any existing *outfile$* will be overwritten!
+    + Will fail if *infile$* and *outfile$* are identical.
+    + For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.
+    + If you prefer, you can use the alias *DedupeFile$()*.
+    + Returns nothing.
+    + **System commands used:** *awk*.
 
 + **FileExists**(fullpathname$) - Test if a file exists.
     + Returns 1 if the file exists, or returns 0 if the file does not exist.
@@ -106,6 +116,14 @@ Convert an image file to a different format, optionally with a different filenam
         + 0 if it is just a regular file. 
     + This does NOT test for hard links. 
     + **System commands used:** *test*.
+
++ **FileSort$**(infile$,outfile$) - Sort a text file *infile$* and write the results to *outfile$*.
+    + Any existing *outfile$* will be overwritten!
+    + Will fail if *infile$* and *outfile$* are identical.
+    + For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.
+    + If you prefer, you can use the alias *SortFile$()*.
+    + Returns nothing if succesful, otherwise returns an error message.
+    + **System commands used:** *sort*.
 
 + **GetEnvVar$**(var$)
     + Get an environment variable
@@ -396,6 +414,12 @@ next f
 
 + **ScreensaverClock**() - starts the *tty-clock* program in screensaver mode.
     + **System commands used:** *tty-clock*.
+
++ **SortArray**(z()) - An alias for *Arraysort()*.
+
++ **SortArray$**(z$()) - An alias for *Arraysort$()*.
+
++ **SortFile$(infile$,outfile$)** - an alias for *FileSort$()*.
 
 + **StripDoc$**(filename$) - Convert a Microsoft Word .doc (NOT .docx) file to text and return the result as a string variable.
     + For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.
