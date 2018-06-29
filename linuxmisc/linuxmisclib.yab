@@ -170,11 +170,111 @@ export sub ConvertImage(inputfile$, outputfile$)
 	endif
 end sub
 
+export sub CowSay$(text$)
+	//Returns a text spoken by a randomized ASCII cartoon.
+	//if text$ is set as "fortune" then a random short fortune
+	//will be selected. Otherwise, the text you gave is printed.
+	local fort$, main$, post$, exec$
+	if RandInt0To9() < 5 then
+		main$ = "cowsay"
+	else
+		main$ = "cowthink"
+	endif
+	sleep 0.2
+	switch RandInt0To9()
+		case 0
+			post$ = " -f apt "
+			break
+		case 1
+			post$ = " -f cock "
+			break
+		case 2
+			post$ = " -f cower "
+			break
+		case 3
+			post$ = " -f default "
+			break
+		case 4
+			post$ = " -f koala "
+			break
+		case 5
+			post$ = " -f moose "
+			break
+		case 6
+			post$ = " -f pony-smaller "
+			break
+		case 7
+			post$ = " -f sheep "
+			break
+		case 8
+			post$ = " -f tux "
+			break
+		case 9
+			post$ = " -f www "
+			break
+	end switch
+	switch RandInt0To9()
+		case 0
+			post$ = post$ + "-b "
+			break
+		case 1
+			post$ = post$ + "-d "
+			break
+		case 2
+			post$ = post$ + "-g "
+			break
+		case 3
+			post$ = post$ + "-p "
+			break
+		case 4
+			post$ = post$ + "-s "
+			break
+		case 5
+			post$ = post$ + "-t "
+			break
+		case 6
+			post$ = post$ + "-w "
+			break
+		case 7
+			post$ = post$ + "-y "
+			break
+		default
+			break
+	end switch
+	if lower$(text$) = "fortune" then
+		fort$ = "fortune -s | "
+		text$ = ""
+	endif	
+	exec$ = fort$ + main$ + post$ + text$
+	return system$(exec$)
+end sub
+
 ########## D ###########
+
+export sub Define$(word$)
+	//Get a dictionary definition of a word.
+	//This requires the installation of the dict program
+	//AND at least one dict dictionary, for example
+	//dict-gcide. The more dictionaries you add, the 
+	//more results you can expect. This command searches
+	//localhost only and does not go online to dict.org.
+	return system$("dict " + word$)
+end sub
 
 export sub DedupeFile$(infile$, outfile$)
 	return FileDedupe$(infile$, outfile$)
 end sub
+
+export sub DistroDetails$()
+	//Return your distro's and computer's stats 
+	return system$("screenfetch -nN")
+end sub
+
+export sub DistroLogo$()
+	//Return your distro's logo in monochrome ASCII art format
+	return system$("screenfetch -LN")
+end sub
+
 
 ########## E ###########
 

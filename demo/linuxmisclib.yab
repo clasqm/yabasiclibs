@@ -172,6 +172,20 @@ end sub
 
 ########## D ###########
 
+export sub Define$(word$)
+	//get a dictionary definition of a word
+	//This requires the installation of the dict program
+	//AND at least one dict dictionary, for example
+	//dict-gcide. The more dictionaries you add, the 
+	//more results you can expect. This command searches
+	//localhost only and does not go online to dict.org
+	return system$("dict " + word$)
+end sub
+
+export sub DedupeFile$(infile$, outfile$)
+	return FileDedupe$(infile$, outfile$)
+end sub
+
 ########## E ###########
 
 export sub EncloseString$(thestring$,type)
@@ -190,6 +204,21 @@ export sub EncloseString$(thestring$,type)
 end sub
 
 ########## F ###########
+
+export sub FileDedupe$(infile$,outfile$)
+	//Remove duplicate lines from a text file infile$ and write
+	//the results to outfile$.
+	//Any existing outfile$ will be overwritten!
+	//will fail if infile$ and outfile$ are identical.
+	local UTest$
+	if infile$ = outfile$ return	
+	UTest$ = TestForUtility$("awk")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("awk '!seen[$0]++' " + infile$ + " > " + outfile$)
+	endif	
+end sub
 
 export sub FileExists(fullpathname$)
 	//test if a file exists
@@ -221,6 +250,20 @@ export sub FileorLink(pathname$)
         local isalink$
         isalink$ = system$("if test -L " + pathname$ + ";then echo 1; else echo 0;fi")
 	return val(isalink$)
+end sub
+
+export sub FileSort$(infile$,outfile$)
+	//Sort a text file infile$ and write the results to outfile$.
+	//Any existing outfile$ will be overwritten!
+	//will fail if infile$ and outfile$ are identical.
+	local UTest$
+	if infile$ = outfile$ return	
+	UTest$ = TestForUtility$("sort")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("sort " + infile$ + " > " + outfile$)
+	endif	
 end sub
 
 ########## G ###########
@@ -255,7 +298,7 @@ end sub
 
 export sub IsItATextFile(filename$)
 	//Tests whether a given file is a text file or not
-	//anytjhing that does not have the string "text" in the results of the
+	//anything that does not have the string "text" in the results of the
 	//file command is assumed to be a binary file.
 	//This should work fine on Linux but may be problematic on BSD systerms
 	//where this command may reject shell scripts
@@ -1023,6 +1066,18 @@ export sub StripPDF$(filename$)
 	else
 		return system$("pstotext " + filename$)
 	endif
+end sub
+
+export sub SortArray(z())
+	ArraySort(z())
+end sub
+
+export sub SortArray$(z$())
+	ArraySortS(z$())
+end sub
+
+export sub SortFile$(infile$, outfile$)
+	return FileSort$(infile$, outfile$)
 end sub
 
 ########## T ###########

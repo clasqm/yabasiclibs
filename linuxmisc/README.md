@@ -79,7 +79,40 @@ Convert an image file to a different format, optionally with a different filenam
     + The output format is taken from the file extension. 
     + The original file is left untouched.
     + Returns 1 for success and 0 for failure
-   + **System commands used**: *gm* or *convert*.
+    + **System commands used**: *gm* or *convert*.
+
++ **CowSay**(text$) - Returns a text spoken by a randomized ASCII cartoon.
+    + if *text$* is set as "fortune" then a random short fortune will be selected. Otherwise, the text you gave is printed.
+    + **System commands used**: *cowsay*, *fortune*.
+    + *Example:*
+````
+print CowSay$("fortune")
+sleep 1
+print CowSay$("This is some other text, not a fortune")
+````
+![CowSay](./imgs/CowSay.png)
+
++ **Define$**(word$) - Get a dictionary definition of a word.
+    + This requires the installation of the *dict* program AND at least one dict dictionary, for example *dict-gcide*.
+    + The more dictionaries you add, the more results you can expect.
+    + This command searches localhost only and does not go online to *dict.org*.
+    + **System commands used**: *dict*.
+
++ **DistroDetails$**() - Return your distro's and computer's stats .
+    + **System commands used**: *screenfetch*.
+    + *Example:*
+```
+print DistroDetails$()
+```
+![DistroDetails](./imgs/DistroDetails.png)
+
++ **DistroLogo$**() - Return your distro's logo in monochrome ASCII art format.
+    + **System commands used**: *screenfetch*.
+    + *Example:*
+```
+print DistroLogo$()
+```
+![DistroLogo](./imgs/DistroLogo.png)
 
 + **EncloseString$**(thestring$,type) - Enclose a string in either single or double quotes, if it isn't already.
     + Mostly for use with long filenames that may include spaces. No error-checking is done here.

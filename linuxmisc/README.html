@@ -97,6 +97,47 @@ Convert an image file to a different format, optionally with a different filenam
 <li>Returns 1 for success and 0 for failure</li>
 <li><strong>System commands used</strong>: <em>gm</em> or <em>convert</em>.</li>
 </ul></li>
+<li><p><strong>CowSay</strong>(text$) - Returns a text spoken by a randomized ASCII cartoon.</p>
+
+<ul>
+<li>if <em>text$</em> is set as "fortune" then a random short fortune will be selected. Otherwise, the text you gave is printed.</li>
+<li><strong>System commands used</strong>: <em>cowsay</em>, <em>fortune</em>.</li>
+<li><em>Example:</em>
+<code>
+print CowSay$("fortune")
+sleep 1
+print CowSay$("This is some other text, not a fortune")
+</code>
+<img src="./imgs/CowSay.png" alt="CowSay" title="" /></li>
+</ul></li>
+<li><p><strong>Define$</strong>(word$) - Get a dictionary definition of a word.</p>
+
+<ul>
+<li>This requires the installation of the <em>dict</em> program AND at least one dict dictionary, for example <em>dict-gcide</em>.</li>
+<li>The more dictionaries you add, the more results you can expect.</li>
+<li>This command searches localhost only and does not go online to <em>dict.org</em>.</li>
+<li><strong>System commands used</strong>: <em>dict</em>.</li>
+</ul></li>
+<li><p><strong>DistroDetails$</strong>() - Return your distro's and computer's stats .</p>
+
+<ul>
+<li><strong>System commands used</strong>: <em>screenfetch</em>.</li>
+<li><em>Example:</em>
+<code>
+print DistroDetails$()
+</code>
+<img src="./imgs/DistroDetails.png" alt="DistroDetails" title="" /></li>
+</ul></li>
+<li><p><strong>DistroLogo$</strong>() - Return your distro's logo in monochrome ASCII art format.</p>
+
+<ul>
+<li><strong>System commands used</strong>: <em>screenfetch</em>.</li>
+<li><em>Example:</em>
+<code>
+print DistroLogo$()
+</code>
+<img src="./imgs/DistroLogo.png" alt="DistroLogo" title="" /></li>
+</ul></li>
 <li><p><strong>EncloseString$</strong>(thestring$,type) - Enclose a string in either single or double quotes, if it isn't already.</p>
 
 <ul>
