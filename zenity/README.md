@@ -5,7 +5,7 @@ Licensed accordingto the MIT license
 
 If you are reading this as a man page, be advised that you can see it in glorious HTML, with pictures even, at https://clasqm.github.io/
 
-This library for yabasic allows the use of the Linux command *zenity* to display a variety of dialogs in graphical mode.
+This library for *yabasic* allows the use of the Linux command *zenity* to display a variety of dialogs in graphical mode.
 
 The library will test for the presence of the zenity command and will exit gracefully if it is not present.Zenity is a GTK program, so the colours and styles will follow that of your GNOME defaults. It may also take a moment or two to pop up - there are a lot of libraries to load! If speed is of the essence, stick to the *dialog*, *clasquinator* or *whiptail* libraries.
 
@@ -20,6 +20,8 @@ The library should exist either in the same folder as your program or in the sta
 To use the library, use the command
 
     import zenitylib
+
+If you would rather cut and paste these subroutines into your own program rather than importing this rather large library, or create your own, smaller library with just the routines you need, be my guest (I *would* appreciate a note of acknowledgement in your code). But some subroutines require supporting routines that you will find at the end of this library. You will have to include those as well.
 
 You should **not** use this library and one of the others that provides dialogs in this set concurrently, because they replicate subroutine names. Pick the right one for your program and stick with it!
 
@@ -136,6 +138,7 @@ MessageDlg(EncloseText$("This is a simple message dialog. Close it with ENTER or
     + Also, once you have it you will want to use *EncloseText()* to surround it with double quotes, just in case it has 
 spaces in it.
     + ONLY available in *zenity*, but *kdialog* has a comparable set of commands.
+    + For an alternative approach, see *SelectDir$()* in the *linuxmisclib* library.
 	
 
 + **ZNotifyDlg**(text$) - pop up a GTK notification.
@@ -148,6 +151,7 @@ spaces in it.
     + Also, once you have it you will want to use *EncloseText()* to surround it with double quotes, just in case it has 
 spaces in it.
     + ONLY available in *zenity*, but *kdialog* has a comparable set of commands.
+    + For an alternative approach, see *SelectFile$()* in the *linuxmisclib* library.
     + *Example:*
 ```
 a$ = StripLFoffSysCmd$(ZSaveFileDlg$())

@@ -5,7 +5,7 @@ Licensed accordingto the MIT license</p>
 
 <p>If you are reading this as a man page, be advised that you can see it in glorious HTML, with pictures even, at https://clasqm.github.io/</p>
 
-<p>This library for yabasic allows the use of the Linux command <em>zenity</em> to display a variety of dialogs in graphical mode.</p>
+<p>This library for <em>yabasic</em> allows the use of the Linux command <em>zenity</em> to display a variety of dialogs in graphical mode.</p>
 
 <p>The library will test for the presence of the zenity command and will exit gracefully if it is not present.Zenity is a GTK program, so the colours and styles will follow that of your GNOME defaults. It may also take a moment or two to pop up - there are a lot of libraries to load! If speed is of the essence, stick to the <em>dialog</em>, <em>clasquinator</em> or <em>whiptail</em> libraries.</p>
 
@@ -21,6 +21,8 @@ Licensed accordingto the MIT license</p>
 
 <pre><code>import zenitylib
 </code></pre>
+
+<p>If you would rather cut and paste these subroutines into your own program rather than importing this rather large library, or create your own, smaller library with just the routines you need, be my guest (I <em>would</em> appreciate a note of acknowledgement in your code). But some subroutines require supporting routines that you will find at the end of this library. You will have to include those as well.</p>
 
 <p>You should <strong>not</strong> use this library and one of the others that provides dialogs in this set concurrently, because they replicate subroutine names. Pick the right one for your program and stick with it!</p>
 
@@ -171,7 +173,8 @@ MessageDlg(EncloseText$("This is a simple message dialog. Close it with ENTER or
 <li>This value is probably terminated with a linefeed - use <em>StripLFoffSysCmd$()</em> in the <em>linuxmisc</em> library to get rid of it.</li>
 <li>Also, once you have it you will want to use <em>EncloseText()</em> to surround it with double quotes, just in case it has 
 spaces in it.</li>
-<li><p>ONLY available in <em>zenity</em>, but <em>kdialog</em> has a comparable set of commands.</p></li>
+<li>ONLY available in <em>zenity</em>, but <em>kdialog</em> has a comparable set of commands.</li>
+<li><p>For an alternative approach, see <em>SelectDir$()</em> in the <em>linuxmisclib</em> library.</p></li>
 <li><p><strong>ZNotifyDlg</strong>(text$) - pop up a GTK notification.</p></li>
 <li>The exact placement and duration of notifications may depend on your WM settings.</li>
 <li><p>ONLY available in Zenity. If you need a general utility, try <em>NotifyDlg()</em> in the <em>linuxmisclib</em> library.</p></li>
@@ -184,6 +187,7 @@ spaces in it.</li>
 <li>Also, once you have it you will want to use <em>EncloseText()</em> to surround it with double quotes, just in case it has 
 spaces in it.</li>
 <li>ONLY available in <em>zenity</em>, but <em>kdialog</em> has a comparable set of commands.</li>
+<li>For an alternative approach, see <em>SelectFile$()</em> in the <em>linuxmisclib</em> library.</li>
 <li><p><em>Example:</em>
 <code>
 a$ = StripLFoffSysCmd$(ZSaveFileDlg$())

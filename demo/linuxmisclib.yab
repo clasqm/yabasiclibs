@@ -31,7 +31,8 @@
 //See the file *test.bas* for test routines that will show examples of how
 //to use these routines.
 
-//It is safe to use this library and ONE of the others in this set concurrently,
+//It is safe to use this library and ONE of the others in this set that provide
+//dialogs concurrently,
 
 //MAIN ROUTINES
 
@@ -170,21 +171,111 @@ export sub ConvertImage(inputfile$, outputfile$)
 	endif
 end sub
 
+export sub CowSay$(text$)
+	//Returns a text spoken by a randomized ASCII cartoon.
+	//if text$ is set as "fortune" then a random short fortune
+	//will be selected. Otherwise, the text you gave is printed.
+	local fort$, main$, post$, exec$
+	if RandInt0To9() < 5 then
+		main$ = "cowsay"
+	else
+		main$ = "cowthink"
+	endif
+	sleep 0.2
+	switch RandInt0To9()
+		case 0
+			post$ = " -f apt "
+			break
+		case 1
+			post$ = " -f cock "
+			break
+		case 2
+			post$ = " -f cower "
+			break
+		case 3
+			post$ = " -f default "
+			break
+		case 4
+			post$ = " -f koala "
+			break
+		case 5
+			post$ = " -f moose "
+			break
+		case 6
+			post$ = " -f pony-smaller "
+			break
+		case 7
+			post$ = " -f sheep "
+			break
+		case 8
+			post$ = " -f tux "
+			break
+		case 9
+			post$ = " -f www "
+			break
+	end switch
+	switch RandInt0To9()
+		case 0
+			post$ = post$ + "-b "
+			break
+		case 1
+			post$ = post$ + "-d "
+			break
+		case 2
+			post$ = post$ + "-g "
+			break
+		case 3
+			post$ = post$ + "-p "
+			break
+		case 4
+			post$ = post$ + "-s "
+			break
+		case 5
+			post$ = post$ + "-t "
+			break
+		case 6
+			post$ = post$ + "-w "
+			break
+		case 7
+			post$ = post$ + "-y "
+			break
+		default
+			break
+	end switch
+	if lower$(text$) = "fortune" then
+		fort$ = "fortune -s | "
+		text$ = ""
+	endif	
+	exec$ = fort$ + main$ + post$ + text$
+	return system$(exec$)
+end sub
+
 ########## D ###########
 
 export sub Define$(word$)
-	//get a dictionary definition of a word
+	//Get a dictionary definition of a word.
 	//This requires the installation of the dict program
 	//AND at least one dict dictionary, for example
 	//dict-gcide. The more dictionaries you add, the 
 	//more results you can expect. This command searches
-	//localhost only and does not go online to dict.org
+	//localhost only and does not go online to dict.org.
 	return system$("dict " + word$)
 end sub
 
 export sub DedupeFile$(infile$, outfile$)
 	return FileDedupe$(infile$, outfile$)
 end sub
+
+export sub DistroDetails$()
+	//Return your distro's and computer's stats 
+	return system$("screenfetch -nN")
+end sub
+
+export sub DistroLogo$()
+	//Return your distro's logo in monochrome ASCII art format
+	return system$("screenfetch -LN")
+end sub
+
 
 ########## E ###########
 
@@ -1044,6 +1135,63 @@ export sub StripDoc$(filename$)
 	endif
 end sub
 
+export sub SelectDir$(startpath$)
+	//Use the ranger file manager to select a directoriy
+	//after you exit ranger (press q) it will save the last
+	//visited directory.
+	//returns the full pathname of the selected directory	
+	return SelectFile$(startpath$, 1)
+end sub
+
+
+export sub SelectFile$(startpath$, selector)
+	//Use the ranger file manager to select a file.
+	//Select your file with arrow keys and ENTER
+	//returns the full pathname of the selected file
+	//The value selector is for internal use only
+	local UTest$, post$, tempfile$, handle, selected$
+	UTest$ = TestForUtility$("ranger")
+	if UTest$ <> "" then
+		return UTest$
+	else
+	tempfile$ = tempdir$() + "/linuxmisclib" + Str$(RandInt()) + ".tmp"
+	if startpath$ = "" startpath = "."
+	switch selector
+		case 0
+			post$ = " --clean --choosefile=" + tempfile$
+			handle = open tempfile$, "r"
+			selected$ = line input handle
+			close handle
+			return selected$
+			break
+		case 1
+			post$ = " --clean --choosedir=" + tempfile$
+			handle = open tempfile$, "r"
+			selected$ = line input handle
+			return selected$
+			close handle
+			break
+		case 2
+			post$ = " --clean --choosefiles=" + tempfile$
+			system("ranger" + post$)
+			return tempfile$
+			close handle
+			
+			break
+	end switch
+	endif
+end sub
+
+export sub SelectMulltiFile$(startpath$)
+	//Use the ranger file manager to select a a bunch of files.
+	//Navigate to your files with arrow keys, select them with 
+	//SPACE, then Press ENTER.
+	//Returns the full pathname of the temporary file in
+	//which your information is stored.
+	return SelectFile$(startpath$, 2)
+end sub
+
+
 export sub StripLFoffSysCmd$(tempval$)
 	//remove LF from the results of a system call
 	//if the results of a System() or System$() command end on a LF (most do),
@@ -1081,6 +1229,40 @@ export sub SortFile$(infile$, outfile$)
 end sub
 
 ########## T ###########
+
+export sub TakeScreenshot$(type, thumb, filename$)
+	//Takes a screenshot in png format
+	//If type = 2 it will take all screens (in a multidisplay setup). 
+	//This will not give an error if there is just one screen.
+	//If type = 1 it will take the entire (single) screen.
+	//If type = 0 it will capture the currently focused window, which is
+	//normally your yabasic program but I suppose you could SLEEP a few seconds
+	//to give the user the chance to click elsewhere.
+	//If type = -1 it will also take the currently active window, but include any 
+	//window manager decorations
+	//If thumb = 1 it will also take a thumbnail picture 20% the size of the original.
+	//If thumb = 0 it will not make a thumbnail.
+	//filename$ should have the appropriate extension, like .png, .bmp or .jpg/jpeg. 
+	//Not giving an extension will produce an error. Sorry, .gif is not supported.
+	//If filename$ is not given it will create a timestamped file in the current directory
+	//TakeScreenshot(), without parameters. will take the current window, without WM
+	//decorations, and create a timestamped file in the current directory, with no thumbnail.
+	//Image quality is set at the scrot default of 75%. if you don't like that, you can change the line
+	//post$ = " -z" below to post$ = " -q 100 -z". But watch for that leading space!
+	local UTest$, post$
+	UTest$ = TestForUtility$("scrot")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		post$ = " -z"
+		if thumb <> 0 post$ = post$ +" -t 20"
+		if type = 2 post$ = post$ +" -m " + filename$
+		if type = 1 post$ = post$ +" " + filename$
+		if type = 0 post$ = post$ +" -u " + filename$
+		if type = -1 post$ = post$ +" -u -b " + filename$
+		system("scrot" + post$)
+	endif
+end sub
 
 export sub TestForUtility$(utility$)
 	//internal routine to test if the called utility actually exists

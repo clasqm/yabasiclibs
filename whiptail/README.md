@@ -5,9 +5,9 @@ Licensed accordingto the MIT license
 
 If you are reading this as a man page, be advised that you can see it in glorious HTML, with pictures even, at https://clasqm.github.io/
 
-This library for yabasic allows the use of the Linux command *whiptail* to display a variety of dialogs in text mode.
+This library for *yabasic* allows the use of the Linux command *whiptail* to display a variety of dialogs in text mode.
 
-The library will test for the presence of the whiptail command and will exit gracefully if it is not present. Whiptail is a textmode application and must be run in a terminal. It will not be useful in a headless script.
+The library will test for the presence of the *whiptail* command and will exit gracefully if it is not present. *Whiptail* is a textmode application and must be run in a terminal. It will not be useful in a headless script.
 
 The entire set of libraries focuses on sane defaults and getting basic functionality into yabasic. There are a lot of options that will not be implemented!
 
@@ -21,7 +21,11 @@ To use the library, use the command
 
     import whiptaillib
 
+If you would rather cut and paste these subroutines into your own program rather than importing this rather large library, or create your own, smaller library with just the routines you need, be my guest (I *would* appreciate a note of acknowledgement in your code). But some subroutines require supporting routines that you will find at the end of this library. You will have to include those as well.
+
 You should **not** use this library and one of the others in this set that provides dialogs concurrently, because they replicate subroutine names. Pick the right one for your program and stick with it!
+
+*Whiptail* does not have file selection dialogs ATM. If you really need them, try the *SelectFile$()*, *SelectDir$()* and *SelectMultiFile$()* routines in the *linuxmisclib* library.
 
 ## Routines available:
 

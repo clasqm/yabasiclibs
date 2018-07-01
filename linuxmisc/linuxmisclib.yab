@@ -31,7 +31,8 @@
 //See the file *test.bas* for test routines that will show examples of how
 //to use these routines.
 
-//It is safe to use this library and ONE of the others in this set concurrently,
+//It is safe to use this library and ONE of the others in this set that provide
+//dialogs concurrently,
 
 //MAIN ROUTINES
 
@@ -419,6 +420,40 @@ end sub
 ########## L ###########
 
 ########## M ###########
+
+export sub MakeAsciiArt$(img$, width)
+	//Convert an image file to monochrome ASCII art
+	//The value img$ can be a path to a local file or a URL.
+	//Width is set to 75 columns to work with most terminals,
+	//but you can override this with the optional value width
+	//It is a good idea to run FileExists(img$) first: 
+	//Ruby error messages are not pretty.
+	//Returns a string containing the asciiart image.
+	local aimg$, w$(1),count, f
+	if width = 0 width = 75
+	aimg$ = system$("asciiart -w " + str$(width) + " " +  img$)
+		//At the time of writing, asciiiart threw up the following error message
+		//prepended to the result:
+		//W: `require 'RMagick'` is deprecated, please change to `require 'rmagick'`
+		//the following loop removes that message if it exists. It may need adjustment
+		//in other locales.
+	if instr(aimg$, "deprecated") then
+		count = split(aimg$, w$(), "\n")
+		aimg$ = ""
+		for f = 2 to count
+			aimg$ = aimg$ + w$(f) + "\n"
+		next f
+	endif
+	return aimg$
+end sub
+
+export sub MakeAsciiArtInvert$(img$, width)
+	//same as MakeAsciiArt$(), but inverts the character map.
+	//Depending on your terminal and image  this can make
+	//the image clearer (or a lot worse).
+	img$ = "-i " + img$
+	return MakeAsciiArt$(img$, width)
+end sub
 
 ########## N ###########
 
@@ -942,12 +977,6 @@ end sub
 
 ########## R ###########
 
-export sub RandInt()
-	//returns a random integer between 0 and 32767
-	//devised at a time when yab's own RAN() command was malfunctioning
-	return val(system$("echo $RANDOM"))
-end sub
-
 export sub RandInt0To9()
 	//returns a random integer between 0 and 9, inclusive
 	//devised at a time when yab's own RAN() command was malfunctioning
@@ -1134,6 +1163,61 @@ export sub StripDoc$(filename$)
 	endif
 end sub
 
+export sub SelectDir$(startpath$)
+	//Use the ranger file manager to select a directoriy
+	//after you exit ranger (press q) it will return the last
+	//visited directory.
+	//returns the full pathname of the selected directory	
+	return SelectFile$(startpath$, 1)
+end sub
+
+export sub SelectFile$(startpath$, selector)
+	//Use the ranger file manager to select a file.
+	//Select your file with arrow keys and ENTER
+	//returns the full pathname of the selected file
+	//The value startpath$ is where to start looking for files
+	//The value selector is for internal use only
+	local UTest$, post$, handle, selected$, tempfile$
+	UTest$ = TestForUtility$("ranger")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		tempfile$ = TempDir$() + "/linuxmisclib_selectfile.tmp"
+		if startpath$ = "" startpath$ = "."
+		switch selector
+			case 0
+				post$ = " --clean --choosefile=" 
+			break
+			case 1
+				post$ = " --clean --choosedir="
+			break
+			case 2
+				post$ = " --clean --choosefiles="
+			break
+		end switch
+		post$ = post$ + tempfile$ + " " + startpath$
+		system("ranger" + post$)
+		if selector = 2 then
+			selected$ = tempfile$
+		else
+			handle = open(tempfile$, "r")
+			line input #handle selected$
+			close #handle
+		endif
+		return selected$
+	endif
+end sub
+
+export sub SelectMultiFile$(startpath$)
+	//Use the ranger file manager to select a a bunch of files.
+	//Navigate to your files with arrow keys, select them with 
+	//SPACE, then Press ENTER.
+	//Returns the full pathname of the temporary file in
+	//which your information is stored.
+	return SelectFile$(startpath$, 2)
+end sub
+
+
 export sub StripLFoffSysCmd$(tempval$)
 	//remove LF from the results of a system call
 	//if the results of a System() or System$() command end on a LF (most do),
@@ -1171,6 +1255,40 @@ export sub SortFile$(infile$, outfile$)
 end sub
 
 ########## T ###########
+
+export sub TakeScreenshot$(type, thumb, filename$)
+	//Takes a screenshot in png format
+	//If type = 2 it will take all screens (in a multidisplay setup). 
+	//This will not give an error if there is just one screen.
+	//If type = 1 it will take the entire (single) screen.
+	//If type = 0 it will capture the currently focused window, which is
+	//normally your yabasic program but I suppose you could SLEEP a few seconds
+	//to give the user the chance to click elsewhere.
+	//If type = -1 it will also take the currently active window, but include any 
+	//window manager decorations
+	//If thumb = 1 it will also take a thumbnail picture 20% the size of the original.
+	//If thumb = 0 it will not make a thumbnail.
+	//filename$ should have the appropriate extension, like .png, .bmp or .jpg/jpeg. 
+	//Not giving an extension will produce an error. Sorry, .gif is not supported.
+	//If filename$ is not given it will create a timestamped file in the current directory
+	//TakeScreenshot(), without parameters. will take the current window, without WM
+	//decorations, and create a timestamped file in the current directory, with no thumbnail.
+	//Image quality is set at the scrot default of 75%. if you don't like that, you can change the line
+	//post$ = " -z" below to post$ = " -q 100 -z". But watch for that leading space!
+	local UTest$, post$
+	UTest$ = TestForUtility$("scrot")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		post$ = " -z"
+		if thumb <> 0 post$ = post$ +" -t 20"
+		if type = 2 post$ = post$ +" -m " + filename$
+		if type = 1 post$ = post$ +" " + filename$
+		if type = 0 post$ = post$ +" -u " + filename$
+		if type = -1 post$ = post$ +" -u -b " + filename$
+		system("scrot" + post$)
+	endif
+end sub
 
 export sub TestForUtility$(utility$)
 	//internal routine to test if the called utility actually exists

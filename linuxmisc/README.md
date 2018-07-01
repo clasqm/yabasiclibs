@@ -5,7 +5,7 @@ Licensed according to the MIT license.
 
 If you are reading this as a man page, be advised that you can see it in glorious HTML, with pictures even, at https://clasqm.github.io/
 
-This library for yabasic allows the use of a variety of common Linux commands in text mode. For example, opening a text file in the *nano* text editor will make it unnecessary for you to write your own text editing routine.
+This library for *yabasic* allows the use of a variety of common Linux commands in text mode. For example, opening a text file in the *nano* text editor will make it unnecessary for you to write your own text editing routine.
 
 This library also contains some routines ported from my libraries originally developed under yab for Haiku.
 
@@ -27,13 +27,15 @@ To use the library, use the command
 
 See the file *test.bas* for test routines that will show examples of how to use these routines.
 
-It is safe to use this library and ONE of the others in this set concurrently,
+If you would rather cut and paste these subroutines into your own program rather than importing this rather large library, or create your own, smaller library with just the routines you need, be my guest (I *would* appreciate a note of acknowledgement in your code). But some subroutines require supporting routines that you will find at the end of this library. You will have to include those as well.
+
+It is safe to use this library and ONE of the others in this set that provide dialogs concurrently,
 
 ----------
 
 ## Routines available:
 
-**NOTE:** All routines with the form *ConvertXXX$()*, *OpenXXX$()* or *OpeninXXX$()* will return an empty string if successful or a warning message if the required program is missing. The warning message will only be displayed if you do something like:
+**NOTE:** All routines with the form *ConvertXXX$()*, *OpenXXX$()* or *OpeninXXX$()*, and most others that use external commands, will return an empty string if successful or a warning message if the required program is missing. The warning message will only be displayed if you do something like:
 
     print OpeninTpp$("file.tpp")
 
@@ -82,6 +84,7 @@ Convert an image file to a different format, optionally with a different filenam
     + **System commands used**: *gm* or *convert*.
 
 + **CowSay**(text$) - Returns a text spoken by a randomized ASCII cartoon.
+    + Both the character and the facial expression are randomized.
     + if *text$* is set as "fortune" then a random short fortune will be selected. Otherwise, the text you gave is printed.
     + **System commands used**: *cowsay*, *fortune*.
     + *Example:*
@@ -188,6 +191,29 @@ print DistroLogo$()
         + *PlayWav()*. 
     + Please note that this is a nuclear option: it will also affect any other programs making use of these utilities.
     + **System commands used:** *pkill*.
+
++ **MakeAsciiArt$**(img$, width) - Convert an image file to monochrome ASCII art.
+    + The value *img$* can be a path to a local file or a URL.
+    + Width default is set to 75 columns to work with most terminals, but you can override this with the optional value *width*.
+    + *MakeAsciiArtInvert$*(img$, width) is the same as MakeAsciiArt$(), but inverts the character map. Depending on your terminal and image  this can make the image clearer (or a lot worse).
+    + It is a good idea to run *FileExists(img$)* first: Ruby error messages are not pretty.
+    + Returns a string containing the asciiart image. Within this string, individual lines are demarcated by linefeeds ("\n"). See the code for how to deconstruct this into an array for further manipulation. 
+    + **System commands used:** *asciiart*.
+    + *Examples:*
+    
+![Original image](./imgs/MCJ.jpg)
+
+````
+print MakeAsciiArt$("./imgs/MCJ.jpg", 40)
+````
+
+![MakeAsciiArt](./imgs/MakeAsciiart1.png)
+
+````
+print reverse MakeAsciiArtInvert$("./imgs/MCJ.jpg", 40)
+````
+
+![MakeAsciiArtInvert](./imgs/MakeAsciiart2.png)
 
 + **NotifyDlg**(text$, duration, block) - Pop up a one-line notification.
     + If *duration* is 0, the notification remains on screen until *right*-clicked, and displays an [X] button to mark the fact.
@@ -448,6 +474,24 @@ next f
 + **ScreensaverClock**() - starts the *tty-clock* program in screensaver mode.
     + **System commands used:** *tty-clock*.
 
++ **SelectDir$**(startpath$) - Use the *ranger* file manager to select a directory.
+    + After you exit ranger (press q) it will return the last visited directory.
+    + Unlike the routines in *clasquinatorlib*, these routines do not rebuild your screen when you are done.
+    + Returns the full pathname of the selected directory.
+    + **System commands used:** *ranger*.
+
++ **SelectFile$**(startpath$) - Use the *ranger* file manager to select a file.
+    + Select your file with arrow keys and ENTER.
+    + Unlike the routines in *clasquinatorlib*, these routines do not rebuild your screen when you are done.
+    + Returns the full pathname of the selected file.
+    + **System commands used:** *ranger*.
+
++ **SelectMulltiFile$**(startpath$) - Use the *ranger* file manager to select a a bunch of files.
+    + Navigate to your files with arrow keys, select them with SPACE, then Press ENTER.
+    + Unlike the routines in *clasquinatorlib*, these routines do not rebuild your screen when you are done.
+    + Returns the full pathname of the temporary file in which your information is stored. it should be */tmp/linuxmisclib_selectfile.tmp*. You can then parse the results in any way you need.
+    + **System commands used:** *ranger*.
+
 + **SortArray**(z()) - An alias for *Arraysort()*.
 
 + **SortArray$**(z$()) - An alias for *Arraysort$()*.
@@ -468,7 +512,24 @@ next f
 + **StripPDF$(filename$)** - Convert a PDF or PS file to text and return the result as a string variable.
     + Return may contain a bunch of error messages as well as the returned text.
     + For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.
-    + **System commands used:** *pstotext*. 
+    + **System commands used:** *pstotext*.
+
++ **TakeScreenshot$**(type, thumb, filename$) - Takes a screenshot.
+    + If *type* = 2 it will take all screens (in a multidisplay setup). This will not give an error if there is just one screen.
+    + If *type* = 1 it will take the entire (single) screen.
+    + If *type* = 0 it will capture the currently focused window, which is normally your yabasic program but I suppose you could SLEEP a few seconds to give the user the chance to click elsewhere.
+    + If *type* = -1 it will also take the currently active window, but include any window manager decorations
+    + If *thumb* = 1 it will also take a thumbnail picture 20% the size of the original. If *thumb* = 0 it will not make a thumbnail.
+    + *filename$* should have the appropriate extension, like *.png*, *.bmp* or *.jpg /.jpeg*. Not giving an extension will produce an error. Sorry, *.gif* is not supported.
+    + If *filename$* is not given it will create a timestamped file in the current directory
+    + *TakeScreenshot()*, without parameters. will take the current window, without WM decorations, and create a timestamped file in the current directory, with no thumbnail.
+    + Image quality is set at the scrot default of 75%.
+    + Returns nothing.
+    + **System commands used:** *scrot*.
+    + *Example:*
+
+![TakeScreenshot](./imgs/TakeScreenshot.png)
+
 
 + **TestForUtility$**(filename$) - tests whether a given utility exists on your $PATH and is executable. 
     + Returns an empty string if the utility exists, and a warning message if it does not. 

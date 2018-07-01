@@ -488,7 +488,7 @@ export sub TextFileDlg(filename$, title$, exit$, altsymbol$)
 	//filename$ = EncloseText$(trimtext$(filename$))
 	handle = open (filename$, "r")
 	while(not EOF(handle))
-		line input #1 a$
+		line input #handle a$
 		string$ = string$ + a$ + " # "
 	wend
 	close handle	

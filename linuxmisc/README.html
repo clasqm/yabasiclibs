@@ -5,7 +5,7 @@ Licensed according to the MIT license.</p>
 
 <p>If you are reading this as a man page, be advised that you can see it in glorious HTML, with pictures even, at https://clasqm.github.io/</p>
 
-<p>This library for yabasic allows the use of a variety of common Linux commands in text mode. For example, opening a text file in the <em>nano</em> text editor will make it unnecessary for you to write your own text editing routine.</p>
+<p>This library for <em>yabasic</em> allows the use of a variety of common Linux commands in text mode. For example, opening a text file in the <em>nano</em> text editor will make it unnecessary for you to write your own text editing routine.</p>
 
 <p>This library also contains some routines ported from my libraries originally developed under yab for Haiku.</p>
 
@@ -28,13 +28,15 @@ Licensed according to the MIT license.</p>
 
 <p>See the file <em>test.bas</em> for test routines that will show examples of how to use these routines.</p>
 
-<p>It is safe to use this library and ONE of the others in this set concurrently,</p>
+<p>If you would rather cut and paste these subroutines into your own program rather than importing this rather large library, or create your own, smaller library with just the routines you need, be my guest (I <em>would</em> appreciate a note of acknowledgement in your code). But some subroutines require supporting routines that you will find at the end of this library. You will have to include those as well.</p>
+
+<p>It is safe to use this library and ONE of the others in this set that provide dialogs concurrently,</p>
 
 <hr />
 
 <h2>Routines available:</h2>
 
-<p><strong>NOTE:</strong> All routines with the form <em>ConvertXXX$()</em>, <em>OpenXXX$()</em> or <em>OpeninXXX$()</em> will return an empty string if successful or a warning message if the required program is missing. The warning message will only be displayed if you do something like:</p>
+<p><strong>NOTE:</strong> All routines with the form <em>ConvertXXX$()</em>, <em>OpenXXX$()</em> or <em>OpeninXXX$()</em>, and most others that use external commands, will return an empty string if successful or a warning message if the required program is missing. The warning message will only be displayed if you do something like:</p>
 
 <pre><code>print OpeninTpp$("file.tpp")
 </code></pre>
@@ -100,6 +102,7 @@ Convert an image file to a different format, optionally with a different filenam
 <li><p><strong>CowSay</strong>(text$) - Returns a text spoken by a randomized ASCII cartoon.</p>
 
 <ul>
+<li>Both the character and the facial expression are randomized.</li>
 <li>if <em>text$</em> is set as "fortune" then a random short fortune will be selected. Otherwise, the text you gave is printed.</li>
 <li><strong>System commands used</strong>: <em>cowsay</em>, <em>fortune</em>.</li>
 <li><em>Example:</em>
@@ -243,8 +246,35 @@ print DistroLogo$()
 <li>Please note that this is a nuclear option: it will also affect any other programs making use of these utilities.</li>
 <li><strong>System commands used:</strong> <em>pkill</em>.</li>
 </ul></li>
-<li><p><strong>NotifyDlg</strong>(text$, duration, block) - Pop up a one-line notification.</p>
+<li><p><strong>MakeAsciiArt$</strong>(img$, width) - Convert an image file to monochrome ASCII art.</p>
 
+<ul>
+<li>The value <em>img$</em> can be a path to a local file or a URL.</li>
+<li>Width default is set to 75 columns to work with most terminals, but you can override this with the optional value <em>width</em>.</li>
+<li><em>MakeAsciiArtInvert$</em>(img$, width) is the same as MakeAsciiArt$(), but inverts the character map. Depending on your terminal and image  this can make the image clearer (or a lot worse).</li>
+<li>It is a good idea to run <em>FileExists(img$)</em> first: Ruby error messages are not pretty.</li>
+<li>Returns a string containing the asciiart image. Within this string, individual lines are demarcated by linefeeds ("\n"). See the code for how to deconstruct this into an array for further manipulation. </li>
+<li><strong>System commands used:</strong> <em>asciiart</em>.</li>
+<li><em>Examples:</em></li>
+</ul></li>
+</ul>
+
+<p><img src="./imgs/MCJ.jpg" alt="Original image" title="" /></p>
+
+<p><code>
+print MakeAsciiArt$("./imgs/MCJ.jpg", 40)
+</code></p>
+
+<p><img src="./imgs/MakeAsciiart1.png" alt="MakeAsciiArt" title="" /></p>
+
+<p><code>
+print reverse MakeAsciiArtInvert$("./imgs/MCJ.jpg", 40)
+</code></p>
+
+<p><img src="./imgs/MakeAsciiart2.png" alt="MakeAsciiArtInvert" title="" /></p>
+
+<ul>
+<li><strong>NotifyDlg</strong>(text$, duration, block) - Pop up a one-line notification.
 <ul>
 <li>If <em>duration</em> is 0, the notification remains on screen until <em>right</em>-clicked, and displays an [X] button to mark the fact.</li>
 <li>Otherwise, there is no button and the  notification disappears after the specified number of seconds.</li>
@@ -593,6 +623,30 @@ next f
 <ul>
 <li><strong>System commands used:</strong> <em>tty-clock</em>.</li>
 </ul></li>
+<li><p><strong>SelectDir$</strong>(startpath$) - Use the <em>ranger</em> file manager to select a directory.</p>
+
+<ul>
+<li>After you exit ranger (press q) it will return the last visited directory.</li>
+<li>Unlike the routines in <em>clasquinatorlib</em>, these routines do not rebuild your screen when you are done.</li>
+<li>Returns the full pathname of the selected directory.</li>
+<li><strong>System commands used:</strong> <em>ranger</em>.</li>
+</ul></li>
+<li><p><strong>SelectFile$</strong>(startpath$) - Use the <em>ranger</em> file manager to select a file.</p>
+
+<ul>
+<li>Select your file with arrow keys and ENTER.</li>
+<li>Unlike the routines in <em>clasquinatorlib</em>, these routines do not rebuild your screen when you are done.</li>
+<li>Returns the full pathname of the selected file.</li>
+<li><strong>System commands used:</strong> <em>ranger</em>.</li>
+</ul></li>
+<li><p><strong>SelectMulltiFile$</strong>(startpath$) - Use the <em>ranger</em> file manager to select a a bunch of files.</p>
+
+<ul>
+<li>Navigate to your files with arrow keys, select them with SPACE, then Press ENTER.</li>
+<li>Unlike the routines in <em>clasquinatorlib</em>, these routines do not rebuild your screen when you are done.</li>
+<li>Returns the full pathname of the temporary file in which your information is stored. it should be <em>/tmp/linuxmisclib_selectfile.tmp</em>. You can then parse the results in any way you need.</li>
+<li><strong>System commands used:</strong> <em>ranger</em>.</li>
+</ul></li>
 <li><p><strong>SortArray</strong>(z()) - An alias for <em>Arraysort()</em>.</p></li>
 <li><p><strong>SortArray$</strong>(z$()) - An alias for <em>Arraysort$()</em>.</p></li>
 <li><p><strong>SortFile$(infile$,outfile$)</strong> - an alias for <em>FileSort$()</em>.</p></li>
@@ -616,8 +670,29 @@ next f
 <ul>
 <li>Return may contain a bunch of error messages as well as the returned text.</li>
 <li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
-<li><strong>System commands used:</strong> <em>pstotext</em>. </li>
+<li><strong>System commands used:</strong> <em>pstotext</em>.</li>
 </ul></li>
+<li><p><strong>TakeScreenshot$</strong>(type, thumb, filename$) - Takes a screenshot.</p>
+
+<ul>
+<li>If <em>type</em> = 2 it will take all screens (in a multidisplay setup). This will not give an error if there is just one screen.</li>
+<li>If <em>type</em> = 1 it will take the entire (single) screen.</li>
+<li>If <em>type</em> = 0 it will capture the currently focused window, which is normally your yabasic program but I suppose you could SLEEP a few seconds to give the user the chance to click elsewhere.</li>
+<li>If <em>type</em> = -1 it will also take the currently active window, but include any window manager decorations</li>
+<li>If <em>thumb</em> = 1 it will also take a thumbnail picture 20% the size of the original. If <em>thumb</em> = 0 it will not make a thumbnail.</li>
+<li><em>filename$</em> should have the appropriate extension, like <em>.png</em>, <em>.bmp</em> or <em>.jpg /.jpeg</em>. Not giving an extension will produce an error. Sorry, <em>.gif</em> is not supported.</li>
+<li>If <em>filename$</em> is not given it will create a timestamped file in the current directory</li>
+<li><em>TakeScreenshot()</em>, without parameters. will take the current window, without WM decorations, and create a timestamped file in the current directory, with no thumbnail.</li>
+<li>Image quality is set at the scrot default of 75%.</li>
+<li>Returns nothing.</li>
+<li><strong>System commands used:</strong> <em>scrot</em>.</li>
+<li><em>Example:</em></li>
+</ul></li>
+</ul>
+
+<p><img src="./imgs/TakeScreenshot.png" alt="TakeScreenshot" title="" /></p>
+
+<ul>
 <li><p><strong>TestForUtility$</strong>(filename$) - tests whether a given utility exists on your $PATH and is executable. </p>
 
 <ul>
