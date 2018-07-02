@@ -28,7 +28,18 @@ You should **not** use this library and one of the others in this set that provi
 *Whiptail* does not have file selection dialogs ATM. If you really need them, try the *SelectFile$()*, *SelectDir$()* and *SelectMultiFile$()* routines in the *linuxmisclib* library.
 
 ## Routines available:
-
++ **Common**
+    + *ClearDlg*()
+    + *EncloseText$*()
+    + *getcmd$*()
+    + *InputDlg$*()
+    + *MenuDlg*()
+    + *MessageDlg*()
+    + *PasswordDlg$*()
+    + *RadioDlg*()
+    + *TestForDialogUtility$*()
+    + *TextFileDlg*()
+    + *YesNoDlg*()
 ### Common Routines
 
 **These routines are available on any of the four dialog-providing libraries.**

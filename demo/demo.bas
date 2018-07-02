@@ -19,18 +19,22 @@ do
 			system("yabasic zenity_demo.bas")
 			break
 		case "5"
-			system("yabasic clasquinator_demo.bas")
+			CheckProvider("yad")
+			system("yabasic yad_demo.bas")
 			break
 		case "6"
-			system("yabasic clasquinator_demo2.bas")
+			system("yabasic clasquinator_demo.bas")
 			break
 		case "7"
-			system("yabasic clasquinator_demo3.bas")
+			system("yabasic clasquinator_demo2.bas")
 			break
 		case "8"
-			system("yabasic clasquinator_demo4.bas")
+			system("yabasic clasquinator_demo3.bas")
 			break
 		case "9"
+			system("yabasic clasquinator_demo4.bas")
+			break
+		case "0"
 			exit
 			break
 		default
@@ -68,24 +72,26 @@ sub InitialMenu()
 	print ,
 	print "4. Zenity"
 	print
-	print "5. ---- Clasquinator (plain) ----"
+	print "5. Yad"
 	print
-	print "6. ";
+	print "6. ---- Clasquinator (plain) ----"
+	print
+	print "7. ";
 	print reverse "        ";
 	print " Clasquinator2 ";
 	print reverse "       "
 	print
-	print "7. ";
+	print "8. ";
 	print reverse "********";
 	print " Clasquinator3 ";
 	print reverse "*******"
 	print
-	print "8. ";
+	print "9. ";
 	print reverse "########";
 	print " Clasquinator4 ";
 	print reverse "#######"
 	print
-	print "9. EXIT"
+	print "0. EXIT"
 	print
 end sub
 

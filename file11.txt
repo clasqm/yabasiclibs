@@ -1,1 +1,0 @@
-/home/michel/Dropbox/git/yabasiclibs/client_state.xml

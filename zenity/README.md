@@ -26,7 +26,24 @@ If you would rather cut and paste these subroutines into your own program rather
 You should **not** use this library and one of the others that provides dialogs in this set concurrently, because they replicate subroutine names. Pick the right one for your program and stick with it!
 
 ## Routines available:
-
++ **Common**
+    + *ClearDlg*()
+    + *EncloseText$*()
+    + *getcmd$*()
+    + *InputDlg$*()
+    + *MenuDlg*()
+    + *MessageDlg*()
+    + *PasswordDlg$*()
+    + *RadioDlg*()
+    + *TestForDialogUtility$*()
+    + *TextFileDlg*()
+    + *YesNoDlg*()
++ **Specific**
+    + *ZCalendarDlg$*()
+    + *ZGetDirDlg$*()
+    + *ZNotifyDlg*()
+    + *ZOpenFileDlg$*()
+    + *KSaveFileDlg$*()
 ### Common Routines
 
 **These routines are available on any of the four dialog-providing libraries.**
@@ -68,7 +85,7 @@ a$ = InputDlg$(EncloseText$("What is your name?"), EncloseText$("Who are you?"),
 
 ![MenuDlg](./imgs/MenuDlg.png)
 
-+ **MessageDlg**(text$) - display a simple message with an OK button.
++ **MessageDlg**(text$, ok$) - display a simple message with an OK button.
     + Returns nothing.
    + *Example:*
 ```

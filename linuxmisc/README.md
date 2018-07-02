@@ -42,6 +42,76 @@ It is safe to use this library and ONE of the others in this set that provide di
 (assuming *tpp* is not installed). Or you can test for its presence like this:
 
     if OpeninTpp$("file.tpp") <> "" {do something}
++ **All**
+    + *ArraySort*(a()),  *ArraySort$*(a$()) - sorts a ONE-dimensional array.
+    + *ConvertFile$*(infile$, outfile$) - Convert any text file format that *pandoc* can handle.
+    + *ConvertFile2PDF$*(infile$, outfile$) - Convert any text file format that *pandoc* can handle to PDF.
+    + *ConvertFile2String$*(infile$) - Convert any text file format that *pandoc* can handle to text.
+    + *ConvertImage*(inputfile$, outputfile$) - 
+    + *CowSay*(text$) - Returns a text spoken by a randomized ASCII cartoon.
+    + *Define$*(word$) - Get a dictionary definition of a word.
+    + *DistroDetails$*() - Return your distro's and computer's stats .
+    + *DistroLogo$*() - Return your distro's logo in monochrome ASCII art format.
+    + *EncloseString$*(thestring$,type) - Enclose a string in either single or double quotes, if it isn't already.
+    + *FileDedupe$*(infile$,outfile$) - Remove duplicate lines from a text file *infile$* and write the results to *outfile$*.
+    + *FileExists*(fullpathname$) - Test if a file exists.
+    + *FileorDir*(fullpathname$) - Test if a file (in the Unix sense) is a regular file or a directory. 
+    + *FileorLink*(fullpathname$) - Test if a file (in the Unix sense) is a regular file or a symbolic link.
+    + *FileSort$*(infile$,outfile$) - Sort a text file *infile$* and write the results to *outfile$*.
+    + *GetEnvVar$*(var$)
+    + *IsFileZeroByte*(pathname$) - determines if a passed filename is a zero-byte file.
+    + *IsItATextFile*(filename$) - Tests whether a given file is a text file or not. 
+    + *KillPlay*() - Stops any multimedia files currently playing.
+    + *MakeAsciiArt$*(img$, width) - Convert an image file to monochrome ASCII art.
+    + *NotifyDlg*(text$, duration, block) - Pop up a one-line notification.
+    + *OpenAbook$*() - Opens the *abook* text-mode contact manager.
+    + *OpenCalcurse$*() - Opens the *calcurse* text-mode calendar app.
+    + *OpenGtypist$*() - Open the gtypist tying tutor program.
+    + *OpenHnb$*() - Open the *hnb* hierarchical notebook.
+    + *OpenInDav$*(filename$) - opens a given text file in the *dav* text editor. 
+    + *OpeninDhex$*(filename$)
+    + *OpeninElinks$*(URL$}: Opens a URL in the *elinks* text-based browser. 
+    + *OpeninFbless$*(file$) - Opens a .FB2 ebook in the *fbless* ebook reader
+    + *OpeninHte$*(filename$)
+    + *OpeninHexcurse$*(filename$)
+    + *OpenInJed$*(filename$) - opens a given text file in the *jed* text editor. 
+    + *OpeninLinks$*(URL$): Opens a URL in the *links* text-based browser. 
+    + *OpeninLynx$*(URL$): Opens a URL in the *lynx* text-based browser. 
+    + *OpenInNano$*(filename$) - opens a given text file in the *nano* text editor. 
+    + *OpenInSc$*(filename$) - opens a given text file in the *sc* spreadsheet. 
+    + *OpenInTpp$*(filename$) - Opens a given  file in the *tpp* text presentation program. 
+    + *OpeninTweak$*(filename$)
+    + *OpeninW3m$*(URL$): Opens a URL in the *w3m* text-based browser. 
+    + *OpeninWordgrinder$*(filename$) - Opens a given  file in the *wordgrinder* word processor. 
+    + *OpenNinvader$*() - start the *ninvaders* game (Space Invaders clone)
+    + *OpenPacman$*() - Start the *pacman4console* game (pacman clone)
+    + *OpenSpeedpad$*() - Opens the *speedpad* typing speed checker.
+    + *OpenTig$*(gitdir$) - Opens the *tig* CLI UI for git.
+    + *OpenTina$*() - Opens the *tina* text-based personal information manager. 
+    + *PlayMP3$*(file$) - Plays an audio (.mp3, m4a, etc) file. 
+    + *PlayVideo$*(file$) - Plays a video file (.mp4, .mov etc.) 
+    + *PlayWav$*(file$) - Plays a .wav sound file. 
+    + *PrintFiglet$*(font$, text$) - Print *text$* in the *figlet* font *font$*.
+    + *PrintToilet$*(font$, text$) - Print *text$* in the *toilet* font *font$*
+    + *RandInt0To9*()
+    + *ReplaceinArray$*(w$(),instring$,outstring$) - Globally replace all occurences of *instring$* in a one-dimensional string array with *outstring$*.
+    + *ReplaceinFile*(infilename$,instring$,outstring$, outfilename$) - Globally replace all occurences of *instring$* in the file *infilename$* with *outstring$* and writes the results to *outfilename$*.
+    + *ReplaceinLine$*(line$,instring$,outstring$) - Globally replace all occurences of *instring$* in the string *line$* with *outstring$*.
+    + *Screensaver*(onoff, type) - Starts or halts  the *termsaver* text-based screensaver application. 
+    + *ScreensaverCC*(onoff,type) - Starts or halts  the *CacaLib* screensaver applications.
+    + *ScreensaverClock*() - starts the *tty-clock* program in screensaver mode.
+    + *SelectDir$*(startpath$) - Use the *ranger* file manager to select a directory.
+    + *SelectFile$*(startpath$) - Use the *ranger* file manager to select a file.
+    + *SelectMulltiFile$*(startpath$) - Use the *ranger* file manager to select a a bunch of files.
+    + *StripDoc$*(filename$) - Convert a Microsoft Word .doc (NOT .docx) file to text and return the result as a string variable.
+    + *StripLFoffSysCmd$*(val$) -  Remove linefeeds from the results of a system call. 
+    + *StripPDF$(filename$)* - Convert a PDF or PS file to text and return the result as a string variable.
+    + *TakeScreenshot$*(type, thumb, filename$) - Takes a screenshot.
+    + *TestForUtility$*(filename$), *TestForUtility*(filename$) - tests whether a given utility exists on your $PATH and is executable. 
+    + *URLExist*(URL$) and *URLExist$*(URL$) do the equivalent job of testing whether a URL exists before sending it to *OpeninLinks*(), for example. 
+    + *WhereAmI$*() - returns the current directory from which the program is running.  
+    + *WikipediaDump$*(searchterm$, language$) - Search wikipedia for a specific string, convert the article to text and return it as a string variable.
+    + *WikipediaURL$*(searchterm$, language$)  - Search wikipedia for a specific string, and return the URL as a string variable.
 
 ----------
 
@@ -264,7 +334,7 @@ print reverse MakeAsciiArtInvert$("./imgs/MCJ.jpg", 40)
     + **System commands used:** *elinks*.
 
 + **OpeninFbless$**(file$) - Opens a .FB2 ebook in the *fbless* ebook reader
-    + .FB2 is an obscure format these days, but you can convert .EPUBs and so on on sites like [https://www.online-convert.com]
+    + .FB2 is an obscure format these days, but you can convert .EPUBs and so on on sites like https://www.online-convert.com .
     + Must be run in a program that is already in a terminal.
    + For best results your URL should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.
    + **System commands used:** *fbless*.
@@ -394,9 +464,6 @@ print reverse MakeAsciiArtInvert$("./imgs/MCJ.jpg", 40)
 + **PrintToilet$**(font$, text$) - Print *text$* in the *toilet* font *font$*
     + You can find these fonts with *locate \*.tlf*.
     + **System commands used:** *toilet*.
-
-+ **RandInt**()
-    + Returns a random integer between 0 and 32767.
 
 + **RandInt0To9**()
     + Returns a random integer between 0 and 9, inclusive.

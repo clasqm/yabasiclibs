@@ -29,6 +29,23 @@ I have not enabled the file selection dialogs - they are just too clunky and con
 
 ## Routines available:
 
++ **Common**
+    + *ClearDlg*()
+    + *EncloseText$*()
+    + *getcmd$*()
+    + *InputDlg$*()
+    + *MenuDlg*()
+    + *MessageDlg*()
+    + *PasswordDlg$*()
+    + *RadioDlg*()
+    + *TestForDialogUtility$*()
+    + *TextFileDlg*()
+    + *YesNoDlg*()
++ **Specific**
+    + *DCalendarDlg$*()
+    + *TransientInfoDlg*()
+    
+
 ### Common Routines
 
 **These routines are available on any of the four dialog-providing libraries.**

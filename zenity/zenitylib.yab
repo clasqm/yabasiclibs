@@ -166,7 +166,6 @@ export sub YesNoDlg(text$,yes$, no$)
 	//Displays a dialog with text (normally a question) and the options
 	//to reply yes or no.
 	//Returns 1 for yes and 0 for no.
-	print getcmd$() + " --question --cancel-label="+ no$ + " --ok-label=" + yes$ + " --text=" + text$
 	if system(getcmd$() + " --question --cancel-label="+ no$ + " --ok-label=" + yes$ + " --text=" + text$) then
 		return 0
 	else

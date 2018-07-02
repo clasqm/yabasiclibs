@@ -79,6 +79,27 @@ If you don't have these, your system is broken and you really, really need to re
 
 This library poaches as many ideas as possible from the other four dialog-providing libraries, but there is not 100% compatibility here, so we will not divide things into Common and Clasquinator-specific sections.
 
++ **All**
+    + *ChangeColour*()
+    + *ClearDlg*()
+    + *EncloseText$*()
+    + *getcmd$*()
+    + *GetDirDlg$*(), *GetDirDlg2$*(), *GetDirDlg3$*(), *GetDirDl4$*()
+    + *GetFileDlg$*, *GetFileDlg2$*,*GetFileDlg3$*, *GetFileDlg4$*
+    + *InputDlg$*(), *InputDlg2$*(), *InputDlg3$*(), *InputDlg4$*()
+    + *MakeDirDlg$*, *MakeDirDlg2$*, *MakeDirDlg3$*, *MakeDirDlg4$*
+    + *MakeFileDlg$*, *MakeFileDlg2$*, *MakeFileDlg3$*, *MakeFileDlg4$*
+    + *MenuDlg*(), *MenuDlg2*(), *MenuDlg3*(), *MenuDlg4*()
+    + *MessageDlg*(), *MessageDlg2*(), *MessageDlg3*(), *MessageDlg4*()
+    + *PasswordDlg$*(), *PasswordDlg2$*(), *PasswordDlg3$*(), *PasswordDlg4$*()
+    + *RadioDlg*(), *RadioDlg2*(), *RadioDlg3*(), *RadioDlg4*()
+    + *StringDisplayDlg*(), *StringDisplayDlg2*(), *StringDisplayDlg3*(), *StringDisplayDlg4*()
+    + *SubMenuDlg*(), *SubMenuDlg2*(), *SubMenuDlg3*(), *SubMenuDlg4*()
+    + *TestForDialogUtility$*()
+    + *TextFileDlg*(), *TextFileDlg2*(), *TextFileDlg3*(), *TextFileDlg4*()
+    + *WaitDlg*(), *WaitDlg2*(), *WaitDlg3*(), *WaitDlg4*()
+    + *YesNoDlg*(), *YesNoDlg2*(), *YesNoDlg3*(), *YesNoDlg4*()
+
 + **ChangeColour**(menu$, title$, trigger$)
     + Change the three colours used in this library.
     + The value *menu$* is used to draw most elements.

@@ -41,10 +41,16 @@ Developed on elementary OS 0.4 "Loki" and Lubuntu 18.04 (i.e. Linux), but it sho
 
 + [linuxmisclib.yab](https://clasqm.github.io/yabasiclibs/linuxmisc/) - allows the use of a variety of common Linux text-mode commands and applications. Also contains a few routines that I just found myself doing over and over.
     + Currently in alpha stage.
+    + The way this thing keeps growing, it may never get out of alpha ...
 + [whiptaillib.yab](https://clasqm.github.io/yabasiclibs/whiptail/) - allows the use of the Linux command *whiptail* to display a variety of dialogs in text mode.
     + Currently in alpha stage.
 
 ![whiptail](./whiptail/imgs/InputDlg.png)
+
++ [yadlib.yab](https://clasqm.github.io/yabasiclibs/yad/) - allows the use of the Linux command *yad* to display a variety of graphical dialogs.
+    + Currently in **very early pre-alpha** stage.
+
+![yad](./yad/imgs/YesNoDlg.png)
 
 + [zenitylib.yab](https://clasqm.github.io/yabasiclibs/zenity/) - allows the use of the Linux command *zenity* to display a variety of graphical dialogs.
     + Currently in alpha stage.
