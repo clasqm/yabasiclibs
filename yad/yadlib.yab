@@ -5,7 +5,7 @@
 
 export sub ClearDlg()
 	//dummy routine for compatibility, since
-	//it does not really make sense in yad
+	//it does not really make sense in yad, zenity
 	//or kdialog
 end sub
 
@@ -256,7 +256,7 @@ end sub
 
 export sub getcmd$()
 	//This is really just for me, to stop me from
-	//getting confused while I am editing four
+	//getting confused while I am editing five
 	//libraries simultaneously.
 	//However, you could use it to test which utility
 	//is currently running and if it is safe to use routines

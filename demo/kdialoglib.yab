@@ -1,1 +1,290 @@
-../kdialog/kdialoglib.yab
+//COMMON ROUTINES
+
+#COM######### A ###########
+#COM######### B ###########
+#COM######### C ###########
+
+export sub ClearDlg()
+	//dummy routine for compatibility, since
+	//it does not really make sense in zenity
+	//or kdialog
+end sub
+
+#COM######### D ###########
+#COM######### E ###########
+
+export sub EncloseText$(thestring$)
+	//A simplified version of the EncloseString$() routine
+	//that can be found in the linuxmisclib library
+	//Encloses a string in double quotes, if it isn't already.
+	//Therefore a$ = EncloseText$("This is text") gives the same result as
+	// a$ = "\"This is text\""
+	//mostly for use with text strings that may include spaces.
+	local type$, type2$
+	type$ = chr$(34)
+	if left$(thestring$,1) <> type$ thestring$ = type$ + thestring$
+	if right$(thestring$,1) <> type$ thestring$ = thestring$ + type$
+	return thestring$
+end sub
+
+#COM######### F ###########
+#COM######### G ###########
+#COM######### H ###########
+#COM######### I ###########
+
+export sub InputDlg$(text$, title$, ok$, cancel$)
+	//Presents a one-line dialog into which the 
+	//user can type a string answer.
+	//Available in kdialog and zenity.
+	//The value title$ is the title on top of the widget
+	//The values ok$ and cancel$ have no effect in kde and may be omitted,
+	//but are kept here for compatibility with zenity.
+	//The result is returned as a string value.
+	return system$(getcmd$() + " --caption " + title$ + " --inputbox " + text$ + " \"\" 0 0 ")
+end sub
+
+#COM######### J ###########
+#COM######### K ###########
+#COM######### L ###########
+#COM######### M ###########
+
+export sub MenuDlg(text$, title$, ok$, cancel$, menustring$)
+	//Create a menu of options for the user to choose from
+	//The value *title$* is the title on top of the widget
+	//The values *ok$* and *cancel$* have no effect in kdialog, 
+	//but are kept here for compatibility and must be supplied.
+	//The value menustring$ is the list of menu options as a single string, 
+	//separated by hash signs (#). Spaces are allowed.
+	//If the number of options exceed the available space in the widget, the list will be scrollable.
+	//The result is returned as a numeric value, starting from 1
+	local input$, output,z$(1),num
+	input$ = getcmd$() + " --title \"" + title$ +  "\" --menu \"" + text$ + "\""
+	num = token(menustring$, z$(),"#")
+	for f = 1 to num
+		input$ = input$ + " " + str$(f) + " \"" + str$(f) + " " + z$(f) + "\"" 
+	next f
+	output = val(system$(input$))
+	return output
+end sub
+
+export sub MenuDlg$(text$, title$, ok$, cancel$, menustring$)
+	return str$(MenuDlg(text$, title$, ok$, cancel$, menustring$))
+end sub
+
+export sub MessageDlg(text$,ok$)
+	//display a simple message with an OK button
+	//The value ok$ has no effect in kdialog
+	//but is kept here for compatibility
+	//returns nothing
+	system(getcmd$() + " --caption \"\" --msgbox " + text$)
+end sub
+
+
+#COM######### N ###########
+#COM######### O ###########
+#COM######### P ###########
+
+export sub PasswordDlg$(text$, title$, ok$, cancel$)
+	//Same as InputDlg$ but with asterisks
+	//replacing the input text.
+	//Available in kdialog and zenity.
+	//The value title$ is the title on top of the widget
+	//The values ok$ and cancel$ have no effect in kdialog
+	//but are kept here for compatibility with zenity.
+	//The result is returned as a string value.
+	return system$(getcmd$() + " --caption " + title$ + " --password " + text$ + " \"\" 0 0 ")
+end sub
+
+#COM######### Q ###########
+#COM######### R ###########
+
+
+export sub RadioDlg(text$, title$, ok$, cancel$, menustring$,selected$)
+	//Create a menu of options for the user to choose from
+	//Same as MenuDlg$(), except that you can indicate which item in
+	//menustring$ is currently selected or active.
+	//The value *title$* is the title on top of the widget
+	//The values *ok$* and *cancel$* have no effect in kdialog, 
+	//but are kept here for compatibility and must be supplied.
+	//The value menustring$ is the list of menu options as a single string, 
+	//separated by hash signs (#). Spaces are allowed.
+	//If the number of options exceed the available space in the widget, the list will be scrollable.
+	//The value selected$ is the currently selected item and must correspond to one of the items in 
+	//menustring$ - case sensitive!
+	//The result is returned as a numeric value, starting from 1
+	local input$, output,z$(1),num
+	input$ = getcmd$() + " --title \"" + title$ + "\""  + " --radiolist \"" + text$ + "\""
+	num = token(menustring$, z$(),"#")
+	for f = 1 to num
+		input$ = input$ + " " + str$(f) + " \"" + z$(f) + "\"" 
+		if z$(f) = selected$ then
+			input$ = input$ + " on"
+		else 
+			input$ = input$ + " off"
+		endif
+	next f
+	input$ = input$ + " 3>&1 1>&2 2>&3 "
+	output = val(system$(input$))
+	return output
+end sub
+
+export sub RadioDlg$(text$, title$, ok$, cancel$, menustring$,selected$)
+	return str$(RadioDlg(text$, title$, ok$, cancel$, menustring$,selected$))
+end sub
+
+#COM######### S ###########
+#COM######### T ###########
+
+export sub TestForDialogUtility$()
+	//internal routine to test if the called utility actually exists
+	//an empty string returned means it does.
+	local which$
+	which$ = system$("which " + getcmd$())
+	if which$ = "" then
+		return "The required program " + getcmd$() + " does not exist on this system"
+	else
+		return ""
+	endif
+end sub 
+
+export sub TextFileDlg(filename$, title$, exit$)
+	//Displays a text file.
+	//The value title$ is the title on top of the widget
+	//The value exit$ has no effect in kde and may be omitted,
+	//but is kept here for compatibility reasons.
+	//Text wrapping varies from one dialog-provider to the next.
+	//It is better if you preformat your text file.
+	//Returns nothing
+	system(getcmd$() + " --caption " + title$ + " --textbox " + filename$ + " 0 0")
+end sub
+
+
+#COM######### U ###########
+#COM######### V ###########
+#COM######### W ###########
+#COM######### X ###########
+#COM######### Y ###########
+
+export sub YesNoDlg(text$,yes$, no$)
+	//Displays a dialog with text (normally a question) and the options
+	//to reply yes or no.
+	//The first CAPITAL letter of the yes$ and no$ variables will become the hotkeys
+	//for those buttons, so make sure they are different.
+	//Returns 1 for yes and 0 for no.
+	if yes$="" yes$ = "Yes": if no$ = "" no$ = "No"
+	if system(getcmd$() + " --no-label " + no$ + " --yes-label " + yes$ + " --yesno " + text$) then
+		return 0
+	else
+		return 1
+	endif
+end sub
+
+export sub YesNoDlg$(text$,yes$, no$)
+	return str$(YesNoDlg(text$,yes$, no$))
+end sub
+
+#COM######### Z ###########
+
+
+//KDIALOG-SPECIFIC ROUTINES
+
+
+#KDS######### K ###########
+
+export sub KCalendarDlg$(text$)
+	//Display a calendar widget with today's date pre-selected.
+	//On exit, the date is returned in the form Day-of-week Month dd yyyy
+	//e.g Sun Jul 15 2018
+	//ONLY available in kdialog.
+	//for dialog and zenity, see DCalendarDlg$() and ZCalendarDlg$()
+	local inputstr$
+	inputstr$ = "echo $(" + getcmd$() + " --calendar " + text$ + ")"
+	return system$(inputstr$)
+end sub
+
+export sub KGetDirDlg$(startdir$)
+	//Select a directory to open.
+	//If startdir$ = "" it defaults to the HOME directory
+	//Result is returned as a string value
+	//This value is probably terminated with a linefeed - use StripLFoffSysCmd$() 
+	//in the linuxmisc library to get rid of it. Also, once you have you will want
+	//to use EncloseText() to surround it with double quotes, just in case it has 
+	//spaces in it.
+	local a$
+	//ONLY available in kdialog, but zenity has a comparable set of commands.
+	if startdir$ = "" startdir$ = "~/"
+	a$ = system$(getcmd$() + " --getexistingdirectory " + EncloseText$(startdir$))
+	if a$ = "\n" a$ = "" //if user selects Cancel return a proper empty string
+	return a$
+end sub
+
+export sub KOpenFileDlg$(startdir$, filter$)
+	//Select a file to open.
+	//If startdir$ = "" it defaults to the HOME directory
+	//filter$ should be formatted like this: .yab or  .doc or  .pdf - only ONE of these!
+	//if filter$ = "" it defaults to all files
+	//This will NOT reveal dotfiles like ~/.bashrc
+	//Result is returned as a string value
+	//This value is probably terminated with a linefeed - use StripLFoffSysCmd$() 
+	//in the linuxmisc library to get rid of it. Also, once you have you will want
+	//to use EncloseText() to surround it with double quotes, just in case it has 
+	//spaces in it.
+	//ONLY available in kdialog, but zenity has a comparable set of commands.
+	local a$
+	if startdir$ = "" startdir$ = "~/"
+	a$ =  system$(getcmd$() + " --getopenfilename " + EncloseText$(startdir$) + " " + filter$)
+	if a$ = "\n" a$ = "" //if user selects Cancel return a proper empty string
+	return a$
+end sub
+
+export sub KOpenURLDlg$(startdir$, filter$)
+	//Same as KOpenFileDlg() but result starts with file://
+	//ONLY available in kdialog.
+	local a$
+	if startdir$ = "" startdir$ = "~/"
+	a$ = system$(getcmd$() + " --getopenurl " + EncloseText$(startdir$) + " " + filter$)
+	if a$ = "\n" a$ = "" //if user selects Cancel return a proper empty string
+	return a$
+end sub
+
+export sub KSaveFileDlg$(startdir$, filter$)
+	//Select or create a file to save.
+	//If startdir$ = "" it defaults to the HOME directory
+	//filter$ should be formatted like this: .yab or  .doc or  .pdf - only ONE of these!
+	//if filter$ = "" it defaults to all files
+	//This will NOT reveal dotfiles like ~/.bashrc
+	//Result is returned as a string value
+	//This value is probably terminated with a linefeed - use StripLFoffSysCmd$() 
+	//in the linuxmisc library to get rid of it. Also, once you have you will want
+	//to use EncloseText() to surround it with double quotes, just in case it has 
+	//spaces in it.
+	//ONLY available in kdialog, but zenity has a comparable set of commands.
+	local a$	
+	if startdir$ = "" startdir$ = "~/"
+	a$ = system$(getcmd$() + " --getsavefilename " + EncloseText$(startdir$) + " " + filter$)
+	if a$ = "\n" a$ = "" //if user selects Cancel return a proper empty string
+	return a$
+end sub
+
+export sub KSaveURLDlg$(startdir$, filter$)
+	//same as KSaveFileDlg$, but result starts with file://
+	//ONLY available in kdialog, but zenity has a comparable set of commands.
+	local a$
+	if startdir$ = "" startdir$ = "~/"
+	a$ = system$(getcmd$() + " --getsaveurl " + EncloseText$(startdir$) + " " + filter$)
+	if a$ = "\n" a$ = "" //if user selects Cancel return a proper empty string
+	return a$
+end sub
+
+//SUPPORTIVE SUBROUTINES
+
+export sub getcmd$()
+	//This is really just for me, to stop me from
+	//getting confused while I am editing four
+	//libraries simultaneously.
+	//However, you could use it to test which utility
+	//is currently running and if it is safe to use routines
+	//not in the common list.
+	//e.g if getcmd$() = "zenity" ZNotifyDlg("this is a notification")
+	return "kdialog"
+end sub

@@ -1,7 +1,7 @@
 #!yabasic
 
 import yadlib
-import linuxmisclib
+//import linuxmisclib
 
 clear screen
 

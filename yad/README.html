@@ -1,8 +1,8 @@
 <h1>yadlib.yab</h1>
 
-<h2>pre-alpha and very unstable - give me some more time with this!</h2>
+<h2>yad has stopped working on my development system - development stalled until I can figure out what is going on.</h2>
 
-<p>A yabasic library (c) Michel Clasquin-Johnson 2018.
+<p>A yabasic library (c) Michel Clasquin-Johnson 2018. <br />
 Licensed according to the MIT license</p>
 
 <p>If you are reading this as a man page, be advised that you can see it in glorious HTML, with pictures even, at https://clasqm.github.io/</p>
@@ -32,202 +32,168 @@ Licensed according to the MIT license</p>
 
 <h2>Routines available:</h2>
 
-<ul>
-<li><strong>Common</strong>
-<ul>
-<li><em>ClearDlg</em>()</li>
-<li><em>EncloseText$</em>()</li>
-<li><em>getcmd$</em>()</li>
-<li><em>InputDlg$</em>()</li>
-<li><em>MenuDlg</em>()</li>
-<li><em>MessageDlg</em>()</li>
-<li><em>PasswordDlg$</em>()</li>
-<li><em>RadioDlg</em>()</li>
-<li><em>TestForDialogUtility$</em>()</li>
-<li><em>TextFileDlg</em>()</li>
-<li><em>YesNoDlg</em>()</li>
-</ul></li>
-<li><strong>Specific</strong>
-<ul>
-<li><em>YCalendarDlg$</em>()</li>
-<li><em>YGetDirDlg$</em>()</li>
-<li><em>YOpenFileDlg$</em>()</li>
-<li><em>YSaveFileDlg$</em>()
-<h3>Common Routines</h3></li>
-</ul></li>
-</ul>
+<p>~~+ <strong>Common</strong>~~
+~~    + <em>ClearDlg</em>()~~
+~~    + <em>EncloseText$</em>()~~
+~~    + <em>getcmd$</em>()~~
+~~    + <em>InputDlg$</em>()~~
+~~    + <em>MenuDlg</em>()~~
+~~    + <em>MessageDlg</em>()~~
+~~    + <em>PasswordDlg$</em>()~~
+~~    + <em>RadioDlg</em>()~~
+~~    + <em>TestForDialogUtility$</em>()~~
+~~    + <em>TextFileDlg</em>()~~
+~~    + <em>YesNoDlg</em>()~~
+~~+ <strong>Specific</strong>~~
+~~    + <em>YCalendarDlg$</em>()~~
+~~    + <em>YGetDirDlg$</em>()~~
+~~    + <em>YOpenFileDlg$</em>()~~
+~~    + <em>YSaveFileDlg$</em>()~~</p>
+
+<h3>Common Routines</h3>
 
 <p><strong>These routines are available on any of the four dialog-providing libraries.</strong></p>
 
 <ul>
-<li><p><strong>ClearDlg</strong>() - on dialog and whiptail, this clears the dialog from your terminal. Same as the yabasic command CLEAR SCREEN, but may work better if you are expecting to issue another Linux command immediately. On yad and kdialog, dummy routines are provided for compatibility so that you do not need to rewrite your code.</p></li>
+<li><p><strong>ClearDlg</strong>() - on dialog and whiptail, this clears the dialog from your terminal. Same as the yabasic command CLEAR SCREEN, but may work better if you are expecting to issue another Linux command immediately. On yad, zenity and kdialog, dummy routines are provided for compatibility so that you do not need to rewrite your code.</p></li>
 <li><p><strong>EncloseText$</strong>(thestring$) - A simplified version of the <em>EncloseString$</em>() routine that can be found in the linuxmisclib library</p>
 
 <ul>
 <li>Encloses a string in double quotes, if it isn't already.</li>
-<li>Therefore <em>a$ = EncloseText$("This is text")</em> gives the same result as <em>a$ = "\"This is text\""</em></li>
+<li>Therefore <em>a$ = EncloseText$("This is text")</em> gives the same result as <em>a$ = "\"This is text\""</em>
+<ul>
 <li>Mostly for use with filenames that may include spaces.</li>
+</ul></li>
 </ul></li>
 <li><p><strong>getcmd$</strong>() - returns the command set available.</p>
 
 <ul>
-<li>This is really just for me, to stop me from getting confused while I am editing four libraries simultaneously. </li>
+<li>This is really just for me, to stop me from getting confused while I am editing four libraries simultaneously.
+<ul>
 <li>However, you could use it to test which utility (or library, in the case of clasquinator) is currently in use and if it is safe to use routines not in the common list.</li>
+</ul></li>
 <li>e.g, <em>if getcmd$() = "clasquinator" SubmenuDlg(options ....)</em></li>
 <li>or  <em>if getcmd$() = "yad" YNotifyDlg("this is a notification")</em></li>
 </ul></li>
-<li><p><strong>InputDlg$</strong>(text$, title$, ok$, cancel$) - Presents a one-line dialog into which the user can type a string answer.</p>
-
-<ul>
-<li>The value <em>title$</em> has no effect in yad but is kept here for compatibility and must be supplied.</li>
-<li>The value <em>ok$</em> is the text of the accept button, normally OK.</li>
-<li>The value <em>cancel$</em> is the text of the reject button, normally Cancel.</li>
-<li>The result is returned as a string value.</li>
-<li><em>Example:</em>
-<code>
-a$ = InputDlg$(EncloseText$("What is your name?"), EncloseText$("Who are you?"), "Accept", "Cancel")
-</code>
-<img src="./imgs/InputDlg.png" alt="InputDlg" title="" /></li>
-</ul></li>
-<li><p><strong>MenuDlg</strong>(text$, title$, ok$, cancel$, menustring$) - Create a menu of options for the user to choose from</p>
-
-<ul>
-<li>The value <em>title$</em> has no effect in yad, but is kept here for compatibility and must be supplied.</li>
-<li>The value <em>ok$</em> is the text of the accept button, normally OK.</li>
-<li>The value <em>cancel$</em> is the text of the reject button, normally Cancel.</li>
-<li>The value menustring$ is the list of menu options as a single string, separated by hash signs (#). Spaces are allowed.</li>
-<li>If the number of options exceed the available space in the widget, the list will be scrollable.</li>
-<li>The result is returned as a numeric value, starting from 1.</li>
-<li>If you prefer to get the same number in string format, you can use <strong>MenuDlg$</strong>(text$, title$, ok$, cancel$, menustring$)</li>
-<li>Please note that the height of this widget is hardcoded at 400 pixels, because it looked really crap when allowed to autosize. This may change with future releases of yad.</li>
-<li><em>EXAMPLE: a = MenuDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above"): print a</em></li>
-</ul></li>
 </ul>
 
-<p><img src="./imgs/MenuDlg.png" alt="MenuDlg" title="" /></p>
-
-<ul>
-<li><p><strong>MessageDlg</strong>(text$, ok$) - display a simple message with an OK button.</p>
-
-<ul>
-<li>The value <em>ok$</em> has no effect in yad, but is kept here for compatibility. It can be omitted.</li>
-<li>Returns nothing.</li>
-<li><em>Example:</em>
-<code>
-MessageDlg(EncloseText$("This is a simple message dialog.\nClose it with ENTER or try clicking on OK."),"OK")
-</code>
-<img src="./imgs/MessageDlg.png" alt="MessageDlg" title="" /></li>
-</ul></li>
-<li><p><strong>PasswordDlg$</strong>(text$, title$, ok$, cancel$) - Same as <em>InputDlg$</em> but with asterisks replacing the input text.</p>
-
-<ul>
-<li>The value <em>title$</em> has no effect in yad, but is kept here for compatibility and must be supplied.</li>
-<li>The value <em>ok$</em> is the text of the accept button, normally OK</li>
-<li>The value <em>cancel$</em> is the text of the reject button, normally Cancel</li>
-<li>The result is returned as a string value.</li>
-</ul></li>
-</ul>
-
-<p><img src="./imgs/PasswordDlg.png" alt="PasswordDlg" title="" /></p>
-
-<ul>
-<li><strong>RadioDlg</strong>(text$, title$, ok$, cancel$, menustring$, selected$) - Create a menu of options for the user to choose from
-<ul>
-<li>Same as <em>MenuDlg</em>(), except that radiobuttons are presented in the first column. Unlike the other dialog-creating utilities, you cannot choose which one to pre-select.</li>
-<li>The value <em>title$</em> has no effect in yad, but is kept here for compatibility and must be supplied.</li>
-<li>The value <em>ok$</em> is the text of the accept button, normally OK.</li>
-<li>The value <em>cancel$</em> is the text of the reject button, normally Cancel.</li>
-<li>The value <em>menustring$</em> is the list of menu options as a single string, separated by hash signs (#). Spaces are allowed.</li>
-<li>The value <em>selected$</em> has no effect in yad, but is kept here for compatibility and must be supplied.</li>
-<li>If the number of options exceed the available space in the widget, the list will be scrollable.</li>
-<li>The result is returned as a numeric value, starting from 1.</li>
-<li>If you prefer to get the same number in string format, you can use <strong>RadioDlg$</strong>(text$, title$, ok$, cancel$, menustring$, selected$)</li>
-<li><em>EXAMPLE: a = RadioDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Magic"): print a</em></li>
-</ul></li>
-</ul>
-
-<p><img src="./imgs/RadioDlg.png" alt="RadioDlg" title="" /></p>
-
-<ul>
-<li><p><strong>TestForDialogUtility\$</strong>() - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.</p></li>
-<li><p><strong>TextFileDlg</strong>(filename$, title$, exit$) - Displays a text file.</p>
-
-<ul>
-<li>The value <em>title$</em> has no effect on yad, but is used here for compatibility reasons and must be supplied.</li>
-<li>The value <em>exit$</em> is the title of the button, normally "OK"</li>
-<li>Text wrapping varies from one dialog-provider to the next. It is better if you preformat your text file.</li>
-<li>Returns nothing.</li>
-</ul></li>
-</ul>
-
-<p><img src="./imgs/TextFileDlg.png" alt="TextFileDlg" title="" /></p>
-
-<ul>
-<li><strong>YesNoDlg</strong>(text$,yes$, no$) - Displays a dialog with text (normally a question) and the options to reply yes or no.
-<ul>
-<li>The value <em>yes$</em> and <em>no$</em> have no effect on yad, but are kept here for compatibility reasons. They can be omitted.</li>
-<li>in <em>dialog</em>, the first CAPITAL letter of the yes$ and no$ variables will become the hotkeys for those buttons, so make sure they are different. This does not matter for the other dialog-providing utilities.</li>
-<li>Returns 1 for yes and 0 for no.</li>
-<li>If you would rather get the same result in string format, use <em>YesNoDlg$</em>(text$,yes$, no$)</li>
-</ul></li>
-</ul>
-
-<p><img src="./imgs/YesNoDlg.png" alt="YesNoDlg" title="" /></p>
-
-<h3>yad-specific routines</h3>
-
-<p><strong>These routines will only work with yad, unless specified otherwise.</strong></p>
-
-<ul>
-<li><strong>YCalendarDlg$</strong>(text$, ok$, cancel$) - Display a calendar widget with today's date pre-selected.
-<ul>
-<li>Use TAB and SHFT-TAB to move between the fields.</li>
-<li>The value <em>ok$</em> is the text of the accept button, normally OK.</li>
-<li>The value <em>cancel$</em> is the text of the reject button, normally Cancel.</li>
-<li>The value <em>text$</em> has no effect on yad, but is used here for compatibility reasons and must be supplied.</li>
-<li>On exit, the date is returned in the form dd/mm/yyy, e.g. 23/05/2018</li>
-<li>ONLY available in <em>yad</em> - for <em>dialog</em> and <em>kdialog</em>, see <em>DCalendarDlg$()</em> and <em>KCalendarDlg$()</em></li>
-<li><em>DCalendarDlg$</em> and <em>ZCalendarDlg$</em> are fully compatible.</li>
-<li><em>EXAMPLE: print ZCalendarDlg$("\"Pick a date\"", "Pick", "Escape")</em></li>
-</ul></li>
-</ul>
-
-<p><img src="./imgs/YCalendarDlg.png" alt="YCalendarDlg" title="" /></p>
-
-<ul>
-<li><p><strong>YGetDirDlg$</strong>() - Select a directory to open.</p>
-
-<ul>
-<li>Result is returned as a string value.</li>
-<li>This value is probably terminated with a linefeed - use <em>StripLFoffSysCmd$()</em> in the <em>linuxmisc</em> library to get rid of it.</li>
-<li>Also, once you have it you will want to use <em>EncloseText()</em> to surround it with double quotes, just in case it has 
-spaces in it.</li>
-<li>ONLY available in <em>yad</em>, but <em>kdialog</em> and <em>zenity</em> have comparable set of commands.</li>
-<li><p>For an alternative approach, see <em>SelectDir$()</em> in the <em>linuxmisclib</em> library.</p></li>
-<li><p><strong>YNotifyDlg</strong>(text$) - pop up a GTK notification.</p></li>
-<li>The exact placement and duration of notifications may depend on your WM settings.</li>
-<li><p>ONLY available in <em>yad</em> (<em>zenity</em> has something similar). If you need a general utility, try <em>NotifyDlg()</em> in the <em>linuxmisclib</em> library.</p></li>
-<li><p><strong>YOpenFileDlg$</strong>() - Select a file to open.</p></li>
-</ul></li>
-<li><p>Result is returned as a string value.</p>
-
-<ul>
-<li>This value is probably terminated with a linefeed - use <em>StripLFoffSysCmd$()</em> in the <em>linuxmisc</em> library to get rid of it.</li>
-<li>Also, once you have it you will want to use <em>EncloseText()</em> to surround it with double quotes, just in case it has spaces in it.</li>
-<li>ONLY available in <em>yad</em>, but <em>kdialog</em> and <em>zenity</em> have comparable set of commands.</li>
-<li>For an alternative approach, see <em>SelectFile$()</em> in the <em>linuxmisclib</em> library.</li>
-<li><p><em>Example:</em>
-<code>
-a$ = StripLFoffSysCmd$(YSaveFileDlg$())
-</code> 
-<img src="imgs/YOpenFileDlg.png" alt="YOpenFileDlg" title="" /></p></li>
-<li><p><strong>YSaveFileDlg$</strong>() - Select or create a file to save.</p></li>
-</ul></li>
-<li>Result is returned as a string value.
-<ul>
-<li>This value is probably terminated with a linefeed - use <em>StripLFoffSysCmd$()</em> in the <em>linuxmisc</em> library to get rid of it.</li>
-<li>Also, once you have it you will want to use <em>EncloseText()</em> to surround it with double quotes, just in case it has 
-spaces in it.</li>
-<li>ONLY available in <em>yad</em>, but <em>kdialog</em> and <em>zenity</em> have comparable set of commands.</li>
-</ul></li>
-</ul>
+<p>~~+ <strong>InputDlg$</strong>(text$, title$, ok$, cancel$) - Presents a one-line dialog into which the user can type a string answer.~~
+~~    + The value <em>title$</em> has no effect in yad but is kept here for compatibility and must be supplied.~~
+~~    + The value <em>ok$</em> is the text of the accept button, normally OK.~~
+~~    + The value <em>cancel$</em> is the text of the reject button, normally Cancel.~~
+~~    + The result is returned as a string value.~~
+~~    + <em>Example:</em>~~
+~~<code>~~
+~~a$ = InputDlg$(EncloseText$("What is your name?"), EncloseText$("Who are you?"), "Accept", "Cancel")~~
+~~</code>~~
+~~<img src="./imgs/InputDlg.png" alt="InputDlg" title="" />~~
+~~~~
+~~+ <strong>MenuDlg</strong>(text$, title$, ok$, cancel$, menustring$) - Create a menu of options for the user to choose from~~
+~~    + The value <em>title$</em> has no effect in yad, but is kept here for compatibility and must be supplied.~~
+~~    + The value <em>ok$</em> is the text of the accept button, normally OK.~~
+~~    + The value <em>cancel$</em> is the text of the reject button, normally Cancel.~~
+~~    + The value menustring$ is the list of menu options as a single string, separated by hash signs (#). Spaces are allowed.~~
+~~    + If the number of options exceed the available space in the widget, the list will be scrollable.~~
+~~    + The result is returned as a numeric value, starting from 1.~~
+~~   + If you prefer to get the same number in string format, you can use <strong>MenuDlg$</strong>(text$, title$, ok$, cancel$, menustring$)~~
+~~   + Please note that the height of this widget is hardcoded at 400 pixels, because it looked really crap when allowed to autosize. This may change with future releases of yad.~~
+~~   + <em>EXAMPLE: a = MenuDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above"): print a</em>~~
+~~~~
+~~<img src="./imgs/MenuDlg.png" alt="MenuDlg" title="" />~~
+~~~~
+~~+ <strong>MessageDlg</strong>(text$, ok$) - display a simple message with an OK button.~~
+~~    + The value <em>ok$</em> has no effect in yad, but is kept here for compatibility. It can be omitted.~~
+~~    + Returns nothing.~~
+~~   + <em>Example:</em>~~
+~~<code>~~
+~~MessageDlg(EncloseText$("This is a simple message dialog.\nClose it with ENTER or try clicking on OK."),"OK")~~
+~~</code>~~
+~~<img src="./imgs/MessageDlg.png" alt="MessageDlg" title="" />~~
+~~~~
+~~+ <strong>PasswordDlg$</strong>(text$, title$, ok$, cancel$) - Same as <em>InputDlg$</em> but with asterisks replacing the input text.~~
+~~    + The value <em>title$</em> has no effect in yad, but is kept here for compatibility and must be supplied.~~
+~~    + The value <em>ok$</em> is the text of the accept button, normally OK~~
+~~    + The value <em>cancel$</em> is the text of the reject button, normally Cancel~~
+~~    + The result is returned as a string value.~~
+~~~~
+~~<img src="./imgs/PasswordDlg.png" alt="PasswordDlg" title="" />~~
+~~~~
+~~+ <strong>RadioDlg</strong>(text$, title$, ok$, cancel$, menustring$, selected$) - Create a menu of options for the user to choose from~~
+~~    + Same as <em>MenuDlg</em>(), except that radiobuttons are presented in the first column. Unlike the other dialog-creating utilities, you cannot choose which one to pre-select.~~
+~~    + The value <em>title$</em> has no effect in yad, but is kept here for compatibility and must be supplied.~~
+~~    + The value <em>ok$</em> is the text of the accept button, normally OK.~~
+~~    + The value <em>cancel$</em> is the text of the reject button, normally Cancel.~~
+~~    + The value <em>menustring$</em> is the list of menu options as a single string, separated by hash signs (#). Spaces are allowed.~~
+~~    + The value <em>selected$</em> has no effect in yad, but is kept here for compatibility and must be supplied.~~
+~~    + If the number of options exceed the available space in the widget, the list will be scrollable.~~
+~~    + The result is returned as a numeric value, starting from 1.~~
+~~    + If you prefer to get the same number in string format, you can use <strong>RadioDlg$</strong>(text$, title$, ok$, cancel$, menustring$, selected$)~~
+~~    + <em>EXAMPLE: a = RadioDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Magic"): print a</em>~~
+~~~~
+~~<img src="./imgs/RadioDlg.png" alt="RadioDlg" title="" />~~
+~~~~
+~~+ <strong>TestForDialogUtility\$</strong>() - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.~~
+~~~~
+~~+ <strong>TextFileDlg</strong>(filename$, title$, exit$) - Displays a text file.~~
+~~    + The value <em>title$</em> has no effect on yad, but is used here for compatibility reasons and must be supplied.~~
+~~    + The value <em>exit$</em> is the title of the button, normally "OK"~~
+~~    + Text wrapping varies from one dialog-provider to the next. It is better if you preformat your text file.~~
+~~    + Returns nothing.~~
+~~~~
+~~<img src="./imgs/TextFileDlg.png" alt="TextFileDlg" title="" />~~
+~~~~
+~~+ <strong>YesNoDlg</strong>(text$,yes$, no$) - Displays a dialog with text (normally a question) and the options to reply yes or no.~~
+~~    + The value <em>yes$</em> and <em>no$</em> have no effect on yad, but are kept here for compatibility reasons. They can be omitted.~~
+~~    + in <em>dialog</em>, the first CAPITAL letter of the yes$ and no$ variables will become the hotkeys for those buttons, so make sure they are different. This does not matter for the other dialog-providing utilities.~~
+~~    + Returns 1 for yes and 0 for no.~~
+~~    + If you would rather get the same result in string format, use <em>YesNoDlg$</em>(text$,yes$, no$)~~
+~~~~
+~~<img src="./imgs/YesNoDlg.png" alt="YesNoDlg" title="" />~~
+~~~~
+~~### yad-specific routines~~
+~~~~
+~~<strong>These routines will only work with yad, unless specified otherwise.</strong>~~
+~~~~
+~~+ <strong>YCalendarDlg$</strong>(text$, ok$, cancel$) - Display a calendar widget with today's date pre-selected.~~
+~~    + Use TAB and SHFT-TAB to move between the fields.~~
+~~    + The value <em>ok$</em> is the text of the accept button, normally OK.~~
+~~    + The value <em>cancel$</em> is the text of the reject button, normally Cancel.~~
+~~    + The value <em>text$</em> has no effect on yad, but is used here for compatibility reasons and must be supplied.~~
+~~    + On exit, the date is returned in the form dd/mm/yyy, e.g. 23/05/2018~~
+~~    + ONLY available in <em>yad</em> - for <em>dialog</em> and <em>kdialog</em>, see <em>DCalendarDlg$()</em> and <em>KCalendarDlg$()</em>~~
+~~    + <em>DCalendarDlg$</em> and <em>ZCalendarDlg$</em> are fully compatible.~~
+~~    + <em>EXAMPLE: print ZCalendarDlg$("\"Pick a date\"", "Pick", "Escape")</em>~~
+~~~~
+~~<img src="./imgs/YCalendarDlg.png" alt="YCalendarDlg" title="" />~~
+~~~~
+~~ + <strong>YGetDirDlg$</strong>() - Select a directory to open.~~
+~~    + Result is returned as a string value.~~
+~~    + This value is probably terminated with a linefeed - use <em>StripLFoffSysCmd$()</em> in the <em>linuxmisc</em> library to get rid of it.~~
+~~    + Also, once you have it you will want to use <em>EncloseText()</em> to surround it with double quotes, just in case it has ~~
+~~spaces in it.~~
+~~    + ONLY available in <em>yad</em>, but <em>kdialog</em> and <em>zenity</em> have comparable set of commands.~~
+~~    + For an alternative approach, see <em>SelectDir$()</em> in the <em>linuxmisclib</em> library.~~
+~~  ~~
+~~~~
+~~+ <strong>YNotifyDlg</strong>(text$) - pop up a GTK notification.~~
+~~    + The exact placement and duration of notifications may depend on your WM settings.~~
+~~    + ONLY available in <em>yad</em> (<em>zenity</em> has something similar). If you need a general utility, try <em>NotifyDlg()</em> in the <em>linuxmisclib</em> library.~~
+~~~~
+~~+ <strong>YOpenFileDlg$</strong>() - Select a file to open.~~
+~~ + Result is returned as a string value.~~
+~~    + This value is probably terminated with a linefeed - use <em>StripLFoffSysCmd$()</em> in the <em>linuxmisc</em> library to get rid of it.~~
+~~    + Also, once you have it you will want to use <em>EncloseText()</em> to surround it with double quotes, just in case it has spaces in it.~~
+~~    + ONLY available in <em>yad</em>, but <em>kdialog</em> and <em>zenity</em> have comparable set of commands.~~
+~~    + For an alternative approach, see <em>SelectFile$()</em> in the <em>linuxmisclib</em> library.~~
+~~    + <em>Example:</em>~~
+~~<code>~~
+~~a$ = StripLFoffSysCmd$(YSaveFileDlg$())~~
+~~</code> ~~
+~~<img src="imgs/YOpenFileDlg.png" alt="YOpenFileDlg" title="" />~~
+~~~~
+~~+ <strong>YSaveFileDlg$</strong>() - Select or create a file to save.~~
+~~ + Result is returned as a string value.~~
+~~    + This value is probably terminated with a linefeed - use <em>StripLFoffSysCmd$()</em> in the <em>linuxmisc</em> library to get rid of it.~~
+~~    + Also, once you have it you will want to use <em>EncloseText()</em> to surround it with double quotes, just in case it has ~~
+~~spaces in it.~~
+~~    + ONLY available in <em>yad</em>, but <em>kdialog</em> and <em>zenity</em> have comparable set of commands.</p>
