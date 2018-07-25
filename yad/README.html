@@ -30,26 +30,6 @@ Licensed according to the MIT license</p>
 
 <p><em>Yad</em> is a fork of <em>zenity</em> and this early version of the library just adapts the routines in <em>zenitylib</em>. Later on, we will dig into <em>yad</em>'s unique features.</p>
 
-<h2>Routines available:</h2>
-
-<p>~~+ <strong>Common</strong>~~
-    + ~~<em>ClearDlg</em>()~~
-    + ~~<em>EncloseText$</em>()~~
-    + ~~<em>getcmd$</em>()~~
-    + ~~<em>InputDlg$</em>()~~
-    + ~~<em>MenuDlg</em>()~~
-    + ~~<em>MessageDlg</em>()~~
-    + ~~<em>PasswordDlg$</em>()~~
-    + ~~<em>RadioDlg</em>()~~
-    + ~~<em>TestForDialogUtility$</em>()~~
-    + ~~<em>TextFileDlg</em>()~~
-    + ~~<em>YesNoDlg</em>()~~
-~~+ <strong>Specific</strong>~~
-    + ~~<em>YCalendarDlg$</em>()~~
-    + ~~<em>YGetDirDlg$</em>()~~
-    + ~~<em>YOpenFileDlg$</em>()~~
-    + ~~<em>YSaveFileDlg$</em>()~~</p>
-
 <h3>Common Routines</h3>
 
 <p><strong>These routines are available on any of the four dialog-providing libraries.</strong></p>
@@ -79,19 +59,28 @@ Licensed according to the MIT license</p>
 
 <p>~~+ <strong>InputDlg$</strong>(text$, title$, ok$, cancel$) - Presents a one-line dialog into which the user can type a string answer.~~</p>
 
-<p>~~+ <strong>MenuDlg</strong>(text$, title$, ok$, cancel$, menustring$) - Create a menu of options for the user to choose from~~ 
-~~+ <strong>MessageDlg</strong>(text$, ok$) - display a simple message with an OK button.~~ 
-~~+ <strong>PasswordDlg$</strong>(text$, title$, ok$, cancel$) - Same as <em>InputDlg$</em> but with asterisks replacing the input text.~~
-~~+ <strong>RadioDlg</strong>(text$, title$, ok$, cancel$, menustring$, selected$) - Create a menu of options for the user to choose from~~
-+ <strong>TestForDialogUtility\$</strong>() - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.
-+ <strong>TextFileDlg</strong>(filename$, title$, exit$) - Displays a text file.~~
-~~+ <strong>YesNoDlg</strong>(text$,yes$, no$) - Displays a dialog with text (normally a question) and the options to reply yes or no.~~
+<p>~~+ <strong>MenuDlg</strong>(text$, title$, ok$, cancel$, menustring$) - Create a menu of options for the user to choose from~~</p>
+
+<p>~~+ <strong>MessageDlg</strong>(text$, ok$) - display a simple message with an OK button.~~</p>
+
+<p>~~+ <strong>PasswordDlg$</strong>(text$, title$, ok$, cancel$) - Same as <em>InputDlg$</em> but with asterisks replacing the input text.~~</p>
+
+<p>~~+ <strong>RadioDlg</strong>(text$, title$, ok$, cancel$, menustring$, selected$) - Create a menu of options for the user to choose from~~</p>
+
+<ul>
+<li><strong>TestForDialogUtility\$</strong>() - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.</li>
+</ul>
+
+<p>~~+ <strong>TextFileDlg</strong>(filename$, title$, exit$) - Displays a text file.~~</p>
+
+<p>~~+ <strong>YesNoDlg</strong>(text$,yes$, no$) - Displays a dialog with text (normally a question) and the options to reply yes or no.~~
 ~~### yad-specific routines~~</p>
 
 <p>~~<strong>These routines will only work with yad, unless specified otherwise.</strong>~~</p>
 
-<p>~~+ <strong>YCalendarDlg$</strong>(text$, ok$, cancel$) - Display a calendar widget with today's date pre-selected.~~
- ~~+ <strong>YGetDirDlg$</strong>() - Select a directory to open.~~
+<p>~~+ <strong>YCalendarDlg$</strong>(text$, ok$, cancel$) - Display a calendar widget with today's date pre-selected.~~</p>
+
+<p>~~+ <strong>YGetDirDlg$</strong>() - Select a directory to open.~~
 ~~+ <strong>YNotifyDlg</strong>(text$) - pop up a GTK notification.~~
 ~~+ <strong>YOpenFileDlg$</strong>() - Select a file to open.~~
 ~~+ <strong>YSaveFileDlg$</strong>() - Select or create a file to save.~~</p>

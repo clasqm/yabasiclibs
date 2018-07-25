@@ -29,25 +29,6 @@ You should **not** use this library and one of the others that provides dialogs 
 
 *Yad* is a fork of *zenity* and this early version of the library just adapts the routines in *zenitylib*. Later on, we will dig into *yad*'s unique features.
 
-## Routines available:
-~~+ **Common**~~
-    + ~~*ClearDlg*()~~
-    + ~~*EncloseText$*()~~
-    + ~~*getcmd$*()~~
-    + ~~*InputDlg$*()~~
-    + ~~*MenuDlg*()~~
-    + ~~*MessageDlg*()~~
-    + ~~*PasswordDlg$*()~~
-    + ~~*RadioDlg*()~~
-    + ~~*TestForDialogUtility$*()~~
-    + ~~*TextFileDlg*()~~
-    + ~~*YesNoDlg*()~~
-~~+ **Specific**~~
-    + ~~*YCalendarDlg$*()~~
-    + ~~*YGetDirDlg$*()~~
-    + ~~*YOpenFileDlg$*()~~
-    + ~~*YSaveFileDlg$*()~~
-
 ### Common Routines
 
 **These routines are available on any of the four dialog-providing libraries.**
@@ -67,19 +48,26 @@ You should **not** use this library and one of the others that provides dialogs 
 
 ~~+ **InputDlg$**(text$, title$, ok$, cancel$) - Presents a one-line dialog into which the user can type a string answer.~~
  
-~~+ **MenuDlg**(text$, title$, ok$, cancel$, menustring$) - Create a menu of options for the user to choose from~~ 
-~~+ **MessageDlg**(text$, ok$) - display a simple message with an OK button.~~ 
+~~+ **MenuDlg**(text$, title$, ok$, cancel$, menustring$) - Create a menu of options for the user to choose from~~
+
+~~+ **MessageDlg**(text$, ok$) - display a simple message with an OK button.~~
+
 ~~+ **PasswordDlg$**(text$, title$, ok$, cancel$) - Same as *InputDlg$* but with asterisks replacing the input text.~~
+
 ~~+ **RadioDlg**(text$, title$, ok$, cancel$, menustring$, selected$) - Create a menu of options for the user to choose from~~
+
 + **TestForDialogUtility\$**\(\) - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.
-+ **TextFileDlg**(filename$, title$, exit$) - Displays a text file.~~
+
+~~+ **TextFileDlg**(filename$, title$, exit$) - Displays a text file.~~
+
 ~~+ **YesNoDlg**(text$,yes$, no$) - Displays a dialog with text (normally a question) and the options to reply yes or no.~~
 ~~### yad-specific routines~~
  
 ~~**These routines will only work with yad, unless specified otherwise.**~~
  
 ~~+ **YCalendarDlg$**(text$, ok$, cancel$) - Display a calendar widget with today's date pre-selected.~~
- ~~+ **YGetDirDlg$**() - Select a directory to open.~~
+
+~~+ **YGetDirDlg$**() - Select a directory to open.~~
 ~~+ **YNotifyDlg**(text$) - pop up a GTK notification.~~
 ~~+ **YOpenFileDlg$**() - Select a file to open.~~
 ~~+ **YSaveFileDlg$**() - Select or create a file to save.~~
