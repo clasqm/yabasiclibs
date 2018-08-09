@@ -42,7 +42,10 @@ It is safe to use this library and ONE of the others in this set that provide di
 (assuming *tpp* is not installed). Or you can test for its presence like this:
 
     if OpeninTpp$("file.tpp") <> "" {do something}
-+ **All**
+
+----------
+
++ **Quick Index**
     + *ArraySort*(a()),  *ArraySort$*(a$()) - sorts a ONE-dimensional array.
     + *ConvertFile$*(infile$, outfile$) - Convert any text file format that *pandoc* can handle.
     + *ConvertFile2PDF$*(infile$, outfile$) - Convert any text file format that *pandoc* can handle to PDF.

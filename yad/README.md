@@ -68,6 +68,9 @@ You should **not** use this library and one of the others that provides dialogs 
 ~~+ **YCalendarDlg$**(text$, ok$, cancel$) - Display a calendar widget with today's date pre-selected.~~
 
 ~~+ **YGetDirDlg$**() - Select a directory to open.~~
+
 ~~+ **YNotifyDlg**(text$) - pop up a GTK notification.~~
+
 ~~+ **YOpenFileDlg$**() - Select a file to open.~~
+
 ~~+ **YSaveFileDlg$**() - Select or create a file to save.~~
