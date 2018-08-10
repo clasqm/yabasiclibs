@@ -7,7 +7,6 @@ It will give you the choice of which of the dialog-providing demos to run. Each 
 
     yabasic dialog_demo.bas
     yabasic kdialog_demo.bas
-    yabasic yad_demo.bas
     yabasic zenity_demo.bas
     yabasic whiptail_demo.bas
     yabasic clasquinator_demo.bas
