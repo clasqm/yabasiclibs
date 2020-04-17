@@ -727,6 +727,21 @@ export sub OpenInSc$(filename$)
 	endif
 end sub
 
+export sub OpeninTilde$(filename$)
+	//opens a given text file in the tilde text editor.
+	//must be run in a program that is already in a terminal
+	//For best results your filename should be enclosed in single
+	//quotation marks so that it will not get confused by spaces. This
+	//routine will not check for that.
+	local UTest$
+	UTest$ = TestForUtility$("tilde")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("tilde " + filename$)
+	endif
+end sub
+
 export sub OpeninTpp$(filename$)
 	//Opens a given  file in the tpp Text Presentation Program
 	//Must be run in a program that is already in a terminal

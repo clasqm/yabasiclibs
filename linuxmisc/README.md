@@ -72,18 +72,19 @@ It is safe to use this library and ONE of the others in this set that provide di
     + *OpenGtypist$*() - Open the gtypist tying tutor program.
     + *OpenHnb$*() - Open the *hnb* hierarchical notebook.
     + *OpenInDav$*(filename$) - opens a given text file in the *dav* text editor. 
-    + *OpeninDhex$*(filename$)
+    + *OpeninDhex$*(filename$) - opens a given file in the *dhex* hexadecimal editor
     + *OpeninElinks$*(URL$}: Opens a URL in the *elinks* text-based browser. 
     + *OpeninFbless$*(file$) - Opens a .FB2 ebook in the *fbless* ebook reader
-    + *OpeninHte$*(filename$)
-    + *OpeninHexcurse$*(filename$)
+    + *OpeninHte$*(filename$) - opens a given file in the *hte* hexadecimal editor
+    + *OpeninHexcurse$*(filename$) - opens a given file in the *hexcurses* hexadecimal editor
     + *OpenInJed$*(filename$) - opens a given text file in the *jed* text editor. 
     + *OpeninLinks$*(URL$): Opens a URL in the *links* text-based browser. 
     + *OpeninLynx$*(URL$): Opens a URL in the *lynx* text-based browser. 
     + *OpenInNano$*(filename$) - opens a given text file in the *nano* text editor. 
     + *OpenInSc$*(filename$) - opens a given text file in the *sc* spreadsheet. 
+    + *OpenInTilde$*(filename$) - opens a given text file in the *tilde* text editor. 
     + *OpenInTpp$*(filename$) - Opens a given  file in the *tpp* text presentation program. 
-    + *OpeninTweak$*(filename$)
+    + *OpeninTweak$*(filename$) - opens a given file in the *tweak* hexadecimal editor
     + *OpeninW3m$*(URL$): Opens a URL in the *w3m* text-based browser. 
     + *OpeninWordgrinder$*(filename$) - Opens a given  file in the *wordgrinder* word processor. 
     + *OpenNinvader$*() - start the *ninvaders* game (Space Invaders clone)
@@ -96,7 +97,7 @@ It is safe to use this library and ONE of the others in this set that provide di
     + *PlayWav$*(file$) - Plays a .wav sound file. 
     + *PrintFiglet$*(font$, text$) - Print *text$* in the *figlet* font *font$*.
     + *PrintToilet$*(font$, text$) - Print *text$* in the *toilet* font *font$*
-    + *RandInt0To9*()
+    + *RandInt0To9*() - output a random integer between 0 and 9, inclusive.
     + *ReplaceinArray$*(w$(),instring$,outstring$) - Globally replace all occurences of *instring$* in a one-dimensional string array with *outstring$*.
     + *ReplaceinFile*(infilename$,instring$,outstring$, outfilename$) - Globally replace all occurences of *instring$* in the file *infilename$* with *outstring$* and writes the results to *outfilename$*.
     + *ReplaceinLine$*(line$,instring$,outstring$) - Globally replace all occurences of *instring$* in the string *line$* with *outstring$*.
