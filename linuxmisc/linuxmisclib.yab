@@ -694,6 +694,23 @@ export sub OpeninLynx$(URL$)
 	endif
 end sub
 
+export sub OpenInMdless$(filename$)
+	//opens a given markdown-fomatted file in the mdless markdown viewer.
+	//must be run in a program that is already in a terminal
+	//For best results your filename should be enclosed in single
+	//quotation marks so that it will not get confused by spaces. This
+	//routine will not check for that.
+	//
+	local UTest$
+	UTest$ = TestForUtility$("mdless")
+	if UTest$ <> "" then
+		return UTest$
+	else
+		system("mdless " + filename$)
+	endif
+end sub
+
+
 export sub OpenInNano$(filename$)
 	//opens a given text file in the nano text editor.
 	//must be run in a program that is already in a terminal

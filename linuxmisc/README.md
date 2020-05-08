@@ -80,7 +80,8 @@ It is safe to use this library and ONE of the others in this set that provide di
     + *OpenInJed$*(filename$) - opens a given text file in the *jed* text editor. 
     + *OpeninLinks$*(URL$): Opens a URL in the *links* text-based browser. 
     + *OpeninLynx$*(URL$): Opens a URL in the *lynx* text-based browser. 
-    + *OpenInNano$*(filename$) - opens a given text file in the *nano* text editor. 
+    + *OpenInNano$*(filename$) - opens a given text file in the *nano* text editor.
+    + *OpenInMdless*(filename$) - opens a Markdown-fomatted file in the mdless viewe. 
     + *OpenInSc$*(filename$) - opens a given text file in the *sc* spreadsheet. 
     + *OpenInTilde$*(filename$) - opens a given text file in the *tilde* text editor. 
     + *OpenInTpp$*(filename$) - Opens a given  file in the *tpp* text presentation program. 
@@ -377,6 +378,12 @@ print reverse MakeAsciiArtInvert$("./imgs/MCJ.jpg", 40)
     + For best results your URL should be enclosed in single quotation marks so that it will not get confused by spaces. 
     + This routine will not check for that. 
     + **System commands used:** *lynx*.
+    
++ **OpenInMdless$**(filename$) - opens a given markdown-formatted text file in the *mdless* markdown viewe in the same terminal window as your program. 
+    + Will fail and return an error message if *mdless* does not exist on your system. 
+    + For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.
+    + You may have to CLEAR SCREEN and rebuild your screen afterwards. 
+    + **System commands used:** *mdless*.
 
 + **OpenInNano$**(filename$) - opens a given text file in the *nano* text editor in the same terminal window as your program. 
     + Will fail and return an error message if *nano* does not exist on your system. 

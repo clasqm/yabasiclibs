@@ -85,7 +85,8 @@ Licensed according to the MIT license.</p>
 <li><em>OpenInJed$</em>(filename$) - opens a given text file in the <em>jed</em> text editor. </li>
 <li><em>OpeninLinks$</em>(URL$): Opens a URL in the <em>links</em> text-based browser. </li>
 <li><em>OpeninLynx$</em>(URL$): Opens a URL in the <em>lynx</em> text-based browser. </li>
-<li><em>OpenInNano$</em>(filename$) - opens a given text file in the <em>nano</em> text editor. </li>
+<li><em>OpenInNano$</em>(filename$) - opens a given text file in the <em>nano</em> text editor.</li>
+<li><em>OpenInMdless</em>(filename$) - opens a Markdown-fomatted file in the mdless viewe. </li>
 <li><em>OpenInSc$</em>(filename$) - opens a given text file in the <em>sc</em> spreadsheet. </li>
 <li><em>OpenInTilde$</em>(filename$) - opens a given text file in the <em>tilde</em> text editor. </li>
 <li><em>OpenInTpp$</em>(filename$) - Opens a given  file in the <em>tpp</em> text presentation program. </li>
@@ -472,6 +473,14 @@ print reverse MakeAsciiArtInvert$("./imgs/MCJ.jpg", 40)
 <li>For best results your URL should be enclosed in single quotation marks so that it will not get confused by spaces. </li>
 <li>This routine will not check for that. </li>
 <li><strong>System commands used:</strong> <em>lynx</em>.</li>
+</ul></li>
+<li><p><strong>OpenInMdless$</strong>(filename$) - opens a given markdown-formatted text file in the <em>mdless</em> markdown viewe in the same terminal window as your program. </p>
+
+<ul>
+<li>Will fail and return an error message if <em>mdless</em> does not exist on your system. </li>
+<li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
+<li>You may have to CLEAR SCREEN and rebuild your screen afterwards. </li>
+<li><strong>System commands used:</strong> <em>mdless</em>.</li>
 </ul></li>
 <li><p><strong>OpenInNano$</strong>(filename$) - opens a given text file in the <em>nano</em> text editor in the same terminal window as your program. </p>
 

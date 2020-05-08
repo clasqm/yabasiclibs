@@ -4,6 +4,9 @@
 
 import linuxmisclib
 
+//Test for OpenInMdless$
+	//OpenInMdless$("README.md")
+
 //Test of TestForUtility$
 //This should fail
 	//print TestForUtility$("blablabla")
