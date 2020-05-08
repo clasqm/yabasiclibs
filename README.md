@@ -1,11 +1,9 @@
 # yabasiclib
 
-Yabasic libraries (c) Michel Clasquin-Johnson 2018.
-Licensed accordingto the MIT license
+**Yabasic libraries (c) Michel Clasquin-Johnson 2018.
+Licensed accordingto the MIT license**
 
-If you are reading this as a man page, be advised that you can see it in glorious HTML, with pictures even, at https://clasqm.github.io/
-
-Extension libraries for yabasic.
+**Extension libraries for yabasic.**
 
 A series of libraries for [yabasic](http://www.yabasic.de/) , the BASIC dialect by [Marc Ihm](https://github.com/marcIhm), that give access to a number of common utilities on Linux, mostly intended to provide standard dialogs. Not tested on other UNIX platforms, but it should be possible to adjust them accordingly.
 
@@ -13,7 +11,7 @@ This does not make yabasic able to write full-on graphical programs, like its ow
 
 This software is still very much in the alpha stage. The routines in the libraries work, but need a lot of optimization and error-trapping.
 
-The library should exist either in the same folder as your program (symlinks work) or in the standard yabasic library location on your system. There is a .deb file [available](https://github.com/clasqm/yabasiclibs/tree/master/build) for those of you who are on Debian-derived systems, but I am pretty new at building .deb files, so I would appreciate feedback!
+The library should exist either in the same folder as your program (symlinks work) or in the standard yabasic library location on your system.
 
 Developed on elementary OS 0.4 "Loki" and Lubuntu 18.04 (i.e. Linux), but it should work on any *NIX system that will run yabasic. Testing on Windows has been far more sketchy, since I don't have a windows box here, but I did what I could in my lunch break at work ;-). Don't tell my boss.
 
@@ -67,6 +65,17 @@ Please note that the libraries that give access to dialog boxes cannot be mixed 
 The four external dialog-providing routines have common commands as well as dialog-specific ones. If your program sticks religiously to the common routines, you will be able to change it from, say, zenity to kdialog by changing a single *import* statement.
 
 Get it here: https://github.com/clasqm/yabasiclibs 
+
+## Installation
+
+First cd to wherever you keep such things. Now clone the git repository:
+
+`git clone https://github.com/clasqm/yabasiclibs.git`
+
+On Linux, become root and symlink the ones you are likely to use to /usr/lib.
+
+I am no longer making .deb packages of these. They change too often
+
 
 ## What will *not* be included
 

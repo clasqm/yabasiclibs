@@ -416,8 +416,8 @@ export sub StringDisplayDlg(string$, title$, exit$, altsymbol$)
 	//or shows the next screen if there is more.
 	//The value title$ is the title on top of the widget
 	//The value exit$ is the title of the button. Normally OK
-	//The value altsymbol$ is for internal use only
 	//This button is a dummy, just for looks.
+	//The value altsymbol$ is for internal use only
 	//It works better if you keep your string reasonably short,
 	//since there is no escape button if you make the user
 	//page through 100 pages!
@@ -941,6 +941,7 @@ sub fillwidget(string$,widgetwidth, widgetheight, continu)
 			print row$;
 			starty = starty + 1
 			row$ = ""
+			if starty > widgetheight - 2 return n
 		elseif len(row$ + "  "  + w$(n) ) <= widgetwidth - 4
 			row$ = row$ + "  "  + w$(n)
 		else
@@ -948,7 +949,7 @@ sub fillwidget(string$,widgetwidth, widgetheight, continu)
 			print row$;
 			row$ = w$(n)
 			starty = starty + 1
-			if starty > widgetheight -2 return n
+			if starty > widgetheight - 2 return n
 		endif
 	next n
 	if len(row$) > 0  then

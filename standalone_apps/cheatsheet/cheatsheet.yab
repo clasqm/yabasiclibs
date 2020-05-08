@@ -1,0 +1,110 @@
+#!/usr/local/bin/yabasic
+
+import clasquinatorlib
+import linuxmisclib
+
+FillScreen()
+decision$ = MainMenu$()
+
+
+#########################################
+##########Main loop######################
+#########################################
+while(true)
+	switch decision$
+		case "q"
+			TheBitterEnd():break
+		case "b"
+			ShortMenu$():break
+		case "l"
+			LongMenu$():break
+		default
+			choice$ = inkey$
+	end switch
+	decision$ = MainMenu$()
+wend
+#########################################
+#########################################
+
+
+sub MainMenu$()
+	local choice$
+	choice$ = MenuDlg$("Cheatsheet", "Quit#Brief descriptions#Long descriptions",0)
+	return choice$
+end sub
+
+sub ShortMenu$()
+	local choice$
+	choice$ = SubMenuDlg$("Brief descriptions","Back#Clasquin#Dialog#Kdialog#Linux#Whiptail#Zenity","Quit#Brief descriptions#Long descriptions")
+		switch choice$
+		case "c"
+			TextFileDlg2("clasquinator.txt", "Clasquinator", "OK"):break
+		case "d"
+			TextFileDlg2("dialog.txt", "Dialog", "OK"):break
+		case "k"
+			TextFileDlg2("kdialog.txt", "Kdialog", "OK"):break
+		case "l"
+			TextFileDlg2("linuxmisc.txt","Miscelleaneous Linux Utilities","OK"):break
+		case "w"
+			TextFileDlg2("whiptail.txt", "Whiptail", "OK"):break
+		case "z"
+			TextFileDlg2("zenity.txt", "Zenity", "OK"):break
+		case "b"
+		default
+			break
+	end switch
+end sub
+
+sub LongMenu$()
+	local choice$
+	choice$ = SubMenuDlg$("Longer descriptions","Back#Clasquin#Dialog#Kdialog#Linux#Whiptail#Yabasic#Zenity","Quit#Brief descriptions#Long descriptions")
+	switch choice$
+		case "c"
+			OpenInMdless$("clasquinator.md")
+			FillScreen()
+			break
+		case "d"
+			OpenInMdless$("dialog.md")
+			FillScreen()
+			break
+		case "k"
+			OpenInMdless$("kdialog.md")
+			FillScreen()
+			break
+		case "l"
+			OpenInMdless$("linuxmisc.md")
+			FillScreen()
+			break
+		case "w"
+			OpenInMdless$("whiptail.md")
+			FillScreen()
+			break
+		case "y"
+			system("man yabasic")
+			FillScreen()
+			break
+		case "z"
+			OpenInMdless$("zenity.md")
+			FillScreen()
+			break
+		case "b"
+		default
+	end switch$
+end sub
+
+
+sub FillScreen()
+	local handle,counter, thestring$
+	clear screen
+	handle = open("intro.txt", "r")
+	while (not EOF(handle))
+		line input #handle thestring$
+		print thestring$
+	wend
+	close handle
+end sub
+
+sub TheBitterEnd()
+	clear screen
+	exit
+end sub

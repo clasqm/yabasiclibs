@@ -15,7 +15,7 @@ The entire set of libraries focuses on sane defaults and getting basic functiona
 
 The images below are for illustration only. The exact appearance of the dialogs will depend on your system settings.
 
-Developed on elementary OS 0.4 "Loki" and Lubuntu 18.04 (i.e. Linux), but it should work on any *NIX system that will run yabasic. Testing on Windows has been far more sketchy, since I don't have a windows box here, but I did what I could in my lunch break at work ;-).
+Developed, at various stages, on elementary OS 0.4 "Loki", Debian Buster and Lubuntu 18.04 (i.e. Linux), but it should work on any *NIX system that will run yabasic. Testing on Windows has been far more sketchy, since I don't have a windows box here, but I did what I could in my lunch break at work ;-).
 
 The library should exist either in the same folder as your program (symlinks work) or in the standard yabasic library location on your system.
 
@@ -84,7 +84,7 @@ This library poaches as many ideas as possible from the other four dialog-provid
     + *ClearDlg*()
     + *EncloseText$*()
     + *getcmd$*()
-    + *GetDirDlg$*(), *GetDirDlg2$*(), *GetDirDlg3$*(), *GetDirDl4$*()
+    + *GetDirDlg$*(), *GetDirDlg2$*(), *GetDirDlg3$*(), *GetDirDlg4$*()
     + *GetFileDlg$*, *GetFileDlg2$*,*GetFileDlg3$*, *GetFileDlg4$*
     + *InputDlg$*(), *InputDlg2$*(), *InputDlg3$*(), *InputDlg4$*()
     + *MakeDirDlg$*, *MakeDirDlg2$*, *MakeDirDlg3$*, *MakeDirDlg4$*
