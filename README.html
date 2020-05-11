@@ -1,79 +1,95 @@
 <h1>yabasiclib</h1>
 
-<p><strong>Yabasic libraries (c) Michel Clasquin-Johnson 2018.
+<p><strong>Yabasic libraries &copy; Michel Clasquin-Johnson 2018.
 Licensed accordingto the MIT license</strong></p>
 
 <p><strong>Extension libraries for yabasic.</strong></p>
 
 <p>A series of libraries for <a href="http://www.yabasic.de/">yabasic</a> , the BASIC dialect by <a href="https://github.com/marcIhm">Marc Ihm</a>, that give access to a number of common utilities on Linux, mostly intended to provide standard dialogs. Not tested on other UNIX platforms, but it should be possible to adjust them accordingly.</p>
 
-<p>This does not make yabasic able to write full-on graphical programs, like its own derivative <a href="http://yab.orgfree.com/">yab</a> on the Haiku platform, but it does allow you to use yabasic as the backend for "wizard"-style applications.</p>
+<p>This does not make yabasic able to write full-on graphical programs, like its own derivative <a href="http://yab.orgfree.com/">yab</a> on the Haiku platform, but it does allow you to use yabasic as the backend for &ldquo;wizard&rdquo;-style applications.</p>
 
 <p>This software is still very much in the alpha stage. The routines in the libraries work, but need a lot of optimization and error-trapping.</p>
 
 <p>The library should exist either in the same folder as your program (symlinks work) or in the standard yabasic library location on your system.</p>
 
-<p>Developed on elementary OS 0.4 "Loki" and Lubuntu 18.04 (i.e. Linux), but it should work on any *NIX system that will run yabasic. Testing on Windows has been far more sketchy, since I don't have a windows box here, but I did what I could in my lunch break at work ;-). Don't tell my boss.</p>
+<p>Developed on elementary OS 0.4 &ldquo;Loki&rdquo; and Lubuntu 18.04 (i.e. Linux), but it should work on any *NIX system that will run yabasic. Testing on Windows has been far more sketchy, since I don&rsquo;t have a windows box here, but I did what I could in my lunch break at work ;-). Don&rsquo;t tell my boss.</p>
 
 <h2>The libraries</h2>
 
 <ul>
 <li><a href="https://clasqm.github.io/yabasiclibs/compat/">compat.yab</a> - a yabasic library that makes the importing of BASIC programs from other dialects a little easier by creating aliases for existing yabasic commands.</li>
 <li><a href="https://clasqm.github.io/yabasiclibs/clasquinator/">clasquinator.yab</a> - a yabasic library that attempts to reproduce the functionality of the other four dialog-providing libraries purely from within yabasic.
+
 <ul>
 <li><em>This library is not 100% compatible with the other four and likely never will be!</em></li>
 <li>This library should work in yabasic for Windows too, but testing has been not been very extensive on that platform.</li>
-<li>Most routines offer more than one style variation to the dialogs. Below we will demonstrate two of these. </li>
+<li>Most routines offer more than one style variation to the dialogs. Below we will demonstrate two of these.</li>
 <li>Currently in alpha stage.</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 
-<p><img src="./clasquinator/imgs/InputDlg.png" alt="clasquinator" title="" /></p>
 
-<p><img src="./clasquinator/imgs/InputDlg2.png" alt="clasquinator2" title="" /></p>
+<p><img src="./clasquinator/imgs/InputDlg.png" alt="clasquinator" /></p>
+
+<p><img src="./clasquinator/imgs/InputDlg2.png" alt="clasquinator2" /></p>
 
 <ul>
 <li><a href="https://clasqm.github.io/yabasiclibs/dialog/">dialoglib.yab</a> - allows the use of the Linux command <em>dialog</em> to display a variety of graphical dialogs in text mode.
+
 <ul>
 <li>Currently in alpha stage.</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 
-<p><img src="./dialog/imgs/InputDlg.png" alt="dialog" title="" /></p>
+
+<p><img src="./dialog/imgs/InputDlg.png" alt="dialog" /></p>
 
 <ul>
 <li><a href="https://clasqm.github.io/yabasiclibs/kdialog/">kdialoglib.yab</a> - allows the use of the Linux command <em>kdialog</em> to display a variety of graphical dialogs.
+
 <ul>
 <li>Currently in alpha stage.</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 
-<p><img src="./kdialog/imgs/InputDlg.png" alt="kdialog" title="" /></p>
+
+<p><img src="./kdialog/imgs/InputDlg.png" alt="kdialog" /></p>
 
 <ul>
 <li><a href="https://clasqm.github.io/yabasiclibs/linuxmisc/">linuxmisclib.yab</a> - allows the use of a variety of common Linux text-mode commands and applications. Also contains a few routines that I just found myself doing over and over.
+
 <ul>
 <li>Currently in alpha stage.</li>
-<li>The way this thing keeps growing, it may never get out of alpha ...</li>
-</ul></li>
+<li>The way this thing keeps growing, it may never get out of alpha &hellip;</li>
+</ul>
+</li>
 <li><a href="https://clasqm.github.io/yabasiclibs/whiptail/">whiptaillib.yab</a> - allows the use of the Linux command <em>whiptail</em> to display a variety of dialogs in text mode.
+
 <ul>
 <li>Currently in alpha stage.</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 
-<p><img src="./whiptail/imgs/InputDlg.png" alt="whiptail" title="" /></p>
+
+<p><img src="./whiptail/imgs/InputDlg.png" alt="whiptail" /></p>
 
 <ul>
-<li><p><u>yadlib.yab</u> - Discontinued. We'll take another look when the <em>yad</em> utility is a bit more mature.</p></li>
+<li><p><u>yadlib.yab</u> - Discontinued. We&rsquo;ll take another look when the <em>yad</em> utility is a bit more mature.</p></li>
 <li><p><a href="https://clasqm.github.io/yabasiclibs/zenity/">zenitylib.yab</a> - allows the use of the Linux command <em>zenity</em> to display a variety of graphical dialogs.</p>
 
 <ul>
 <li>Currently in alpha stage.</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 
-<p><img src="./zenity/imgs/InputDlg.png" alt="zenity" title="" /></p>
+
+<p><img src="./zenity/imgs/InputDlg.png" alt="zenity" /></p>
 
 <p>For instructions, see the separate README file for each of these libraries. Each library also comes with a <em>test.bas</em> file in which each new function is supplied with an example. Just remove the comments from the example you want to test, save the changes  and run the command</p>
 
@@ -88,7 +104,7 @@ Licensed accordingto the MIT license</strong></p>
 
 <p>The four external dialog-providing routines have common commands as well as dialog-specific ones. If your program sticks religiously to the common routines, you will be able to change it from, say, zenity to kdialog by changing a single <em>import</em> statement.</p>
 
-<p>Get it here: https://github.com/clasqm/yabasiclibs </p>
+<p>Get it here: https://github.com/clasqm/yabasiclibs</p>
 
 <h2>Installation</h2>
 
@@ -104,10 +120,11 @@ Licensed accordingto the MIT license</strong></p>
 
 <ul>
 <li>Routines to use other GUI apps. There is no possible way to write a routine for every graphical text editor in Linux. And that is just the text editors. My routines are very straightforward and you should be able to adapt them to your own needs.</li>
-<li>Anything to do with emacs. Friends don't let friends use emacs.</li>
+<li>Anything to do with emacs. Friends don&rsquo;t let friends use emacs.</li>
 <li>In <em>linuxmisclib</em>, routines that start up in a new xterm. Well, maybe much later.</li>
 <li>In <em>dialog</em>, the directory- and file-selectors. Too clunky to be allowed to live, and there is nothing compatible in <em>whiptail</em> anyway.</li>
 <li>The entire set of libraries focuses on sane defaults and getting basic functionality into yabasic. There are a lot of obscure switches (esp. in <em>kdialog</em> and <em>zenity</em>) that will not be implemented!</li>
 </ul>
 
-<p><img src="./imgs/thanks.png" alt="Thanks" title="" /></p>
+
+<p><img src="./imgs/thanks.png" alt="Thanks" /></p>

@@ -1,4 +1,4 @@
-#!/usr/local/bin/yabasic
+#!/usr/bin/env yabasic
 
 import clasquinatorlib
 import linuxmisclib
