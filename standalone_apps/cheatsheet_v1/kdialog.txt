@@ -1,0 +1,24 @@
+Kdialog
+
+Common
+
+ClearDlg()
+EncloseText$(thestring$)
+getcmd$()
+InputDlg$(text$, title$, ok$, cancel$)
+MenuDlg(text$, title$, ok$, cancel$, menustring$)
+MessageDlg(text$, ok$)
+PasswordDlg$(text$, title$, ok$, cancel$)
+RadioDlg(text$, title$, ok$, cancel$, menustring$, selected$)
+TestForDialogUtility$()
+TextFileDlg(filename$, title$, exit$)
+YesNoDlg(text$,yes$, no$)
+
+Specific
+
+KCalendarDlg$(text$)
+KGetDirDlg$(startdir$)
+KOpenFileDlg$(startdir$, filter$)
+KOpenURLDlg$(startdir$, filter$)
+KSaveFileDlg$(startdir$, filter$)
+KSaveURLDlg$(startdir$, filter$)

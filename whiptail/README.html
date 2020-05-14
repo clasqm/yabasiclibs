@@ -1,6 +1,6 @@
 <h1>whiptaillib.yab</h1>
 
-<p>A yabasic library &copy; Michel Clasquin-Johnson 2018.
+<p>A yabasic library (c) Michel Clasquin-Johnson 2018.
 Licensed accordingto the MIT license</p>
 
 <p>If you are reading this as a man page, be advised that you can see it in glorious HTML, with pictures even, at https://clasqm.github.io/</p>
@@ -13,11 +13,11 @@ Licensed accordingto the MIT license</p>
 
 <p>The images below are for illustration only. The exact appearance of the dialogs will depend on your system settings.</p>
 
-<p>Developed on elementary OS 0.4 &ldquo;Loki&rdquo; and Lubuntu 18.04 (i.e. Linux), but it should work on any system that will run both yabasic and the whiptail command.</p>
+<p>Developed on elementary OS 0.4 "Loki" and Lubuntu 18.04 (i.e. Linux), but it should work on any system that will run both yabasic and the whiptail command.</p>
 
 <p>The library should exist either in the same folder as your program or in the standard yabasic library location on your system.</p>
 
-<p>To use the library, use the command</p>
+<p>To use the library, use the command </p>
 
 <pre><code>import whiptaillib
 </code></pre>
@@ -32,7 +32,6 @@ Licensed accordingto the MIT license</p>
 
 <ul>
 <li><strong>Common</strong>
-
 <ul>
 <li><em>ClearDlg</em>()</li>
 <li><em>EncloseText$</em>()</li>
@@ -45,12 +44,9 @@ Licensed accordingto the MIT license</p>
 <li><em>TestForDialogUtility$</em>()</li>
 <li><em>TextFileDlg</em>()</li>
 <li><em>YesNoDlg</em>()
-
 <h3>Common Routines</h3></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-
 
 <p><strong>These routines are available on any of the four dialog-providing libraries.</strong></p>
 
@@ -59,20 +55,18 @@ Licensed accordingto the MIT license</p>
 <li><p><strong>EncloseText$</strong>(thestring$) - A simplified version of the <em>EncloseString$</em>() routine that can be found in the linuxmisclib library</p>
 
 <ul>
-<li>Encloses a string in double quotes, if it isn&rsquo;t already.</li>
-<li>Therefore <em>a$ = EncloseText$(&ldquo;This is text&rdquo;)</em> gives the same result as <em>a$ = &ldquo;\"This is text\&rdquo;&ldquo;</em></li>
+<li>Encloses a string in double quotes, if it isn't already.</li>
+<li>Therefore <em>a$ = EncloseText$("This is text")</em> gives the same result as <em>a$ = "\"This is text\""</em></li>
 <li>Mostly for use with filenames that may include spaces.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>getcmd$</strong>() - returns the command set available.</p>
 
 <ul>
-<li>This is really just for me, to stop me from getting confused while I am editing four libraries simultaneously.</li>
+<li>This is really just for me, to stop me from getting confused while I am editing four libraries simultaneously. </li>
 <li>However, you could use it to test which utility (or library, in the case of clasquinator) is currently in use and if it is safe to use routines not in the common list.</li>
-<li>e.g, <em>if getcmd$() = &ldquo;clasquinator&rdquo; SubmenuDlg(options &hellip;.)</em></li>
-<li>or  <em>if getcmd$() = &ldquo;zenity&rdquo; ZNotifyDlg(&ldquo;this is a notification&rdquo;)</em></li>
-</ul>
-</li>
+<li>e.g, <em>if getcmd$() = "clasquinator" SubmenuDlg(options ....)</em></li>
+<li>or  <em>if getcmd$() = "zenity" ZNotifyDlg("this is a notification")</em></li>
+</ul></li>
 <li><p><strong>InputDlg$</strong>(text$, title$, ok$, cancel$) - Presents a one-line dialog into which the user can type a string answer.</p>
 
 <ul>
@@ -84,9 +78,8 @@ Licensed accordingto the MIT license</p>
 <code>
 a$ = InputDlg$(EncloseText$("What is your name?"), EncloseText$("Who are you?"), "Accept", "Cancel")
 </code>
-<img src="./imgs/InputDlg.png" alt="InputDlg" /></li>
-</ul>
-</li>
+<img src="./imgs/InputDlg.png" alt="InputDlg" title="" /></li>
+</ul></li>
 <li><p><strong>MenuDlg</strong>(text$, title$, ok$, cancel$, menustring$) - Create a menu of options for the user to choose from</p>
 
 <ul>
@@ -96,13 +89,11 @@ a$ = InputDlg$(EncloseText$("What is your name?"), EncloseText$("Who are you?"),
 <li>The value menustring$ is the list of menu options as a single string, separated by hash signs (#). Spaces are allowed.</li>
 <li>If the number of options exceed the available space in the widget, the list will be scrollable.</li>
 <li>The result is returned as a numeric value, starting from 1.</li>
-<li>If you prefer to get the same number in string format, you can use <strong>MenuDlg$</strong>(text$, title$, ok$, cancel$, menustring$)</li>
-</ul>
-</li>
+<li>If you prefer to get the same number in string format, you can use <strong>MenuDlg$</strong>(text$, title$, ok$, cancel$, menustring$) </li>
+</ul></li>
 </ul>
 
-
-<p><img src="./imgs/MenuDlg.png" alt="MenuDlg" /></p>
+<p><img src="./imgs/MenuDlg.png" alt="MenuDlg" title="" /></p>
 
 <ul>
 <li><p><strong>MessageDlg</strong>(text$, ok$) - Display a simple message with an OK button.</p>
@@ -114,9 +105,8 @@ a$ = InputDlg$(EncloseText$("What is your name?"), EncloseText$("Who are you?"),
 <code>
 MessageDlg(EncloseText$("This is a simple message dialog. Close it with O or ENTER or try clicking on OK."),"OK")
 </code>
-<img src="./imgs/MessageDlg.png" alt="MessageDlg" /></li>
-</ul>
-</li>
+<img src="./imgs/MessageDlg.png" alt="MessageDlg" title="" /></li>
+</ul></li>
 <li><p><strong>PasswordDlg$</strong>(text$, title$, ok$, cancel$) - Same as <em>InputDlg$</em> but with asterisks replacing the input text.</p>
 
 <ul>
@@ -124,16 +114,13 @@ MessageDlg(EncloseText$("This is a simple message dialog. Close it with O or ENT
 <li>The value <em>ok$</em> is the text of the accept button, normally OK</li>
 <li>The value <em>cancel$</em> is the text of the reject button, normally Cancel</li>
 <li>The result is returned as a string value.</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 
-
-<p><img src="./imgs/PasswordDlg.png" alt="PasswordDlg" /></p>
+<p><img src="./imgs/PasswordDlg.png" alt="PasswordDlg" title="" /></p>
 
 <ul>
 <li><strong>RadioDlg</strong>(text$, title$, ok$, cancel$, menustring$, selected$) - Create a menu of options for the user to choose from.
-
 <ul>
 <li>Same as <em>MenuDlg</em>(), except that you can indicate which item in <em>menustring$</em> is currently selected or active.</li>
 <li>The value <em>title$</em> is the title on top of the widget</li>
@@ -146,43 +133,36 @@ MessageDlg(EncloseText$("This is a simple message dialog. Close it with O or ENT
 <li>The result is returned as a numeric value, starting from 1.</li>
 <li>If you prefer to get the same number in string format, you can use <strong>RadioDlg$</strong>(text$, title$, ok$, cancel$, menustring$, selected$)</li>
 <li>This routine does work in whiptail, but the graphical feedback is poor. This may be a bug in the current version of whiptail.</li>
-<li><em>EXAMPLE: a = RadioDlg(&ldquo;This is a menu&rdquo;, &ldquo;A Menu!&rdquo;,&ldquo;Accept&rdquo;, &ldquo;Deny&rdquo;, &ldquo;Science#Religion#Magic#All of the above&rdquo;, &ldquo;Magic&rdquo;): print a</em></li>
-</ul>
-</li>
+<li><em>EXAMPLE: a = RadioDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above", "Magic"): print a</em></li>
+</ul></li>
 </ul>
 
-
-<p><img src="./imgs/RadioDlg.png" alt="RadioDlg" /></p>
+<p><img src="./imgs/RadioDlg.png" alt="RadioDlg" title="" /></p>
 
 <ul>
 <li><p><strong>TestForDialogUtility$</strong>() - Routine to test if the called utility actually exists on the system. An empty string returned means it does, otherwise an error message is returned.</p></li>
 <li><p><strong>TextFileDlg</strong>(filename$, title$, exit$) - Displays a text file.</p>
 
 <ul>
-<li>  The value <em>title$</em> is the title on top of the widget</li>
+<li>The value <em>title$</em> is the title on top of the widget</li>
 <li>The value <em>exit$</em> is the title of the button. Normally OK.</li>
 <li>Text wrapping varies from one dialog-provider to the next. It is better if you preformat your text file.</li>
 <li>Returns nothing.</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 
-
-<p><img src="./imgs/TextFileDlg.png" alt="TextFileDlg" /></p>
+<p><img src="./imgs/TextFileDlg.png" alt="TextFileDlg" title="" /></p>
 
 <ul>
 <li><strong>YesNoDlg</strong>(text$,yes$, no$) - Displays a dialog with text (normally a question) and the options to reply yes or no.
-
 <ul>
 <li>in <em>dialog</em>, the first CAPITAL letter of the yes$ and no$ variables will become the hotkeys for those buttons, so make sure they are different. This does not matter for the other dialog-providing utilities.</li>
 <li>Returns 1 for yes and 0 for no.</li>
 <li>If you would rather get the same result in string format, use <em>YesNoDlg$</em>(text$,yes$, no$)</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 
-
-<p><img src="./imgs/YesNoDlg.png" alt="YesNoDlg" /></p>
+<p><img src="./imgs/YesNoDlg.png" alt="YesNoDlg" title="" /></p>
 
 <h3>whiptail-specific routines</h3>
 

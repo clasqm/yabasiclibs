@@ -236,7 +236,7 @@ a$ = InputDlg2$("What is your name?", "Who are you?")
     + The value *title$* is the title on top of the widget.
     + The value *menustring$* is the list of menu options as a single string, separated by hash signs (#). Spaces are allowed.
     + The value *level* can be either 0 for a primary menu or 1 for a submenu.
-    + If *level* = 1 *mainmenu$* must also be supplied, otherwise it is not required. This is the *menustring$* of the originating menu.
+    + If *level* = 1 *mainmenustring$* must also be supplied, otherwise it is not required. This is the *menustring$* of the originating menu.
     + The first letter of menu item automatically becomes the trigger. Both lower and upper case variants will activate it. It is up to you to ensure that you do not use menu items that start with the same letter.
     + Menus will only be displayed to the width of the terminal, so keep them short!
     + Results are returned as a string variable, which will be the trigger in *lowercase*.

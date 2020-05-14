@@ -1,6 +1,6 @@
 <h1>linuxmisclib.yab</h1>
 
-<p>A yabasic library &copy; Michel Clasquin-Johnson 2018.
+<p>A yabasic library (c) Michel Clasquin-Johnson 2018.
 Licensed according to the MIT license.</p>
 
 <p>If you are reading this as a man page, be advised that you can see it in glorious HTML, with pictures even, at https://clasqm.github.io/</p>
@@ -13,7 +13,7 @@ Licensed according to the MIT license.</p>
 
 <p>All routines are case-sensitive.</p>
 
-<p>Developed on elementary OS 0.4 &ldquo;Loki&rdquo; and Lubuntu 18.04 (i.e. Linux), but it should work on any system that will run both yabasic and the command in question.</p>
+<p>Developed on elementary OS 0.4 "Loki" and Lubuntu 18.04 (i.e. Linux), but it should work on any system that will run both yabasic and the command in question.</p>
 
 <p>The <em>yabasic</em> I use for development is version 2.78.5, compiled and installed from source obtained at www.yabasic.de.</p>
 
@@ -50,26 +50,25 @@ Licensed according to the MIT license.</p>
 
 <ul>
 <li><strong>Quick Index</strong>
-
 <ul>
 <li><em>ArraySort</em>(a()),  <em>ArraySort$</em>(a$()) - sorts a ONE-dimensional array.</li>
 <li><em>ConvertFile$</em>(infile$, outfile$) - Convert any text file format that <em>pandoc</em> can handle.</li>
 <li><em>ConvertFile2PDF$</em>(infile$, outfile$) - Convert any text file format that <em>pandoc</em> can handle to PDF.</li>
 <li><em>ConvertFile2String$</em>(infile$) - Convert any text file format that <em>pandoc</em> can handle to text.</li>
-<li><em>ConvertImage</em>(inputfile$, outputfile$) -</li>
+<li><em>ConvertImage</em>(inputfile$, outputfile$) - </li>
 <li><em>CowSay</em>(text$) - Returns a text spoken by a randomized ASCII cartoon.</li>
 <li><em>Define$</em>(word$) - Get a dictionary definition of a word.</li>
-<li><em>DistroDetails$</em>() - Return your distro&rsquo;s and computer&rsquo;s stats .</li>
-<li><em>DistroLogo$</em>() - Return your distro&rsquo;s logo in monochrome ASCII art format.</li>
-<li><em>EncloseString$</em>(thestring$,type) - Enclose a string in either single or double quotes, if it isn&rsquo;t already.</li>
+<li><em>DistroDetails$</em>() - Return your distro's and computer's stats .</li>
+<li><em>DistroLogo$</em>() - Return your distro's logo in monochrome ASCII art format.</li>
+<li><em>EncloseString$</em>(thestring$,type) - Enclose a string in either single or double quotes, if it isn't already.</li>
 <li><em>FileDedupe$</em>(infile$,outfile$) - Remove duplicate lines from a text file <em>infile$</em> and write the results to <em>outfile$</em>.</li>
 <li><em>FileExists</em>(fullpathname$) - Test if a file exists.</li>
-<li><em>FileorDir</em>(fullpathname$) - Test if a file (in the Unix sense) is a regular file or a directory.</li>
+<li><em>FileorDir</em>(fullpathname$) - Test if a file (in the Unix sense) is a regular file or a directory. </li>
 <li><em>FileorLink</em>(fullpathname$) - Test if a file (in the Unix sense) is a regular file or a symbolic link.</li>
 <li><em>FileSort$</em>(infile$,outfile$) - Sort a text file <em>infile$</em> and write the results to <em>outfile$</em>.</li>
 <li><em>GetEnvVar$</em>(var$)</li>
 <li><em>IsFileZeroByte</em>(pathname$) - determines if a passed filename is a zero-byte file.</li>
-<li><em>IsItATextFile</em>(filename$) - Tests whether a given file is a text file or not.</li>
+<li><em>IsItATextFile</em>(filename$) - Tests whether a given file is a text file or not. </li>
 <li><em>KillPlay</em>() - Stops any multimedia files currently playing.</li>
 <li><em>MakeAsciiArt$</em>(img$, width) - Convert an image file to monochrome ASCII art.</li>
 <li><em>NotifyDlg</em>(text$, duration, block) - Pop up a one-line notification.</li>
@@ -77,56 +76,54 @@ Licensed according to the MIT license.</p>
 <li><em>OpenCalcurse$</em>() - Opens the <em>calcurse</em> text-mode calendar app.</li>
 <li><em>OpenGtypist$</em>() - Open the gtypist tying tutor program.</li>
 <li><em>OpenHnb$</em>() - Open the <em>hnb</em> hierarchical notebook.</li>
-<li><em>OpenInDav$</em>(filename$) - opens a given text file in the <em>dav</em> text editor.</li>
+<li><em>OpenInDav$</em>(filename$) - opens a given text file in the <em>dav</em> text editor. </li>
 <li><em>OpeninDhex$</em>(filename$) - opens a given file in the <em>dhex</em> hexadecimal editor</li>
-<li><em>OpeninElinks$</em>(URL$}: Opens a URL in the <em>elinks</em> text-based browser.</li>
+<li><em>OpeninElinks$</em>(URL$}: Opens a URL in the <em>elinks</em> text-based browser. </li>
 <li><em>OpeninFbless$</em>(file$) - Opens a .FB2 ebook in the <em>fbless</em> ebook reader</li>
 <li><em>OpeninHte$</em>(filename$) - opens a given file in the <em>hte</em> hexadecimal editor</li>
 <li><em>OpeninHexcurse$</em>(filename$) - opens a given file in the <em>hexcurses</em> hexadecimal editor</li>
-<li><em>OpenInJed$</em>(filename$) - opens a given text file in the <em>jed</em> text editor.</li>
-<li><em>OpeninLinks$</em>(URL$): Opens a URL in the <em>links</em> text-based browser.</li>
-<li><em>OpeninLynx$</em>(URL$): Opens a URL in the <em>lynx</em> text-based browser.</li>
-<li><em>OpenInMdless</em>(filename$) - opens a Markdown-formatted file in the mdless viewer.</li>
+<li><em>OpenInJed$</em>(filename$) - opens a given text file in the <em>jed</em> text editor. </li>
+<li><em>OpeninLinks$</em>(URL$): Opens a URL in the <em>links</em> text-based browser. </li>
+<li><em>OpeninLynx$</em>(URL$): Opens a URL in the <em>lynx</em> text-based browser. </li>
+<li><em>OpenInMdless</em>(filename$) - opens a Markdown-formatted file in the mdless viewer. </li>
 <li><em>OpenInNano$</em>(filename$) - opens a given text file in the <em>nano</em> text editor.</li>
-<li><em>OpenInSc$</em>(filename$) - opens a given text file in the <em>sc</em> spreadsheet.</li>
-<li><em>OpenInTilde$</em>(filename$) - opens a given text file in the <em>tilde</em> text editor.</li>
-<li><em>OpenInTpp$</em>(filename$) - Opens a given  file in the <em>tpp</em> text presentation program.</li>
+<li><em>OpenInSc$</em>(filename$) - opens a given text file in the <em>sc</em> spreadsheet. </li>
+<li><em>OpenInTilde$</em>(filename$) - opens a given text file in the <em>tilde</em> text editor. </li>
+<li><em>OpenInTpp$</em>(filename$) - Opens a given  file in the <em>tpp</em> text presentation program. </li>
 <li><em>OpeninTweak$</em>(filename$) - opens a given file in the <em>tweak</em> hexadecimal editor</li>
-<li><em>OpeninW3m$</em>(URL$): Opens a URL in the <em>w3m</em> text-based browser.</li>
-<li><em>OpeninWordgrinder$</em>(filename$) - Opens a given  file in the <em>wordgrinder</em> word processor.</li>
+<li><em>OpeninW3m$</em>(URL$): Opens a URL in the <em>w3m</em> text-based browser. </li>
+<li><em>OpeninWordgrinder$</em>(filename$) - Opens a given  file in the <em>wordgrinder</em> word processor. </li>
 <li><em>OpenNinvader$</em>() - start the <em>ninvaders</em> game (Space Invaders clone)</li>
 <li><em>OpenPacman$</em>() - Start the <em>pacman4console</em> game (pacman clone)</li>
 <li><em>OpenSpeedpad$</em>() - Opens the <em>speedpad</em> typing speed checker.</li>
 <li><em>OpenTig$</em>(gitdir$) - Opens the <em>tig</em> CLI UI for git.</li>
-<li><em>OpenTina$</em>() - Opens the <em>tina</em> text-based personal information manager.</li>
-<li><em>PlayMP3$</em>(file$) - Plays an audio (.mp3, m4a, etc) file.</li>
-<li><em>PlayVideo$</em>(file$) - Plays a video file (.mp4, .mov etc.)</li>
-<li><em>PlayWav$</em>(file$) - Plays a .wav sound file.</li>
+<li><em>OpenTina$</em>() - Opens the <em>tina</em> text-based personal information manager. </li>
+<li><em>PlayMP3$</em>(file$) - Plays an audio (.mp3, m4a, etc) file. </li>
+<li><em>PlayVideo$</em>(file$) - Plays a video file (.mp4, .mov etc.) </li>
+<li><em>PlayWav$</em>(file$) - Plays a .wav sound file. </li>
 <li><em>PrintFiglet$</em>(font$, text$) - Print <em>text$</em> in the <em>figlet</em> font <em>font$</em>.</li>
 <li><em>PrintToilet$</em>(font$, text$) - Print <em>text$</em> in the <em>toilet</em> font <em>font$</em></li>
 <li><em>RandInt0To9</em>() - output a random integer between 0 and 9, inclusive.</li>
 <li><em>ReplaceinArray$</em>(w$(),instring$,outstring$) - Globally replace all occurences of <em>instring$</em> in a one-dimensional string array with <em>outstring$</em>.</li>
 <li><em>ReplaceinFile</em>(infilename$,instring$,outstring$, outfilename$) - Globally replace all occurences of <em>instring$</em> in the file <em>infilename$</em> with <em>outstring$</em> and writes the results to <em>outfilename$</em>.</li>
 <li><em>ReplaceinLine$</em>(line$,instring$,outstring$) - Globally replace all occurences of <em>instring$</em> in the string <em>line$</em> with <em>outstring$</em>.</li>
-<li><em>Screensaver</em>(onoff, type) - Starts or halts  the <em>termsaver</em> text-based screensaver application.</li>
+<li><em>Screensaver</em>(onoff, type) - Starts or halts  the <em>termsaver</em> text-based screensaver application. </li>
 <li><em>ScreensaverCC</em>(onoff,type) - Starts or halts  the <em>CacaLib</em> screensaver applications.</li>
 <li><em>ScreensaverClock</em>() - starts the <em>tty-clock</em> program in screensaver mode.</li>
 <li><em>SelectDir$</em>(startpath$) - Use the <em>ranger</em> file manager to select a directory.</li>
 <li><em>SelectFile$</em>(startpath$) - Use the <em>ranger</em> file manager to select a file.</li>
 <li><em>SelectMulltiFile$</em>(startpath$) - Use the <em>ranger</em> file manager to select a a bunch of files.</li>
 <li><em>StripDoc$</em>(filename$) - Convert a Microsoft Word .doc (NOT .docx) file to text and return the result as a string variable.</li>
-<li><em>StripLFoffSysCmd$</em>(val$) -  Remove linefeeds from the results of a system call.</li>
+<li><em>StripLFoffSysCmd$</em>(val$) -  Remove linefeeds from the results of a system call. </li>
 <li><em>StripPDF$(filename$)</em> - Convert a PDF or PS file to text and return the result as a string variable.</li>
 <li><em>TakeScreenshot$</em>(type, thumb, filename$) - Takes a screenshot.</li>
-<li><em>TestForUtility$</em>(filename$), <em>TestForUtility</em>(filename$) - tests whether a given utility exists on your $PATH and is executable.</li>
-<li><em>URLExist</em>(URL$) and <em>URLExist$</em>(URL$) do the equivalent job of testing whether a URL exists before sending it to <em>OpeninLinks</em>(), for example.</li>
-<li><em>WhereAmI$</em>() - returns the current directory from which the program is running.</li>
+<li><em>TestForUtility$</em>(filename$), <em>TestForUtility</em>(filename$) - tests whether a given utility exists on your $PATH and is executable. </li>
+<li><em>URLExist</em>(URL$) and <em>URLExist$</em>(URL$) do the equivalent job of testing whether a URL exists before sending it to <em>OpeninLinks</em>(), for example. </li>
+<li><em>WhereAmI$</em>() - returns the current directory from which the program is running.  </li>
 <li><em>WikipediaDump$</em>(searchterm$, language$) - Search wikipedia for a specific string, convert the article to text and return it as a string variable.</li>
 <li><em>WikipediaURL$</em>(searchterm$, language$)  - Search wikipedia for a specific string, and return the URL as a string variable.</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-
 
 <hr />
 
@@ -134,64 +131,58 @@ Licensed according to the MIT license.</p>
 <li><p><strong>ArraySort</strong>(a()) - sorts a ONE-dimensional numeric array.</p>
 
 <ul>
-<li>Do not try <em>a() =  ArraySort(a())</em>, it won&rsquo;t work.</li>
+<li>Do not try <em>a() =  ArraySort(a())</em>, it won't work.</li>
 <li>Your array should be global - I have had inconsistent results with local arrays.</li>
 <li>If you prefer, you can use the alias <em>SortArray()</em>.</li>
 <li><strong>System commands used:</strong> <em>sort</em>, <em>rm</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>ArraySort$</strong>(a$()) - sorts a ONE-dimensional string array (case-independent).</p>
 
 <ul>
-<li>Do not try <em>a$() =  ArraySort$(a$())</em>, it won&rsquo;t work.</li>
+<li>Do not try <em>a$() =  ArraySort$(a$())</em>, it won't work.</li>
 <li>Your array should be global - I have had inconsistent results with local arrays.</li>
 <li>If you prefer, you can use the alias <em>SortArray$()</em>.</li>
 <li><strong>System commands used:</strong> <em>sort</em>, <em>rm</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>ConvertFile$</strong>(infile$, outfile$) - Convert any <a href="#pandocformats">text file format</a> to any other format that <em>pandoc</em> ( http://pandoc.org ) can handle.</p>
 
 <ul>
-<li>Make sure that your two filenames have the correct extension added, then <em>pandoc</em> will almost always get it right.</li>
-<li><strong>Example</strong>: <em>ConvertFile$(&ldquo;myfile.md&rdquo;, &ldquo;myfile.docx&rdquo;)</em> will convert a Markdown file to Microsoft .docx format (it does not delete the original file).</li>
-<li><strong>NOTE 1</strong>: PDF output requires <em>pdflatex</em> or <em>wkhtmltopdf</em> to be installed as well as <em>pandoc</em>. Rather use <em>ConvertFile2PDF()</em> for that.</li>
-<li><strong>NOTE 2</strong>: Also, avoid RTF format output. Pandoc&rsquo;s version of this format seems nonstandard.</li>
+<li>Make sure that your two filenames have the correct extension added, then <em>pandoc</em> will almost always get it right. </li>
+<li><strong>Example</strong>: <em>ConvertFile$("myfile.md", "myfile.docx")</em> will convert a Markdown file to Microsoft .docx format (it does not delete the original file).</li>
+<li><strong>NOTE 1</strong>: PDF output requires <em>pdflatex</em> or <em>wkhtmltopdf</em> to be installed as well as <em>pandoc</em>. Rather use <em>ConvertFile2PDF()</em> for that. </li>
+<li><strong>NOTE 2</strong>: Also, avoid RTF format output. Pandoc's version of this format seems nonstandard.</li>
 <li><strong>System commands used:</strong> <em>pandoc</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>ConvertFile2PDF$</strong>(infile$, outfile$) - Convert any <a href="#pandocformats">text file format</a> that <em>pandoc</em> ( http://pandoc.org ) can handle to PDF.</p>
 
 <ul>
-<li>Make sure that your infile&rsquo;s name has the correct extension added, and that your outfile&rsquo;s name ends with .pdf, then <em>pandoc</em> will almost always get it right.</li>
-<li><strong>Example</strong>: <em>ConvertFile2PDF$(&ldquo;myfile.md&rdquo;, &ldquo;myfile.pdf&rdquo;)</em> will convert a Markdown file to pdf format.</li>
+<li>Make sure that your infile's name has the correct extension added, and that your outfile's name ends with .pdf, then <em>pandoc</em> will almost always get it right.</li>
+<li><strong>Example</strong>: <em>ConvertFile2PDF$("myfile.md", "myfile.pdf")</em> will convert a Markdown file to pdf format. </li>
 <li><strong>System commands used:</strong> <em>pandoc</em>, <em>wkhtmltopdf</em></li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>ConvertFile2String$</strong>(infile$) - Convert any <a href="#pandocformats">text file format</a> that <em>pandoc</em> ( http://pandoc.org ) can handle to text.</p>
 
 <ul>
 <li>Make sure that your filename has the correct extension, then <em>pandoc</em> will almost always get it right.</li>
-<li><strong>Example</strong>: <em>Let a$ = ConvertFile2String$(&ldquo;myfile.md&rdquo;)</em> will convert a Markdown file and return the result as the string variable a$.  Unlike <em>ConvertFile$()</em>, this routine will NOT write an output file.</li>
+<li><strong>Example</strong>: <em>Let a$ = ConvertFile2String$("myfile.md")</em> will convert a Markdown file and return the result as the string variable a$.  Unlike <em>ConvertFile$()</em>, this routine will NOT write an output file. </li>
 <li><strong>System commands used</strong>: <em>pandoc</em>.</li>
-</ul>
-</li>
-<li><p><strong>ConvertImage</strong>(inputfile$, outputfile$) -
+</ul></li>
+<li><p><strong>ConvertImage</strong>(inputfile$, outputfile$) - 
 Convert an image file to a different format, optionally with a different filename.</p>
 
 <ul>
 <li>This routine will work with either Graphics magic OR Image magic.</li>
 <li>If both are installed, Graphics magic takes precedence.</li>
-<li>The output format is taken from the file extension.</li>
+<li>The output format is taken from the file extension. </li>
 <li>The original file is left untouched.</li>
 <li>Returns 1 for success and 0 for failure</li>
 <li><strong>System commands used</strong>: <em>gm</em> or <em>convert</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>CowSay</strong>(text$) - Returns a text spoken by a randomized ASCII cartoon.</p>
 
 <ul>
 <li>Both the character and the facial expression are randomized.</li>
-<li>if <em>text$</em> is set as &ldquo;fortune&rdquo; then a random short fortune will be selected. Otherwise, the text you gave is printed.</li>
+<li>if <em>text$</em> is set as "fortune" then a random short fortune will be selected. Otherwise, the text you gave is printed.</li>
 <li><strong>System commands used</strong>: <em>cowsay</em>, <em>fortune</em>.</li>
 <li><em>Example:</em>
 <code>
@@ -199,9 +190,8 @@ print CowSay$("fortune")
 sleep 1
 print CowSay$("This is some other text, not a fortune")
 </code>
-<img src="./imgs/CowSay.png" alt="CowSay" /></li>
-</ul>
-</li>
+<img src="./imgs/CowSay.png" alt="CowSay" title="" /></li>
+</ul></li>
 <li><p><strong>Define$</strong>(word$) - Get a dictionary definition of a word.</p>
 
 <ul>
@@ -209,9 +199,8 @@ print CowSay$("This is some other text, not a fortune")
 <li>The more dictionaries you add, the more results you can expect.</li>
 <li>This command searches localhost only and does not go online to <em>dict.org</em>.</li>
 <li><strong>System commands used</strong>: <em>dict</em>.</li>
-</ul>
-</li>
-<li><p><strong>DistroDetails$</strong>() - Return your distro&rsquo;s and computer&rsquo;s stats .</p>
+</ul></li>
+<li><p><strong>DistroDetails$</strong>() - Return your distro's and computer's stats .</p>
 
 <ul>
 <li><strong>System commands used</strong>: <em>screenfetch</em>.</li>
@@ -219,10 +208,9 @@ print CowSay$("This is some other text, not a fortune")
 <code>
 print DistroDetails$()
 </code>
-<img src="./imgs/DistroDetails.png" alt="DistroDetails" /></li>
-</ul>
-</li>
-<li><p><strong>DistroLogo$</strong>() - Return your distro&rsquo;s logo in monochrome ASCII art format.</p>
+<img src="./imgs/DistroDetails.png" alt="DistroDetails" title="" /></li>
+</ul></li>
+<li><p><strong>DistroLogo$</strong>() - Return your distro's logo in monochrome ASCII art format.</p>
 
 <ul>
 <li><strong>System commands used</strong>: <em>screenfetch</em>.</li>
@@ -230,24 +218,21 @@ print DistroDetails$()
 <code>
 print DistroLogo$()
 </code>
-<img src="./imgs/DistroLogo.png" alt="DistroLogo" /></li>
-</ul>
-</li>
-<li><p><strong>EncloseString$</strong>(thestring$,type) - Enclose a string in either single or double quotes, if it isn&rsquo;t already.</p>
+<img src="./imgs/DistroLogo.png" alt="DistroLogo" title="" /></li>
+</ul></li>
+<li><p><strong>EncloseString$</strong>(thestring$,type) - Enclose a string in either single or double quotes, if it isn't already.</p>
 
 <ul>
 <li>Mostly for use with long filenames that may include spaces. No error-checking is done here.</li>
-<li><p>If you feed this routine a string that already contains quotes, your program will come to a halt. Use INSTR() to check for that first.</p></li>
+<li><p>If you feed this routine a string that already contains quotes, your program will come to a halt. Use INSTR() to check for that first. </p></li>
 <li><p><em>type</em> is either</p>
 
 <ul>
 <li>0 (single quote) or</li>
 <li>1 (double quote).</li>
-</ul>
-</li>
+</ul></li>
 <li><strong>System commands used:</strong> none.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>FileDedupe$</strong>(infile$,outfile$) - Remove duplicate lines from a text file <em>infile$</em> and write the results to <em>outfile$</em>.</p>
 
 <ul>
@@ -257,44 +242,36 @@ print DistroLogo$()
 <li>If you prefer, you can use the alias <em>DedupeFile$()</em>.</li>
 <li>Returns nothing.</li>
 <li><strong>System commands used:</strong> <em>awk</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>FileExists</strong>(fullpathname$) - Test if a file exists.</p>
 
 <ul>
 <li>Returns 1 if the file exists, or returns 0 if the file does not exist.</li>
-<li>If only a filename is given, only the program&rsquo;s local directory will be searched.</li>
+<li>If only a filename is given, only the program's local directory will be searched.</li>
 <li>But you can also give a full pathname.</li>
 <li><strong>System commands used:</strong> none.</li>
-</ul>
-</li>
-<li><p><strong>FileorDir</strong>(fullpathname$) - Test if a file (in the Unix sense) is a regular file or a directory.</p>
+</ul></li>
+<li><p><strong>FileorDir</strong>(fullpathname$) - Test if a file (in the Unix sense) is a regular file or a directory. </p>
 
 <ul>
-<li><strong>Returns</strong>
-
+<li><strong>Returns</strong> 
 <ul>
-<li>1 if it is a directory,</li>
+<li>1 if it is a directory, </li>
 <li>0 if it is just a regular file.</li>
-</ul>
-</li>
+</ul></li>
 <li><strong>System commands used:</strong> <em>test</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>FileorLink</strong>(fullpathname$) - Test if a file (in the Unix sense) is a regular file or a symbolic link.</p>
 
 <ul>
-<li><strong>Returns</strong>
-
+<li><strong>Returns</strong> 
 <ul>
-<li>1 if it is a link,</li>
-<li>0 if it is just a regular file.</li>
-</ul>
-</li>
-<li>This does NOT test for hard links.</li>
+<li>1 if it is a link, </li>
+<li>0 if it is just a regular file. </li>
+</ul></li>
+<li>This does NOT test for hard links. </li>
 <li><strong>System commands used:</strong> <em>test</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>FileSort$</strong>(infile$,outfile$) - Sort a text file <em>infile$</em> and write the results to <em>outfile$</em>.</p>
 
 <ul>
@@ -304,59 +281,50 @@ print DistroLogo$()
 <li>If you prefer, you can use the alias <em>SortFile$()</em>.</li>
 <li>Returns nothing if succesful, otherwise returns an error message.</li>
 <li><strong>System commands used:</strong> <em>sort</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>GetEnvVar$</strong>(var$)</p>
 
 <ul>
 <li>Get an environment variable</li>
-<li>Shortcut to <em>peek$(&ldquo;env&rdquo;,  &ldquo;NAME&rdquo;)</em></li>
+<li>Shortcut to <em>peek$("env",  "NAME")</em></li>
 <li>Do <em>not</em> precede the value <em>var$</em> with the $ character as you would do in bash.</li>
 <li>Inspired by a library by Martin Medvold</li>
-<li><em>Example: </em>a$ = GetEnvVar$(&ldquo;PATH&rdquo;)*</li>
-</ul>
-</li>
+<li><em>Example: *a$ = GetEnvVar$("PATH")</em></li>
+</ul></li>
 <li><p><strong>IsFileZeroByte</strong>(pathname$) - determines if a passed filename is a zero-byte file.</p>
 
 <ul>
-<li><strong>Returns</strong>
-
+<li><strong>Returns</strong> 
 <ul>
-<li>0 (false) if the passed variable is larger than zero bytes,</li>
+<li>0 (false) if the passed variable is larger than zero bytes, </li>
 <li>1 (true) if it is zero bytes in size</li>
 <li>note that this reverses the output of the <em>test -s</em> command.</li>
-</ul>
-</li>
+</ul></li>
 <li><strong>Caution:</strong> will also return 1 if file does not exist: test for that with <em>FileExists</em> first.</li>
 <li>It will also return 0 if file is actually a directory: test for that with <em>FileorDir</em> first.</li>
 <li>If the file given is a symlink, this routine will report on the real, linked file.</li>
 <li>This yabasic routine is incompatible with a similar routine I wrote for yab. If you program in both languages, you need to reverse the conditions.</li>
 <li><strong>System commands used:</strong> <em>test</em>.</li>
-</ul>
-</li>
-<li><p><strong>IsItATextFile</strong>(filename$) - Tests whether a given file is a text file or not.</p>
+</ul></li>
+<li><p><strong>IsItATextFile</strong>(filename$) - Tests whether a given file is a text file or not. </p>
 
 <ul>
-<li>Anything that does not have the string &ldquo;text&rdquo; in the results of the <em>file</em> command is assumed to be a binary file. This should work fine on Linux but may be problematic on BSD systems (including MacOS?) where this command may reject shell scripts.</li>
-<li>If you need something more powerful than <em>file</em>, I suggest you install <em>enca</em>.</li>
+<li>Anything that does not have the string "text" in the results of the <em>file</em> command is assumed to be a binary file. This should work fine on Linux but may be problematic on BSD systems (including MacOS?) where this command may reject shell scripts. </li>
+<li>If you need something more powerful than <em>file</em>, I suggest you install <em>enca</em>. </li>
 <li><strong>System commands used:</strong> <em>file</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>KillPlay</strong>() - Stops any multimedia files currently playing.</p>
 
 <ul>
-<li>Stops playing of multimedia files if they use either <em>ffplay</em> or <em>aplay</em>, such as files launched with
-
+<li>Stops playing of multimedia files if they use either <em>ffplay</em> or <em>aplay</em>, such as files launched with 
 <ul>
-<li><em>PlayMP3()</em>,</li>
-<li><em>PlayVideo()</em> or</li>
-<li><em>PlayWav()</em>.</li>
-</ul>
-</li>
+<li><em>PlayMP3()</em>, </li>
+<li><em>PlayVideo()</em> or </li>
+<li><em>PlayWav()</em>. </li>
+</ul></li>
 <li>Please note that this is a nuclear option: it will also affect any other programs making use of these utilities.</li>
 <li><strong>System commands used:</strong> <em>pkill</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>MakeAsciiArt$</strong>(img$, width) - Convert an image file to monochrome ASCII art.</p>
 
 <ul>
@@ -364,45 +332,40 @@ print DistroLogo$()
 <li>Width default is set to 75 columns to work with most terminals, but you can override this with the optional value <em>width</em>.</li>
 <li><em>MakeAsciiArtInvert$</em>(img$, width) is the same as MakeAsciiArt$(), but inverts the character map. Depending on your terminal and image  this can make the image clearer (or a lot worse).</li>
 <li>It is a good idea to run <em>FileExists(img$)</em> first: Ruby error messages are not pretty.</li>
-<li>Returns a string containing the asciiart image. Within this string, individual lines are demarcated by linefeeds (&ldquo;\n&rdquo;). See the code for how to deconstruct this into an array for further manipulation.</li>
+<li>Returns a string containing the asciiart image. Within this string, individual lines are demarcated by linefeeds ("\n"). See the code for how to deconstruct this into an array for further manipulation. </li>
 <li><strong>System commands used:</strong> <em>asciiart</em>.</li>
 <li><em>Examples:</em></li>
-</ul>
-</li>
+</ul></li>
 </ul>
 
-
-<p><img src="./imgs/MCJ.jpg" alt="Original image" /></p>
+<p><img src="./imgs/MCJ.jpg" alt="Original image" title="" /></p>
 
 <p><code>
 print MakeAsciiArt$("./imgs/MCJ.jpg", 40)
 </code></p>
 
-<p><img src="./imgs/MakeAsciiart1.png" alt="MakeAsciiArt" /></p>
+<p><img src="./imgs/MakeAsciiart1.png" alt="MakeAsciiArt" title="" /></p>
 
 <p><code>
 print reverse MakeAsciiArtInvert$("./imgs/MCJ.jpg", 40)
 </code></p>
 
-<p><img src="./imgs/MakeAsciiart2.png" alt="MakeAsciiArtInvert" /></p>
+<p><img src="./imgs/MakeAsciiart2.png" alt="MakeAsciiArtInvert" title="" /></p>
 
 <ul>
 <li><strong>NotifyDlg</strong>(text$, duration, block) - Pop up a one-line notification.
-
 <ul>
 <li>If <em>duration</em> is 0, the notification remains on screen until <em>right</em>-clicked, and displays an [X] button to mark the fact.</li>
 <li>Otherwise, there is no button and the  notification disappears after the specified number of seconds.</li>
 <li>If <em>block</em> equals 0 the notification will launch in a new process and your yabasic program can continue.</li>
-<li>If <em>block</em> equals 1, your app will pause until the popup disappears.</li>
-<li>Keep your notifications short - you don&rsquo;t have much space to play with.</li>
+<li>If <em>block</em> equals 1, your app will pause until the popup disappears.  </li>
+<li>Keep your notifications short - you don't have much space to play with.</li>
 <li>Returns nothing</li>
 <li><strong>System utility used:</strong> <em>dzen2</em></li>
-</ul>
-</li>
+</ul></li>
 </ul>
 
-
-<p><img src="./imgs/NotifyDlg1.png" alt="NotifyDlg" /></p>
+<p><img src="./imgs/NotifyDlg1.png" alt="NotifyDlg" title="" /></p>
 
 <ul>
 <li><p><strong>OpenAbook$</strong>() - Opens the <em>abook</em> text-mode contact manager.</p>
@@ -410,44 +373,38 @@ print reverse MakeAsciiArtInvert$("./imgs/MCJ.jpg", 40)
 <ul>
 <li>Only the default database is provided for in this routine.</li>
 <li><strong>System commands used:</strong> <em>abook</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>OpenBastet$</strong>() - Opens the <em>bastet</em> CLI Tetris clone.</p>
 
 <ul>
 <li><strong>System commands used:</strong> <em>bastet</em>.</li>
-</ul>
-</li>
-<li><p><strong>OpenCalcurse$</strong>() - Opens the <em>calcurse</em> text-mode calendar app. Only the default calendar is provided for in this routine.</p>
+</ul></li>
+<li><p><strong>OpenCalcurse$</strong>() - Opens the <em>calcurse</em> text-mode calendar app. Only the default calendar is provided for in this routine. </p>
 
 <ul>
 <li><strong>System commands used:</strong> <em>calcurse</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>OpenGtypist$</strong>() - Open the gtypist tying tutor program.</p>
 
 <ul>
 <li><strong>System commands used:</strong> <em>gtypist</em></li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>OpenHnb$</strong>() - Open the <em>hnb</em> hierarchical notebook.</p>
 
 <ul>
 <li>Only the default database is provided for in this routine.</li>
 <li><strong>System commands used:</strong> <em>hnb</em></li>
-</ul>
-</li>
-<li><p><strong>OpenInDav$</strong>(filename$) - opens a given text file in the <em>dav</em> text editor in the same terminal window as your program.</p>
+</ul></li>
+<li><p><strong>OpenInDav$</strong>(filename$) - opens a given text file in the <em>dav</em> text editor in the same terminal window as your program. </p>
 
 <ul>
-<li>Will fail and return an error message if <em>dav</em> does not exist on your system.</li>
-<li>If <em>filename$</em> does not exist, <em>dav</em> will create one in memory and let you save it.</li>
-<li>If <em>filename$</em> is an empty string (&ldquo;&rdquo;), <em>dav</em> will open with a new, unnamed file. (You can also use the shortcut <em>OpenDav$</em>() for this).</li>
+<li>Will fail and return an error message if <em>dav</em> does not exist on your system. </li>
+<li>If <em>filename$</em> does not exist, <em>dav</em> will create one in memory and let you save it. </li>
+<li>If <em>filename$</em> is an empty string (""), <em>dav</em> will open with a new, unnamed file. (You can also use the shortcut <em>OpenDav$</em>() for this).</li>
 <li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
 <li>You may have to CLEAR SCREEN and rebuild your screen afterwards.</li>
 <li><strong>System commands used:</strong> <em>dav</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>OpeninDhex$</strong>(filename$)</p>
 
 <ul>
@@ -455,17 +412,15 @@ print reverse MakeAsciiArtInvert$("./imgs/MCJ.jpg", 40)
 <li>Must be run in a program that is already in a terminal.</li>
 <li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
 <li><strong>System commands used:</strong> <em>dhex</em>.</li>
-</ul>
-</li>
-<li><p><strong>OpeninElinks$</strong>(URL$}: Opens a URL in the <em>elinks</em> text-based browser.</p>
+</ul></li>
+<li><p><strong>OpeninElinks$</strong>(URL$}: Opens a URL in the <em>elinks</em> text-based browser. </p>
 
 <ul>
-<li>Must be run in a program that is already in a terminal.</li>
-<li>Will fail and return an error message if <em>elinks</em> does not exist on your system.</li>
-<li>For best results your URL should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
+<li>Must be run in a program that is already in a terminal. </li>
+<li>Will fail and return an error message if <em>elinks</em> does not exist on your system. </li>
+<li>For best results your URL should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that. </li>
 <li><strong>System commands used:</strong> <em>elinks</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>OpeninFbless$</strong>(file$) - Opens a .FB2 ebook in the <em>fbless</em> ebook reader</p>
 
 <ul>
@@ -473,19 +428,17 @@ print reverse MakeAsciiArtInvert$("./imgs/MCJ.jpg", 40)
 <li>Must be run in a program that is already in a terminal.</li>
 <li>For best results your URL should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
 <li><strong>System commands used:</strong> <em>fbless</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>OpeninHte$</strong>(filename$)</p>
 
 <ul>
 <li>opens a given file in the <em>hte</em> hexadecimal editor.</li>
-<li>The package name for this utility might be &ldquo;ht&rdquo; on your system.</li>
+<li>The package name for this utility might be "ht" on your system.</li>
 <li>This routine forces hte into hex mode even if it is a text file, but you can explore the other modes with F6.</li>
 <li>Must be run in a program that is already in a terminal.</li>
 <li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
 <li><strong>System commands used:</strong> <em>hte</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>OpeninHexcurse$</strong>(filename$)</p>
 
 <ul>
@@ -493,82 +446,74 @@ print reverse MakeAsciiArtInvert$("./imgs/MCJ.jpg", 40)
 <li>Must be run in a program that is already in a terminal.</li>
 <li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
 <li><strong>System commands used:</strong> <em>hexcurse</em>.</li>
-</ul>
-</li>
-<li><p><strong>OpenInJed$</strong>(filename$) - opens a given text file in the <em>jed</em> text editor in the same terminal window as your program.</p>
+</ul></li>
+<li><p><strong>OpenInJed$</strong>(filename$) - opens a given text file in the <em>jed</em> text editor in the same terminal window as your program. </p>
 
 <ul>
-<li>Will fail and return an error message if <em>jed</em> does not exist on your system.</li>
-<li>If <em>filename$</em> does not exist, <em>jed</em> will create one in memory and let you save it.</li>
-<li>If <em>filename$</em> is an empty string (&ldquo;&rdquo;), <em>jed</em> will open with a new, unnamed file. (You can also use the shortcut <em>OpenJed$</em>() for this).</li>
+<li>Will fail and return an error message if <em>jed</em> does not exist on your system. </li>
+<li>If <em>filename$</em> does not exist, <em>jed</em> will create one in memory and let you save it. </li>
+<li>If <em>filename$</em> is an empty string (""), <em>jed</em> will open with a new, unnamed file. (You can also use the shortcut <em>OpenJed$</em>() for this).</li>
 <li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
-<li>You may have to CLEAR SCREEN and rebuild your screen afterwards.</li>
+<li>You may have to CLEAR SCREEN and rebuild your screen afterwards. </li>
 <li><strong>System commands used:</strong> <em>jed</em>.</li>
-</ul>
-</li>
-<li><p><strong>OpeninLinks$</strong>(URL$): Opens a URL in the <em>links</em> text-based browser.</p>
+</ul></li>
+<li><p><strong>OpeninLinks$</strong>(URL$): Opens a URL in the <em>links</em> text-based browser. </p>
 
 <ul>
-<li>Must be run in a program that is already in a terminal.</li>
-<li>Will fail and return an error message if <em>links</em> does not exist on your system.</li>
-<li>For best results your URL should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
+<li>Must be run in a program that is already in a terminal. </li>
+<li>Will fail and return an error message if <em>links</em> does not exist on your system. </li>
+<li>For best results your URL should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that. </li>
 <li><strong>System commands used:</strong> <em>links</em>.</li>
-</ul>
-</li>
-<li><p><strong>OpeninLynx$</strong>(URL$): Opens a URL in the <em>lynx</em> text-based browser.</p>
+</ul></li>
+<li><p><strong>OpeninLynx$</strong>(URL$): Opens a URL in the <em>lynx</em> text-based browser. </p>
 
 <ul>
-<li>Must be run in a program that is already in a terminal.</li>
-<li>Will fail and return an error message if <em>lynx</em> does not exist on your system.</li>
-<li>For best results your URL should be enclosed in single quotation marks so that it will not get confused by spaces.</li>
-<li>This routine will not check for that.</li>
+<li>Must be run in a program that is already in a terminal. </li>
+<li>Will fail and return an error message if <em>lynx</em> does not exist on your system. </li>
+<li>For best results your URL should be enclosed in single quotation marks so that it will not get confused by spaces. </li>
+<li>This routine will not check for that. </li>
 <li><strong>System commands used:</strong> <em>lynx</em>.</li>
-</ul>
-</li>
-<li><p><strong>OpenInMdless$</strong>(filename$) - opens a given markdown-formatted text file in the <em>mdless</em> markdown viewer in the same terminal window as your program.</p>
+</ul></li>
+<li><p><strong>OpenInMdless$</strong>(filename$) - opens a given markdown-formatted text file in the <em>mdless</em> markdown viewer in the same terminal window as your program. </p>
 
 <ul>
-<li>Will fail and return an error message if <em>mdless</em> does not exist on your system.</li>
+<li>Will fail and return an error message if <em>mdless</em> does not exist on your system. </li>
 <li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
-<li>You may have to CLEAR SCREEN and rebuild your screen afterwards.</li>
+<li>You may have to CLEAR SCREEN and rebuild your screen afterwards. </li>
 <li><strong>System commands used:</strong> <em>mdless</em>.</li>
-</ul>
-</li>
-<li><p><strong>OpenInNano$</strong>(filename$) - opens a given text file in the <em>nano</em> text editor in the same terminal window as your program.</p>
+</ul></li>
+<li><p><strong>OpenInNano$</strong>(filename$) - opens a given text file in the <em>nano</em> text editor in the same terminal window as your program. </p>
 
 <ul>
-<li>Will fail and return an error message if <em>nano</em> does not exist on your system.</li>
-<li>If <em>filename$</em> does not exist, <em>nano</em> will create one in memory and let you save it.</li>
-<li>If filename$ is an empty string (&ldquo;&rdquo;), <em>nano</em> will open with a new, unnamed file.</li>
-<li>You can also use the shortcut <em>OpenNano</em>$() for this.</li>
+<li>Will fail and return an error message if <em>nano</em> does not exist on your system. </li>
+<li>If <em>filename$</em> does not exist, <em>nano</em> will create one in memory and let you save it. </li>
+<li>If filename$ is an empty string (""), <em>nano</em> will open with a new, unnamed file.</li>
+<li>You can also use the shortcut <em>OpenNano</em>$() for this. </li>
 <li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
-<li>You may have to CLEAR SCREEN and rebuild your screen afterwards.</li>
+<li>You may have to CLEAR SCREEN and rebuild your screen afterwards. </li>
 <li><strong>System commands used:</strong> <em>nano</em>.</li>
-</ul>
-</li>
-<li><p><strong>OpenInSc$</strong>(filename$) - opens a given text file in the <em>sc</em> spreadsheet in the same terminal window as your program.</p>
+</ul></li>
+<li><p><strong>OpenInSc$</strong>(filename$) - opens a given text file in the <em>sc</em> spreadsheet in the same terminal window as your program. </p>
 
 <ul>
-<li>Will fail and return an error message if <em>sc</em> does not exist on your system.</li>
-<li>If <em>filename$</em> does not exist, <em>sc</em> will create one in memory and let you save it.</li>
-<li>If filename$ is an empty string (&ldquo;&rdquo;), <em>sc</em> will open with a new, unnamed file.</li>
-<li>You can also use the shortcut <em>OpenSc</em>$() for this).</li>
+<li>Will fail and return an error message if <em>sc</em> does not exist on your system. </li>
+<li>If <em>filename$</em> does not exist, <em>sc</em> will create one in memory and let you save it. </li>
+<li>If filename$ is an empty string (""), <em>sc</em> will open with a new, unnamed file.</li>
+<li>You can also use the shortcut <em>OpenSc</em>$() for this). </li>
 <li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
-<li>You may have to CLEAR SCREEN and rebuild your screen afterwards.</li>
+<li>You may have to CLEAR SCREEN and rebuild your screen afterwards. </li>
 <li><strong>System commands used:</strong> <em>sc</em>.</li>
-</ul>
-</li>
-<li><p><strong>OpenInTpp$</strong>(filename$) - Opens a given  file in the <em>tpp</em> text presentation program.</p>
+</ul></li>
+<li><p><strong>OpenInTpp$</strong>(filename$) - Opens a given  file in the <em>tpp</em> text presentation program. </p>
 
 <ul>
-<li>Must be run in a program that is already in a terminal.</li>
-<li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
-<li>It is up to you to determine that filename$ is a valid <em>tpp</em> data file.</li>
-<li><strong>NOTE</strong> that if you want to use <em>tpp</em>&rsquo;s <em>&ndash;huge</em> facility, then <em>figlet</em> must also be installed.</li>
-<li>To see all <em>tpp</em> can do, run the bash command <em>tpp /usr/share/doc/tpp/examples/tpp-features.tpp</em>.</li>
+<li>Must be run in a program that is already in a terminal. </li>
+<li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that. </li>
+<li>It is up to you to determine that filename$ is a valid <em>tpp</em> data file. </li>
+<li><strong>NOTE</strong> that if you want to use <em>tpp</em>'s <em>--huge</em> facility, then <em>figlet</em> must also be installed. </li>
+<li>To see all <em>tpp</em> can do, run the bash command <em>tpp /usr/share/doc/tpp/examples/tpp-features.tpp</em>. </li>
 <li><strong>System commands used:</strong> <em>tpp</em>, <em>figlet</em> (optional).</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>OpeninTweak$</strong>(filename$)</p>
 
 <ul>
@@ -577,114 +522,100 @@ print reverse MakeAsciiArtInvert$("./imgs/MCJ.jpg", 40)
 <li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
 <li>TIP: <em>OpeninHte()</em> is much more user-friendly!</li>
 <li><strong>System commands used:</strong> <em>tweak</em>.</li>
-</ul>
-</li>
-<li><p><strong>OpeninW3m$</strong>(URL$): Opens a URL in the <em>w3m</em> text-based browser.</p>
+</ul></li>
+<li><p><strong>OpeninW3m$</strong>(URL$): Opens a URL in the <em>w3m</em> text-based browser. </p>
 
 <ul>
-<li>Must be run in a program that is already in a terminal.</li>
-<li>Will fail and return an error message if <em>w3m</em> does not exist on your system.</li>
-<li>For best results your URL should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
+<li>Must be run in a program that is already in a terminal. </li>
+<li>Will fail and return an error message if <em>w3m</em> does not exist on your system. </li>
+<li>For best results your URL should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that. </li>
 <li><strong>System commands used:</strong> <em>w3m</em></li>
-</ul>
-</li>
-<li><p><strong>OpeninWordgrinder$</strong>(filename$) - Opens a given  file in the <em>wordgrinder</em> word processor.</p>
+</ul></li>
+<li><p><strong>OpeninWordgrinder$</strong>(filename$) - Opens a given  file in the <em>wordgrinder</em> word processor. </p>
 
 <ul>
-<li>Must be run in a program that is already in a terminal.</li>
-<li>If filename$ is an empty string (&ldquo;&rdquo;), <em>wordgrinder</em> will open with a new, unnamed file.</li>
-<li>You can also use the shortcut <em>OpenWordgrinder$()</em> for this.</li>
-<li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
-<li>It is up to you to determine that <em>filename$</em> is a valid <em>wordgrinder</em> data file.</li>
+<li>Must be run in a program that is already in a terminal. </li>
+<li>If filename$ is an empty string (""), <em>wordgrinder</em> will open with a new, unnamed file.</li>
+<li>You can also use the shortcut <em>OpenWordgrinder$()</em> for this. </li>
+<li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.  </li>
+<li>It is up to you to determine that <em>filename$</em> is a valid <em>wordgrinder</em> data file. </li>
 <li><strong>System commands used:</strong> <em>wordgrinder</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>OpenNinvader$</strong>() - start the <em>ninvaders</em> game (Space Invaders clone)</p>
 
 <ul>
 <li><strong>System commands used:</strong> <em>ninvaders</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>OpenPacman$</strong>() - Start the <em>pacman4console</em> game (pacman clone)</p>
 
 <ul>
 <li><strong>System commands used:</strong> <em>pacman4console</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>OpenSpeedpad$</strong>() - Opens the <em>speedpad</em> typing speed checker.</p>
 
 <ul>
 <li><strong>System commands used:</strong> <em>speedpad</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>OpenTig$</strong>(gitdir$) - Opens the <em>tig</em> CLI UI for git.</p>
 
 <ul>
 <li>The value <em>gitdir$</em> must be a valid git directory</li>
 <li><strong>System commands used:</strong> <em>tig</em>.</li>
-</ul>
-</li>
-<li><p><strong>OpenTina$</strong>() - Opens the <em>tina</em> text-based personal information manager.</p>
+</ul></li>
+<li><p><strong>OpenTina$</strong>() - Opens the <em>tina</em> text-based personal information manager. </p>
 
 <ul>
-<li>Only the default database is provided for in this routine.</li>
+<li>Only the default database is provided for in this routine. </li>
 <li><strong>System commands used:</strong> <em>tina</em>.</li>
-</ul>
-</li>
-<li><p><strong>PlayMP3$</strong>(file$) - Plays an audio (.mp3, m4a, etc) file.</p>
+</ul></li>
+<li><p><strong>PlayMP3$</strong>(file$) - Plays an audio (.mp3, m4a, etc) file. </p>
 
 <ul>
-<li>Launched in a separate process, so it cannot be stopped afterwards, unless you do a <em>KilPlay()</em>.</li>
-<li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
-<li>Will also play .wav files, but <em>PlayWav()</em> is a little faster.</li>
+<li>Launched in a separate process, so it cannot be stopped afterwards, unless you do a <em>KilPlay()</em>. </li>
+<li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that. </li>
+<li>Will also play .wav files, but <em>PlayWav()</em> is a little faster.  </li>
 <li><strong>System commands used:</strong> <em>ffplay</em>.</li>
-</ul>
-</li>
-<li><p><strong>PlayVideo$</strong>(file$) - Plays a video file (.mp4, .mov etc.)</p>
+</ul></li>
+<li><p><strong>PlayVideo$</strong>(file$) - Plays a video file (.mp4, .mov etc.) </p>
 
 <ul>
-<li>Launched in a separate process, so it cannot be stopped afterwards, unless you do a <em>KillPlay()</em>.</li>
-<li>If played in an xterm, this will open a NEW window.</li>
-<li>In a fullscreen console, it will play in an ASCII-art format.</li>
-<li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
-<li>This routine can also be used for audio files - It will then show the cover art, unlike the audio-only playing of <em>PlayMP3()</em>.</li>
+<li>Launched in a separate process, so it cannot be stopped afterwards, unless you do a <em>KillPlay()</em>. </li>
+<li>If played in an xterm, this will open a NEW window. </li>
+<li>In a fullscreen console, it will play in an ASCII-art format. </li>
+<li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that. </li>
+<li>This routine can also be used for audio files - It will then show the cover art, unlike the audio-only playing of <em>PlayMP3()</em>. </li>
 <li><strong>System commands used:</strong> <em>ffplay</em>.</li>
-</ul>
-</li>
-<li><p><strong>PlayWav$</strong>(file$) - Plays a .wav sound file.</p>
+</ul></li>
+<li><p><strong>PlayWav$</strong>(file$) - Plays a .wav sound file. </p>
 
 <ul>
-<li>Launched in a separate process, so it cannot be stopped afterwards, unless you do a <em>KillPlay()</em>.</li>
-<li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
+<li>Launched in a separate process, so it cannot be stopped afterwards, unless you do a <em>KillPlay()</em>. </li>
+<li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that. </li>
 <li><strong>System commands used:</strong> <em>aplay</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>PrintFiglet$</strong>(font$, text$) - Print <em>text$</em> in the <em>figlet</em> font <em>font$</em>.</p>
 
 <ul>
 <li>You can find these fonts with <em>locate *.flf</em>.</li>
 <li><strong>System commands used:</strong> <em>figlet</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>PrintToilet$</strong>(font$, text$) - Print <em>text$</em> in the <em>toilet</em> font <em>font$</em></p>
 
 <ul>
 <li>You can find these fonts with <em>locate *.tlf</em>.</li>
 <li><strong>System commands used:</strong> <em>toilet</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>RandInt0To9</strong>()</p>
 
 <ul>
 <li>Returns a random integer between 0 and 9, inclusive.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>ReplaceinArray$</strong>(w$(),instring$,outstring$) - Globally replace all occurences of <em>instring$</em> in a one-dimensional string array with <em>outstring$</em>.</p>
 
 <ul>
 <li>Case-sensitive.</li>
 <li>If you are going to use this on code of any kind, you will have to look into using escape codes.</li>
-<li>Even in plain text, you will probably need to escape double quote marks (&ldquo;) and forward slashes(\).</li>
+<li>Even in plain text, you will probably need to escape double quote marks (") and forward slashes(\).</li>
 <li>Unlike using <em>mid$()</em>, this one can change the length of the strings in the array: <em>instring$</em> and <em>outstring$</em> need not the the same size.</li>
 <li>Returns a string delimited with linefeeds.</li>
 <li>Your receiving routine can turn it back into an array with the <em>token</em> or <em>split</em> functions.</li>
@@ -702,94 +633,78 @@ for f = 1 to 3
 print a$(f)
 next f
 </code></li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>ReplaceinFile</strong>(infilename$,instring$,outstring$, outfilename$) - Globally replace all occurences of <em>instring$</em> in the file <em>infilename$</em> with <em>outstring$</em> and writes the results to the file <em>outfilename$</em>.</p>
 
 <ul>
 <li>If <em>outfilename$</em> is not supplied, it will write the result to the original file.</li>
 <li>Case-sensitive.
 +If you are going to use this on code of any kind, you will have to look into using escape codes.</li>
-<li>Even in plain text, you will probably need to escape double quote marks (&ldquo;) and forward slashes(\).</li>
+<li>Even in plain text, you will probably need to escape double quote marks (") and forward slashes(\).</li>
 <li>Unlike using <em>mid$()</em>, this one can change the length of the strings: <em>instring$</em> and <em>outstring$</em> need not the the same size.</li>
 <li>Limited to the string size that yabasic can handle - try not to use it on <em>War and Peace</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>ReplaceinLine$</strong>(line$,instring$,outstring$) - Globally replace all occurences of <em>instring$</em> in the string <em>line$</em> with <em>outstring$</em>.</p>
 
 <ul>
 <li>Case-sensitive.</li>
 <li>If you are going to use this on code of any kind, you will have to look into using escape codes.</li>
-<li>Even in plain text, you will probably need to escape double quote marks (&ldquo;) and forward slashes(\).</li>
+<li>Even in plain text, you will probably need to escape double quote marks (") and forward slashes(\).</li>
 <li>Unlike using <em>mid$()</em>, this one can change the length of the string: <em>instring$</em> and <em>outstring$</em> need not the the same size.</li>
 <li><strong>System commands used:</strong> none.</li>
-<li><strong>Example:</strong> <em>print ReplaceinLine$(&ldquo;superman&rdquo;,&ldquo;super&rdquo;,&ldquo;bat&rdquo;)</em> will print &ldquo;batman&rdquo;.</li>
-</ul>
-</li>
-<li><p><strong>Screensaver</strong>(onoff, type) - Starts or halts  the <em>termsaver</em> text-based screensaver application.</p>
+<li><strong>Example:</strong> <em>print ReplaceinLine$("superman","super","bat")</em> will print "batman".</li>
+</ul></li>
+<li><p><strong>Screensaver</strong>(onoff, type) - Starts or halts  the <em>termsaver</em> text-based screensaver application. </p>
 
 <ul>
-<li>Please note that work in your program is not necessarily suspended while this runs, because it gets launched in a separate process, but it is up to you to poll for the exiting condition.</li>
-<li>Values for <em>onoff</em> are
-
+<li>Please note that work in your program is not necessarily suspended while this runs, because it gets launched in a separate process, but it is up to you to poll for the exiting condition. </li>
+<li>Values for <em>onoff</em> are 
 <ul>
-<li>1 (start screensaver) and</li>
-<li>0 (close screensaver),</li>
-</ul>
-</li>
-<li>If <em>onoff</em> is 0, the second parameter may be omitted.</li>
-<li>Closing the screensaver will close ALL <em>termsaver</em> instances on your system.
-
+<li>1 (start screensaver) and </li>
+<li>0 (close screensaver), </li>
+</ul></li>
+<li>If <em>onoff</em> is 0, the second parameter may be omitted. </li>
+<li>Closing the screensaver will close ALL <em>termsaver</em> instances on your system. 
 <ul>
-<li>You can also close it manually with CTRL-C.</li>
-</ul>
-</li>
-<li>Values for <em>type</em> are
-
+<li>You can also close it manually with CTRL-C. </li>
+</ul></li>
+<li>Values for <em>type</em> are 
 <ul>
-<li>0 (24 hr clock),</li>
-<li>1 (12 hr clock), 2 (the words \&ldquo;Yabasic forever\&rdquo; appear at random on your screen),</li>
-<li>3 (scrolling MIMEtype information), and</li>
-<li>4 (system monitor).</li>
-</ul>
-</li>
-<li>This implementation only uses screensavers that do not need an Internet connection.</li>
-<li>See two ways to handle a screensaver in <em>test.bas</em>.</li>
+<li>0 (24 hr clock), </li>
+<li>1 (12 hr clock), 2 (the words \"Yabasic forever\" appear at random on your screen), </li>
+<li>3 (scrolling MIMEtype information), and </li>
+<li>4 (system monitor). </li>
+</ul></li>
+<li>This implementation only uses screensavers that do not need an Internet connection. </li>
+<li>See two ways to handle a screensaver in <em>test.bas</em>. </li>
 <li><strong>System commands used:</strong> <em>termsaver</em>, <em>pkill</em>, <em>clear</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>ScreensaverCC</strong>(onoff,type) - Starts or halts  the <em>CacaLib</em> screensaver applications.</p>
 
 <ul>
 <li>Please note that work in your program is not necessarily suspended while this runs, because it gets launched in a separate process, but it is up to you to poll for the exiting condition.</li>
 <li>Only use this one if you KNOW your application will be running in a fullscreen console, because caca apps start a new window under X automatically.</li>
-<li>Values for <em>onoff</em> are
-
+<li>Values for <em>onoff</em> are 
 <ul>
-<li>1 (start screensaver) and</li>
+<li>1 (start screensaver) and </li>
 <li>0 (close screensaver)</li>
-</ul>
-</li>
+</ul></li>
 <li>If <em>onoff</em> is 0, the second parameter may be omitted.</li>
 <li>Closing the screensaver will close ALL caca demo app instances on your system.</li>
 <li>You can also close it manually with ESC.</li>
-<li>Values for <em>type</em> are
-
+<li>Values for <em>type</em> are 
 <ul>
-<li>0 (<em>cacademo</em>) and</li>
+<li>0 (<em>cacademo</em>) and </li>
 <li>1 (<em>cacafire</em>)</li>
-</ul>
-</li>
+</ul></li>
 <li>See two ways to handle a screensaver in test.bas</li>
 <li><strong>System commands used:</strong> <em>cacademo</em>, <em>cacafire</em>, <em>pkill</em>, <em>clear</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>ScreensaverClock</strong>() - starts the <em>tty-clock</em> program in screensaver mode.</p>
 
 <ul>
 <li><strong>System commands used:</strong> <em>tty-clock</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>SelectDir$</strong>(startpath$) - Use the <em>ranger</em> file manager to select a directory.</p>
 
 <ul>
@@ -797,8 +712,7 @@ next f
 <li>Unlike the routines in <em>clasquinatorlib</em>, these routines do not rebuild your screen when you are done.</li>
 <li>Returns the full pathname of the selected directory.</li>
 <li><strong>System commands used:</strong> <em>ranger</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>SelectFile$</strong>(startpath$) - Use the <em>ranger</em> file manager to select a file.</p>
 
 <ul>
@@ -806,8 +720,7 @@ next f
 <li>Unlike the routines in <em>clasquinatorlib</em>, these routines do not rebuild your screen when you are done.</li>
 <li>Returns the full pathname of the selected file.</li>
 <li><strong>System commands used:</strong> <em>ranger</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>SelectMulltiFile$</strong>(startpath$) - Use the <em>ranger</em> file manager to select a a bunch of files.</p>
 
 <ul>
@@ -815,8 +728,7 @@ next f
 <li>Unlike the routines in <em>clasquinatorlib</em>, these routines do not rebuild your screen when you are done.</li>
 <li>Returns the full pathname of the temporary file in which your information is stored. it should be <em>/tmp/linuxmisclib_selectfile.tmp</em>. You can then parse the results in any way you need.</li>
 <li><strong>System commands used:</strong> <em>ranger</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>SortArray</strong>(z()) - An alias for <em>Arraysort()</em>.</p></li>
 <li><p><strong>SortArray$</strong>(z$()) - An alias for <em>Arraysort$()</em>.</p></li>
 <li><p><strong>SortFile$(infile$,outfile$)</strong> - an alias for <em>FileSort$()</em>.</p></li>
@@ -825,26 +737,23 @@ next f
 <ul>
 <li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
 <li><strong>System commands used:</strong> <em>antiword</em>.</li>
-</ul>
-</li>
-<li><p><strong>StripLFoffSysCmd$</strong>(val$) -  Remove linefeeds from the results of a system call.</p>
+</ul></li>
+<li><p><strong>StripLFoffSysCmd$</strong>(val$) -  Remove linefeeds from the results of a system call. </p>
 
 <ul>
-<li>If the results of a system() or system$() command end on a LF (most do), strip the LF off and return the resulting string.</li>
-<li>But it can be used for any string that might have a suspected and unwanted LF at the end.</li>
-<li>If there is no LF present, it does nothing.</li>
-<li>This may not work on Windows systems, where you also need to test for a CR but we are not writing this library for Windows in any case.</li>
+<li>If the results of a system() or system$() command end on a LF (most do), strip the LF off and return the resulting string. </li>
+<li>But it can be used for any string that might have a suspected and unwanted LF at the end. </li>
+<li>If there is no LF present, it does nothing. </li>
+<li>This may not work on Windows systems, where you also need to test for a CR but we are not writing this library for Windows in any case. </li>
 <li><strong>System commands used:</strong> none</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>StripPDF$(filename$)</strong> - Convert a PDF or PS file to text and return the result as a string variable.</p>
 
 <ul>
 <li>Return may contain a bunch of error messages as well as the returned text.</li>
 <li>For best results your filename should be enclosed in single quotation marks so that it will not get confused by spaces. This routine will not check for that.</li>
 <li><strong>System commands used:</strong> <em>pstotext</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>TakeScreenshot$</strong>(type, thumb, filename$) - Takes a screenshot.</p>
 
 <ul>
@@ -860,44 +769,38 @@ next f
 <li>Returns nothing.</li>
 <li><strong>System commands used:</strong> <em>scrot</em>.</li>
 <li><em>Example:</em></li>
-</ul>
-</li>
+</ul></li>
 </ul>
 
-
-<p><img src="./imgs/TakeScreenshot.png" alt="TakeScreenshot" /></p>
+<p><img src="./imgs/TakeScreenshot.png" alt="TakeScreenshot" title="" /></p>
 
 <ul>
-<li><p><strong>TestForUtility$</strong>(filename$) - tests whether a given utility exists on your $PATH and is executable.</p>
+<li><p><strong>TestForUtility$</strong>(filename$) - tests whether a given utility exists on your $PATH and is executable. </p>
 
 <ul>
-<li>Returns an empty string if the utility exists, and a warning message if it does not.</li>
-<li>This reverses the functionality of the Linux <em>which</em> command.</li>
+<li>Returns an empty string if the utility exists, and a warning message if it does not. </li>
+<li>This reverses the functionality of the Linux <em>which</em> command. </li>
 <li>This command is used by many of the other routines in this library, and a version of it can be found in each of the various dialog libraries.</li>
 <li><strong>System commands used:</strong> <em>which</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>TestForUtility</strong>(filename$) - tests whether a given utility exists on your $PATH and is executable.</p>
 
 <ul>
 <li>same as TestForUtility$(), but returns 1 if the utility exists, and 0 if it does not.</li>
 <li><strong>System commands used:</strong> <em>which</em>.</li>
-</ul>
-</li>
-<li><p><strong>URLExist</strong>(URL$) and <strong>URLExist$</strong>(URL$) do the equivalent job of testing whether a URL exists before sending it to <em>OpeninLinks</em>(), for example.</p>
+</ul></li>
+<li><p><strong>URLExist</strong>(URL$) and <strong>URLExist$</strong>(URL$) do the equivalent job of testing whether a URL exists before sending it to <em>OpeninLinks</em>(), for example. </p>
 
 <ul>
-<li>The difference is whether the <em>1</em> (it exists) or 0 (it does not exist) is sent as a numeric or string result.</li>
-<li>See the file <em>test.bas</em> for the different ways to use these routines.</li>
+<li>The difference is whether the <em>1</em> (it exists) or 0 (it does not exist) is sent as a numeric or string result. </li>
+<li>See the file <em>test.bas</em> for the different ways to use these routines.  </li>
 <li><strong>System commands used:</strong> <em>curl</em>.</li>
-</ul>
-</li>
-<li><p><strong>WhereAmI$</strong>() - returns the current directory from which the program is running.</p>
+</ul></li>
+<li><p><strong>WhereAmI$</strong>() - returns the current directory from which the program is running.  </p>
 
 <ul>
 <li><strong>System commands used:</strong> <em>pwd</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>WikipediaDump$</strong>(searchterm$, language$) - Search wikipedia for a specific string, convert the article to text and return it as a string variable.</p>
 
 <ul>
@@ -906,8 +809,7 @@ next f
 <li><em>searchterm$</em> may include spaces.</li>
 <li><strong>NOTE</strong>: this routine may take a second or two to get going.</li>
 <li><strong>System commands used:</strong> <em>wikipedia2text</em>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>WikipediaURL$</strong>(searchterm$, language$) - Search wikipedia for a specific string, and return the URL as a string variable.</p>
 
 <ul>
@@ -916,10 +818,8 @@ next f
 <li><em>searchterm$</em> may include spaces.</li>
 <li><strong>NOTE</strong>: this routine may take a second or two to get going.</li>
 <li><strong>System commands used:</strong> <em>wikipedia2text</em>.</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-
 
 <hr />
 
@@ -927,18 +827,18 @@ next f
 
 <p><a name="pandocformats"></a></p>
 
-<p><strong>Input formats</strong>:  commonmark, docbook, docx, epub, haddock, html, json*, latex, markdown, markdown_github, markdown_mmd, markdown_phpextra, markdown_strict, mediawiki, native, odt, opml, org, rst, t2t, textile, twiki</p>
+<p><strong>Input formats</strong>:  commonmark, docbook, docx, epub, haddock, html, json*, latex, markdown, markdown<em>github, markdown</em>mmd, markdown<em>phpextra, markdown</em>strict, mediawiki, native, odt, opml, org, rst, t2t, textile, twiki</p>
 
-<p><strong>Output formats</strong>: asciidoc, beamer, commonmark, context, docbook, docx, dokuwiki, dzslides, epub, epub3, fb2, haddock, html, html5, icml, latex, man, markdown, markdown_github, markdown_mmd, markdown_phpextra, markdown_strict, mediawiki, native, odt, opendocument, opml, org, plain, revealjs, rst, rtf, s5, slideous, slidy, texinfo, textile</p>
+<p><strong>Output formats</strong>: asciidoc, beamer, commonmark, context, docbook, docx, dokuwiki, dzslides, epub, epub3, fb2, haddock, html, html5, icml, latex, man, markdown, markdown<em>github, markdown</em>mmd, markdown<em>phpextra, markdown</em>strict, mediawiki, native, odt, opendocument, opml, org, plain, revealjs, rst, rtf, s5, slideous, slidy, texinfo, textile</p>
 
-<p><img src="./imgs/pandocdiagram.jpg" alt="pandoc formats" /></p>
+<p><img src="./imgs/pandocdiagram.jpg" alt="pandoc formats" title="" /></p>
 
 <h2>Appendix 2: Language support for wikipedia2text</h2>
 
 <p><a name="wikilangs"></a></p>
 
 <p>|Code| Language|Code| Language|
-|:&mdash;-|:&mdash;-|:&mdash;-|:&mdash;-|
+|:----|:----|:----|:----|
 | <strong>af</strong> | Afrikaans|<strong>la</strong> | Latin|
 | <strong>als</strong> | Alemannic| <strong>lb</strong> | Luxembourgian|
 | <strong>ca</strong> | Catalan| <strong>nds</strong> | Low German|
@@ -954,4 +854,4 @@ next f
 | <strong>ia</strong> | Interlingua|<strong>sl</strong> | Slovenian|
 | <strong>is</strong> | Islandic|  <strong>sv</strong> | Swedish|
 | <strong>it</strong> | Italian| <strong>tr</strong> | Turkish
- |:&mdash;-|:&mdash;-|:&mdash;-|:&mdash;-|</p>
+ |:----|:----|:----|:----|</p>

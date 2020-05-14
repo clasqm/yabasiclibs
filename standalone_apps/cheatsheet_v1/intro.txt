@@ -10,6 +10,6 @@ This does not make yabasic able to write full-on graphical programs, like its ow
 
 This software is still very much in the alpha stage. The routines in the libraries work, but need a lot of optimization and error-trapping.
 
-The library should exist either in the same folder as your program (symlinks work) or in the standard yabasic library location on your system. There is a .deb file available for those of you who are on Debian-derived systems, but I am pretty new at building .deb files, so I would appreciate feedback!
+The libraries should exist either in the same folder as your program (symlinks work) or in the standard yabasic library location on your system. 
 
 Developed on elementary OS 0.4 "Loki" and Lubuntu 18.04 (i.e. Linux), but it should work on any *NIX system that will run yabasic. Testing on Windows has been far more sketchy, since I don't have a windows box here, but I did what I could in my lunch break at work ;-). Don't tell my boss.
