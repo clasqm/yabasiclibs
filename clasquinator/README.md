@@ -80,9 +80,9 @@ If you don't have these, your system is broken and you really, really need to re
 This library poaches as many ideas as possible from the other four dialog-providing libraries, but there is not 100% compatibility here, so we will not divide things into Common and Clasquinator-specific sections.
 
 + **All**
-    + *ChangeColour*()
+    + *ChangeColour*(menu$, title$, trigger$)
     + *ClearDlg*()
-    + *EncloseText$*()
+    + *EncloseText$*(the string$)
     + *getcmd$*()
     + *GetDirDlg$*(), *GetDirDlg2$*(), *GetDirDlg3$*(), *GetDirDlg4$*()
     + *GetFileDlg$*, *GetFileDlg2$*,*GetFileDlg3$*, *GetFileDlg4$*

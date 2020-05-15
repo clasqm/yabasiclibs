@@ -1,23 +1,26 @@
 Clasquinator
-
+============
+ 
+This library allows yabasic to display a variety of dialogs in text mode without making use of external commands.
+ 
 All
-
+ 
 ChangeColour(menu$, title$, trigger$)
-ClearDlg()
-EncloseText$(thestring$)
+ClearDlg(...)
+EncloseText$(the string$)
 getcmd$()
 GetDirDlg$(title$, text$, start$), GetDirDlg2$(...), GetDirDlg3$(...), GetDirDlg4$(...)
 GetFileDlg$(title$, text$, start$), GetFileDlg2$(...),GetFileDlg3$(...), GetFileDlg4$(...)
 InputDlg$(text$, title$, ok$, cancel$), InputDlg2$(...), InputDlg3$(...), InputDlg4$(...)
-MakeDirDlg$(title$, text$, start$), MakeDirDlg2$(...), MakeDirDlg3$(...), MakeDirDlg4$(...)
-MakeFileDlg$(title$, text$, start$), MakeFileDlg2$(...), MakeFileDlg3$(...), MakeFileDlg4$(...)
-MenuDlg(title$, menustring$, level<, mainmenustring$>), MenuDlg2(...), MenuDlg3(...), MenuDlg4(...)
+MakeDirDlg$(title$, text$, start$), MakeDirDlg2$, MakeDirDlg3$, MakeDirDlg4$
+MakeFileDlg$, MakeFileDlg2$(...), MakeFileDlg3$(...), MakeFileDlg4$(...)
+MenuDlg(title$(title$, menustring$, level, mainmenustring$), MenuDlg2(...), MenuDlg3(...), MenuDlg4(...)
 MessageDlg(text$, ok$), MessageDlg2(...), MessageDlg3(...), MessageDlg4(...)
 PasswordDlg$(text$, title$, ok$, cancel$), PasswordDlg2$(...), PasswordDlg3$(...), PasswordDlg4$(...)
 RadioDlg(title$, menustring$, level, mainmenustring$), RadioDlg2(...), RadioDlg3(...), RadioDlg4(...)
 StringDisplayDlg(string$, title$, exit$), StringDisplayDlg2(...), StringDisplayDlg3(...), StringDisplayDlg4(...)
 SubMenuDlg(title$, menustring$, mainmenustring$), SubMenuDlg2(...), SubMenuDlg3(...), SubMenuDlg4(...)
 TestForDialogUtility$()
-TextFileDlg(filename$, title$, exit$)), TextFileDlg2(...), TextFileDlg3(...), TextFileDlg4(...)
+TextFileDlg(filename$, title$, exit$), TextFileDlg2(...), TextFileDlg3(...), TextFileDlg4(...)
 WaitDlg(onoff, text$), WaitDlg2(...), WaitDlg3(...), WaitDlg4(...)
 YesNoDlg(text$,yes$, no$), YesNoDlg2(...), YesNoDlg3(...), YesNoDlg4(...)

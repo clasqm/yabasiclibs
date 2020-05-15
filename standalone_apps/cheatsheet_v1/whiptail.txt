@@ -1,7 +1,10 @@
 Whiptail
-
+========
+ 
+This library for yabasic allows the use of the Linux command whiptail to display a variety of dialogs in text mode.
+ 
 Common
-
+ 
 ClearDlg()
 EncloseText$(thestring$)
 getcmd$()

@@ -1,7 +1,10 @@
 Dialog
+======
+ 
+his library for yabasic allows the use of the Linux command dialog to display a variety of dialogs in text mode.
 
 Common
-
+ 
 ClearDlg()
 EncloseText$(thestring$)
 getcmd$()
@@ -13,8 +16,8 @@ RadioDlg(text$, title$, ok$, cancel$, menustring$, selected$)
 TestForDialogUtility$()
 TextFileDlg(filename$, title$, exit$)
 YesNoDlg(text$,yes$, no$)
-
+ 
 Specific
-
+ 
 DCalendarDlg$(text$, ok$, cancel$)
 TransientInfoDlg(text$)

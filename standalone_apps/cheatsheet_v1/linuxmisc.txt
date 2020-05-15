@@ -1,6 +1,8 @@
 Linuxmisc
-
-
+=========
+ 
+This library for yabasic allows the use of a variety of common Linux commands in text mode. For example, opening a text file in the nano text editor will make it unnecessary for you to write your own text editing routine.
+ 
 ArraySort(a()), ArraySort$(a$()) - sorts a ONE-dimensional array.
 ConvertFile$(infile$, outfile$) - Convert any text file format that pandoc can handle.
 ConvertFile2PDF$(infile$, outfile$) - Convert any text file format that pandoc can handle to PDF.
