@@ -79,6 +79,7 @@ a$ = InputDlg$(EncloseText$("What is your name?"), EncloseText$("Who are you?"),
     + The value menustring$ is the list of menu options as a single string, separated by hash signs (#). Spaces are allowed.
     + If the number of options exceed the available space in the widget, the list will be scrollable.
     + The result is returned as a numeric value, starting from 1.
+    + The one thing you should be careful not to run from such a menu is ... another Yabasic program. As of May 2020, yabasic scripts or bound apps will crash any shell script or menuing app you try to launch them from. Don't ask me why.
    + If you prefer to get the same number in string format, you can use **MenuDlg$**(text$, title$, ok$, cancel$, menustring$)
    + Please note that the height of this widget is hardcoded at 400 pixels, because it looked really crap when allowed to autosize. This may change with future releases of zenity.
    + *EXAMPLE: a = MenuDlg("This is a menu", "A Menu!","Accept", "Deny", "Science#Religion#Magic#All of the above"): print a*
