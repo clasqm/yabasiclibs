@@ -13,3 +13,5 @@ It will give you the choice of which of the dialog-providing demos to run. Each 
     yabasic clasquinator_demo2.bas
     yabasic clasquinator_demo3.bas
     yabasic clasquinator_demo4.bas
+
+**NOTICE: Yabasic has a bug ATM where it will crash any script or menu you try to launch a yabasic app from (at least in Linux). I have reported this, but for now the main demo.bas program is nonfunctional.**
