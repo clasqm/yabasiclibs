@@ -14,4 +14,4 @@ It will give you the choice of which of the dialog-providing demos to run. Each 
     yabasic clasquinator_demo3.bas
     yabasic clasquinator_demo4.bas
 
-**NOTICE: Yabasic has a bug ATM where it will crash any script or menu you try to launch a yabasic app from (at least in Linux). I have reported this, but for now the main demo.bas program is nonfunctional.**
+**NOTICE: Yabasic has a bug ATM where it will crash any script or menu you try to launch a yabasic app from (at least in Linux). I have reported this, but for now the main demo.bas program is nonfunctional. One way around the problem is to go back to an old 2.79.x version of yabasic, for example my homemade deb [here](https://github.com/clasqm/yabasic/blob/master/build/yabasic_2.79.0-1.deb).**

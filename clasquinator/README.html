@@ -288,7 +288,7 @@ a$ = InputDlg2$("What is your name?", "Who are you?")
 <li>The first letter of menu item automatically becomes the trigger. Both lower and upper case variants will activate it. It is up to you to ensure that you do not use menu items that start with the same letter.</li>
 <li>Menus will only be displayed to the width of the terminal, so keep them short!</li>
 <li>Results are returned as a string variable, which will be the trigger in <em>lowercase</em>.</li>
-<li>The one thing you should be careful not to run from such a menu is ... another Yabasic program. As of May 2020, yabasic scripts or bound apps will crash any shell script or menuing app you try to launch them from. Don't ask me why.</li>
+<li>The one thing you should be careful not to run from such a menu is ... another Yabasic program. Yabasic has a bug ATM where it will crash any script or menu you try to launch a yabasic app from (at least in Linux). I have reported this, but for now the main demo.bas program is nonfunctional. One way around the problem is to go back to an old 2.79.x version of yabasic, for example my homemade deb <a href="https://github.com/clasqm/yabasic/blob/master/build/yabasic_2.79.0-1.deb">here</a>.</li>
 <li>Submenus can also be created with the <em>SubMenuDlg$(title$, menustring$)</em> routine, which is an alias to this one and does not require the <em>level</em> parameter.Therefore the following two commands are completely equivalent:
 <code>
 MenuDlg$("File menu","Open#Close#Exit",1, "File#Edit#Help")
