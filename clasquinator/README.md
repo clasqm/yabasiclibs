@@ -3,8 +3,6 @@
 A yabasic library (c) Michel Clasquin-Johnson 2018.
 Licensed accordingto the MIT license
 
-If you are reading this as a man page, be advised that you can see it in glorious HTML, with pictures even, at https://clasqm.github.io/
-
 This library allows *yabasic* to display a variety of dialogs in text mode without making use of external commands.
 
 *Some* routines will perhaps also be made available in graphics mode. Maybe, one day. I am a better text mode programmer, what can I say? 

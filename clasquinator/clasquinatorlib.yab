@@ -1,7 +1,7 @@
 //This folder contains a library for yabasic that allows yabasic to display 
 //a variety of dialogs in text mode without making use of external commands.
 
-//*Some* routines will also be made available in graphics mode, but keep 
+//*Some* routines may also be made available in graphics mode, but keep 
 //in mind that you only have one graphics window to play with. if you use 
 //these, you will not have the graphics window for your own use.
 
