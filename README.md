@@ -5,6 +5,8 @@ Licensed accordingto the MIT license**
 
 **Extension libraries for yabasic.**
 
+**This repository is no longer being maintained. For my latest work on this, please go to [this site](https://sourceforge.net/projects/yabasic-libs-2/)**
+
 A series of libraries for [yabasic](http://www.yabasic.de/) , the BASIC dialect by [Marc Ihm](https://github.com/marcIhm), that give access to a number of common utilities on Linux, mostly intended to provide standard dialogs. Not tested on other UNIX platforms, but it should be possible to adjust them accordingly.
 
 This does not make yabasic able to write full-on graphical programs, like its own derivative [yab](http://yab.orgfree.com/) on the Haiku platform, but it does allow you to use yabasic as the backend for "wizard"-style applications.
